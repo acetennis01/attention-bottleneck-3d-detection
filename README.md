@@ -22,19 +22,20 @@ Key properties:
 Run focused tests from the MMDetection3D root:
 
 ```bash
-/home/abhiramannaluru/mbt/bin/python -m pytest \
+conda activate openmmlab
+PYTHONPATH="$PWD" python -m pytest \
   projects/myfusion/tests/test_mbt_bev.py -q
 ```
 
 Build-check the config:
 
 ```bash
-/home/abhiramannaluru/mbt/bin/python - <<'PY'
+PYTHONPATH="$PWD" python - <<'PY'
 from mmengine.config import Config
-from mmengine.registry import init_default_scope
+from mmdet3d.utils import register_all_modules
 from mmdet3d.registry import MODELS
 cfg = Config.fromfile('projects/myfusion/configs/my_fusion_mbt_bev.py')
-init_default_scope(cfg.default_scope)
+register_all_modules(init_default_scope=True)
 model = MODELS.build(cfg.model)
 print(type(model).__name__)
 PY
@@ -43,9 +44,56 @@ PY
 Train from the MMDetection3D root:
 
 ```bash
-/home/abhiramannaluru/mbt/bin/python tools/train.py \
+PYTHONPATH="$PWD" python tools/train.py \
   projects/myfusion/configs/my_fusion_mbt_bev.py
 ```
 
-Before reporting benchmark results, evaluate from an unmodified MMDetection3D
-KITTI evaluator and submit test-set detections to the official KITTI server.
+Run the checkpointed two-epoch diagnostic first:
+
+```bash
+PYTHONPATH="$PWD" python tools/train.py \
+  projects/myfusion/configs/my_fusion_mbt_bev_smoke.py
+```
+
+It saves checkpoints after each epoch and persists formatted validation output
+at `work_dirs/mbt_bev_diagnostic/pred_instances_3d.pkl`. Audit box dimensions,
+bottom-center height, and horizontal matching with:
+
+```bash
+PYTHONPATH="$PWD" python projects/myfusion/tools/audit_kitti_predictions.py
+```
+
+Re-evaluate the persisted file without rerunning inference:
+
+```bash
+PYTHONPATH="$PWD" python \
+  projects/myfusion/tools/evaluate_persisted_kitti.py \
+  work_dirs/mbt_bev_diagnostic/pred_instances_3d.pkl
+```
+
+### KITTI evaluator compatibility
+
+The VM's Numba runtime emits PTX 8.5 while its driver accepts PTX 8.4, so the
+upstream Numba rotated-IoU kernel cannot compile. Apply the included MMCV
+compatibility backend from the MMDetection3D root:
+
+```bash
+python projects/myfusion/mmdet3d_patches/apply.py
+PYTHONPATH="$PWD" python -m pytest \
+  projects/myfusion/tests/test_kitti_overlap_backend.py -q
+```
+
+This leaves MMDetection3D's KITTI metric logic unchanged and replaces only the
+incompatible overlap kernel. The MMCV backend is tested against the Shapely
+reference for IoU, both intersection fractions, and raw intersection area.
+
+### Two-epoch diagnostic result
+
+The validated two-epoch run produced strict 3D AP40 of 49.15/41.14/38.93 for
+Car, 14.18/9.21/8.32 for Cyclist, and 8.45/8.31/7.71 for Pedestrian on the local
+KITTI validation split (easy/moderate/hard). These are diagnostic results, not
+official test-server results.
+
+Before reporting benchmark results, use the upstream MMDetection3D KITTI metric
+logic (or a regression-tested CPU overlap backend with identical criterion
+semantics) and submit test-set detections to the official KITTI server.

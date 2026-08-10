@@ -108,7 +108,12 @@ model = dict(
 # The camera backbone adds memory relative to PointPillars.
 optim_wrapper = dict(clip_grad=dict(max_norm=35, norm_type=2))
 
-# Avoid the modified local evaluator when generating official benchmark files.
-# This config remains suitable for local validation after the upstream evaluator
-# is restored or the repository is evaluated from a clean MMDetection3D checkout.
+# Keep recoverable progress during long runs without accumulating checkpoints.
+default_hooks = dict(
+    checkpoint=dict(
+        type='CheckpointHook', interval=1, max_keep_ckpts=3, save_last=True))
+
+# Benchmark claims must use the upstream KITTI metric logic.  A CPU rotated-IoU
+# backend is acceptable only when it is regression-tested to match the official
+# criterion semantics.
 work_dir = 'work_dirs/my_fusion_mbt_bev'
