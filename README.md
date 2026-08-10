@@ -56,8 +56,33 @@ PYTHONPATH="$PWD" python tools/train.py \
 ```
 
 It saves checkpoints after each epoch and persists formatted validation output
-at `work_dirs/mbt_bev_diagnostic/pred_instances_3d.pkl`. Audit box dimensions,
-bottom-center height, and horizontal matching with:
+at `work_dirs/mbt_bev_diagnostic/pred_instances_3d.pkl`.
+
+Run the matched LiDAR-only diagnostic before either full experiment:
+
+```bash
+PYTHONPATH="$PWD" python tools/train.py \
+  projects/myfusion/configs/pointpillars_lidar_control_smoke.py
+```
+
+The full controlled comparison uses a shared seed (`0`), batch size (`1`),
+80-epoch schedule, KITTI split/classes/range, and geometry-safe LiDAR pipeline:
+
+```bash
+# LiDAR-only control
+PYTHONPATH="$PWD" python tools/train.py \
+  projects/myfusion/configs/pointpillars_lidar_control.py
+
+# Camera-LiDAR MBT
+PYTHONPATH="$PWD" python tools/train.py \
+  projects/myfusion/configs/my_fusion_mbt_bev.py
+```
+
+Both configs retain the last three checkpoints, save the best checkpoint by
+overall moderate 3D AP40, and persist the latest formatted validation
+predictions in their respective work directories.
+
+Audit box dimensions, bottom-center height, and horizontal matching with:
 
 ```bash
 PYTHONPATH="$PWD" python projects/myfusion/tools/audit_kitti_predictions.py
