@@ -54,7 +54,7 @@ test_pipeline = [
 ]
 
 train_dataloader = dict(
-    batch_size=2,
+    batch_size=1,
     dataset=dict(
         dataset=dict(
             data_prefix=dict(
@@ -108,12 +108,26 @@ model = dict(
 # The camera backbone adds memory relative to PointPillars.
 optim_wrapper = dict(clip_grad=dict(max_norm=35, norm_type=2))
 
-# Keep recoverable progress during long runs without accumulating checkpoints.
+# Keep the controlled LiDAR and MBT experiments directly comparable.
+randomness = dict(seed=0, deterministic=False)
+train_cfg = dict(by_epoch=True, max_epochs=80, val_interval=2)
+
+# Keep recoverable progress and select the best validation checkpoint.
 default_hooks = dict(
     checkpoint=dict(
-        type='CheckpointHook', interval=1, max_keep_ckpts=3, save_last=True))
+        type='CheckpointHook',
+        interval=1,
+        max_keep_ckpts=3,
+        save_last=True,
+        save_best=(
+            'Kitti metric/pred_instances_3d/KITTI/'
+            'Overall_3D_AP40_moderate'),
+        rule='greater'))
+
+work_dir = 'work_dirs/mbt_bev_full'
+val_evaluator = dict(pklfile_prefix=work_dir)
+test_evaluator = dict(pklfile_prefix=work_dir)
 
 # Benchmark claims must use the upstream KITTI metric logic.  A CPU rotated-IoU
 # backend is acceptable only when it is regression-tested to match the official
 # criterion semantics.
-work_dir = 'work_dirs/my_fusion_mbt_bev'
