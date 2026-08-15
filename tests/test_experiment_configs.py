@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import pytest
 from mmengine.config import Config
 
 
@@ -70,3 +71,64 @@ def test_smoke_configs_are_bounded_and_persistent():
         assert cfg.default_hooks.checkpoint.max_keep_ckpts == 2
         assert cfg.val_evaluator.pklfile_prefix == cfg.work_dir
         assert cfg.test_evaluator.pklfile_prefix == cfg.work_dir
+
+
+def test_lower_lr_experiment_changes_only_schedule_and_diagnostics():
+    original = _load('my_fusion_mbt_bev.py')
+    lower_lr = _load('my_fusion_mbt_bev_lr3e4.py')
+
+    assert lower_lr.model == original.model
+    assert lower_lr.train_dataloader == original.train_dataloader
+    assert lower_lr.val_dataloader == original.val_dataloader
+    assert lower_lr.train_cfg == original.train_cfg
+    assert lower_lr.randomness == original.randomness
+    assert lower_lr.optim_wrapper.optimizer.lr == 3e-4
+    assert lower_lr.param_scheduler[0].eta_min == pytest.approx(3e-3)
+    assert lower_lr.param_scheduler[1].eta_min == pytest.approx(3e-8)
+    assert lower_lr.custom_hooks == [
+        dict(type='FusionDiagnosticsHook', interval=500)]
+    assert lower_lr.work_dir == 'work_dirs/mbt_bev_lr3e4_seed0'
+    assert lower_lr.val_evaluator.pklfile_prefix == lower_lr.work_dir
+    assert lower_lr.test_evaluator.pklfile_prefix == lower_lr.work_dir
+
+
+def test_effective_batch_48_experiments_are_matched():
+    lidar = _load('pointpillars_lidar_control_eb48.py')
+    mbt = _load('my_fusion_mbt_bev_eb48.py')
+
+    for cfg in (lidar, mbt):
+        assert cfg.train_dataloader.batch_size == 6
+        assert cfg.optim_wrapper.accumulative_counts == 8
+        assert (cfg.train_dataloader.batch_size
+                * cfg.optim_wrapper.accumulative_counts) == 48
+        assert cfg.auto_scale_lr.base_batch_size == 48
+        assert cfg.randomness.seed == 0
+        assert cfg.train_cfg.max_epochs == 80
+        assert cfg.train_cfg.val_interval == 2
+        assert cfg.val_evaluator.pklfile_prefix == cfg.work_dir
+        assert cfg.test_evaluator.pklfile_prefix == cfg.work_dir
+
+    assert lidar.optim_wrapper.optimizer == mbt.optim_wrapper.optimizer
+    assert lidar.param_scheduler == mbt.param_scheduler
+    assert lidar.param_scheduler[2].eta_min == 0.85
+    assert lidar.param_scheduler[3].eta_min == 0.95
+    assert lidar.work_dir.endswith('eb48_stable_momentum_seed0')
+    assert mbt.work_dir.endswith('eb48_stable_momentum_seed0')
+    assert lidar.class_names == mbt.class_names
+    assert lidar.point_cloud_range == mbt.point_cloud_range
+    assert mbt.custom_hooks == [
+        dict(type='FusionDiagnosticsHook', interval=100)]
+
+
+def test_effective_batch_smoke_performs_two_accumulated_updates():
+    cfg = _load('my_fusion_mbt_bev_eb48_smoke.py')
+    assert cfg.train_dataloader.batch_size == 6
+    assert cfg.optim_wrapper.accumulative_counts == 8
+    assert cfg.train_cfg.type == 'IterBasedTrainLoop'
+    assert cfg.train_cfg.max_iters == 16
+    assert cfg.val_cfg is None
+    assert cfg.val_dataloader is None
+    assert cfg.val_evaluator is None
+    assert cfg.param_scheduler == []
+    assert cfg.custom_hooks == [
+        dict(type='FusionDiagnosticsHook', interval=8)]
