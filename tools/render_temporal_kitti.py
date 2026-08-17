@@ -2,7 +2,9 @@
 
 The script runs the matched LiDAR-only and MBT checkpoints frame-by-frame on
 a synced KITTI Raw drive, then writes a four-panel BEV comparison above the
-front camera image.  It intentionally performs detection only; no temporal
+front camera image.  The reference panel displays the full 360-degree raw
+scan, while both models receive only the camera-visible subset matching KITTI
+``velodyne_reduced``.  It intentionally performs detection only; no temporal
 smoothing or tracking is applied to the predictions.
 """
 
@@ -32,6 +34,7 @@ CLASS_COLORS = {
     2: (232, 102, 45),     # blue
 }
 POINT_CLOUD_RANGE = (0.0, -39.68, 69.12, 39.68)
+FULL_SCAN_RANGE = (-70.0, -70.0, 70.0, 70.0)
 BOX_EDGES = (
     (0, 1), (1, 2), (2, 3), (3, 0),
     (4, 5), (5, 6), (6, 7), (7, 4),
@@ -237,8 +240,11 @@ def inference_multimodal(
         return model.test_step(pseudo_collate([data]))[0]
 
 
-def bev_coordinates(points_xy: np.ndarray, size: int) -> np.ndarray:
-    x_min, y_min, x_max, y_max = POINT_CLOUD_RANGE
+def bev_coordinates(
+        points_xy: np.ndarray, size: int,
+        point_cloud_range: Tuple[float, float, float, float] =
+        POINT_CLOUD_RANGE) -> np.ndarray:
+    x_min, y_min, x_max, y_max = point_cloud_range
     u = (y_max - points_xy[:, 1]) / (y_max - y_min) * (size - 1)
     v = (x_max - points_xy[:, 0]) / (x_max - x_min) * (size - 1)
     return np.stack((u, v), axis=1).round().astype(np.int32)
@@ -281,17 +287,40 @@ def draw_title(panel: np.ndarray, title: str, dark: bool = False) -> None:
                 0.65, color, 2, cv2.LINE_AA)
 
 
-def render_lidar_panel(points: np.ndarray, size: int) -> np.ndarray:
+def render_lidar_panel(
+        raw_points: np.ndarray, inference_points: np.ndarray,
+        size: int) -> np.ndarray:
+    """Render 360-degree raw LiDAR and highlight the model-input subset."""
     panel = np.zeros((size, size, 3), dtype=np.uint8)
-    x_min, y_min, x_max, y_max = POINT_CLOUD_RANGE
-    mask = ((points[:, 0] >= x_min) & (points[:, 0] <= x_max) &
-            (points[:, 1] >= y_min) & (points[:, 1] <= y_max))
-    visible = points[mask]
-    pixels = bev_coordinates(visible[:, :2], size)
+    x_min, y_min, x_max, y_max = FULL_SCAN_RANGE
+    mask = ((raw_points[:, 0] >= x_min) & (raw_points[:, 0] <= x_max) &
+            (raw_points[:, 1] >= y_min) & (raw_points[:, 1] <= y_max))
+    visible = raw_points[mask]
+    pixels = bev_coordinates(visible[:, :2], size, FULL_SCAN_RANGE)
     intensity = np.clip(visible[:, 3] * 255, 55, 255).astype(np.uint8)
     panel[pixels[:, 1], pixels[:, 0]] = np.stack(
         (intensity, intensity, intensity), axis=1)
-    draw_title(panel, 'LiDAR input (camera FOV)', dark=True)
+
+    input_mask = (
+        (inference_points[:, 0] >= x_min) &
+        (inference_points[:, 0] <= x_max) &
+        (inference_points[:, 1] >= y_min) &
+        (inference_points[:, 1] <= y_max))
+    input_pixels = bev_coordinates(
+        inference_points[input_mask, :2], size, FULL_SCAN_RANGE)
+    panel[input_pixels[:, 1], input_pixels[:, 0]] = (64, 185, 255)
+
+    ego = bev_coordinates(
+        np.asarray([[0.0, 0.0]], dtype=np.float32), size,
+        FULL_SCAN_RANGE)[0]
+    forward = bev_coordinates(
+        np.asarray([[8.0, 0.0]], dtype=np.float32), size,
+        FULL_SCAN_RANGE)[0]
+    cv2.circle(panel, tuple(ego), 5, (80, 220, 80), -1, cv2.LINE_AA)
+    cv2.arrowedLine(
+        panel, tuple(ego), tuple(forward), (80, 220, 80), 2,
+        cv2.LINE_AA, tipLength=0.25)
+    draw_title(panel, 'LiDAR 360 | orange: model input', dark=True)
     return panel
 
 
@@ -378,8 +407,8 @@ def fit_camera_image(image: np.ndarray, width: int, height: int) -> np.ndarray:
 
 
 def compose_frame(
-        drive_name: str, frame_index: int, points: np.ndarray,
-        camera: np.ndarray,
+        drive_name: str, frame_index: int, raw_points: np.ndarray,
+        inference_points: np.ndarray, camera: np.ndarray,
         lidar_predictions: DetectionSet, mbt_predictions: DetectionSet,
         ground_truth: DetectionSet, lidar_to_image: np.ndarray,
         score_threshold: float) -> np.ndarray:
@@ -395,13 +424,13 @@ def compose_frame(
                 0.92, (25, 25, 25), 2, cv2.LINE_AA)
 
     panels = [
-        render_lidar_panel(points, panel_size),
+        render_lidar_panel(raw_points, inference_points, panel_size),
         render_detection_panel(
-            points, lidar_predictions, panel_size, 'LiDAR-only'),
+            inference_points, lidar_predictions, panel_size, 'LiDAR-only'),
         render_detection_panel(
-            points, mbt_predictions, panel_size, 'MBT fusion'),
+            inference_points, mbt_predictions, panel_size, 'MBT fusion'),
         render_detection_panel(
-            points, ground_truth, panel_size, 'Ground truth'),
+            inference_points, ground_truth, panel_size, 'Ground truth'),
     ]
     for index, panel in enumerate(panels):
         x_start = index * panel_size
@@ -485,7 +514,7 @@ def main() -> None:
     mbt_pipeline, box_type_3d, box_mode_3d = build_multimodal_pipeline(
         mbt_model)
 
-    video_path = output_dir / f'{drive_name}_lidar_vs_mbt.mp4'
+    video_path = output_dir / f'{drive_name}_full360_lidar_vs_mbt.mp4'
     writer = cv2.VideoWriter(
         str(video_path), cv2.VideoWriter_fourcc(*'mp4v'), args.fps,
         (1600, 944))
@@ -511,8 +540,9 @@ def main() -> None:
             mbt_predictions = unpack_predictions(mbt_result, args.score_thr)
             gt = ground_truth.get(frame_index, empty_detections())
             rendered = compose_frame(
-                drive_name, frame_index, points, image, lidar_predictions,
-                mbt_predictions, gt, lidar_to_image, args.score_thr)
+                drive_name, frame_index, raw_points, points, image,
+                lidar_predictions, mbt_predictions, gt, lidar_to_image,
+                args.score_thr)
             writer.write(rendered)
             if position == 0:
                 cv2.imwrite(str(output_dir / 'preview.png'), rendered)
@@ -530,6 +560,8 @@ def main() -> None:
         'fps': args.fps,
         'frame_stride': args.frame_stride,
         'score_threshold': args.score_thr,
+        'lidar_reference_panel': 'full 360-degree raw scan',
+        'model_lidar_input': 'camera-FOV-reduced points',
         'lidar_config': args.lidar_config,
         'lidar_checkpoint': args.lidar_checkpoint,
         'mbt_config': args.mbt_config,

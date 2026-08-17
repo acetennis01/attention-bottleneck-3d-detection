@@ -185,9 +185,12 @@ Reevaluation artifacts are stored under:
 
 `tools/render_temporal_kitti.py` renders the matched LiDAR-only and MBT best
 checkpoints on a synchronized KITTI Raw drive.  Its Simple-BEV-style layout
-contains raw LiDAR, LiDAR-only detections, MBT detections, tracklet ground
-truth, and the front camera with projected MBT boxes.  Predictions are made
-independently per frame; the video does not apply tracking or smoothing.
+contains a full 360-degree raw LiDAR reference, LiDAR-only detections, MBT
+detections, tracklet ground truth, and the front camera with projected MBT
+boxes.  Orange points in the reference panel show the camera-visible subset
+actually passed to both models; the remaining raw scan is visualization only
+and does not change inference.  Predictions are made independently per frame;
+the video does not apply tracking or smoothing.
 
 For the compact 154-frame `2011_09_26_drive_0005_sync` sequence, run:
 
@@ -199,6 +202,6 @@ python projects/myfusion/tools/render_temporal_kitti.py
 ```
 
 The default output is
-`work_dirs/temporal_visualization_drive_0005/2011_09_26_drive_0005_lidar_vs_mbt.mp4`.
+`work_dirs/temporal_visualization_drive_0005/2011_09_26_drive_0005_full360_lidar_vs_mbt.mp4`.
 Use `--max-frames 3` for a quick rendering smoke test and `--score-thr` to
 change the displayed detection threshold.
