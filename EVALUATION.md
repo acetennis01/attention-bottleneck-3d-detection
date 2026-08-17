@@ -29,26 +29,3 @@ an object-detection metric, not classification accuracy.
 
 MBT improves overall moderate AP40 by **2.4945 points** (**6.45% relative**).
 The gain is driven primarily by Car detection. These are single-seed results.
-
-## Reevaluation artifacts
-
-- LiDAR-only: `work_dirs/pointpillars_lidar_control_eb48_stable_momentum_seed0/best_epoch28_eval/`
-- MBT: `work_dirs/mbt_bev_eb48_stable_momentum_seed0/best_epoch58_eval/`
-
-## Temporal evaluation
-
-Full videos were rendered for KITTI Raw drives `0001`, `0005`, `0014`,
-`0015`, `0035`, and `0051` at 10 FPS and a display threshold of `0.30`.
-
-The first panel shows the full 360-degree raw LiDAR scan. Orange points are
-the camera-FOV subset passed to both models; other points are reference-only.
-Predictions are independent per frame with no tracking or temporal smoothing.
-KITTI Raw tracklets are qualitative references and omit some objects. The
-models and displayed benchmark classes are Car, Pedestrian, and Cyclist.
-
-Videos are stored at:
-
-```text
-work_dirs/temporal_visualization_drive_<ID>/
-2011_09_26_drive_<ID>_full360_lidar_vs_mbt.mp4
-```
