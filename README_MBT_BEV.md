@@ -122,3 +122,57 @@ PYTHONPATH="$PWD" python \
 Before reporting benchmark results, use the upstream MMDetection3D KITTI metric
 logic (or a regression-tested CPU overlap backend with identical criterion
 semantics) and submit test-set detections to the official KITTI server.
+
+## Best-checkpoint validation results
+
+The table below reports independent reevaluation of each selected checkpoint
+on the 3,769-sample KITTI validation split.  Checkpoints were selected by
+overall KITTI 3D AP40 moderate.  Values are strict-IoU 3D AP40 percentages
+(`0.50` for Pedestrian/Cyclist and `0.70` for Car), not classification
+accuracy and not results from the official KITTI test server.
+
+| Model | Best epoch | Class | Easy | Moderate | Hard |
+| --- | ---: | --- | ---: | ---: | ---: |
+| LiDAR-only PointPillars | 28 | Pedestrian | 34.4906 | 30.3730 | 28.2636 |
+|  |  | Cyclist | 53.4429 | 34.1321 | 32.1293 |
+|  |  | Car | 60.7508 | 51.5553 | 47.9270 |
+|  |  | **Overall** | **49.5614** | **38.6868** | **36.1066** |
+| Camera–LiDAR MBT | 58 | Pedestrian | 36.2324 | 32.3544 | 29.0082 |
+|  |  | Cyclist | 53.5009 | 33.2382 | 30.6601 |
+|  |  | Car | 66.6320 | 57.9512 | 55.0250 |
+|  |  | **Overall** | **52.1218** | **41.1813** | **38.2311** |
+| **MBT - LiDAR** |  | **Overall delta** | **+2.5604** | **+2.4945** | **+2.1245** |
+
+At the checkpoint-selection metric, MBT improves overall 3D AP40 moderate
+from `38.6868` to `41.1813` (`+2.4945` points, approximately `+6.45%`
+relative).  The moderate per-class changes are `+1.9814` for Pedestrian,
+`-0.8939` for Cyclist, and `+6.3959` for Car.
+
+Reevaluation artifacts are stored under:
+
+- LiDAR-only:
+  `work_dirs/pointpillars_lidar_control_eb48_stable_momentum_seed0/best_epoch28_eval/`
+- MBT:
+  `work_dirs/mbt_bev_eb48_stable_momentum_seed0/best_epoch58_eval/`
+
+## Temporal KITTI Raw visualization
+
+`tools/render_temporal_kitti.py` renders the matched LiDAR-only and MBT best
+checkpoints on a synchronized KITTI Raw drive.  Its Simple-BEV-style layout
+contains raw LiDAR, LiDAR-only detections, MBT detections, tracklet ground
+truth, and the front camera with projected MBT boxes.  Predictions are made
+independently per frame; the video does not apply tracking or smoothing.
+
+For the compact 154-frame `2011_09_26_drive_0005_sync` sequence, run:
+
+```bash
+cd ~/mmdetection3d
+conda activate openmmlab
+export PYTHONPATH="$PWD"
+python projects/myfusion/tools/render_temporal_kitti.py
+```
+
+The default output is
+`work_dirs/temporal_visualization_drive_0005/2011_09_26_drive_0005_lidar_vs_mbt.mp4`.
+Use `--max-frames 3` for a quick rendering smoke test and `--score-thr` to
+change the displayed detection threshold.
