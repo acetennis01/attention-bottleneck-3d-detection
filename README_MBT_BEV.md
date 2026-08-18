@@ -126,16 +126,23 @@ semantics) and submit test-set detections to the official KITTI server.
 ## Best-checkpoint validation results
 
 > [!IMPORTANT]
-> **Camera–LiDAR MBT reaches 41.1813 overall 3D AP40 moderate, compared with
-> 38.6868 for LiDAR-only PointPillars: a gain of +2.4945 AP points (+6.45%
-> relative).**
+> **The MBT-configured detector reaches 41.1813 overall 3D AP40 moderate,
+> compared with 38.6868 for LiDAR-only PointPillars: a gain of +2.4945 AP
+> points (+6.45% relative).**
+
+> [!WARNING]
+> Camera ablation shows that this checkpoint is effectively invariant to
+> image content: black images reproduce `41.1813`, and shuffled images score
+> `41.1811`. The gain demonstrates an improvement from the MBT-configured
+> architecture and training, but it is **not evidence that meaningful camera
+> information caused the improvement**.
 
 ### Overall comparison
 
 | Model | Input modalities | Best epoch | Easy | **Moderate** | Hard |
 | :--- | :--- | ---: | ---: | ---: | ---: |
 | LiDAR-only PointPillars | LiDAR | 28 | 49.5614 | 38.6868 | 36.1066 |
-| **Attention-bottleneck fusion (MBT)** | **Camera + LiDAR** | **58** | **52.1218** | **41.1813** | **38.2311** |
+| **MBT-configured detector** | Camera + LiDAR inputs | **58** | **52.1218** | **41.1813** | **38.2311** |
 | **MBT improvement** |  |  | **+2.5604** | **+2.4945** | **+2.1245** |
 
 ### Moderate-difficulty breakdown
@@ -152,6 +159,17 @@ metrics.  Most of the gain comes from **Car** detection, with a smaller gain
 for **Pedestrian** and a modest regression for **Cyclist**.  Because these are
 single-seed results, additional seeds are required before treating the
 difference as a confidence-qualified architecture improvement.
+
+### Camera-input ablation
+
+| Epoch-58 MBT input | Easy | Moderate | Hard |
+| :--- | ---: | ---: | ---: |
+| Correct image | 52.1218 | 41.1813 | 38.2311 |
+| Black image | 52.1218 | 41.1813 | 38.2311 |
+| Shuffled image | 52.1216 | 41.1811 | 38.2311 |
+
+Across 17,438 detections, mean absolute confidence-score changes are below
+`2.1e-8`. See `EVALUATION.md` for the interpretation and artifact paths.
 
 <details>
 <summary><strong>Full strict 3D AP40 results by class and difficulty</strong></summary>
