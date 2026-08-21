@@ -1,0 +1,148 @@
+\section{Results and Analysis}
+
+\subsection{Quantitative Results}
+
+The LiDAR-only PointPillars reference and the attention-bottleneck fusion
+detector were evaluated on the 3,769-sample KITTI validation split using
+AP$_{40}$. Both models used the same validation split, object classes,
+point-cloud range, effective batch size, random seed, and KITTI evaluator.
+The best checkpoint for each model was selected using overall 3D AP$_{40}$ at
+moderate difficulty. The LiDAR-only reference reached its best result at epoch
+28, while the fusion detector reached its best result at epoch 20.
+
+\begin{table}[ht]
+\centering
+\caption{Overall KITTI validation AP$_{40}$.}
+\label{tab:overall_results}
+\begin{tabular}{lrrrrrr}
+\hline
+& \multicolumn{3}{c}{BEV AP$_{40}$} &
+\multicolumn{3}{c}{3D AP$_{40}$} \\
+Model & Easy & Moderate & Hard & Easy & Moderate & Hard \\
+\hline
+LiDAR-only PointPillars
+& 64.5245 & 52.8874 & 49.6791 & 49.5614 & 38.6868 & 36.1066 \\
+Attention-bottleneck fusion
+& \textbf{66.3382} & \textbf{54.6478} & \textbf{51.9588}
+& \textbf{54.4341} & \textbf{42.6696} & \textbf{39.9782} \\
+\hline
+Difference
+& +1.8137 & +1.7604 & +2.2797 & +4.8727 & +3.9828 & +3.8716 \\
+\hline
+\end{tabular}
+\end{table}
+
+The attention-bottleneck fusion detector outperforms the LiDAR-only reference
+at every BEV and 3D difficulty level. At moderate difficulty, it improves BEV
+AP$_{40}$ by 1.7604 points and 3D AP$_{40}$ by 3.9828 points. The latter is a
+10.29\% relative improvement over the LiDAR-only result.
+
+\begin{table}[ht]
+\centering
+\caption{Per-class 3D AP$_{40}$ at moderate difficulty.}
+\label{tab:per_class_results}
+\begin{tabular}{lrrr}
+\hline
+Class & LiDAR-only & Fusion & Difference \\
+\hline
+Pedestrian & 30.3730 & \textbf{32.2419} & +1.8689 \\
+Cyclist & 34.1321 & \textbf{37.7407} & +3.6086 \\
+Car & 51.5553 & \textbf{58.0263} & +6.4710 \\
+\hline
+\end{tabular}
+\end{table}
+
+Fusion improves moderate 3D AP$_{40}$ for all three classes. The largest
+absolute improvement is observed for Car, followed by Cyclist and Pedestrian.
+The best fusion checkpoint obtains a moderate 3D AP$_{40}$ of 42.6696 at epoch
+20, compared with 41.5993 at epoch 40. This decrease indicates mild
+overfitting during the second half of training and supports validation-based
+checkpoint selection.
+
+\subsection{Camera Ablation}
+
+The best fusion checkpoint was reevaluated with correct camera images,
+all-black images, and a deterministic seed-0 derangement of the validation
+images. In the shuffled condition, every LiDAR sample receives an image from
+a different validation sample while its LiDAR points and annotations remain
+unchanged.
+
+\begin{table}[ht]
+\centering
+\caption{Camera-input ablation using the epoch-20 fusion checkpoint.}
+\label{tab:camera_ablation}
+\begin{tabular}{lrr}
+\hline
+Camera input & Moderate BEV AP$_{40}$ & Moderate 3D AP$_{40}$ \\
+\hline
+Correct image & \textbf{54.6478} & \textbf{42.6696} \\
+Black image & 54.1208 & 42.3851 \\
+Shuffled image & 53.9806 & 42.0954 \\
+\hline
+\end{tabular}
+\end{table}
+
+Shuffling the camera input reduces moderate BEV AP$_{40}$ by 0.6672 points
+and moderate 3D AP$_{40}$ by 0.5742 points. It changes the predictions in
+3,716 of the 3,769 validation frames, demonstrating that image information
+influences the detector. The strongest class-specific effect is observed for
+Pedestrian, whose moderate 3D AP$_{40}$ decreases from 32.2419 to 30.4090
+under image shuffling. The corresponding changes for Car and Cyclist are
+small and are not consistently positive. Thus, useful camera information is
+most evident for pedestrian detection, while LiDAR remains the dominant
+modality overall.
+
+\subsection{Attention Visualization}
+
+Figure~\ref{fig:attention_maps} visualizes a head-averaged, last-layer
+attention rollout from a selected LiDAR detection token through the four
+shared bottleneck tokens to the geometrically aligned camera tokens. One
+moderate-difficulty true positive is shown for each class. Examples are
+selected using a fixed visualization-quality criterion that combines
+detection confidence, object visibility, and attention overlap in both
+camera and BEV space.
+Camera-invisible BEV cells are excluded, and each map is normalized
+independently for visualization; therefore, color magnitude should not be
+compared across examples.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\linewidth]
+{evaluation_assets/attention_maps_camera_bev.png}
+\caption{Attention rollout for Pedestrian, Cyclist, and Car examples. The
+left column projects attention onto the camera image, while the right column
+shows the same attention in BEV together with LiDAR points and detections.
+White boxes identify the selected ground-truth object and corresponding
+prediction.}
+\label{fig:attention_maps}
+\end{figure}
+
+The maps show nonuniform but generally diffuse attention over camera-visible
+scene regions. The top 10\% of valid camera cells contain 21.04\%, 19.39\%,
+and 37.57\% of the attention mass for the displayed Pedestrian, Cyclist, and
+Car examples, respectively. Attention peaks overlap the selected objects in
+these examples while also covering nearby objects and scene context. This
+behavior is expected from four global bottleneck tokens, which compress
+scene-level information rather than enforcing object-localized
+correspondence. Because the examples were selected partly for attention
+overlap, they are illustrative rather than representative. The maps visualize
+active attention pathways but do not by themselves demonstrate causal camera
+use; the camera-input ablation provides the stronger evidence.
+
+\subsection{Discussion and Limitations}
+
+The results show that the proposed attention-bottleneck fusion detector
+performs better than the LiDAR-only reference on the KITTI validation split.
+Camera ablations demonstrate a measurable contribution from visual content,
+particularly for pedestrians. However, the ablation gap is smaller than the
+total improvement over LiDAR-only, so the full gain cannot be attributed to
+camera information alone. The additional attention layers, bottleneck
+representation, LiDAR-side processing, warm start, and staged fine-tuning may
+also contribute.
+
+The experiments use one random seed and the validation split rather than the
+official KITTI test server. Consequently, variation across training runs has
+not been measured. Additional seeds and comparisons with alternative fusion
+architectures are required before claiming that attention bottlenecks are
+generally superior to other fusion methods. Attention weights should also be
+interpreted as model diagnostics rather than causal explanations.

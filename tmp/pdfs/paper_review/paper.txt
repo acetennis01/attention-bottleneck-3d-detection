@@ -1,0 +1,585 @@
+=== PAGE 1 ===
+Abstract—Autonomous vehicles rely on multiple sensors, such
+as cameras, LiDAR, radars, and GPS, to perceive their surround-
+ings and navigate safely. Combining information from diverse
+sensors enhances situational awareness by mitigating individual
+sensor limitations. This research focuses on improving the ac-
+curacy of object detection, classification, and tracking by fusing
+LiDAR and camera data using deep learning techniques.This
+paper investigates the fusion of LiDAR and camera data us-
+ing attention bottlenecks. By combining complementary sensor
+strengths, the approach addresses individual limitations and noisy
+data challenges. The method, validated on the KITTI dataset,
+demonstrates improved perception accuracy and robustness.
+Key contributions include implementation of a scalable fusion
+framework, advancing reliable decision-making for autonomous
+navigation in complex scenarios.
+Multi Sensor Data Fusion, Sensor Data Fusion, LIDAR-
+Camera Fusion, Data Fusion, Attention Bottlenecks
+
+=== PAGE 2 ===
+LiDAR-Camera data fusion in autonomous vehicle
+using Attention Bottlenecks
+I. I NTRODUCTION
+Autonomous vehicles are typically equipped with various
+sensors that aid in safe navigation by perceiving the envi-
+ronment. These sensors include cameras, LiDAR, and radar,
+among others. To ensure a fail-safe system, multiple identical
+sensors may be installed. Cameras capture color information
+during the day, while night vision cameras use IR rays to pro-
+vide grayscale images at night. LiDAR scans the environment
+and generates a 3D point cloud representation, while radar
+provides range and angle information.
+However, each sensor has limitations in its usage. For
+example, camera systems provide good images during the day
+but degrade in low light, rainy conditions, or at night. LiDAR
+generates accurate 3D information, but processing point clouds
+for analysis is computationally costly compared to camera
+systems. Therefore, using individual sensors has advantages
+and disadvantages in capturing accurate environmental details.
+To address this, many attempts have been made to fuse
+information from multiple sensors and improve various types
+of analysis operations on the sensor data. The primary focus
+of our work is on improving the accuracy of analysis activities
+such as object detection, classification, and tracking. By fusing
+data from multiple sensors, the system can obtain a more
+comprehensive view of the environment and improve the accu-
+racy of these analysis activities. In summary, this experimental
+work aims to investigate the use of sensor fusion to improve
+the accuracy of analysis activities in autonomous vehicles.
+By combining data from multiple sensors, the system can
+generate more accurate and reliable data, which can improve
+the effectiveness and applicability of autonomous vehicles in
+complex environments.
+II. M ULTI-SENSOR DATA FUSION
+Multi-sensor data fusion(MSDF) [1] is a technique that
+integrates data from several sensors to achieve a more accurate
+and comprehensive understanding of a specific environment or
+scenario. The aim of multi-sensor data fusion is to enhance
+the system’s overall performance by utilizing complementary
+information from different sensors, which leads to better
+decision-making and improved situational awareness. This
+technology finds its applications in several domains, including
+autonomous vehicles, defense, robotics, healthcare, among
+others.
+Multi-sensor data fusion has gained significant attention in
+recent years, due to its ability to address complex real-world
+problems. With the rapid advancement of sensor technology,
+there are now many types of sensors available, such as
+cameras, LiDARs, radars, microphones, and more, which can
+provide diverse and complementary information about the en-
+vironment. By integrating information from multiple sensors,
+multi-sensor data fusion can compensate for the limitations
+and uncertainties of individual sensors, reduce ambiguity, and
+enhance the overall accuracy and reliability of the system.
+Fig. 1: Multi-Sensor data fusion
+III. S ENSORS IN AUTONOMOUS VEHICLES
+Autonomous vehicles are equipped with a variety of sensors
+to perceive their surroundings accurately and make informed
+decisions in realtime. The different sensors complement each
+other, providing a more complete and robust perception of the
+environment.
+Fig. 2: Autonomous vehicle and sensors .source [2]
+Sensor’s capabilities vary in terms of functionality, output
+data, speed of operation, operating environments, quality of
+data, etc. The capabilities of a sensor are categorized and
+
+=== PAGE 3 ===
+Fig. 3: Autonomous vehicle sensor’s capabilities are identi-
+fied and listed.Concentric circles indicate the quality of output
+with respect to the specified functionality.
+pictorially shown in Figure 3. It has been noted that relying
+on a single type of sensor alone cannot provide all the
+necessary capabilities required for the reliable operation of
+an autonomous vehicle system in different operating environ-
+ments.
+IV. M ULTI-SENSOR DATA FUSION IN AUTONOMOUS
+VEHICLES
+Fusing data from multiple sensors is a key technique in
+autonomous vehicles. LiDAR uses lasers to measure distance
+and create 3D point clouds, while cameras capture 2D images
+and are used for object recognition and tracking. Radar uses
+radio waves to measure distance and velocity and is useful
+for detecting objects in bad weather conditions.Each sensor
+has its unique strengths and weaknesses, and combining them
+allows the vehicle to benefit from the strengths of each
+sensor while compensating for its weaknesses. Capabilities of
+LiDAR, camera, and radar is highlighted and shown in Figure
+6.
+By fusing data from multiple similar or different sensors, an
+autonomous vehicle can overcome the limitations of individual
+sensors and obtain a more accurate and complete understand-
+ing of the environment.
+An ideal fusion solution combines the properties of individ-
+ual sensors and provides a union of all capabilities of sensors.
+This makes the system work in all weather, all time, adverse
+conditions. An ideal fusion solution should be able to perform
+better than a single sensor, while also ensuring that it does
+not perform worse than a single modality when the other
+modality fails. The capabilities of sensors and the proposed
+fusion solution is shown in Figure 7.
+However, the process of sensor fusion is not straightforward
+and requires advanced algorithms to handle the different types
+of data, coordinate systems, and measurement errors. The goal
+is to create a consistent and accurate representation of the
+Fig. 4: Camera
+Fig. 5: LiDAR
+Fig. 6: Sensor capabilities of sensors are highlighted in
+different colors
+Fig. 7: Ideal fusion combines the properties of individual
+sensors and provides a union of all capabilities of sensors.
+environment that can be used by the vehicle’s control systems
+to make safe and efficient decisions. With the advancement
+of machine learning techniques and advanced hardware, many
+approaches have been attempted and proposed to carry out
+LiDAR-Camera data fusion. Generally, these approaches [3]
+can broadly be categorized into three types - early, mid and
+late fusion is shown in Figure8 . In early fusion methods, input
+signals from vairous sensors are fused and fed to models. In
+mid level fusion, features from sensor inputs are extracted,
+fused and fused features are used in middle layers of the
+models. In the late fusion, decision level fusion is carried out
+using the last layers model. There are studies carried out the
+effectiveness of the each fusion methods.
+In this paper, we propose a approach for multi-modal data
+fusion for autonomous vehicle.
+1. We propose a transformer-based data fusion method using
+an attention bottleneck mechanism. The attention bottleneck
+collects information from multiple modalities and correlates
+the most relevant information across them.
+2. We apply the framework on LiDAR and Camera data.
+LiDAR data is transformed to histogram based pseudo images
+to reduce computational complexity.
+
+=== PAGE 4 ===
+Fig. 8: Fusion strategies. In early fusion, single model pro-
+cesses multi-modality inputs.Cross-modal information is pro-
+cessed in middle layers in mid fusion.Inputs are processed us-
+ing different models and outputs are combined in late fusion.In
+bottleneck fusion, cross modal information is processed and
+passed to the next level through attention bottleneck blocks.
+3. We experimentally validated the method on KITTI dataset
+[4] and benchmarks with complex urban scenarios.
+V. L ITERATURE SURVEY
+Many papers have proposed various fusion techniques to
+improve the accuracy and robustness of object detection and
+tracking. For example, in the paper ”Multi-sensor Fusion for
+Object Detection and Tracking in Autonomous Driving,” [5]
+the authors propose a deep learning-based approach that fuses
+LiDAR and camera data for object detection and tracking.
+A recent trend in the literature is the use of deep learning-
+based methods for multi-sensor data fusion. For example,
+in the paper ”Deep Sensor Fusion for Autonomous Driving:
+A Survey,” [3] the authors provide a comprehensive survey
+of recent deep learning-based sensor fusion methods for au-
+tonomous driving and their performance. The paper discusses
+different fusion techniques, such as Kalman filtering, particle
+filtering, and deep learning methods. Some works propose
+to use the camera and LiDAR data together for semantic
+segmentation, which means classifying each pixel of an image
+into different object classes. For example, in the paper ”Real-
+time Semantic Segmentation for Autonomous Driving using
+LiDAR and Camera” [6], the authors propose a system that
+fuses the LiDAR and camera data and uses it for semantic
+segmentation in real-time. Some works propose to use the
+camera and LiDAR data together for semantic segmentation,
+which means classifying each pixel of an image into different
+object classes. For example, in the paper ”Real-time Semantic
+Segmentation for Autonomous Driving using LiDAR and
+Camera” [6], the authors propose a system that fuses the
+LiDAR and camera data and uses it for semantic segmentation
+in real-time. In their paper [7] ”Attention Bottlenecks for
+multimodal fusion,” authors address the problem of fusing data
+of different modalities using bottleneck latents to collate and
+condense relevant information and share what is necessary.
+VI. M ETHODOLOGY OVERVIEW
+A transformer based approach [7] is used in this work to
+combine LiDAR and camera data for classification tasks in
+autonomous vehicles. The model takes as camera image frame
+and LiDAR point cloud as input. Point cloud is converted
+to pseudo image for reducing computational demands. Image
+frame and pseudo image (derived from pointcloud) are divided
+into patches and tokenised to facilitate computation. A set of
+fusion tokens (Bottleneck tokens) [7] are inserted with LiDAR
+and camera tokens. With the help of attention bottlenecks in
+transformer, the model is forced to carry out cross modal atten-
+tion through fusion tokens. Final layer’s output is forwarded
+to a classifier.
+A. Model Architecture
+As mentioned earlier, we used a fusion transformer [7]
+to combine LiDAR and camera data for classification tasks.
+Architecture of fusion transformer is shown in Figure 9. The
+model takes as input streams of images and point clouds,
+where the continuous input streams (i.e., image frames and
+point clouds) are divided into patches to facilitate computation.
+This approach of dividing images into patches and using
+transformers for image classification was demonstrated in the
+Vision Transformer (ViT) model [8]. A similar approach is
+applied in processing both point clouds and image streams.
+Point clouds consist of a series of unordered 3D coordinates.
+Due to the computationally intensive nature of processing
+point clouds, it is converted histogram based pseudo images.
+Pseudo-histogram images (derived from point clouds) and the
+camera image frames are provided as inputs to the fusion
+model. These images are resized and then tokenized before
+being processed. Pretrained Vision Transformer (ViT) [8] is
+used in this work for feature extraction and tokenization.
+In addition to LiDAR and camera tokens (xlidar, ximage) , a
+small set of fusion tokens are added in the input sequence.
+Fusion tokens(Bottleneck tokens) xfusion are introduced to
+restrict cross modal attention flow happens through them using
+attention bottlenecks [7] in the fusion transformer. These atten-
+tion bottlenecks facilitate cross-modal attention flow, enabling
+the model to focus on relevant regions of the multi modal data.
+The bottlenecks play a key role by emphasizing important
+features from both modalities. Cross-modal attention [9] is
+effective in identifying critical regions where both camera
+and LiDAR features interact, helping the model to extract
+complementary information from each modality. The cross-
+modal attention [9] blocks guide the model in sharing critical
+information between the two modalities, ensuring that the most
+relevant features are communicated and fused effectively.
+Representation at output layer is finally passed to classifier
+for classification tasks.
+B. Attention Bottlenecks
+Instead of directly concatenating or merging multimodal
+embeddings, the model uses attention bottlenecks to mediate
+
+=== PAGE 5 ===
+Fig. 9: Architecture. Fusion transformer takes LiDAR and
+camera data as inputs. Input sequences are extracted frame
+by frame.Pointcloud is convered to histogram based pseudo
+image. LiDAR pseudo image and camera image is devided into
+patches and converted to tokens. Tokens are then appended to
+fusion tokens and fed into transformer module. Transformer
+encoder uses self attention in unimodal information and cross
+attention on fusion tokens at bottlenecks at multiple layers
+the fusion. Bottleneck tokens [7] are a small set of trainable
+parameters that interact with the modality-specific embeddings
+through attention mechanisms. Each bottleneck token attends
+to features from all modalities, and in return, features from
+each modality attend to these bottleneck tokens. This design
+minimizes direct cross-modality interactions, enhancing effi-
+ciency. We denote LiDAR tokens as xlidar = [ l1, l2, . . . , lm] ,
+camera image tokens as ximage = [ i1, i2, . . . , in] and fusion
+tokens as xfusion = [ f1, f2, . . . , fb]. A transformer layer is
+denoted by xl+1 = T ransf ormer(xl)
+Input sequence is now the concatenation of xlidar , xfusion
+and ximage tokens
+x = [xlidar||xfusion||ximage] (1)
+Token representation for layer l is
+[xl+1
+i ||xfusion
+l+1
+i ] = T ransf ormer([xl
+i||xl
+fusion]) (2)
+xl+1
+fusioni = Avg(xl+1
+fusioni ) (3)
+Here i represents modality. This case LiDAR and Camera.
+xlidar and ximage exchange information via xfusion.
+C. Input Representations
+LiDAR pointcloud is an unstructured set of points, where
+each point is represented by spatial coordinates(x,y,z). These
+coordinates describe the position of objects in the environment
+relative to the sensor’s origin. Optionally, the point cloud
+may include additional attributes such as intensity, which
+represents the reflectivity of the object’s surface. Due to the
+computationally intensive nature of processing point clouds,
+various methods have been proposed to reduce this complexity.
+For example, the paper [10] proposes a method to convert
+point clouds into histogram images for easier processing. This
+transformation allows the data to be compatible with stan-
+dard 2D convolutional operations, making it easier to extract
+meaningful features. While models like PointNet [11], Point-
+Pillers [12] directly process point clouds without transforming
+them into another format. We followed approach leverages
+the conversion to pseudo-histogram images to simplify the
+computational demands of point cloud processing.
+The 3D data is projected onto a 2D grid, where the x
+and y-axes define the spatial extent of the scene, and the
+z-coordinate is used to segment points into distinct height
+layers (e.g., ”above” and ”below” thresholds). This grid-
+based representation serves as the foundation for constructing
+histograms,where each cell represent point density or counts
+within each grid cell. Histogram image is 3D tensor with shape
+(3,448,224), where channels represents below, above, and total
+features in the cell.
+Image data is in RGB format is resized to tensor with shape
+(3x224x224).
+D. Output Representations
+Transformer-based model processes the bottleneck-
+enhanced embeddings, capturing relationships within and
+across modalities. The fused embeddings are passed to task-
+specific heads, such as classification layers for downstream
+tasks.
+VII. D ATASET
+We experiment model using KITTI dataset [4], a widely
+used benchmark in autonomous driving research. It is created
+by the Karlsruhe Institute of Technology and the Toyota
+Technological Institute at Chicago. It includes a collection of
+images and LIDAR data, which are utilized in computer vision
+research for tasks such as stereo vision, optical flow, visual
+odometry, 3D object detection, and 3D tracking. Datasets are
+captured by driving through the mid-sized city of Karlsruhe,
+as well as in rural areas and on highways. Data collected from
+two color and two grayscale cameras (10 Hz, resolution: 1392
+× 512 pixels, field of view: 90° × 35°), a Velodyne HDL-
+64E 3D laser scanner (10 Hz, 64 beams, range: 100 m), a
+GPS/IMU localization unit. In addition to providing the data,
+benchmarks, evaluation metrics for each task are also offered.
+
+=== PAGE 6 ===
+VIII. I MPLEMENTATION DETAILS
+The model is implemented in PyTorch and tested using the
+KITTI dataset [4]. It uses separate backbone networks for each
+modality. ResNet-18 pretrained on ImageNet is used on image
+frames, while PointPillars is used on point clouds. The image
+frame is resized to a maximum size of 1280 × 384 while
+maintaining its aspect ratio. These backbones encode each
+modality into feature embeddings. A camera frame and its
+associated point cloud are sampled together from the dataset.
+A 16 × 16 token grid is formed from the point-cloud pseudo-
+image, while the image features are geometrically aligned
+with the corresponding bird’s-eye-view cells using the KITTI
+camera-to-LiDAR calibration and four height queries. In the
+pseudo-image, the x-axis spans (0, 69.12) meters and the y-
+axis spans (−39.68, 39.68) meters. Each cell is (0.16, 0.16)
+meters in the x and y directions.
+The pseudo-image encoder takes the four-dimensional point
+features and processes them using a PillarFeatureNet. The
+encoded pillar features are scattered into a bird’s-eye-view
+pseudo-image and processed by a SECOND backbone and
+SECONDFPN neck. The resulting high-level LiDAR feature
+representation contains 384 channels and preserves the spatial
+structure required for 3D object detection.
+The attention bottlenecks are implemented by a class called
+SymmetricMBTBEVFusion. The SymmetricMBTBEVFusion
+class uses four learnable bottleneck tokens and PyTorch’s
+nn.MultiheadAttention to fuse point-cloud and RGB
+features. Both modality feature maps are projected to an
+embedding dimension of 128 and represented by geometrically
+aligned 16 × 16 token grids. Each modality concatenates its
+feature tokens with the shared bottleneck tokens and processes
+them using separate transformer parameters. The bottleneck
+updates produced by the point-cloud and RGB branches are
+averaged after each fusion layer. Four fusion layers with eight
+attention heads are used. The fused representation is then
+used to update the LiDAR tokens through an additional cross-
+attention step. Camera information is communicated to the
+LiDAR representation through the shared bottleneck tokens. A
+lightweight 1 × 1 residual projection maps the fused features
+back to 384 channels and adds them to the original LiDAR
+BEV feature map. The bottleneck tokens are initialized with
+a standard deviation of 0.02, and the residual projection is
+initialized to zero. During training, 15% of the LiDAR tokens
+in camera-visible regions and 10% of the LiDAR BEV feature
+channels are randomly dropped. An auxiliary class-specific
+camera-BEV center-prediction loss with a weight of 0.25 is
+also applied. This design ensures efficient, parameter-effective
+feature fusion while preserving the PointPillars detection rep-
+resentation.
+The model was initialized using the best LiDAR-only Point-
+Pillars checkpoint. The LiDAR encoder and detection head
+were frozen for the first five epochs and subsequently fine-
+tuned with the complete model. The base learning rate was set
+to 0.0003, with a learning rate of 0.0006 for the camera and
+fusion components and 0.00015 for the LiDAR and detection
+components. The model was trained for 40 epochs. The model
+was trained with a physical batch size of 6 and eight-step
+gradient accumulation, resulting in an effective batch size of
+48.
+IX. R ESULTS AND ANALYSIS
+A. Quantitative Results
+The LiDAR-only PointPillars reference and the attention-
+bottleneck fusion detector were evaluated on the 3,769-sample
+KITTI validation split using AP40. Both models used the same
+validation split, object classes, point-cloud range, effective
+batch size, random seed, and KITTI evaluator. The best
+checkpoint for each model was selected using overall 3D AP40
+at moderate difficulty. The LiDAR-only reference reached its
+best result at epoch 28, while the fusion detector reached its
+best result at epoch 20. The overall results are presented in
+Table I.
+As shown in Table I, the attention-bottleneck fusion detector
+outperforms the LiDAR-only reference at every BEV and 3D
+difficulty level. At moderate difficulty, it improves BEV AP 40
+by 1.7604 points and 3D AP 40 by 3.9828 points. The latter is
+a 10.30% relative improvement over the LiDAR-only result.
+The per-class moderate 3D AP 40 results are presented in
+Table II.
+As shown in Table II, fusion improves moderate 3D AP 40
+for all three classes. The largest absolute improvement is
+observed for Car, followed by Cyclist and Pedestrian. The best
+fusion checkpoint obtains a moderate 3D AP 40 of 42.6696 at
+epoch 20, compared with 41.5993 at epoch 40. This decrease
+indicates mild overfitting during the second half of training
+and supports validation-based checkpoint selection.
+B. Camera Ablation
+The best fusion checkpoint was reevaluated with correct
+camera images, all-black images, and a deterministic seed-0
+derangement of the validation images. In the shuffled condi-
+tion, every LiDAR sample receives an image from a different
+validation sample while its LiDAR points and annotations
+remain unchanged. The results of these experiments are pre-
+sented in Table III.
+As shown in Table III, shuffling the camera input reduces
+moderate BEV AP 40 by 0.6672 points and moderate 3D AP 40
+by 0.5742 points. It changes the predictions in 3,716 of the
+3,769 validation frames, demonstrating that image information
+influences the detector. The strongest class-specific effect is
+observed for Pedestrian, whose moderate 3D AP 40 decreases
+from 32.2419 to 30.4090 under image shuffling. The corre-
+sponding changes for Car and Cyclist are small and are not
+consistently positive. Thus, useful camera information is most
+evident for pedestrian detection, while LiDAR remains the
+dominant modality overall.
+C. Attention Visualization
+Figure 10 visualizes a head-averaged, last-layer attention
+rollout from a selected LiDAR detection token through the four
+shared bottleneck tokens to the geometrically aligned camera
+
+=== PAGE 7 ===
+TABLE I: Overall KITTI validation AP 40 for the LiDAR-only and attention-bottleneck fusion models.
+BEV AP 40 3D AP 40
+Model Easy Moderate Hard Easy Moderate Hard
+LiDAR-only PointPillars 64.5245 52.8874 49.6791 49.5614 38.6868 36.1066
+Attention-bottleneck fusion 66.3382 54.6478 51.9588 54.4341 42.6696 39.9782
+Difference +1.8137 +1.7604 +2.2797 +4.8727 +3.9828 +3.8716
+TABLE II: Per-class 3D AP 40 at moderate difficulty.
+Class LiDAR-only Fusion Difference
+Pedestrian 30.3730 32.2419 +1.8689
+Cyclist 34.1321 37.7407 +3.6086
+Car 51.5553 58.0263 +6.4710
+tokens. One moderate-difficulty true positive is shown for each
+class. Examples are selected using a fixed visualization-quality
+criterion that combines detection confidence, object visibility,
+and attention overlap in both camera and BEV space. Camera-
+invisible BEV cells are excluded, and each map is normalized
+independently for visualization; therefore, color magnitude
+should not be compared across examples.
+Fig. 10: Attention rollout for Pedestrian, Cyclist, and Car
+examples. The left column projects attention onto the camera
+image, while the right column shows the same attention in
+BEV together with LiDAR points and detections. White boxes
+identify the selected ground-truth object and corresponding
+prediction.
+The maps show nonuniform but generally diffuse attention
+over camera-visible scene regions. The top 10% of valid
+camera cells contain 21.04%, 19.39%, and 37.57% of the
+attention mass for the displayed Pedestrian, Cyclist, and Car
+examples, respectively. Attention peaks overlap the selected
+objects in these examples while also covering nearby objects
+and scene context. This behavior is expected from four global
+bottleneck tokens, which compress scene-level information
+rather than enforcing object-localized correspondence. Be-
+cause the examples were selected partly for attention over-
+lap, they are illustrative rather than representative. The maps
+visualize active attention pathways but do not by themselves
+demonstrate causal camera use; the camera-input ablation in
+Table III provides stronger evidence.
+D. Discussion and Limitations
+The results in Tables I and II show that the proposed
+attention-bottleneck fusion detector performs better than the
+LiDAR-only reference on the KITTI validation split. Camera
+ablations demonstrate a measurable contribution from visual
+content, particularly for pedestrians. However, the ablation gap
+is smaller than the total improvement over LiDAR-only, so the
+full gain cannot be attributed to camera information alone. The
+additional attention layers, bottleneck representation, LiDAR-
+side processing, warm start, and staged fine-tuning may also
+contribute.
+The experiments use one random seed and the validation
+split rather than the official KITTI test server. Consequently,
+variation across training runs has not been measured. Addi-
+tional seeds and comparisons with alternative fusion architec-
+tures are required before claiming that attention bottlenecks are
+generally superior to other fusion methods. Attention weights
+should also be interpreted as model diagnostics rather than
+causal explanations.
+X. F UTURE WORK
+This work explored the fusion of LiDAR and camera data
+using attention bottlenecks. Future work will include more
+extensive ablation studies to evaluate the effects of the num-
+ber of bottleneck tokens, attention heads, fusion layers, and
+fusion-stage placement. The model should also be evaluated
+across multiple random seeds and compared with alternative
+fusion architectures to better establish the effectiveness of the
+proposed approach.
+Another direction is to incorporate temporal sensor data
+[13]. Processing consecutive camera frames and LiDAR scans
+could allow the model to use motion information, potentially
+improving the detection and tracking of moving or partially
+occluded objects.
+Finally, future experiments could compare fusion at different
+stages of the network. Earlier fusion may preserve more
+low-level cross-modal information, whereas later fusion may
+
+=== PAGE 8 ===
+TABLE III: Camera-input ablation results using the epoch-20 fusion checkpoint.
+Camera input Moderate BEV AP 40 Moderate 3D AP 40
+Correct image 54.6478 42.6696
+Black image 54.1208 42.3851
+Shuffled image 53.9806 42.0954
+combine more semantically developed features. Evaluating
+these alternatives could identify the most effective placement
+for the attention bottleneck module.
+XI. C ONCLUSION
+We implemented and evaluated a transformer-based fusion
+technique for LiDAR and camera data fusion for autonomous
+vehicles. We experimented with cross-modal attention [14]
+using attention bottlenecks. The fusion model outperformed
+the LiDAR-only baseline on the KITTI validation split. There
+is still scope for future work to improve the performance of
+the fusion model and develop better strategies for fusing data
+from multiple modalities.
+REFERENCES
+[1] D. L. Hall and J. Llinas, “An introduction to multisensor data fusion,”
+Proceedings of the IEEE , vol. 85, no. 1, pp. 6–23, 1997.
+[2] D. Clarke, “multi-target-multi-source-fusion-in-autonomous-
+driving-an-introduction,” 2018, accessed: 14-05-2023.
+[Online]. Available: https://blogs.sw.siemens.com/automotive-
+transportation/2018/07/16/multi-target-multi-source-fusion-in-
+autonomous-driving-an-introduction/
+[3] Z. Wang, Y . Wu, and Q. Niu, “Multi-sensor fusion in automated driving:
+A survey,” Ieee Access , vol. 8, pp. 2847–2868, 2019.
+[4] A. Geiger, P. Lenz, and R. Urtasun, “Are we ready for autonomous
+driving? the kitti vision benchmark suite,” in Conference on Computer
+Vision and Pattern Recognition (CVPR) , 2012.
+[5] M. R. Nabati, “Sensor fusion for object detection and tracking in
+autonomous vehicles,” 2021.
+[6] D. Kang, A. Wong, B. Lee, and J. Kim, “Real-time semantic segmen-
+tation of 3d point cloud for autonomous driving,” Electronics, vol. 10,
+no. 16, p. 1960, 2021.
+[7] A. Nagrani, S. Yang, A. Arnab, A. Jansen, C. Schmid, and
+C. Sun, “Attention bottlenecks for multimodal fusion,” 2022. [Online].
+Available: https://arxiv.org/abs/2107.00135
+[8] A. Dosovitskiy, L. Beyer, A. Kolesnikov, D. Weissenborn,
+X. Zhai, T. Unterthiner, M. Dehghani, M. Minderer, G. Heigold,
+S. Gelly, J. Uszkoreit, and N. Houlsby, “An image is
+worth 16x16 words: Transformers for image recognition at
+scale,” CoRR, vol. abs/2010.11929, 2020. [Online]. Available:
+https://arxiv.org/abs/2010.11929
+[9] Z. Huang, X. Wang, Y . Wei, L. Huang, H. Shi, W. Liu, and T. S.
+Huang, “Ccnet: Criss-cross attention for semantic segmentation,” IEEE
+Transactions on Pattern Analysis and Machine Intelligence , pp. 1–1,
+2020.
+[10] H. Shao, L. Wang, R. Chen, H. Li, and Y . Liu, “Safety-enhanced
+autonomous driving using interpretable sensor fusion transformer,” in
+Conference on Robot Learning . PMLR, 2023, pp. 726–737.
+[11] C. R. Qi, H. Su, K. Mo, and L. J. Guibas, “Pointnet: Deep learning on
+point sets for 3d classification and segmentation,” in Proceedings of the
+IEEE conference on computer vision and pattern recognition , 2017, pp.
+652–660.
+[12] A. H. Lang, S. V ora, H. Caesar, L. Zhou, J. Yang, and O. Beijbom,
+“Pointpillars: Fast encoders for object detection from point clouds,”
+in Proceedings of the IEEE/CVF conference on computer vision and
+pattern recognition, 2019, pp. 12 697–12 705.
+[13] J. Lin, C. Gan, and S. Han, “Tsm: Temporal shift module for efficient
+video understanding,” in Proceedings of the IEEE/CVF international
+conference on computer vision , 2019, pp. 7083–7093.
+[14] C.-F. R. Chen, Q. Fan, and R. Panda, “Crossvit: Cross-attention multi-
+scale vision transformer for image classification,” in Proceedings of the
+IEEE/CVF international conference on computer vision , 2021, pp. 357–
+366.
