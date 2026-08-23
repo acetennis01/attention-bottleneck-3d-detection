@@ -4,13 +4,14 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
 SCALE = 2
-WIDTH, HEIGHT = 1100, 1500
+WIDTH, HEIGHT = 1100, 1600
 OUT = Path(__file__).with_name("modelarchitecture.png")
 LIDAR_INPUT = Path(__file__).with_name("lidar_point_cloud_input.png")
 CAMERA_INPUT = Path(__file__).with_name("camera_image_input.png")
 
 REGULAR = "/System/Library/Fonts/Supplemental/Arial.ttf"
 BOLD = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+ITALIC = "/System/Library/Fonts/Supplemental/Arial Italic.ttf"
 
 
 def p(value):
@@ -129,6 +130,47 @@ def token_row(x, y, count, color, labels, cell=36, gap=8):
     return positions
 
 
+def arrow_label(cx, cy, text, width, size=11):
+    draw.rounded_rectangle(
+        p((cx - width / 2, cy - 11, cx + width / 2, cy + 11)),
+        radius=p(4), fill="white")
+    centered_text(cx, cy, text, size, [True])
+
+
+def arrow_math_label(
+        cx, cy, prefix, base, subscript, width, superscript=None, size=11):
+    """Draw a diagram label with real typographic sub/superscripts."""
+    half_height = max(11, size)
+    draw.rounded_rectangle(
+        p((cx - width / 2, cy - half_height,
+           cx + width / 2, cy + half_height)),
+        radius=p(4), fill="white")
+    prefix_font = font(size, True)
+    base_font = ImageFont.truetype(ITALIC, p(size + 1))
+    script_font = font(max(8, size - 3))
+    prefix_width = draw.textlength(prefix, font=prefix_font)
+    base_width = draw.textlength(base, font=base_font)
+    sub_width = draw.textlength(subscript, font=script_font)
+    sup_width = (
+        draw.textlength(superscript, font=script_font)
+        if superscript else 0)
+    gap = p(5)
+    total_width = prefix_width + gap + base_width + max(sub_width, sup_width)
+    left = p(cx) - total_width / 2
+    middle = p(cy)
+    draw.text((left, middle), prefix, font=prefix_font,
+              fill=COLORS["text"], anchor="lm")
+    left += prefix_width + gap
+    draw.text((left, middle), base, font=base_font,
+              fill=COLORS["text"], anchor="lm")
+    script_x = left + base_width
+    draw.text((script_x, middle + p(4)), subscript, font=script_font,
+              fill=COLORS["text"], anchor="lm")
+    if superscript:
+        draw.text((script_x, middle - p(5)), superscript, font=script_font,
+                  fill=COLORS["text"], anchor="lm")
+
+
 def draw_sensor_image(source, x, y, w, h):
     draw.rectangle(p((x, y, x + w, y + h)), fill="white")
     inset = p(7)
@@ -143,87 +185,95 @@ def draw_sensor_image(source, x, y, w, h):
 # Output stack at the top.
 centered_text(550, 32, "3D object detection output", 17, [True])
 box(390, 52, 320, 68, "output", ["3D boxes · classes · scores", "Car · Pedestrian · Cyclist"], [18, 14], [True, False])
-arrow(550, 160, 550, 120)
-box(430, 160, 240, 70, "output", ["PointPillars", "3D detection head"], [19, 17], [True, True])
-arrow(550, 270, 550, 230)
-box(365, 270, 370, 72, "neutral", ["Residual fusion with original LiDAR BEV", "1 × 1 projection to 384 channels"], [17, 14], [True, False])
-arrow(550, 385, 550, 342)
-box(385, 385, 330, 72, "fusion", ["LiDAR readout cross-attention", "LiDAR queries; bottleneck keys/values"], [18, 14], [True, False])
+arrow(550, 145, 550, 120)
+box(430, 145, 240, 70, "output", ["PointPillars", "3D detection head"], [19, 17], [True, True])
+arrow(550, 295, 550, 215)
+arrow_math_label(550, 255, "Fused LiDAR BEV", "F", "fused", 240, size=14)
+box(365, 295, 370, 72, "neutral", ["Residual fusion with original LiDAR BEV", "1 × 1 projection to 384 channels"], [17, 14], [True, False])
+arrow(550, 445, 550, 367)
+arrow_math_label(
+    550, 406, "Updated LiDAR tokens", "x̂", "lidar", 280, size=14)
+box(385, 445, 330, 72, "fusion", ["LiDAR readout cross-attention", "LiDAR queries; bottleneck keys/values"], [18, 14], [True, False])
 
 # Symmetric MBT block.
 draw.rounded_rectangle(
-    p((225, 485, 875, 790)), radius=p(15),
+    p((225, 585, 875, 890)), radius=p(15),
     fill=COLORS["fusion_fill"], outline=COLORS["fusion_stroke"], width=p(2.5))
-centered_text(550, 508, "Symmetric attention-bottleneck fusion", 20, [True])
-centered_text(550, 537, "8 attention heads per layer", 14)
-arrow(550, 485, 550, 457, COLORS["fusion_stroke"])
+centered_text(550, 608, "Symmetric attention-bottleneck fusion", 20, [True])
+centered_text(550, 637, "8 attention heads per layer", 14)
 
-box(275, 655, 245, 70, "lidar", ["LiDAR transformer", "LiDAR tokens + shared tokens"], [17, 13], [True, False])
-box(580, 655, 245, 70, "camera", ["Camera transformer", "camera tokens + shared tokens"], [17, 13], [True, False])
+box(275, 755, 245, 70, "lidar", ["LiDAR transformer", "LiDAR tokens + shared tokens"], [17, 13], [True, False])
+box(580, 755, 245, 70, "camera", ["Camera transformer", "camera tokens + shared tokens"], [17, 13], [True, False])
 
 # Four shared bottleneck tokens are shown explicitly.
-centered_text(550, 566, "shared bottleneck state", 13)
-token_row(454, 582, 4, "#9d59c7", ["B1", "B2", "B3", "B4"], cell=38, gap=10)
+centered_text(550, 666, "shared bottleneck state", 13)
+token_row(454, 682, 4, "#9d59c7", ["B1", "B2", "B3", "B4"], cell=38, gap=10)
+
+# Route the fusion-block output directly to the LiDAR-query readout.
+arrow(550, 585, 550, 517, COLORS["fusion_stroke"])
+arrow_math_label(
+    550, 551, "Final bottleneck state", "x", "fusion", 300,
+    superscript="L", size=14)
 # Parallel updates into the shared state.
-routed_arrow([(397, 655), (397, 635), (500, 635), (500, 620)], COLORS["fusion_stroke"])
-routed_arrow([(703, 655), (703, 635), (600, 635), (600, 620)], COLORS["fusion_stroke"])
+routed_arrow([(397, 755), (397, 735), (500, 735), (500, 720)], COLORS["fusion_stroke"])
+routed_arrow([(703, 755), (703, 735), (600, 735), (600, 720)], COLORS["fusion_stroke"])
 # Shared state returns to both branches, forming two visible loops.
-routed_arrow([(454, 601), (250, 601), (250, 690), (275, 690)], COLORS["fusion_stroke"])
-routed_arrow([(646, 601), (850, 601), (850, 690), (825, 690)], COLORS["fusion_stroke"])
+routed_arrow([(454, 701), (250, 701), (250, 790), (275, 790)], COLORS["fusion_stroke"])
+routed_arrow([(646, 701), (850, 701), (850, 790), (825, 790)], COLORS["fusion_stroke"])
 
 # Repeated layer loop.
 draw.line(
-    p([(350, 748), (750, 748), (750, 775), (350, 775)]),
+    p([(350, 848), (750, 848), (750, 875), (350, 875)]),
     fill=COLORS["fusion_stroke"], width=p(2), joint="curve")
-arrow(350, 775, 350, 748, COLORS["fusion_stroke"], 2)
-centered_text(550, 761, "repeat bottleneck update across 4 fusion layers", 13)
+arrow(350, 875, 350, 848, COLORS["fusion_stroke"], 2)
+centered_text(550, 861, "repeat bottleneck update across 4 fusion layers", 13)
 
 # Token row beneath the MBT block, matching the reference layout.
-centered_text(275, 848, "LiDAR tokens (16 × 16, 128-D)", 14, [True])
-centered_text(550, 848, "4 fusion tokens", 14, [True])
-centered_text(825, 848, "Camera tokens (16 × 16, 128-D)", 14, [True])
-token_row(142, 868, 6, "#7fb1df", ["L1", "L2", "L3", "…", "L255", "L256"], cell=34, gap=8)
-token_row(467, 868, 4, "#9d59c7", ["B1", "B2", "B3", "B4"], cell=34, gap=8)
-token_row(692, 868, 6, "#efbd6d", ["C1", "C2", "C3", "…", "C255", "C256"], cell=34, gap=8)
+centered_text(275, 948, "LiDAR tokens (16 × 16, 128-D)", 14, [True])
+centered_text(550, 948, "4 fusion tokens", 14, [True])
+centered_text(825, 948, "Camera tokens (16 × 16, 128-D)", 14, [True])
+token_row(142, 968, 6, "#7fb1df", ["L1", "L2", "L3", "…", "L255", "L256"], cell=34, gap=8)
+token_row(467, 968, 4, "#9d59c7", ["B1", "B2", "B3", "B4"], cell=34, gap=8)
+token_row(692, 968, 6, "#efbd6d", ["C1", "C2", "C3", "…", "C255", "C256"], cell=34, gap=8)
 
-routed_arrow([(275, 830), (275, 810), (397, 810), (397, 725)], COLORS["lidar_stroke"])
-arrow(550, 830, 550, 620, COLORS["fusion_stroke"])
-routed_arrow([(825, 830), (825, 810), (703, 810), (703, 725)], COLORS["camera_stroke"])
+routed_arrow([(275, 930), (275, 910), (397, 910), (397, 825)], COLORS["lidar_stroke"])
+arrow(550, 930, 550, 720, COLORS["fusion_stroke"])
+routed_arrow([(825, 930), (825, 910), (703, 910), (703, 825)], COLORS["camera_stroke"])
 
 # Encoders and aligned representations.
-arrow(275, 970, 275, 910, COLORS["lidar_stroke"])
-box(145, 970, 260, 70, "lidar", ["Projection + BEV pooling", "16 × 16 tokens"], [17, 14], [True, False])
-arrow(275, 1070, 275, 1040, COLORS["lidar_stroke"])
-box(145, 1070, 260, 72, "lidar", ["SECOND + SECONDFPN", "384-channel LiDAR BEV"], [17, 14], [True, False])
-arrow(275, 1175, 275, 1142, COLORS["lidar_stroke"])
-box(145, 1175, 260, 70, "lidar", ["PillarFeatureNet", "pillar encoding + BEV scatter"], [17, 14], [True, False])
+arrow(275, 1070, 275, 1010, COLORS["lidar_stroke"])
+box(145, 1070, 260, 70, "lidar", ["Projection + BEV pooling", "16 × 16 tokens"], [17, 14], [True, False])
+arrow(275, 1170, 275, 1140, COLORS["lidar_stroke"])
+box(145, 1170, 260, 72, "lidar", ["SECOND + SECONDFPN", "384-channel LiDAR BEV"], [17, 14], [True, False])
+arrow(275, 1275, 275, 1242, COLORS["lidar_stroke"])
+box(145, 1275, 260, 70, "lidar", ["PillarFeatureNet", "pillar encoding + BEV scatter"], [17, 14], [True, False])
 
-arrow(825, 970, 825, 910, COLORS["camera_stroke"])
-box(695, 970, 260, 78, "camera", ["Camera-to-BEV alignment", "KITTI calibration · 4 height queries"], [17, 13], [True, False])
-arrow(825, 1100, 825, 1048, COLORS["camera_stroke"])
-box(695, 1100, 260, 72, "camera", ["ResNet-18", "ImageNet pretrained"], [18, 14], [True, False])
+arrow(825, 1070, 825, 1010, COLORS["camera_stroke"])
+box(695, 1070, 260, 78, "camera", ["Camera-to-BEV alignment", "KITTI calibration · 4 height queries"], [17, 13], [True, False])
+arrow(825, 1200, 825, 1148, COLORS["camera_stroke"])
+box(695, 1200, 260, 72, "camera", ["ResNet-18", "ImageNet pretrained"], [18, 14], [True, False])
 
 # Training-only auxiliary loss from aligned camera features.
-routed_arrow([(955, 1009), (1027, 1009), (1027, 1070)], COLORS["neutral_stroke"], 1.8)
-box(965, 1070, 125, 58, "neutral", ["Auxiliary center loss", "training only"], [11, 10], [True, False], 2, 7)
+routed_arrow([(955, 1109), (1027, 1109), (1027, 1170)], COLORS["neutral_stroke"], 1.8)
+box(965, 1170, 125, 58, "neutral", ["Auxiliary center loss", "training only"], [11, 10], [True, False], 2, 7)
 
 # Raw sensor inputs at the bottom.
-arrow(275, 1275, 275, 1245, COLORS["lidar_stroke"])
-draw_sensor_image(LIDAR_INPUT, 95, 1275, 360, 155)
-centered_text(275, 1453, "LiDAR point cloud", 17, [True])
-centered_text(275, 1477, "x, y, z, intensity", 13)
+arrow(275, 1375, 275, 1345, COLORS["lidar_stroke"])
+draw_sensor_image(LIDAR_INPUT, 95, 1375, 360, 155)
+centered_text(275, 1553, "LiDAR point cloud", 17, [True])
+centered_text(275, 1577, "x, y, z, intensity", 13)
 
-arrow(825, 1275, 825, 1172, COLORS["camera_stroke"])
-draw_sensor_image(CAMERA_INPUT, 645, 1275, 360, 155)
-centered_text(825, 1453, "RGB camera image", 17, [True])
-centered_text(825, 1477, "maximum 1280 × 384", 13)
+arrow(825, 1375, 825, 1272, COLORS["camera_stroke"])
+draw_sensor_image(CAMERA_INPUT, 645, 1375, 360, 155)
+centered_text(825, 1553, "RGB camera image", 17, [True])
+centered_text(825, 1577, "maximum 1280 × 384", 13)
 
 # Original LiDAR BEV skip connection to residual fusion.
 routed_arrow(
-    [(145, 1106), (55, 1106), (55, 306), (365, 306)],
+    [(145, 1206), (55, 1206), (55, 331), (365, 331)],
     COLORS["lidar_stroke"], 2)
-draw.rectangle(p((63, 318, 286, 344)), fill="white")
-centered_text(174, 331, "original LiDAR BEV residual", 12)
+draw.rectangle(p((63, 343, 286, 369)), fill="white")
+centered_text(174, 356, "original LiDAR BEV residual", 12)
 
 image.save(OUT, dpi=(300, 300))
 print(OUT)
