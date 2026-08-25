@@ -36,8 +36,15 @@ class FusionDiagnosticsHook(Hook):
     def _component(name: str) -> str:
         if name.startswith('img_backbone.'):
             return 'image_backbone'
-        if name.startswith('fusion_module.image'):
+        if name.startswith((
+                'fusion_module.image',
+                'fusion_module.camera_')):
             return 'fusion_image'
+        if name.startswith((
+                'fusion_module.aligned_bev_position',
+                'fusion_module.height_score',
+                'fusion_module.local_')):
+            return 'fusion_alignment'
         if name.startswith('fusion_module.lidar'):
             return 'fusion_lidar'
         if name.startswith('fusion_module.bottleneck'):
@@ -88,6 +95,22 @@ class FusionDiagnosticsHook(Hook):
             'fusion/bottleneck_token_rms': rms(
                 output['bottleneck_tokens']),
         }
+        if 'image_valid_ratio' in output:
+            self._feature_stats['fusion/image_valid_ratio'] = float(
+                output['image_valid_ratio'].detach())
+        if 'local_camera_gate' in output:
+            valid = output['image_valid_mask'].expand_as(
+                output['local_camera_gate'])
+            valid_gates = output['local_camera_gate'].detach()[valid]
+            if valid_gates.numel() > 0:
+                self._feature_stats['fusion/local_camera_gate_mean'] = (
+                    valid_gates.float().mean().item())
+        if 'lidar_token_keep_ratio' in output:
+            self._feature_stats['fusion/lidar_token_keep_ratio'] = float(
+                output['lidar_token_keep_ratio'].detach())
+        if 'camera_aux_logits' in output:
+            self._feature_stats['fusion/camera_aux_logit_rms'] = rms(
+                output['camera_aux_logits'])
 
     def before_train(self, runner) -> None:
         self._runner = runner
@@ -132,4 +155,3 @@ class FusionDiagnosticsHook(Hook):
             handle.remove()
         self._handles = []
         self._runner = None
-

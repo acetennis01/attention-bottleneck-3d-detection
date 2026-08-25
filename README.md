@@ -1,124 +1,116 @@
-# Symmetric MBT BEV fusion
+# Attention-bottleneck camera–LiDAR 3D detection
 
-This is the geometry-preserving camera–LiDAR implementation used by
-`configs/my_fusion_mbt_bev.py`.
+This MMDetection3D project contains the final KITTI experiment used in the
+paper: a PointPillars detector with calibration-aware camera-to-BEV alignment
+and symmetric attention-bottleneck fusion.
 
-Key properties:
+The final model uses:
 
-- Implements the symmetric bottleneck update from equations (8) and (9) of
-  *Attention Bottlenecks for Multimodal Fusion*.
-- Uses separate image and LiDAR transformer parameters.
-- Adds separate learned positional and modality embeddings.
-- Uses four bottleneck tokens initialized with standard deviation `0.02`.
-- Preserves the full-resolution PointPillars BEV map and standard
-  `Anchor3DHead` instead of detecting directly from global bottleneck tokens.
-- Uses a final bottleneck-to-LiDAR readout so the last symmetric image update
-  contributes to the LiDAR-only detection representation.
-- Starts as an exact LiDAR-only feature baseline through a zero-initialized
-  residual fusion adapter.
-- Disables geometry-changing training augmentation until synchronized
-  camera–LiDAR augmentation is implemented.
+- PointPillars with SECOND and SECONDFPN for LiDAR BEV features.
+- An ImageNet-pretrained ResNet-18 camera backbone.
+- KITTI calibration to sample camera features at four heights for each BEV
+  location.
+- Four shared bottleneck tokens, four fusion layers, and eight attention heads.
+- A bottleneck-mediated LiDAR readout and a training-only camera center loss.
+- A five-epoch fusion warm-up followed by joint fine-tuning for 40 epochs.
 
-Run focused tests from the MMDetection3D root:
+## Repository layout
+
+```text
+configs/       Final training, baseline, smoke-test, and ablation configs
+fusion/        Attention-bottleneck fusion module and MMDetection3D detector
+hooks/         Staged training and fusion diagnostics
+transforms/    Black-image and shuffled-image evaluation transforms
+tools/         Evaluation, ablation, and attention-map utilities
+tests/         Focused tests for the retained implementation
+docs/          Paper figures generated from the final model
+```
+
+The configuration inheritance chain is intentionally retained because these
+are the exact configurations used by the experiment:
+
+```text
+my_fusion_mbt_bev.py
+└── my_fusion_mbt_bev_eb48.py
+    └── my_fusion_mbt_bev_aligned_eb48.py
+        └── my_fusion_mbt_bev_camera_focused_eb48.py
+```
+
+## Setup
+
+Place this repository at `mmdetection3d/projects/myfusion`, then run commands
+from the MMDetection3D root:
 
 ```bash
 conda activate openmmlab
-PYTHONPATH="$PWD" python -m pytest \
-  projects/myfusion/tests/test_mbt_bev.py -q
+export PYTHONPATH="$PWD"
 ```
 
-Build-check the config:
-
-```bash
-PYTHONPATH="$PWD" python - <<'PY'
-from mmengine.config import Config
-from mmdet3d.utils import register_all_modules
-from mmdet3d.registry import MODELS
-cfg = Config.fromfile('projects/myfusion/configs/my_fusion_mbt_bev.py')
-register_all_modules(init_default_scope=True)
-model = MODELS.build(cfg.model)
-print(type(model).__name__)
-PY
-```
-
-Train from the MMDetection3D root:
-
-```bash
-PYTHONPATH="$PWD" python tools/train.py \
-  projects/myfusion/configs/my_fusion_mbt_bev.py
-```
-
-Run the checkpointed two-epoch diagnostic first:
-
-```bash
-PYTHONPATH="$PWD" python tools/train.py \
-  projects/myfusion/configs/my_fusion_mbt_bev_smoke.py
-```
-
-It saves checkpoints after each epoch and persists formatted validation output
-at `work_dirs/mbt_bev_diagnostic/pred_instances_3d.pkl`.
-
-Run the matched LiDAR-only diagnostic before either full experiment:
-
-```bash
-PYTHONPATH="$PWD" python tools/train.py \
-  projects/myfusion/configs/pointpillars_lidar_control_smoke.py
-```
-
-The full controlled comparison uses a shared seed (`0`), batch size (`1`),
-80-epoch schedule, KITTI split/classes/range, and geometry-safe LiDAR pipeline:
-
-```bash
-# LiDAR-only control
-PYTHONPATH="$PWD" python tools/train.py \
-  projects/myfusion/configs/pointpillars_lidar_control.py
-
-# Camera-LiDAR MBT
-PYTHONPATH="$PWD" python tools/train.py \
-  projects/myfusion/configs/my_fusion_mbt_bev.py
-```
-
-Both configs retain the last three checkpoints, save the best checkpoint by
-overall moderate 3D AP40, and persist the latest formatted validation
-predictions in their respective work directories.
-
-Audit box dimensions, bottom-center height, and horizontal matching with:
-
-```bash
-PYTHONPATH="$PWD" python projects/myfusion/tools/audit_kitti_predictions.py
-```
-
-Re-evaluate the persisted file without rerunning inference:
-
-```bash
-PYTHONPATH="$PWD" python \
-  projects/myfusion/tools/evaluate_persisted_kitti.py \
-  work_dirs/mbt_bev_diagnostic/pred_instances_3d.pkl
-```
-
-### KITTI evaluator compatibility
-
-The VM's Numba runtime emits PTX 8.5 while its driver accepts PTX 8.4, so the
-upstream Numba rotated-IoU kernel cannot compile. Apply the included MMCV
-compatibility backend from the MMDetection3D root:
+If the VM cannot execute the upstream Numba KITTI rotated-IoU kernel, apply
+the included regression-tested MMCV backend:
 
 ```bash
 python projects/myfusion/mmdet3d_patches/apply.py
-PYTHONPATH="$PWD" python -m pytest \
-  projects/myfusion/tests/test_kitti_overlap_backend.py -q
+python -m pytest projects/myfusion/tests/test_kitti_overlap_backend.py -q
 ```
 
-This leaves MMDetection3D's KITTI metric logic unchanged and replaces only the
-incompatible overlap kernel. The MMCV backend is tested against the Shapely
-reference for IoU, both intersection fractions, and raw intersection area.
+## Train the retained experiments
 
-### Two-epoch diagnostic result
+The camera-focused model warm-starts from the best LiDAR-only checkpoint at
+the path specified by `load_from`, so train the baseline first:
 
-The validated two-epoch run produced strict 3D AP40 of 49.15/41.14/38.93 for
-Car, 14.18/9.21/8.32 for Cyclist, and 8.45/8.31/7.71 for Pedestrian on the local
-KITTI validation split (easy/moderate/hard). These are diagnostic results, not
-official test-server results.
+```bash
+python tools/train.py \
+  projects/myfusion/configs/pointpillars_lidar_control_eb48.py
+```
 
-Before reporting benchmark results, use the upstream MMDetection3D KITTI metric
-logic (or a regression-tested CPU overlap backend with identical criterion
-semantics) and submit test-set detections to the official KITTI server.
+Run the bounded camera-focused smoke test:
+
+```bash
+python tools/train.py \
+  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_eb48_smoke.py
+```
+
+Train the final fusion model:
+
+```bash
+python tools/train.py \
+  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_eb48.py
+```
+
+Both full experiments use seed 0, a physical batch size of 6, and eight-step
+gradient accumulation. Checkpoints are selected using overall KITTI 3D
+AP40 at moderate difficulty.
+
+## Camera ablations
+
+Evaluate the best fusion checkpoint with correct images first, then with the
+retained black-image and shuffled-image configurations:
+
+```bash
+python tools/test.py \
+  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_eb48.py \
+  /path/to/best_epoch_20.pth
+
+python tools/test.py \
+  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_black_eval.py \
+  /path/to/best_epoch_20.pth
+
+python tools/test.py \
+  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_shuffled_eval.py \
+  /path/to/best_epoch_20.pth
+```
+
+`tools/compare_camera_ablations.py` compares the persisted prediction files.
+`tools/render_attention_maps.py` exports the camera and BEV attention maps used
+in the paper.
+
+## Results
+
+On the 3,769-sample KITTI validation split, the best epoch-20 fusion checkpoint
+reached **42.6696 overall 3D AP40 moderate**, compared with **38.6868** for the
+LiDAR-only baseline. Correct images outperformed black images by 0.2845 points
+and shuffled images by 0.5742 points at the same metric. See
+[`EVALUATION.md`](EVALUATION.md) for the full results and limitations.
+
+These are validation-split results, not official KITTI test-server scores.

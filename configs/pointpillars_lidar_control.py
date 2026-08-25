@@ -11,8 +11,8 @@ point_cloud_range = [0, -39.68, -3, 69.12, 39.68, 1]
 input_modality = dict(use_lidar=True, use_camera=False)
 backend_args = None
 
-# Match the LiDAR half of the MBT pipeline. Geometry-changing augmentation is
-# intentionally omitted so the only experimental difference is camera fusion.
+# Match the LiDAR half of the fusion pipeline. Geometry-changing augmentation
+# is omitted because it would desynchronize camera and LiDAR inputs.
 train_pipeline = [
     dict(
         type='LoadPointsFromFile',
