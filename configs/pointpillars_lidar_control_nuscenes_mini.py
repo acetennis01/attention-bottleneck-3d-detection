@@ -11,7 +11,7 @@ class_names = [
     'car', 'truck', 'trailer', 'bus', 'construction_vehicle', 'bicycle',
     'motorcycle', 'pedestrian', 'traffic_cone', 'barrier'
 ]
-metainfo = dict(classes=class_names)
+metainfo = dict(classes=class_names, version='v1.0-mini')
 input_modality = dict(use_lidar=True, use_camera=False)
 backend_args = None
 

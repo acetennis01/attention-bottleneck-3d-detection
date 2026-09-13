@@ -56,7 +56,7 @@ train_pipeline = [
         keys=['img', 'points', 'gt_bboxes_3d', 'gt_labels_3d'],
         meta_keys=[
             'cam2img', 'lidar2cam', 'img_shape', 'img_path',
-            'sample_idx', 'num_pts_feats'
+            'sample_idx', 'num_pts_feats', 'box_type_3d', 'box_mode_3d'
         ]),
 ]
 
@@ -83,7 +83,7 @@ test_pipeline = [
         keys=['img', 'points'],
         meta_keys=[
             'cam2img', 'lidar2cam', 'img_shape', 'img_path',
-            'sample_idx', 'num_pts_feats'
+            'sample_idx', 'num_pts_feats', 'box_type_3d', 'box_mode_3d'
         ]),
 ]
 
