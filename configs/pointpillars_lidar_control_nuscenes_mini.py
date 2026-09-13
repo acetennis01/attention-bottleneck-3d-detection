@@ -84,7 +84,7 @@ val_evaluator = dict(
 test_evaluator = val_evaluator
 
 randomness = dict(seed=0, deterministic=False)
-train_cfg = dict(by_epoch=True, max_epochs=24, val_interval=1)
+train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=24, val_interval=1)
 default_hooks = dict(
     checkpoint=dict(
         type='CheckpointHook',

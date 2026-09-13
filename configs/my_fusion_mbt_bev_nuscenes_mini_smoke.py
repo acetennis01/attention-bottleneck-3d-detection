@@ -2,7 +2,7 @@
 
 _base_ = ['./my_fusion_mbt_bev_nuscenes_mini.py']
 
-train_cfg = dict(by_epoch=True, max_epochs=1, val_interval=1)
+train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=1, val_interval=1)
 default_hooks = dict(
     checkpoint=dict(
         type='CheckpointHook', interval=1, max_keep_ckpts=1,
