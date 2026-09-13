@@ -84,6 +84,7 @@ val_evaluator = dict(
 test_evaluator = val_evaluator
 
 randomness = dict(seed=0, deterministic=False)
+optim_wrapper = dict(accumulative_counts=4)
 train_cfg = dict(type='EpochBasedTrainLoop', max_epochs=24, val_interval=1)
 default_hooks = dict(
     checkpoint=dict(
