@@ -63,3 +63,51 @@ def test_lidar_to_image_composition_supports_three_by_three_intrinsics():
 
     assert result.shape == (1, 4, 4)
     assert torch.equal(result[0, :3, :3], intrinsics[0])
+
+
+def test_pointpillars_checkpoint_prefixes_are_remapped_for_warm_start():
+    state_dict = {
+        'pts_voxel_encoder.layer.weight': torch.ones(1),
+        'pts_middle_encoder.layer.weight': torch.ones(1),
+        'pts_backbone.layer.weight': torch.ones(1),
+        'pts_neck.layer.weight': torch.ones(1),
+        'pts_bbox_head.layer.weight': torch.ones(1),
+        'img_backbone.layer.weight': torch.ones(1),
+    }
+
+    NuScenesMBTBEVFusionDetector._remap_pointpillars_state_dict(state_dict)
+
+    assert 'voxel_encoder.layer.weight' in state_dict
+    assert 'middle_encoder.layer.weight' in state_dict
+    assert 'backbone.layer.weight' in state_dict
+    assert 'neck.layer.weight' in state_dict
+    assert 'bbox_head.layer.weight' in state_dict
+    assert 'img_backbone.layer.weight' in state_dict
+    assert not any(key.startswith('pts_') for key in state_dict)
+
+
+def test_pointpillars_checkpoint_loads_into_detector_modules():
+    detector = NuScenesMBTBEVFusionDetector.__new__(
+        NuScenesMBTBEVFusionDetector)
+    torch.nn.Module.__init__(detector)
+    module_names = (
+        'voxel_encoder',
+        'middle_encoder',
+        'backbone',
+        'neck',
+        'bbox_head',
+    )
+    for name in module_names:
+        setattr(detector, name, torch.nn.Linear(1, 1, bias=False))
+
+    checkpoint = {
+        f'pts_{name}.weight': torch.full((1, 1), index + 1.0)
+        for index, name in enumerate(module_names)
+    }
+    incompatible = detector.load_state_dict(checkpoint, strict=False)
+
+    assert incompatible.missing_keys == []
+    assert incompatible.unexpected_keys == []
+    for index, name in enumerate(module_names):
+        expected = torch.full((1, 1), index + 1.0)
+        assert torch.equal(getattr(detector, name).weight, expected)

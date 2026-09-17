@@ -20,6 +20,14 @@ class MBTBEVFusionDetector(Base3DDetector):
     and Anchor3DHead interfaces. Bottlenecks only mediate cross-modal exchange.
     """
 
+    _POINTPILLARS_PREFIX_MAP = {
+        'pts_voxel_encoder.': 'voxel_encoder.',
+        'pts_middle_encoder.': 'middle_encoder.',
+        'pts_backbone.': 'backbone.',
+        'pts_neck.': 'neck.',
+        'pts_bbox_head.': 'bbox_head.',
+    }
+
     def __init__(
         self,
         img_backbone: dict,
@@ -56,6 +64,52 @@ class MBTBEVFusionDetector(Base3DDetector):
         self.camera_aux_focal_gamma = float(camera_aux_focal_gamma)
         if self.camera_aux_loss_weight < 0:
             raise ValueError('camera_aux_loss_weight must be non-negative')
+
+    @classmethod
+    def _remap_pointpillars_state_dict(
+        cls,
+        state_dict: dict,
+        prefix: str = '',
+    ) -> None:
+        """Map an upstream PointPillars checkpoint onto this detector.
+
+        MMDetection3D's PointPillars checkpoints name the LiDAR path with
+        ``pts_*`` prefixes, whereas this fusion detector exposes the same
+        modules without that prefix. Remapping at the root module makes
+        ``load_from`` initialize the intended LiDAR and detection weights.
+        Native MBT checkpoints are left unchanged.
+        """
+        for source, destination in cls._POINTPILLARS_PREFIX_MAP.items():
+            source_prefix = prefix + source
+            destination_prefix = prefix + destination
+            for key in list(state_dict):
+                if not key.startswith(source_prefix):
+                    continue
+                mapped_key = destination_prefix + key[len(source_prefix):]
+                if mapped_key not in state_dict:
+                    state_dict[mapped_key] = state_dict[key]
+                del state_dict[key]
+
+    def _load_from_state_dict(
+        self,
+        state_dict,
+        prefix,
+        local_metadata,
+        strict,
+        missing_keys,
+        unexpected_keys,
+        error_msgs,
+    ) -> None:
+        self._remap_pointpillars_state_dict(state_dict, prefix)
+        super()._load_from_state_dict(
+            state_dict,
+            prefix,
+            local_metadata,
+            strict,
+            missing_keys,
+            unexpected_keys,
+            error_msgs,
+        )
 
     @property
     def with_neck(self) -> bool:

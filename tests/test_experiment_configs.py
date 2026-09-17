@@ -70,6 +70,26 @@ def test_camera_focused_smoke_is_bounded():
     assert cfg.param_scheduler == []
 
 
+def test_nuscenes_camera_focused_config_matches_kitti_methodology():
+    cfg = _load('my_fusion_mbt_bev_nuscenes.py')
+
+    assert cfg.train_cfg.type == 'EpochBasedTrainLoop'
+    assert cfg.train_cfg.max_epochs == 24
+    assert cfg.train_cfg.val_begin == 2
+    assert cfg.optim_wrapper.accumulative_counts == 4
+    assert cfg.optim_wrapper.optimizer.lr == pytest.approx(3e-4)
+    assert cfg.custom_hooks[0].type == 'StagedFusionTrainingHook'
+    assert cfg.custom_hooks[0].freeze_epochs == 5
+    assert cfg.custom_hooks[1].type == 'FusionDiagnosticsHook'
+    assert 'pointpillars_nuscenes' in cfg.load_from
+
+    custom_keys = cfg.optim_wrapper.paramwise_cfg.custom_keys
+    assert custom_keys.img_backbone.lr_mult == pytest.approx(2.0)
+    assert custom_keys.fusion_module.lr_mult == pytest.approx(2.0)
+    assert custom_keys.voxel_encoder.lr_mult == pytest.approx(0.5)
+    assert custom_keys.bbox_head.lr_mult == pytest.approx(0.5)
+
+
 @pytest.mark.parametrize(
     'name, transform',
     [
