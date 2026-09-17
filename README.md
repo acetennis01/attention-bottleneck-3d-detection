@@ -1,8 +1,9 @@
 # Attention-bottleneck camera–LiDAR 3D detection
 
 This MMDetection3D project contains the final KITTI experiment used in the
-paper: a PointPillars detector with calibration-aware camera-to-BEV alignment
-and symmetric attention-bottleneck fusion.
+paper and its full nuScenes trainval adaptation: a PointPillars detector with
+calibration-aware camera-to-BEV alignment and symmetric attention-bottleneck
+fusion.
 
 The final model uses:
 
@@ -114,3 +115,13 @@ and shuffled images by 0.5742 points at the same metric. See
 [`EVALUATION.md`](EVALUATION.md) for the full results and limitations.
 
 These are validation-split results, not official KITTI test-server scores.
+
+## nuScenes experiment
+
+The full nuScenes experiment uses a matched LiDAR-only PointPillars baseline
+followed by camera-focused MBT fine-tuning. The MBT run automatically
+warm-starts from the baseline checkpoint with the highest validation NDS,
+freezes the transferred LiDAR and detection modules for five epochs, and then
+jointly fine-tunes both modalities. See
+[`docs/NUSCENES_TRAINING.md`](docs/NUSCENES_TRAINING.md) for the complete
+training protocol and commands.
