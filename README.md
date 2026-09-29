@@ -12,8 +12,10 @@ The final model uses:
 - KITTI calibration to sample camera features at four heights for each BEV
   location.
 - Four shared bottleneck tokens, four fusion layers, and eight attention heads.
-- A bottleneck-mediated LiDAR readout and a training-only camera center loss.
-- A five-epoch fusion warm-up followed by joint fine-tuning for 40 epochs.
+- A bottleneck-mediated LiDAR readout and a training-only, camera-only center
+  loss applied before multimodal fusion.
+- Stable valid-only camera aggregation and a bounded BEV residual update.
+- A fixed pretrained camera and LiDAR detector while the fusion path trains.
 
 ## Repository layout
 
@@ -58,7 +60,8 @@ python -m pytest projects/myfusion/tests/test_kitti_overlap_backend.py -q
 ## Train the retained experiments
 
 The camera-focused model warm-starts from the best LiDAR-only checkpoint at
-the path specified by `load_from`, so train the baseline first:
+the path specified by `load_from` and keeps that detector fixed, so train the
+baseline first:
 
 ```bash
 python tools/train.py \
@@ -106,7 +109,7 @@ python tools/test.py \
 `tools/render_attention_maps.py` exports the camera and BEV attention maps used
 in the paper.
 
-## Results
+## Recorded results from the original implementation
 
 On the 3,769-sample KITTI validation split, the best epoch-20 fusion checkpoint
 reached **42.6696 overall 3D AP40 moderate**, compared with **38.6868** for the
@@ -115,13 +118,16 @@ and shuffled images by 0.5742 points at the same metric. See
 [`EVALUATION.md`](EVALUATION.md) for the full results and limitations.
 
 These are validation-split results, not official KITTI test-server scores.
+They predate the numerically stable camera aggregation and bounded residual
+revision. The corrected implementation must be retrained before new results
+are attributed to it.
 
 ## nuScenes experiment
 
 The full nuScenes experiment uses a matched LiDAR-only PointPillars baseline
-followed by camera-focused MBT fine-tuning. The MBT run automatically
-warm-starts from the baseline checkpoint with the highest validation NDS,
-freezes the transferred LiDAR and detection modules for five epochs, and then
-jointly fine-tunes both modalities. See
+followed by camera-focused MBT training. The MBT run automatically warm-starts
+from the baseline checkpoint with the highest validation NDS and keeps the
+transferred camera backbone, LiDAR encoder, and detection head fixed while the
+corrected alignment and fusion modules train. See
 [`docs/NUSCENES_TRAINING.md`](docs/NUSCENES_TRAINING.md) for the complete
 training protocol and commands.

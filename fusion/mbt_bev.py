@@ -8,6 +8,7 @@ the 3D detection head.
 
 from __future__ import annotations
 
+import math
 from typing import Dict, Optional, Sequence, Tuple, Union
 
 import torch
@@ -107,7 +108,10 @@ class SymmetricMBTBEVFusion(nn.Module):
         lidar_bev_drop_prob: Training-only channel-drop probability on the raw
             LiDAR BEV bypass.
         camera_aux_num_classes: Number of camera-BEV auxiliary classes. Zero
-            disables the bottleneck-conditioned auxiliary head.
+            disables the camera-only auxiliary head.
+        height_score_limit: Absolute bound for camera height/view logits.
+        fusion_residual_max_scale: Maximum magnitude of the gated BEV update.
+        fusion_residual_init_scale: Initial magnitude of the gated BEV update.
     """
 
     def __init__(
@@ -129,6 +133,9 @@ class SymmetricMBTBEVFusion(nn.Module):
         lidar_token_drop_prob: float = 0.0,
         lidar_bev_drop_prob: float = 0.0,
         camera_aux_num_classes: int = 0,
+        height_score_limit: float = 10.0,
+        fusion_residual_max_scale: float = 0.1,
+        fusion_residual_init_scale: float = 0.02,
     ) -> None:
         super().__init__()
         if embed_dim % num_heads != 0:
@@ -144,6 +151,14 @@ class SymmetricMBTBEVFusion(nn.Module):
                 raise ValueError(f'{name} must be in [0, 1)')
         if camera_aux_num_classes < 0:
             raise ValueError('camera_aux_num_classes must be non-negative')
+        if height_score_limit <= 0:
+            raise ValueError('height_score_limit must be positive')
+        if fusion_residual_max_scale <= 0:
+            raise ValueError('fusion_residual_max_scale must be positive')
+        if not 0 < fusion_residual_init_scale < fusion_residual_max_scale:
+            raise ValueError(
+                'fusion_residual_init_scale must be between zero and '
+                'fusion_residual_max_scale')
 
         if isinstance(token_grid_size, int):
             token_grid_size = (token_grid_size, token_grid_size)
@@ -159,6 +174,8 @@ class SymmetricMBTBEVFusion(nn.Module):
         self.lidar_token_drop_prob = float(lidar_token_drop_prob)
         self.lidar_bev_drop_prob = float(lidar_bev_drop_prob)
         self.camera_aux_num_classes = int(camera_aux_num_classes)
+        self.height_score_limit = float(height_score_limit)
+        self.fusion_residual_max_scale = float(fusion_residual_max_scale)
         self.requires_projection_metadata = point_cloud_range is not None
         if not self.requires_projection_metadata and (
                 lidar_token_drop_prob > 0 or camera_aux_num_classes > 0):
@@ -201,6 +218,8 @@ class SymmetricMBTBEVFusion(nn.Module):
             # shared positional encoding is appropriate.
             self.aligned_bev_position = nn.Parameter(
                 torch.empty(1, self.num_spatial_tokens, embed_dim))
+            self.camera_score_norm = nn.GroupNorm(1, embed_dim)
+            self.aligned_camera_norm = nn.LayerNorm(embed_dim)
             self.height_score = nn.Conv2d(embed_dim, 1, kernel_size=1)
             if use_local_camera_residual:
                 self.aligned_image_norm = nn.LayerNorm(embed_dim)
@@ -238,15 +257,10 @@ class SymmetricMBTBEVFusion(nn.Module):
         )
         self.readout_norm = nn.LayerNorm(embed_dim)
         if camera_aux_num_classes > 0:
-            # The auxiliary camera prediction is explicitly conditioned on
-            # the shared bottlenecks, keeping MBT as the communication path.
-            self.camera_readout = nn.MultiheadAttention(
-                embed_dim=embed_dim,
-                num_heads=num_heads,
-                dropout=attn_dropout,
-                batch_first=True,
-            )
-            self.camera_readout_norm = nn.LayerNorm(embed_dim)
+            # Supervise the aligned camera representation before multimodal
+            # fusion. This prevents LiDAR-conditioned bottlenecks from solving
+            # the nominally camera-only auxiliary task.
+            self.camera_aux_norm = nn.LayerNorm(embed_dim)
             self.camera_aux_head = nn.Linear(
                 embed_dim, camera_aux_num_classes)
 
@@ -254,6 +268,12 @@ class SymmetricMBTBEVFusion(nn.Module):
         # Zero initialization starts training from the LiDAR-only baseline.
         self.bev_residual = nn.Conv2d(
             embed_dim, in_lidar_channels, kernel_size=1, bias=True)
+        self.bev_residual_input_norm = nn.GroupNorm(1, embed_dim)
+        initial_ratio = (
+            fusion_residual_init_scale /
+            (fusion_residual_max_scale - fusion_residual_init_scale))
+        self.fusion_gate_logit = nn.Parameter(torch.tensor(
+            math.log(initial_ratio), dtype=torch.float32))
 
         self.bottleneck_init_std = bottleneck_init_std
         self.reset_parameters()
@@ -284,6 +304,46 @@ class SymmetricMBTBEVFusion(nn.Module):
         features = projection(features)
         features = F.adaptive_avg_pool2d(features, self.token_grid_size)
         return features.flatten(2).transpose(1, 2).contiguous()
+
+    @staticmethod
+    def _masked_candidate_softmax(
+        scores: Tensor,
+        valid: Tensor,
+        dim: int,
+    ) -> Tensor:
+        """Normalize only over valid camera/height candidates.
+
+        A fixed finite sentinel is unsafe because learned valid logits can
+        become smaller than the sentinel, causing softmax to select invalid
+        candidates. All-invalid cells are handled separately to avoid NaNs.
+        """
+        if scores.shape != valid.shape:
+            raise ValueError('scores and valid must have identical shapes')
+        valid = valid.bool()
+        has_valid = valid.any(dim=dim, keepdim=True)
+        masked_scores = scores.masked_fill(
+            ~valid, torch.finfo(scores.dtype).min)
+        masked_scores = torch.where(
+            has_valid, masked_scores, torch.zeros_like(masked_scores))
+        weights = torch.softmax(masked_scores.float(), dim=dim).to(scores.dtype)
+        weights = torch.where(valid, weights, torch.zeros_like(weights))
+        normalizer = weights.sum(dim=dim, keepdim=True)
+        return torch.where(
+            has_valid,
+            weights / normalizer.clamp_min(torch.finfo(weights.dtype).eps),
+            torch.zeros_like(weights),
+        )
+
+    def _bounded_height_scores(self, score_input: Tensor) -> Tensor:
+        normalized = self.camera_score_norm(score_input)
+        raw_scores = self.height_score(normalized)
+        limit = self.height_score_limit
+        return limit * torch.tanh(raw_scores / limit)
+
+    def _fusion_residual_scale(self) -> Tensor:
+        return (
+            self.fusion_residual_max_scale *
+            torch.sigmoid(self.fusion_gate_logit))
 
     def _aligned_image_tokens(
         self,
@@ -357,18 +417,17 @@ class SymmetricMBTBEVFusion(nn.Module):
         valid = valid.reshape(
             batch_size, 1, num_heights, grid_h, grid_w)
 
-        scores = self.height_score(
+        scores = self._bounded_height_scores(
             sampled.permute(0, 2, 1, 3, 4).reshape(
                 batch_size * num_heights,
                 self.embed_dim, grid_h, grid_w))
         scores = scores.reshape(batch_size, num_heights, grid_h, grid_w)
-        scores = scores.masked_fill(~valid[:, 0], -1e4)
-        weights = torch.softmax(scores, dim=1).unsqueeze(1)
-        weights = weights * valid.to(weights.dtype)
-        weights = weights / weights.sum(dim=2, keepdim=True).clamp_min(1e-6)
+        weights = self._masked_candidate_softmax(
+            scores, valid[:, 0], dim=1).unsqueeze(1)
         aligned = (sampled * weights).sum(dim=2)
         cell_valid = valid.any(dim=2)
         tokens = aligned.flatten(2).transpose(1, 2).contiguous()
+        tokens = self.aligned_camera_norm(tokens)
         mask = cell_valid.flatten(2).transpose(1, 2).contiguous()
         if return_sampling_weights:
             return tokens, mask, weights[:, 0]
@@ -405,13 +464,10 @@ class SymmetricMBTBEVFusion(nn.Module):
                 image_shapes,
                 scale_factors,
                 padded_image_shape,
-                return_sampling_weights=return_attention,
+                return_sampling_weights=True,
             )
-            if return_attention:
-                (aligned_image_content, image_valid_mask,
-                 image_height_weights) = aligned_output
-            else:
-                aligned_image_content, image_valid_mask = aligned_output
+            (aligned_image_content, image_valid_mask,
+             image_height_weights) = aligned_output
             position = self.aligned_bev_position
             image_tokens = (
                 aligned_image_content + position + self.image_modality)
@@ -448,6 +504,10 @@ class SymmetricMBTBEVFusion(nn.Module):
             lidar_tokens = (
                 lidar_content + self.lidar_position + self.lidar_modality)
             lidar_token_keep_mask = torch.ones_like(image_valid_mask)
+
+        if self.camera_aux_num_classes > 0:
+            camera_aux_tokens = self.camera_aux_norm(image_tokens)
+            camera_aux_logits = self.camera_aux_head(camera_aux_tokens)
         bottlenecks = self.bottleneck_tokens.expand(batch_size, -1, -1)
         image_bottleneck_attention = []
         lidar_bottleneck_attention = []
@@ -500,18 +560,6 @@ class SymmetricMBTBEVFusion(nn.Module):
         )
         lidar_tokens = self.readout_norm(lidar_tokens + readout)
 
-        if self.camera_aux_num_classes > 0:
-            camera_readout, camera_readout_attention = self.camera_readout(
-                query=image_tokens,
-                key=bottlenecks,
-                value=bottlenecks,
-                need_weights=return_attention,
-                average_attn_weights=False,
-            )
-            camera_aux_tokens = self.camera_readout_norm(
-                image_tokens + camera_readout)
-            camera_aux_logits = self.camera_aux_head(camera_aux_tokens)
-
         token_map = lidar_tokens.transpose(1, 2).reshape(
             batch_size, self.embed_dim, *self.token_grid_size)
         token_map = F.interpolate(
@@ -525,7 +573,10 @@ class SymmetricMBTBEVFusion(nn.Module):
             p=self.lidar_bev_drop_prob,
             training=self.training,
         )
-        fused_bev = lidar_bypass + self.bev_residual(token_map)
+        residual_delta = torch.tanh(self.bev_residual(
+            self.bev_residual_input_norm(token_map)))
+        residual_scale = self._fusion_residual_scale()
+        fused_bev = lidar_bypass + residual_scale * residual_delta
 
         output = dict(
             bev_features=fused_bev,
@@ -537,7 +588,17 @@ class SymmetricMBTBEVFusion(nn.Module):
             image_valid_ratio=image_valid_mask.float().mean(),
             lidar_token_keep_mask=lidar_token_keep_mask,
             lidar_token_keep_ratio=lidar_token_keep_mask.float().mean(),
+            fusion_residual_scale=residual_scale.detach(),
         )
+        if self.requires_projection_metadata:
+            weight_sums = image_height_weights.sum(dim=1).flatten(1)
+            visible = image_valid_mask.squeeze(-1)
+            visible_sums = weight_sums[visible]
+            output['camera_weight_sum_min'] = (
+                visible_sums.min().detach() if visible_sums.numel() else
+                weight_sums.new_tensor(1.0))
+            output['aligned_image_rms'] = (
+                aligned_image_content.detach().float().square().mean().sqrt())
         if (self.requires_projection_metadata and
                 self.use_local_camera_residual):
             output['local_camera_gate'] = gate
@@ -555,8 +616,5 @@ class SymmetricMBTBEVFusion(nn.Module):
             if self.requires_projection_metadata:
                 attention['image_height_weights'] = (
                     image_height_weights.detach())
-            if self.camera_aux_num_classes > 0:
-                attention['camera_readout'] = (
-                    camera_readout_attention.detach())
             output['attention'] = attention
         return output

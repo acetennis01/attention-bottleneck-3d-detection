@@ -55,14 +55,15 @@ load_from = (
     if _lidar_best_candidates else
     'work_dirs/pointpillars_nuscenes/BEST_LIDAR_CHECKPOINT_NOT_FOUND.pth')
 
+epoch_num = 24
+# Keep the transferred PointPillars detector fixed. The corrected experiment
+# isolates what the camera/fusion path adds to the matched LiDAR baseline.
 custom_hooks = [
-    dict(type='StagedFusionTrainingHook', freeze_epochs=5),
+    dict(type='StagedFusionTrainingHook', freeze_epochs=epoch_num),
     dict(type='FusionDiagnosticsHook', interval=500),
 ]
 
-# Preserve the nuScenes effective batch size of four. During fine-tuning, the
-# camera/fusion path learns four times faster than the pretrained LiDAR path.
-epoch_num = 24
+# Preserve the nuScenes effective batch size of four.
 train_cfg = dict(
     type='EpochBasedTrainLoop',
     max_epochs=epoch_num,
@@ -75,16 +76,15 @@ optim_wrapper = dict(
         lr=3e-4,
         betas=(0.95, 0.99),
         weight_decay=0.01),
-    clip_grad=dict(max_norm=35, norm_type=2),
+    clip_grad=dict(max_norm=10, norm_type=2),
     paramwise_cfg=dict(
         custom_keys={
-            'img_backbone': dict(lr_mult=2.0),
-            'fusion_module': dict(lr_mult=2.0),
-            'voxel_encoder': dict(lr_mult=0.5),
-            'middle_encoder': dict(lr_mult=0.5),
-            'backbone': dict(lr_mult=0.5),
-            'neck': dict(lr_mult=0.5),
-            'bbox_head': dict(lr_mult=0.5),
+            'fusion_module': dict(lr_mult=1.0),
+            'voxel_encoder': dict(lr_mult=0.05),
+            'middle_encoder': dict(lr_mult=0.05),
+            'backbone': dict(lr_mult=0.05),
+            'neck': dict(lr_mult=0.05),
+            'bbox_head': dict(lr_mult=0.05),
         }))
 param_scheduler = [
     dict(

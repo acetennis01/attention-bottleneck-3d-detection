@@ -183,9 +183,34 @@ def test_camera_focused_path_is_bottleneck_mediated_and_supervised():
     auxiliary_loss = output['camera_aux_logits'].square().mean()
     auxiliary_loss.backward()
     assert image.grad is not None and image.grad.abs().sum() > 0
-    assert module.bottleneck_tokens.grad is not None
-    assert module.bottleneck_tokens.grad.abs().sum() > 0
-    assert module.camera_readout.in_proj_weight.grad is not None
+    # The camera-only auxiliary objective must not be solvable through the
+    # LiDAR-conditioned shared bottlenecks.
+    assert module.bottleneck_tokens.grad is None
+    assert module.camera_aux_norm.weight.grad is not None
+
+
+def test_masked_candidate_softmax_rejects_invalid_sentinel_winners():
+    scores = torch.tensor([[[[-80000.0]], [[-20000.0]], [[5.0]]]])
+    valid = torch.tensor([[[[True]], [[True]], [[False]]]])
+
+    weights = SymmetricMBTBEVFusion._masked_candidate_softmax(
+        scores, valid, dim=1)
+
+    assert weights[0, 2, 0, 0] == 0
+    torch.testing.assert_close(
+        weights.sum(dim=1), torch.ones(1, 1, 1))
+    assert weights[0, 1, 0, 0] > weights[0, 0, 0, 0]
+
+
+def test_masked_candidate_softmax_handles_all_invalid_cells():
+    scores = torch.full((1, 4, 2, 2), -50000.0)
+    valid = torch.zeros_like(scores, dtype=torch.bool)
+
+    weights = SymmetricMBTBEVFusion._masked_candidate_softmax(
+        scores, valid, dim=1)
+
+    assert torch.isfinite(weights).all()
+    assert not weights.any()
 
 
 def test_camera_focused_eval_disables_lidar_dropout():
@@ -218,7 +243,6 @@ def test_attention_capture_is_opt_in_and_preserves_output():
     assert attention['image_bottleneck'].shape == (1, 2, 4, 4, 4)
     assert attention['lidar_bottleneck'].shape == (1, 2, 4, 4, 4)
     assert attention['lidar_readout'].shape == (1, 4, 4, 4)
-    assert attention['camera_readout'].shape == (1, 4, 4, 4)
     assert attention['image_height_weights'].shape == (1, 2, 2, 2)
     torch.testing.assert_close(
         attention['lidar_readout'].sum(dim=-1),

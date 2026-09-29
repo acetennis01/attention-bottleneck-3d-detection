@@ -48,14 +48,17 @@ def test_camera_focused_config_matches_reported_model():
     assert fusion.num_layers == 4
     assert fusion.num_heads == 8
     assert fusion.use_local_camera_residual is False
-    assert fusion.lidar_token_drop_prob == pytest.approx(0.15)
-    assert fusion.lidar_bev_drop_prob == pytest.approx(0.10)
+    assert fusion.lidar_token_drop_prob == pytest.approx(0.0)
+    assert fusion.lidar_bev_drop_prob == pytest.approx(0.0)
     assert fusion.camera_aux_num_classes == 3
+    assert fusion.height_score_limit == pytest.approx(10.0)
+    assert fusion.fusion_residual_max_scale == pytest.approx(0.1)
+    assert cfg.model.img_backbone.frozen_stages == 4
     assert cfg.model.camera_aux_loss_weight == pytest.approx(0.25)
     assert cfg.train_cfg.max_epochs == 40
     assert cfg.train_cfg.val_interval == 2
     assert cfg.custom_hooks[0].type == 'StagedFusionTrainingHook'
-    assert cfg.custom_hooks[0].freeze_epochs == 5
+    assert cfg.custom_hooks[0].freeze_epochs == cfg.train_cfg.max_epochs
     assert 'pointpillars_lidar_control' in cfg.load_from
 
 
@@ -79,15 +82,15 @@ def test_nuscenes_camera_focused_config_matches_kitti_methodology():
     assert cfg.optim_wrapper.accumulative_counts == 4
     assert cfg.optim_wrapper.optimizer.lr == pytest.approx(3e-4)
     assert cfg.custom_hooks[0].type == 'StagedFusionTrainingHook'
-    assert cfg.custom_hooks[0].freeze_epochs == 5
+    assert cfg.custom_hooks[0].freeze_epochs == cfg.train_cfg.max_epochs
     assert cfg.custom_hooks[1].type == 'FusionDiagnosticsHook'
     assert 'pointpillars_nuscenes' in cfg.load_from
 
     custom_keys = cfg.optim_wrapper.paramwise_cfg.custom_keys
-    assert custom_keys.img_backbone.lr_mult == pytest.approx(2.0)
-    assert custom_keys.fusion_module.lr_mult == pytest.approx(2.0)
-    assert custom_keys.voxel_encoder.lr_mult == pytest.approx(0.5)
-    assert custom_keys.bbox_head.lr_mult == pytest.approx(0.5)
+    assert cfg.model.img_backbone.frozen_stages == 4
+    assert custom_keys.fusion_module.lr_mult == pytest.approx(1.0)
+    assert custom_keys.voxel_encoder.lr_mult == pytest.approx(0.05)
+    assert custom_keys.bbox_head.lr_mult == pytest.approx(0.05)
 
 
 @pytest.mark.parametrize(

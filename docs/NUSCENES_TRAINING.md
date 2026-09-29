@@ -39,7 +39,7 @@ The checkpoint hook retains the checkpoint with the highest validation NDS.
 The MBT configuration resolves this best checkpoint when it is loaded, so the
 baseline must finish before MBT training begins.
 
-## MBT warm-start and staged training
+## MBT warm-start and stable fusion training
 
 The MBT model is initialized from the best LiDAR baseline checkpoint rather
 than training its LiDAR path from scratch. The detector explicitly remaps the
@@ -58,17 +58,17 @@ SECONDFPN neck, and detection-head weights. The ResNet-18 camera backbone is
 initialized from ImageNet, while the camera-to-BEV alignment and
 attention-bottleneck fusion parameters are newly initialized.
 
-For epochs 1--5, the transferred LiDAR modules and detection head are frozen
-and kept in evaluation mode. The camera backbone, camera-to-BEV alignment,
-attention-bottleneck layers, LiDAR readout, and auxiliary camera head are
-trained during this warm-up. From epoch 6 onward, the LiDAR and detection
-modules are unfrozen and the complete model is fine-tuned jointly.
+The transferred LiDAR modules and detection head remain frozen and in
+evaluation mode for the corrected run. The ImageNet camera backbone is also
+kept fixed. Camera-to-BEV projection, normalized valid-only view/height
+aggregation, attention-bottleneck layers, LiDAR readout, bounded residual
+adapter, and camera-only auxiliary head are trained.
 
-The AdamW base learning rate is `3e-4`. Camera and fusion parameters use an
-initial 2x multiplier (`6e-4`), while transferred LiDAR and detection
-parameters use a 0.5x multiplier (`1.5e-4`). A cosine schedule reduces the
-learning rate over 24 epochs. Fusion statistics and component gradient norms
-are logged every 500 iterations.
+The AdamW fusion learning rate is `3e-4`, reduced by a cosine schedule over 24
+epochs. The residual update is bounded and begins with a scale of `0.02`.
+LiDAR token and BEV dropout are disabled in the stable run. Fusion statistics,
+camera aggregation health, and component gradient norms are logged every 500
+iterations.
 
 Start the MBT run only after the baseline has completed:
 

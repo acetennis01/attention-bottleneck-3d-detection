@@ -47,6 +47,8 @@ def test_six_view_fusion_shapes_and_validity():
     assert output['camera_aux_logits'].shape == (1, 4, 10)
     assert output['image_valid_mask'].shape == (1, 4, 1)
     assert output['image_valid_mask'].all()
+    assert float(output['camera_weight_sum_min']) == 1.0
+    assert float(output['aligned_image_rms']) > 0
     assert output['attention']['image_view_height_weights'].shape == (
         1, 6, 1, 2, 2)
 

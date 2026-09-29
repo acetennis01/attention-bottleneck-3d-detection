@@ -102,24 +102,23 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
         score_input = sampled.permute(0, 1, 3, 2, 4, 5).reshape(
             batch_size * num_views * num_heights,
             self.embed_dim, grid_h, grid_w)
-        scores = self.height_score(score_input).reshape(
+        scores = self._bounded_height_scores(score_input).reshape(
             batch_size, num_views, num_heights, grid_h, grid_w)
-        scores = scores.masked_fill(~valid, -1e4)
 
         candidate_count = num_views * num_heights
         scores = scores.reshape(
             batch_size, candidate_count, grid_h, grid_w)
         candidate_valid = valid.reshape(
             batch_size, candidate_count, grid_h, grid_w)
-        weights = torch.softmax(scores, dim=1)
-        weights = weights * candidate_valid.to(weights.dtype)
-        weights = weights / weights.sum(dim=1, keepdim=True).clamp_min(1e-6)
+        weights = self._masked_candidate_softmax(
+            scores, candidate_valid, dim=1)
 
         sampled = sampled.permute(0, 2, 1, 3, 4, 5).reshape(
             batch_size, self.embed_dim, candidate_count, grid_h, grid_w)
         aligned = (sampled * weights[:, None]).sum(dim=2)
         cell_valid = candidate_valid.any(dim=1, keepdim=True)
         tokens = aligned.flatten(2).transpose(1, 2).contiguous()
+        tokens = self.aligned_camera_norm(tokens)
         mask = cell_valid.flatten(2).transpose(1, 2).contiguous()
         if return_sampling_weights:
             return tokens, mask, weights.reshape(
@@ -155,13 +154,10 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
             lidar2img,
             image_shapes,
             padded_image_shape,
-            return_sampling_weights=return_attention,
+            return_sampling_weights=True,
         )
-        if return_attention:
-            aligned_image_content, image_valid_mask, image_view_weights = (
-                aligned_output)
-        else:
-            aligned_image_content, image_valid_mask = aligned_output
+        aligned_image_content, image_valid_mask, image_view_weights = (
+            aligned_output)
 
         position = self.aligned_bev_position
         image_tokens = aligned_image_content + position + self.image_modality
@@ -181,6 +177,10 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
                 image_valid_mask.to(lidar_tokens.dtype) * gate *
                 self.local_image_value(
                     self.aligned_image_norm(aligned_image_content)))
+
+        if self.camera_aux_num_classes > 0:
+            camera_aux_tokens = self.camera_aux_norm(image_tokens)
+            camera_aux_logits = self.camera_aux_head(camera_aux_tokens)
 
         bottlenecks = self.bottleneck_tokens.expand(batch_size, -1, -1)
         image_bottleneck_attention = []
@@ -223,17 +223,6 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
             average_attn_weights=False)
         lidar_tokens = self.readout_norm(lidar_tokens + readout)
 
-        if self.camera_aux_num_classes > 0:
-            camera_readout, camera_readout_attention = self.camera_readout(
-                query=image_tokens,
-                key=bottlenecks,
-                value=bottlenecks,
-                need_weights=return_attention,
-                average_attn_weights=False)
-            camera_aux_tokens = self.camera_readout_norm(
-                image_tokens + camera_readout)
-            camera_aux_logits = self.camera_aux_head(camera_aux_tokens)
-
         token_map = lidar_tokens.transpose(1, 2).reshape(
             batch_size, self.embed_dim, *self.token_grid_size)
         token_map = F.interpolate(
@@ -245,7 +234,10 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
             lidar_features,
             p=self.lidar_bev_drop_prob,
             training=self.training)
-        fused_bev = lidar_bypass + self.bev_residual(token_map)
+        residual_delta = torch.tanh(self.bev_residual(
+            self.bev_residual_input_norm(token_map)))
+        residual_scale = self._fusion_residual_scale()
+        fused_bev = lidar_bypass + residual_scale * residual_delta
 
         output = dict(
             bev_features=fused_bev,
@@ -256,7 +248,16 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
             image_valid_mask=image_valid_mask,
             image_valid_ratio=image_valid_mask.float().mean(),
             lidar_token_keep_mask=lidar_token_keep_mask,
-            lidar_token_keep_ratio=lidar_token_keep_mask.float().mean())
+            lidar_token_keep_ratio=lidar_token_keep_mask.float().mean(),
+            fusion_residual_scale=residual_scale.detach(),
+            aligned_image_rms=(
+                aligned_image_content.detach().float().square().mean().sqrt()))
+        weight_sums = image_view_weights.sum(dim=(1, 2)).flatten(1)
+        visible = image_valid_mask.squeeze(-1)
+        visible_sums = weight_sums[visible]
+        output['camera_weight_sum_min'] = (
+            visible_sums.min().detach() if visible_sums.numel() else
+            weight_sums.new_tensor(1.0))
         if self.use_local_camera_residual:
             output['local_camera_gate'] = gate
         if self.camera_aux_num_classes > 0:
@@ -270,7 +271,5 @@ class NuScenesSymmetricMBTBEVFusion(SymmetricMBTBEVFusion):
                     lidar_bottleneck_attention, dim=1),
                 lidar_readout=lidar_readout_attention.detach(),
                 image_view_height_weights=image_view_weights.detach())
-            if self.camera_aux_num_classes > 0:
-                attention['camera_readout'] = camera_readout_attention.detach()
             output['attention'] = attention
         return output

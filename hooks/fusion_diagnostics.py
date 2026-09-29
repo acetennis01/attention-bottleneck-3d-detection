@@ -50,7 +50,8 @@ class FusionDiagnosticsHook(Hook):
         if name.startswith('fusion_module.bottleneck'):
             return 'bottleneck'
         if name.startswith(('fusion_module.readout',
-                            'fusion_module.bev_residual')):
+                            'fusion_module.bev_residual',
+                            'fusion_module.fusion_gate')):
             return 'fusion_output'
         if name.startswith(('voxel_encoder.', 'middle_encoder.',
                             'backbone.', 'neck.')):
@@ -78,6 +79,7 @@ class FusionDiagnosticsHook(Hook):
         if not self._is_logging_step():
             return
         lidar_features = inputs[1].detach().float()
+        image_features = inputs[0].detach().float()
         fused_features = output['bev_features'].detach().float()
         delta = fused_features - lidar_features
 
@@ -88,6 +90,7 @@ class FusionDiagnosticsHook(Hook):
         delta_rms = rms(delta)
         self._feature_stats = {
             'fusion/lidar_rms': lidar_rms,
+            'fusion/image_backbone_rms': rms(image_features),
             'fusion/bev_delta_rms': delta_rms,
             'fusion/bev_delta_ratio': delta_rms / max(lidar_rms, 1e-12),
             'fusion/image_token_rms': rms(output['image_tokens']),
@@ -111,6 +114,20 @@ class FusionDiagnosticsHook(Hook):
         if 'camera_aux_logits' in output:
             self._feature_stats['fusion/camera_aux_logit_rms'] = rms(
                 output['camera_aux_logits'])
+        if 'aligned_image_rms' in output:
+            aligned_rms = float(output['aligned_image_rms'])
+            self._feature_stats['fusion/aligned_image_rms'] = aligned_rms
+        if 'camera_weight_sum_min' in output:
+            weight_sum_min = float(output['camera_weight_sum_min'])
+            self._feature_stats['fusion/camera_weight_sum_min'] = (
+                weight_sum_min)
+            if not 0.999 <= weight_sum_min <= 1.001:
+                raise RuntimeError(
+                    'Camera aggregation collapsed: visible candidate weights '
+                    f'sum to {weight_sum_min:.6g}, expected one')
+        if 'fusion_residual_scale' in output:
+            self._feature_stats['fusion/residual_scale'] = float(
+                output['fusion_residual_scale'])
 
     def before_train(self, runner) -> None:
         self._runner = runner
