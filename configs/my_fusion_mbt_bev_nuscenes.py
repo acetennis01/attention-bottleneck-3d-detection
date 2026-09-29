@@ -1,9 +1,8 @@
 """Camera-focused six-view MBT detector on nuScenes v1.0 trainval.
 
 This follows the final KITTI training methodology: warm-start from the best
-matched LiDAR-only detector, freeze the pretrained LiDAR and detection path
-for five epochs, and then fine-tune it more gently than the camera/fusion
-path.
+matched LiDAR-only detector, keep the pretrained LiDAR and detection path
+frozen for all 24 epochs, and train the corrected camera/fusion path.
 """
 
 from glob import glob as _glob
@@ -40,7 +39,7 @@ test_dataloader = val_dataloader
 val_evaluator = dict(
     data_root=data_root,
     ann_file=data_root + 'nuscenes_infos_val.pkl',
-    jsonfile_prefix='work_dirs/mbt_bev_nuscenes/results')
+    jsonfile_prefix='work_dirs/mbt_bev_nuscenes_fixed/results')
 test_evaluator = val_evaluator
 
 # CheckpointHook keeps exactly one best-NDS file. Resolve it when this config
@@ -97,4 +96,4 @@ param_scheduler = [
         convert_to_iter_based=True),
 ]
 
-work_dir = 'work_dirs/mbt_bev_nuscenes'
+work_dir = 'work_dirs/mbt_bev_nuscenes_fixed'
