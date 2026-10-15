@@ -1,0 +1,93 @@
+{
+  "checkpoint": "work_dirs/mbt_bev_nuscenes_fixed/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_epoch_9.pth",
+  "score_threshold": 0.35,
+  "static_samples": [
+    {
+      "query_grid_x": 5,
+      "query_grid_y": 11,
+      "normalized_entropy": 0.9998166692420156,
+      "top_10_percent_mass": 0.11095581203699112,
+      "dataset_index": 785,
+      "token": "56f2d967734747c181e8cac27acef265",
+      "attention_query_class": "car",
+      "attention_query_score": 0.9708742499351501,
+      "detections_above_threshold": 45
+    },
+    {
+      "query_grid_x": 9,
+      "query_grid_y": 8,
+      "normalized_entropy": 0.9942970580452246,
+      "top_10_percent_mass": 0.15224511921405792,
+      "dataset_index": 1606,
+      "token": "9075f9ff230041c59042130739b92ef1",
+      "attention_query_class": "car",
+      "attention_query_score": 0.9772411584854126,
+      "detections_above_threshold": 52
+    },
+    {
+      "query_grid_x": 6,
+      "query_grid_y": 8,
+      "normalized_entropy": 0.9969897904097836,
+      "top_10_percent_mass": 0.14354999363422394,
+      "dataset_index": 2126,
+      "token": "5374ff6ee0994633b57a197b0bf3ea06",
+      "attention_query_class": "car",
+      "attention_query_score": 0.9888801574707031,
+      "detections_above_threshold": 36
+    },
+    {
+      "query_grid_x": 8,
+      "query_grid_y": 5,
+      "normalized_entropy": 0.9969369917359687,
+      "top_10_percent_mass": 0.13591937720775604,
+      "dataset_index": 3519,
+      "token": "c223c6a23bdb4aed96e70a0ebee9dfed",
+      "attention_query_class": "car",
+      "attention_query_score": 0.9617486000061035,
+      "detections_above_threshold": 27
+    },
+    {
+      "query_grid_x": 9,
+      "query_grid_y": 11,
+      "normalized_entropy": 0.9938738087414513,
+      "top_10_percent_mass": 0.16520723700523376,
+      "dataset_index": 4496,
+      "token": "858a1ece22cf45d9bc71e42336604b78",
+      "attention_query_class": "car",
+      "attention_query_score": 0.977292537689209,
+      "detections_above_threshold": 44
+    },
+    {
+      "query_grid_x": 9,
+      "query_grid_y": 7,
+      "normalized_entropy": 0.9960850756749198,
+      "top_10_percent_mass": 0.14425881206989288,
+      "dataset_index": 5335,
+      "token": "c65d818108874033a84ea118bd9b99d3",
+      "attention_query_class": "car",
+      "attention_query_score": 0.9902535080909729,
+      "detections_above_threshold": 39
+    }
+  ],
+  "video_dataset_indices": [
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+  ],
+  "video_fps": 2.0
+}

@@ -122,6 +122,22 @@ They predate the numerically stable camera aggregation and bounded residual
 revision. The corrected implementation must be retrained before new results
 are attributed to it.
 
+## Controlled KITTI bottleneck-size study
+
+`configs/kitti_bottleneck_b1.py`, `b2`, `b4`, `b8`, and `b16` restore the
+historical KITTI architecture and 40-epoch recipe, including five-epoch LiDAR
+warm-up freezing and the bottleneck-conditioned auxiliary head. These configs
+use valid-only camera-height normalization without adopting the later
+nuScenes architecture changes. Their outputs are separate from the original
+experiments. A fresh four-token control is required alongside the other sizes.
+
+See [`docs/KITTI_BOTTLENECK_SMOKE.md`](docs/KITTI_BOTTLENECK_SMOKE.md) for GPU
+smoke tests and training commands, and
+[`docs/KITTI_ARCHITECTURE_AUDIT.md`](docs/KITTI_ARCHITECTURE_AUDIT.md) for the
+numerical correction and the intentional design choices that were preserved.
+The new numerical tests pass locally; the corrected GPU suite and full runs
+must wait until Haddr's PC is available.
+
 ## nuScenes experiment
 
 The full nuScenes experiment uses a matched LiDAR-only PointPillars baseline

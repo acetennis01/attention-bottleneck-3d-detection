@@ -12,6 +12,9 @@ checkpoints/
 *.pth
 *.pkl
 
+# Keep large generated nuScenes predictions locally, not in GitHub history.
+nuscenes_analysis_results/*/results/pred_instances_3d/results_nusc.json
+
 .idea/
 .vscode/
 .DS_Store

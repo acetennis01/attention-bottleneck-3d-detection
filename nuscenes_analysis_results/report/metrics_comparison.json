@@ -1,0 +1,116 @@
+{
+  "overall": {
+    "lidar_baseline": {
+      "NDS": 0.4450138811374339,
+      "mAP": 0.2561393688466228,
+      "trans_err": 0.433573063107296,
+      "scale_err": 0.30165978005709515,
+      "orient_err": 0.4701431158338243,
+      "vel_err": 0.4502002715240104,
+      "attr_err": 0.17498180233654906
+    },
+    "correct_cameras": {
+      "NDS": 0.4529463811124986,
+      "mAP": 0.27779736493902457,
+      "trans_err": 0.4455012336733487,
+      "scale_err": 0.30699275851715024,
+      "orient_err": 0.4858390113855406,
+      "vel_err": 0.4385835800374113,
+      "attr_err": 0.18260642995668647
+    },
+    "shuffled_cameras": {
+      "NDS": 0.44241995158942127,
+      "mAP": 0.25589146440890737,
+      "trans_err": 0.4428396566924621,
+      "scale_err": 0.3069835432037008,
+      "orient_err": 0.48089350568227857,
+      "vel_err": 0.44431584698711113,
+      "attr_err": 0.18022525358477198
+    },
+    "black_cameras": {
+      "NDS": 0.4405356677252016,
+      "mAP": 0.24663652089348115,
+      "trans_err": 0.43561277361326856,
+      "scale_err": 0.3050351344547425,
+      "orient_err": 0.46241494853919796,
+      "vel_err": 0.453094143703032,
+      "attr_err": 0.1716689269051489
+    }
+  },
+  "deltas": {
+    "vs_lidar_baseline": {
+      "NDS": 0.007932499975064677,
+      "mAP": 0.021657996092401766
+    },
+    "vs_shuffled_cameras": {
+      "NDS": 0.010526429523077308,
+      "mAP": 0.021905900530117206
+    },
+    "vs_black_cameras": {
+      "NDS": 0.01241071338729699,
+      "mAP": 0.031160844045543423
+    }
+  },
+  "class_mean_ap": {
+    "car": {
+      "lidar_baseline": 0.716306755077182,
+      "correct_cameras": 0.7162262478670761,
+      "shuffled_cameras": 0.7162325620680364,
+      "black_cameras": 0.7163075252464008
+    },
+    "truck": {
+      "lidar_baseline": 0.24800859028469263,
+      "correct_cameras": 0.24800859028469263,
+      "shuffled_cameras": 0.24800859028469263,
+      "black_cameras": 0.24800859028469263
+    },
+    "bus": {
+      "lidar_baseline": 0.27155315499280264,
+      "correct_cameras": 0.27155315499280264,
+      "shuffled_cameras": 0.27155315499280264,
+      "black_cameras": 0.27155315499280264
+    },
+    "trailer": {
+      "lidar_baseline": 0.04844986787495413,
+      "correct_cameras": 0.04625237445379485,
+      "shuffled_cameras": 0.04651369459559334,
+      "black_cameras": 0.04839186256736351
+    },
+    "construction_vehicle": {
+      "lidar_baseline": 0.001785924996422579,
+      "correct_cameras": 0.0011121716958953642,
+      "shuffled_cameras": 0.0011536400710798022,
+      "black_cameras": 0.0016801607157055764
+    },
+    "pedestrian": {
+      "lidar_baseline": 0.5696063346354961,
+      "correct_cameras": 0.5966258048378283,
+      "shuffled_cameras": 0.5705739152314135,
+      "black_cameras": 0.5404240253924644
+    },
+    "motorcycle": {
+      "lidar_baseline": 0.20364679607419786,
+      "correct_cameras": 0.24779551062812152,
+      "shuffled_cameras": 0.2271066637573812,
+      "black_cameras": 0.21147281719359512
+    },
+    "bicycle": {
+      "lidar_baseline": 0.048394430258516676,
+      "correct_cameras": 0.06156113208973017,
+      "shuffled_cameras": 0.05123150059397735,
+      "black_cameras": 0.04203384200852478
+    },
+    "traffic_cone": {
+      "lidar_baseline": 0.1293960520103994,
+      "correct_cameras": 0.20765380281982462,
+      "shuffled_cameras": 0.12093731136357014,
+      "black_cameras": 0.10323363631712798
+    },
+    "barrier": {
+      "lidar_baseline": 0.3242457822615634,
+      "correct_cameras": 0.3811848597204798,
+      "shuffled_cameras": 0.3056036111305266,
+      "black_cameras": 0.28325959421613434
+    }
+  }
+}

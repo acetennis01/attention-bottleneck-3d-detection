@@ -1,0 +1,22 @@
+{
+  "checkpoint": "work_dirs/mbt_bev_nuscenes_fixed/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_epoch_9.pth",
+  "score_threshold": 0.25,
+  "static_samples": [
+    {
+      "query_grid_x": 8,
+      "query_grid_y": 6,
+      "normalized_entropy": 0.999431256121432,
+      "top_10_percent_mass": 0.11789456754922867,
+      "dataset_index": 854,
+      "token": "59a27b7fc76541ea92d79f7d4c62a2ec",
+      "attention_query_class": "car",
+      "attention_query_score": 0.9764209389686584,
+      "detections_above_threshold": 75
+    }
+  ],
+  "video_dataset_indices": [
+    853,
+    854
+  ],
+  "video_fps": 2.0
+}

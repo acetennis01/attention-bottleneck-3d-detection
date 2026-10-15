@@ -107,3 +107,20 @@ def test_camera_ablation_configs(name: str, transform: str):
     cfg = _load(name)
     assert transform in [step.type for step in cfg.test_pipeline]
     assert cfg.test_dataloader == cfg.val_dataloader
+
+
+@pytest.mark.parametrize(
+    'name, transform',
+    [
+        ('my_fusion_mbt_bev_nuscenes_black_eval.py', 'BlackImage'),
+        (
+            'my_fusion_mbt_bev_nuscenes_shuffled_eval.py',
+            'ShuffleNuScenesImagePaths',
+        ),
+    ],
+)
+def test_nuscenes_camera_ablation_configs(name: str, transform: str):
+    cfg = _load(name)
+    assert transform in [step.type for step in cfg.test_pipeline]
+    assert cfg.test_dataloader == cfg.val_dataloader
+    assert 'nuscenes_analysis' in cfg.test_evaluator.jsonfile_prefix

@@ -125,6 +125,13 @@ class FusionDiagnosticsHook(Hook):
                 raise RuntimeError(
                     'Camera aggregation collapsed: visible candidate weights '
                     f'sum to {weight_sum_min:.6g}, expected one')
+        if 'camera_weight_sum_max' in output:
+            weight_sum_max = float(output['camera_weight_sum_max'])
+            self._feature_stats['fusion/camera_weight_sum_max'] = weight_sum_max
+            if not 0.999 <= weight_sum_max <= 1.001:
+                raise RuntimeError(
+                    'Camera aggregation is invalid: visible candidate weights '
+                    f'sum to {weight_sum_max:.6g}, expected one')
         if 'fusion_residual_scale' in output:
             self._feature_stats['fusion/residual_scale'] = float(
                 output['fusion_residual_scale'])
