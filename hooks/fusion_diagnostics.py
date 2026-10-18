@@ -36,6 +36,8 @@ class FusionDiagnosticsHook(Hook):
     def _component(name: str) -> str:
         if name.startswith('img_backbone.'):
             return 'image_backbone'
+        if name.startswith('img_neck.'):
+            return 'image_neck'
         if name.startswith((
                 'fusion_module.image',
                 'fusion_module.camera_')):
@@ -111,6 +113,9 @@ class FusionDiagnosticsHook(Hook):
         if 'lidar_token_keep_ratio' in output:
             self._feature_stats['fusion/lidar_token_keep_ratio'] = float(
                 output['lidar_token_keep_ratio'].detach())
+        if 'lidar_spatial_drop_prob' in output:
+            self._feature_stats['fusion/lidar_spatial_drop_prob'] = float(
+                output['lidar_spatial_drop_prob'].detach())
         if 'camera_aux_logits' in output:
             self._feature_stats['fusion/camera_aux_logit_rms'] = rms(
                 output['camera_aux_logits'])

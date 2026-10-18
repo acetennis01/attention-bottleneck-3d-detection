@@ -5,6 +5,13 @@ paper and its full nuScenes trainval adaptation: a PointPillars detector with
 calibration-aware camera-to-BEV alignment and symmetric attention-bottleneck
 fusion.
 
+## New camera-focused v2 experiment
+
+The opt-in ResNet-50 + FPN / 256-D MBT experiment, independent camera
+supervision, coupled LiDAR masking, checks, and commands are documented in
+[`CAMERA_FOCUSED_V2.md`](CAMERA_FOCUSED_V2.md). It preserves the existing
+experiments and has no full-training accuracy results yet.
+
 The final model uses:
 
 - PointPillars with SECOND and SECONDFPN for LiDAR BEV features.
