@@ -83,3 +83,17 @@ def test_v2_no_mask_is_a_separate_training_control():
     assert cfg.model.fusion_module.lidar_spatial_drop_prob == 0
     assert cfg.custom_hooks[1].max_drop_prob == 0
     assert cfg.work_dir != load('kitti_camera_v2.py').work_dir
+
+
+def test_v2_sixteen_tokens_changes_only_token_count_and_output_paths():
+    reference = load('kitti_camera_v2.py').to_dict()
+    variant = load('kitti_camera_v2_b16.py').to_dict()
+    assert reference['model']['fusion_module']['num_bottleneck_tokens'] == 8
+    assert variant['model']['fusion_module']['num_bottleneck_tokens'] == 16
+    assert reference['work_dir'] != variant['work_dir']
+    for cfg in (reference, variant):
+        del cfg['model']['fusion_module']['num_bottleneck_tokens']
+        del cfg['work_dir']
+        del cfg['val_evaluator']['pklfile_prefix']
+        del cfg['test_evaluator']['pklfile_prefix']
+    assert variant == reference

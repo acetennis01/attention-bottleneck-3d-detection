@@ -114,7 +114,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--work-dir', required=True)
     parser.add_argument('--baseline-checkpoint')
+    parser.add_argument('--tokens', type=int,
+                        help='Override only bottleneck count for a V2 smoke.')
     args = parser.parse_args()
+    if args.tokens is not None and args.tokens < 1:
+        parser.error('--tokens must be positive')
     work_dir = Path(args.work_dir).resolve()
     if work_dir.exists() and any(work_dir.iterdir()):
         raise FileExistsError('Use a new smoke work directory')
@@ -126,6 +130,8 @@ def main():
             'configs/kitti_camera_v2_smoke.py')
         if args.baseline_checkpoint:
             cfg.load_from = args.baseline_checkpoint
+        if args.tokens is not None:
+            cfg.model.fusion_module.num_bottleneck_tokens = args.tokens
         if not Path(cfg.load_from).is_file():
             raise FileNotFoundError(cfg.load_from)
         cfg.work_dir = str(work_dir)
@@ -137,6 +143,7 @@ def main():
             dataset = dataset.dataset
         dataset.indices = cfg.train_dataloader.batch_size * cfg.train_cfg.max_iters
         report.update(
+            bottleneck_tokens=cfg.model.fusion_module.num_bottleneck_tokens,
             physical_batch_size=cfg.train_dataloader.batch_size,
             accumulation_steps=cfg.optim_wrapper.accumulative_counts,
             optimizer_updates=(cfg.train_cfg.max_iters //

@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-18",
+  "branch": "codex/camera-focused-mbt-v2",
+  "scope": "Bounded execution checks, not full training or benchmark evaluation",
+  "applicable_regression_tests_passed": 94,
+  "excluded_optional_tests": "test_kitti_overlap_backend.py: its optional rotate_iou_cpu module was not installed",
+  "kitti_refactor_compatibility": "Pre-refactor state dict loaded strictly; every synthetic train/eval output and attention tensor was bitwise identical",
+  "baseline_checkpoint": "work_dirs/pointpillars_nuscenes/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_epoch_24.pth",
+  "baseline_sha256": "af4443ce5eb32249fe2454d141aade6b5db93be8881169d93c65ab669aa7dfb2",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "physical_batch_size": 1,
+  "accumulation_steps": 4,
+  "iterations_per_variant": 8,
+  "optimizer_updates_per_variant": 2,
+  "checks_passed_for_both_variants": [
+    "Exact LiDAR/head checkpoint transfer",
+    "Initial eval equals original LiDAR features at every pyramid level",
+    "Frozen LiDAR state is unchanged after smoke optimization",
+    "Camera backbone, FPN, bottleneck, auxiliary and residual parameters update",
+    "Detection-only backward reaches camera and LiDAR after unfreezing",
+    "Camera candidate weight sums normalize over valid views/heights",
+    "Evaluation disables LiDAR masking",
+    "Prediction produces nonempty finite boxes with labels in [0,9]",
+    "Saved checkpoint reloads strictly"
+  ],
+  "variants": [
+    {
+      "tokens": 8,
+      "status": "passed",
+      "parameters": 39327859,
+      "initial_no_mask_warmup_loss": 0.889769434928894,
+      "initial_full_mask_stress_loss": 433.2838439941406,
+      "peak_gpu_allocated_mib": 5731.00439453125,
+      "predicted_boxes_on_checked_sample": 234,
+      "visible_camera_ratio_min": 0.99609375,
+      "lidar_keep_ratio_min": 0.87890625,
+      "remote_report": "/home/yab/mmdetection3d/work_dirs/nuscenes_camera_v2_smoke_20261018_b8_verified/smoke_report.json"
+    },
+    {
+      "tokens": 16,
+      "status": "passed",
+      "parameters": 39329907,
+      "initial_no_mask_warmup_loss": 0.8962780237197876,
+      "initial_full_mask_stress_loss": 433.29034423828125,
+      "peak_gpu_allocated_mib": 5731.63720703125,
+      "predicted_boxes_on_checked_sample": 170,
+      "visible_camera_ratio_min": 0.99609375,
+      "lidar_keep_ratio_min": 0.87890625,
+      "remote_report": "/home/yab/mmdetection3d/work_dirs/nuscenes_camera_v2_smoke_20261018_b16_verified/smoke_report.json"
+    }
+  ],
+  "caution": "Immediate full masking on the initial frozen detector produces very large but finite classification losses. Production retains two no-mask epochs and a ramp; the smokes do not establish stability at that transition, convergence, camera benefit, mAP or NDS. A monitored pilot should precede an unattended long run.",
+  "full_training_started": false
+}

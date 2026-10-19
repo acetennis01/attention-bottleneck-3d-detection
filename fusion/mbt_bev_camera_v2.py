@@ -122,6 +122,23 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
             image_features, lidar2img, image_shapes, scale_factors,
             padded_image_shape, return_sampling_weights=True)
         aligned = self.aligned_camera_norm(aligned)
+        return self._fuse_aligned_features(
+            lidar_features, aligned, image_valid_mask, height_weights,
+            return_attention=return_attention)
+
+    def _fuse_aligned_features(
+        self, lidar_features: Tensor, aligned: Tensor,
+        image_valid_mask: Tensor, sampling_weights: Tensor,
+        return_attention: bool = False,
+        sampling_attention_key: str = 'image_height_weights',
+    ) -> Dict[str, Tensor]:
+        """Shared V2 graph after single- or multi-view geometric sampling.
+
+        ``aligned`` has already been normalized exactly once by the caller.
+        Keeping this graph shared prevents dataset variants from drifting in
+        auxiliary supervision, coupled masking, or bottleneck exchange.
+        """
+        batch_size = lidar_features.shape[0]
         image_tokens = (
             aligned + self.aligned_bev_position + self.image_modality)
         # Computed before *any* multimodal attention: no dependence on LiDAR,
@@ -175,7 +192,8 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
         # Keep the historical unrestricted residual's capacity. In particular,
         # do not cap the camera's possible correction at 0.1 per BEV feature.
         fused = lidar_bypass + self.bev_residual(token_map)
-        sums = height_weights.detach().float().sum(1).flatten(1)
+        sums = sampling_weights.detach().float().reshape(
+            batch_size, -1, *self.token_grid_size).sum(1).flatten(1)
         visible_sums = sums[image_valid_mask[..., 0]]
         output = dict(
             bev_features=fused,
@@ -202,5 +220,5 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
                 image_bottleneck=torch.stack(image_attention_layers, dim=1),
                 lidar_bottleneck=torch.stack(lidar_attention_layers, dim=1),
                 lidar_readout=readout_attention.detach(),
-                image_height_weights=height_weights.detach())
+                **{sampling_attention_key: sampling_weights.detach()})
         return output

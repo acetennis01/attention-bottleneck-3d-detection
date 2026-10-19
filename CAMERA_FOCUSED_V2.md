@@ -1,5 +1,9 @@
 # Camera-focused MBT v2 (new KITTI experiment)
 
+For the separate six-camera nuScenes V2 variants, see
+[nuScenes V2 setup and checks](docs/NUSCENES_CAMERA_V2.md). Those configs do not
+replace the historical nuScenes runs or change the KITTI training recipe.
+
 This branch increases camera/fusion capacity and addresses LiDAR shortcuts.
 It does **not** replace the historical KITTI token study or the nuScenes model.
 There are no new full-training accuracy results yet. Graph tests and short
@@ -121,6 +125,24 @@ python tools/train.py projects/myfusion/configs/kitti_camera_v2.py
 
 The new work directory is `work_dirs/kitti_camera_v2_r50_e256_b8_seed0`.
 Resume this experiment only with its own config and `--resume`.
+
+### Controlled 16-token V2 run
+
+`configs/kitti_camera_v2_b16.py` inherits the full eight-token V2 config and
+changes only the bottleneck count and output paths. It starts independently
+from the same LiDAR-only checkpoint, not from the trained eight-token model.
+The 40 epochs, seed, batch, masking, alignment, auxiliary loss, optimizer,
+freezing schedule and 3D-AP-based checkpoint selection are unchanged.
+
+```bash
+python projects/myfusion/tools/smoke_camera_v2.py --tokens 16 \
+  --work-dir work_dirs/kitti_camera_v2_b16_smoke_check
+python tools/train.py projects/myfusion/configs/kitti_camera_v2_b16.py
+```
+
+Its output directory is `work_dirs/kitti_camera_v2_r50_e256_b16_seed0`.
+The eight-token outputs are not modified. Compare both models with the same
+evaluator backend; more tokens are not assumed to improve either AP metric.
 
 ## Evaluate useful camera contribution
 
