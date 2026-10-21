@@ -1,8 +1,12 @@
 """Resolved configuration contracts for independent larger nuScenes runs."""
 
 from pathlib import Path
+from types import SimpleNamespace
 
+import pytest
 from mmengine.config import Config
+
+from projects.myfusion.hooks.camera_v2_masking import CameraV2MaskingHook
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -70,3 +74,57 @@ def test_nuscenes_smoke_is_bounded_and_does_not_launch_full_validation():
     assert cfg.val_cfg is None and cfg.val_dataloader is None
     assert cfg.val_evaluator is None and cfg.param_scheduler == []
     assert cfg.default_hooks.checkpoint.by_epoch is False
+
+
+def test_no_mask_restart_changes_only_masking_and_output_paths():
+    first = load('nuscenes_camera_v2.py').to_dict()
+    second = load('nuscenes_camera_v2_no_mask.py').to_dict()
+    assert first['model']['fusion_module']['lidar_spatial_drop_prob'] == 0.1
+    assert second['model']['fusion_module']['lidar_spatial_drop_prob'] == 0.0
+    assert second['custom_hooks'][1]['max_drop_prob'] == 0.0
+    assert second['resume'] is False
+    assert second['load_from'] == first['load_from']
+    assert first['work_dir'] != second['work_dir']
+    for cfg in (first, second):
+        del cfg['model']['fusion_module']['lidar_spatial_drop_prob']
+        del cfg['custom_hooks'][1]['max_drop_prob']
+        del cfg['work_dir']
+        del cfg['val_evaluator']['jsonfile_prefix']
+        del cfg['test_evaluator']['jsonfile_prefix']
+    assert first == second
+
+
+def test_no_mask_hook_never_reenables_masking_even_on_late_resume():
+    cfg = load('nuscenes_camera_v2_no_mask.py')
+    kwargs = dict(cfg.custom_hooks[1])
+    kwargs.pop('type')
+    hook = CameraV2MaskingHook(**kwargs)
+    fusion = SimpleNamespace(lidar_spatial_drop_prob=0.1)
+    runner = SimpleNamespace(model=SimpleNamespace(fusion_module=fusion),
+                             logger=SimpleNamespace(info=lambda text: None))
+    for epoch in [0, 1, 2, 3, 4, 5, 23, 40, 2]:
+        runner.epoch = epoch
+        hook.before_train_epoch(runner)
+        assert fusion.lidar_spatial_drop_prob == 0.0
+
+
+def test_no_mask_smoke_checks_actual_zero_mask_policy():
+    cfg = load('nuscenes_camera_v2_no_mask_smoke.py')
+    assert cfg.model.fusion_module.lidar_spatial_drop_prob == 0.0
+    assert cfg.custom_hooks[1].max_drop_prob == 0.0
+    assert cfg.train_cfg.type == 'IterBasedTrainLoop'
+    assert cfg.train_cfg.max_iters == 8
+    assert cfg.val_cfg is None and cfg.val_evaluator is None
+
+
+@pytest.mark.parametrize('mode,transform', [
+    ('black', 'BlackImage'), ('shuffled', 'ShuffleNuScenesImagePaths')])
+def test_no_mask_ablations_preserve_model_and_only_change_camera_input(
+        mode, transform):
+    original = load('nuscenes_camera_v2_no_mask.py')
+    cfg = load(f'nuscenes_camera_v2_no_mask_{mode}_eval.py')
+    assert cfg.model == original.model
+    pipeline = [step for step in cfg.test_pipeline if step.type != transform]
+    assert pipeline == original.test_pipeline
+    assert cfg.test_dataloader.dataset.pipeline == cfg.test_pipeline
+    assert cfg.test_dataloader == cfg.val_dataloader

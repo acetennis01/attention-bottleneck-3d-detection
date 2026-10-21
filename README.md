@@ -154,3 +154,23 @@ transferred camera backbone, LiDAR encoder, and detection head fixed while the
 corrected alignment and fusion modules train. See
 [`docs/NUSCENES_TRAINING.md`](docs/NUSCENES_TRAINING.md) for the complete
 training protocol and commands.
+
+## Fresh multi-scale nuScenes experiment
+
+The next larger-model experiment is documented in
+[`docs/NUSCENES_MULTISCALE_FRESH.md`](docs/NUSCENES_MULTISCALE_FRESH.md).
+It uses ResNet-50, eight shared bottleneck tokens and bottleneck-mediated
+readout at all three detection scales. The trained LiDAR encoder/head and
+their normalization buffers stay fixed; camera/fusion optimization starts
+afresh from the LiDAR-only baseline and ImageNet camera initialization.
+Hard masking is disabled and independent camera supervision retains weight 0.25.
+
+The [controlled continuation study](docs/NUSCENES_CONTROLLED_RETRAINING.md)
+completed all five matched 1,000-update runs. Multi-scale readout scored
+**28.4913 mAP / 45.7456 NDS** on full nuScenes validation, versus
+27.6609 / 45.3258 for its matched frozen single-scale control. These are short
+continuation results, not results of the proposed fresh full-training recipe.
+
+The new configuration is `configs/nuscenes_multiscale_fresh.py`; a separate
+lower-LR variant and architecture-compatible black/shuffled-camera evaluation
+configs are also included. Adding these files does not start full training.

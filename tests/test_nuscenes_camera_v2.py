@@ -121,10 +121,12 @@ def test_multiview_feature_extraction_keeps_batch_and_view_order():
 
 
 @pytest.mark.parametrize('training', [False, True])
-def test_same_keep_mask_covers_every_lidar_pyramid_bypass(training):
+@pytest.mark.parametrize('drop_probability', [0.0, 0.5])
+def test_same_keep_mask_covers_every_lidar_pyramid_bypass(
+        training, drop_probability):
     model = Detector.__new__(Detector)
     nn.Module.__init__(model)
-    model.fusion_module = build(lidar_spatial_drop_prob=0.5)
+    model.fusion_module = build(lidar_spatial_drop_prob=drop_probability)
     model.fusion_level = 0
     model.train(training)
     features = (torch.ones(1, 12, 7, 9), torch.ones(1, 12, 3, 5),
@@ -137,13 +139,22 @@ def test_same_keep_mask_covers_every_lidar_pyramid_bypass(training):
     # The selected fusion level is already processed and must not be re-masked.
     torch.testing.assert_close(result[0], features[0])
     for feature in result[1:]:
-        if training:
+        if training and drop_probability > 0:
             assert feature[0, 0, 0, 0] == 0
             assert feature[0, 0, -1, -1] == 0
             assert feature[0, 0, 0, -1] == 1
             assert feature[0, 0, -1, 0] == 1
         else:
             assert (feature == 1).all()
+
+
+def test_training_zero_mask_policy_preserves_lidar_and_draws_no_mask():
+    module = build(lidar_spatial_drop_prob=0.0).train()
+    image, lidar, meta = inputs()
+    with patch('torch.rand_like', side_effect=AssertionError('Mask was sampled')):
+        output = module(image, lidar, **meta)
+    assert output['lidar_token_keep_mask'].all()
+    torch.testing.assert_close(output['bev_features'], lidar, rtol=0, atol=0)
 
 
 def test_six_views_and_matching_metadata_are_required():

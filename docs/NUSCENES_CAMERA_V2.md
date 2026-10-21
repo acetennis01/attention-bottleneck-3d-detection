@@ -5,6 +5,41 @@ replacements for the historical KITTI or nuScenes implementations. The existing
 full nuScenes dataset and LiDAR baseline checkpoint are reused; no conversion
 or download is required on Haddr's PC.
 
+**Current next experiment (2026-10-21):** use the separate
+[fresh multi-scale recipe](NUSCENES_MULTISCALE_FRESH.md). The completed
+[controlled continuation study](NUSCENES_CONTROLLED_RETRAINING.md) found
+multi-scale readout best at 28.4913 mAP / 45.7456 NDS after 1,000 updates.
+The new full configuration starts fresh camera/fusion optimization from the
+LiDAR-only checkpoint, fixes LiDAR/head buffers and parameters throughout,
+and adds an update-based warm-up/decay schedule. It has no full-run result yet.
+
+**Historical follow-up (2026-10-20):** the no-mask run's best model was epoch 5
+(27.91 mAP / 45.48 NDS). Validation declined after joint unfreezing. A separate
+[two-epoch frozen-LiDAR continuation pilot](NUSCENES_FROZEN_CONTINUATION.md)
+warm-started that full MBT model, with new optimizer state, LiDAR/head and
+their normalization statistics fixed, unchanged architecture, and no masks.
+The old run/checkpoints remain separate. Do not restart its declining joint
+continuation or extend the pilot without reviewing its validation results.
+The PC reboot interrupted this pilot during epoch 2; it is no longer active.
+
+**Historical restart (2026-10-18):** `nuscenes_camera_v2_no_mask.py`.
+The initial masked run was stopped during epoch 3 after a reproducible
+classification-loss spike. Its epoch-2 checkpoints (mAP 0.2728, NDS 0.4514)
+remain intact. The restart starts **fresh fusion optimization from the same
+LiDAR-only checkpoint**, not from those MBT weights and not from a smoke.
+Both the configured probability and the masking hook's maximum are zero for
+the entire new run. Other architecture/training settings are unchanged.
+
+The restart passed **102 applicable regression tests**, the real-data
+eight-iteration smoke and a **128-iteration recovery pilot**. Every LiDAR keep
+ratio was 1.0. A separate cold-start transient still occurred without masking
+(peak loss 2494.66), but the final 32 pilot losses had median 1.151 and maximum
+1.715; the original masked run also recovered from its initial transient before
+the later epoch-3 masking failure. These are distinct issues. The no-mask
+change removes the confirmed mask-ramp failure, not a proof of universally
+stable optimization or improved AP. The pilot checkpoint is not used for
+full training. Evidence: [recovery pilot](nuscenes_camera_v2_nomask_pilot_report.json).
+
 ## Models and methodology
 
 | Setting | Both variants |
@@ -33,17 +68,27 @@ requires handling those unused parameters.
 
 The nuScenes LiDAR neck returns a pyramid rather than KITTI's single
 384-channel feature. Fusion updates level 0 (256 channels) and preserves the
-remaining levels for the existing head. During training, **one camera-visible
+remaining levels for the existing head. In the preserved original masked
+configuration, **one camera-visible
 spatial mask** covers the selected level's token content and residual bypass,
 and is also resized onto every other direct pyramid bypass. Context from
 neighboring cells remains available. This avoids leaving a separate unmasked
 head-input level, but is not a claim that all LiDAR context is removed.
 
-The mask schedule matches KITTI V2: epochs 1-2 use zero, epoch 3 uses 0.0333,
+That original mask schedule matches KITTI V2: epochs 1-2 use zero, epoch 3 uses 0.0333,
 epoch 4 uses 0.0667, and epoch 5 onward uses 0.10. Evaluation disables masking.
 All camera-to-LiDAR exchange still goes through shared bottleneck tokens;
 auxiliary logits are supervision only, never detector inputs. There is no
 direct camera residual or bounded residual gate.
+
+The new no-mask control disables masking of both token content and every
+detector bypass. Hard-zeroed features trigger foreground probabilities from
+the frozen head's learned biases; additionally, non-fused pyramid levels have
+no camera/fusion repair path while LiDAR/head are frozen. Fixed-weight tests
+on eight frames reproduced mean detection loss 0.7731 unmasked versus
+170.6303 hard-masked. Token-only masking or 10% attenuation in selected cells
+stayed near 0.773, but neither establishes useful camera reliance. No-mask is
+a stability control, not a guarantee of better accuracy or camera use.
 
 ## What differs from previous experiments
 
@@ -79,9 +124,7 @@ python -m pytest projects/myfusion/tests/test_nuscenes_camera_v2.py \
   projects/myfusion/tests/test_nuscenes_camera_v2_configs.py -q
 
 python projects/myfusion/tools/smoke_nuscenes_camera_v2.py \
-  --tokens 8 --work-dir work_dirs/nuscenes_v2_b8_smoke_check
-python projects/myfusion/tools/smoke_nuscenes_camera_v2.py \
-  --tokens 16 --work-dir work_dirs/nuscenes_v2_b16_smoke_check
+  --no-mask --tokens 8 --work-dir work_dirs/nuscenes_v2_b8_nomask_smoke_check
 ```
 
 Each smoke uses eight real samples, eight iterations and two accumulated
@@ -92,12 +135,16 @@ updates, joint detection-only backward after unfreezing, nonempty finite
 predictions, disabled evaluation masks, strict checkpoint reload and memory.
 Its checkpoints are execution artifacts, **not** full-training initializers.
 
-The smoke deliberately enables the full mask immediately. On the initial
+Without `--no-mask`, the historical smoke deliberately enables the full mask
+immediately. On the initial
 frozen detector this can cause large classification losses and pre-clipping
 gradient norms. It reports no-mask warm-up and full-mask stress losses
 separately. Passing means the tested computations are finite and connected;
 it does **not** prove convergence, accuracy, or that the masking strength is
-optimal. Keep the production ramp and monitor loss/validation when it activates.
+optimal. Those finite stress smokes did not establish a safe masking recipe:
+the full run later confirmed the problematic transition. The new `--no-mask`
+smoke instead asserts every keep ratio is exactly one while retaining all
+gradient/update/checkpoint tests.
 
 The existing KITTI CPU-overlap-backend tests require their optional backend;
 they are unrelated to nuScenes evaluation and need not alter its runtime.
@@ -124,17 +171,25 @@ alone does not establish that the 0.10 mask will train well on nuScenes.
 Evidence: [execution report](nuscenes_camera_v2_smoke_report.json). Full
 reports/checkpoints are retained in the remote work directories listed there.
 
-## Full training (run separately, after checks)
+## Fresh no-hard-mask training (after checks)
 
 ```bash
-python tools/train.py projects/myfusion/configs/nuscenes_camera_v2.py
-# After the first run completes:
-python tools/train.py projects/myfusion/configs/nuscenes_camera_v2_b16.py
+python tools/train.py projects/myfusion/configs/nuscenes_camera_v2_no_mask.py
 ```
 
-Output directories are `work_dirs/nuscenes_camera_v2_r50_e256_b8_seed0` and
-`work_dirs/nuscenes_camera_v2_r50_e256_b16_seed0`. Existing experiment outputs
-are not overwritten. Full training is **not** launched by adding these files.
+The new output directory is
+`work_dirs/nuscenes_camera_v2_r50_e256_b8_nomask_seed0`. Existing experiment
+outputs are not overwritten. The old 8/16-token masked configs remain for
+reproducibility; do not use them as the corrected training command. Full
+training is **not** launched by adding these files.
+
+After epoch 2, evaluate the same selected checkpoint with correct images
+(`nuscenes_camera_v2_no_mask.py`), black images
+(`nuscenes_camera_v2_no_mask_black_eval.py`) and shuffled images
+(`nuscenes_camera_v2_no_mask_shuffled_eval.py`). All share the same V2 model.
+The old `run_nuscenes_analysis.sh` is hard-coded to historical 128-D weights
+and must not be used for this run. Hold the 16-token restart until the
+eight-token run's stability and camera contribution have been assessed.
 
 Use the same nuScenes evaluator for baseline and fusion, then run correct,
 black-camera and shuffled-camera evaluations at the selected checkpoints.

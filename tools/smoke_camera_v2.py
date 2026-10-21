@@ -38,8 +38,9 @@ def component(name):
 class Checks(Hook):
     priority = 'LOW'
 
-    def __init__(self, report, baseline):
+    def __init__(self, report, baseline, expect_masking=True):
         self.report, self.baseline = report, baseline
+        self.expect_masking = bool(expect_masking)
         self.handles, self.losses, self.keep_ratios = [], [], []
         self.grad_max, self.valid_ratios = {}, []
 
@@ -98,13 +99,18 @@ class Checks(Hook):
             assert self.grad_max.get(group, 0) > 0, f'No {group} gradient'
             assert changed.get(group, 0) > 0, f'No {group} update'
         assert min(self.valid_ratios) > 0
-        assert min(self.keep_ratios) < 1, 'Coupled masking was not exercised'
+        if self.expect_masking:
+            assert min(self.keep_ratios) < 1, 'Coupled masking was not exercised'
+        else:
+            assert all(value == 1.0 for value in self.keep_ratios), (
+                'No-mask experiment unexpectedly masked LiDAR tokens')
         self.report.update(
             lidar_checkpoint_loaded_exactly=True, frozen_lidar_unchanged=True,
             train_iterations=len(self.losses), losses=self.losses,
             gradient_max_abs=self.grad_max,
             changed_parameter_tensors=changed,
             visible_camera_ratio_min=min(self.valid_ratios),
+            expected_masking=self.expect_masking,
             lidar_keep_ratio_min=min(self.keep_ratios))
         for handle in self.handles:
             handle.remove()

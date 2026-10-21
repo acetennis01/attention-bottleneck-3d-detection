@@ -1,6 +1,7 @@
 """Bounded real-nuScenes GPU check of the larger V2 experiment, not AP.
 
-Uses eight samples/iterations and two accumulated optimizer updates, then
+Defaults to eight samples/iterations and two accumulated optimizer updates;
+an optional longer bounded pilot checks initial optimization recovery. Then
 checks joint detection-only backward, inference and strict checkpoint reload.
 """
 
@@ -49,7 +50,10 @@ class NuScenesChecks(Checks):
                 masked, _ = model.parse_losses(losses)
             assert torch.isfinite(warmup) and torch.isfinite(masked)
             self.report['initial_no_mask_warmup_loss'] = float(warmup)
-            self.report['initial_full_mask_stress_loss'] = float(masked)
+            self.report['configured_mask_probability'] = probability
+            self.report['initial_configured_mask_loss'] = float(masked)
+            if probability > 0:
+                self.report['initial_full_mask_stress_loss'] = float(masked)
         finally:
             model.fusion_module.lidar_spatial_drop_prob = probability
 
@@ -59,31 +63,44 @@ def main():
     parser.add_argument('--work-dir', required=True)
     parser.add_argument('--tokens', type=int, choices=(8, 16), default=8)
     parser.add_argument('--baseline-checkpoint')
+    parser.add_argument('--no-mask', action='store_true',
+                        help='Check the new no-hard-mask stability control.')
+    parser.add_argument('--iterations', type=int, default=8,
+                        help='8..512 iterations, divisible by accumulation 4.')
     args = parser.parse_args()
+    if not 8 <= args.iterations <= 512 or args.iterations % 4:
+        parser.error('--iterations must be 8..512 and divisible by four')
     work_dir = Path(args.work_dir).resolve()
     if work_dir.exists() and any(work_dir.iterdir()):
         raise FileExistsError('Use a new smoke work directory')
     work_dir.mkdir(parents=True, exist_ok=True)
     report = dict(status='running', note='Execution check, not benchmark AP.')
     try:
+        config = ('nuscenes_camera_v2_no_mask_smoke.py' if args.no_mask else
+                  'nuscenes_camera_v2_smoke.py')
         cfg = Config.fromfile(Path(__file__).resolve().parents[1] /
-                              'configs/nuscenes_camera_v2_smoke.py')
+                              'configs' / config)
         cfg.model.fusion_module.num_bottleneck_tokens = args.tokens
         if args.baseline_checkpoint:
             cfg.load_from = args.baseline_checkpoint
         if not Path(cfg.load_from).is_file():
             raise FileNotFoundError(cfg.load_from)
         cfg.work_dir, cfg.launcher, cfg.resume = str(work_dir), 'none', False
-        cfg.train_dataloader.dataset.indices = 8
+        cfg.train_cfg.max_iters = args.iterations
+        cfg.default_hooks.checkpoint.interval = args.iterations
+        cfg.train_dataloader.dataset.indices = args.iterations
         report.update(
-            tokens=args.tokens, physical_batch_size=1, accumulation_steps=4,
-            optimizer_updates=2, gpu=torch.cuda.get_device_name(),
+            tokens=args.tokens, no_hard_mask=args.no_mask,
+            physical_batch_size=1, accumulation_steps=4,
+            requested_iterations=args.iterations,
+            optimizer_updates=args.iterations // 4, gpu=torch.cuda.get_device_name(),
             baseline_checkpoint=str(Path(cfg.load_from).resolve()),
             baseline_sha256=hashlib.sha256(
                 Path(cfg.load_from).read_bytes()).hexdigest())
         torch.cuda.reset_peak_memory_stats()
         runner = Runner.from_cfg(cfg)
-        runner.register_hook(NuScenesChecks(report, cfg.load_from))
+        runner.register_hook(NuScenesChecks(
+            report, cfg.load_from, expect_masking=not args.no_mask))
         runner.train()
         model = runner.model
         model.train()
@@ -121,7 +138,7 @@ def main():
         assert ((pred.labels_3d >= 0) & (pred.labels_3d < 10)).all()
         assert output['lidar_token_keep_mask'].all()
         assert all(torch.isfinite(f).all() for f in features)
-        checkpoint = work_dir / 'iter_8.pth'
+        checkpoint = work_dir / f'iter_{args.iterations}.pth'
         model.load_state_dict(torch.load(checkpoint, map_location='cpu')[
             'state_dict'], strict=True)
         report.update(
