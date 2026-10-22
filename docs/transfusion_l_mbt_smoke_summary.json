@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-22",
+  "status": "passed",
+  "checkpoint_sha256": "2628f933277774e194932815ea1a5d66a0bd9f69ebc8d9040e8c92760bb6652e",
+  "pretrained_tensors_verified": 306,
+  "explicit_sparse_kernel_layout_permutations": 21,
+  "applicable_regression_tests_passed": 137,
+  "new_integration_tests_passed": 10,
+  "identical_baseline_and_fusion_point_inputs": true,
+  "real_cuda_voxel_coordinates_order": "x,y,z",
+  "zero_residual_bev_features_bitwise_identical": true,
+  "pretrained_head_parameters_bitwise_identical": true,
+  "head_outputs_numerically_equivalent": true,
+  "head_comparison_rtol": 0.0001,
+  "head_comparison_atol": 0.001,
+  "head_max_abs_difference": 0.0009818077087402344,
+  "finite_predictions": 200,
+  "discarded_optimizer_updates": 2,
+  "second_update_gradient_norms_before_clipping": {
+    "camera_backbone": 6.6121050148584075,
+    "image_fpn": 3.3828078144763176,
+    "fusion": 398.85463581050715,
+    "bottleneck": 0.30555811524391174
+  },
+  "lidar_and_head_parameters_and_bn_buffers_unchanged": true,
+  "torch_peak_allocated_GiB_excludes_external_cuda_workspaces": 3.721963405609131,
+  "full_validation_baseline_verified": false,
+  "full_runner_training_and_resume_smoke_completed": false,
+  "note": "Smoke weights discarded. Full baseline reproduction is required before training. Nonzero gradients do not establish useful camera dependence or accuracy gains."
+}
