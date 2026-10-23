@@ -55,7 +55,7 @@ interpolation or weight resizing is performed.
 
 ## Checks performed (2026-10-22)
 
-- **145 applicable regression tests passed**, including 8 new camera tests.
+- **146 applicable regression tests passed**, including camera and early-validation tests.
   The unrelated optional KITTI overlap-backend test remains excluded.
 - A reference MMDetection Swin independently loaded from the same native state
   produces bitwise-identical CPU feature outputs on a fixed input.
@@ -66,7 +66,10 @@ interpolation or weight resizing is performed.
   (second-step bottleneck norm 0.27605). All frozen LiDAR/head weights and BN
   buffers remained unchanged. Nonzero gradients establish connectivity, not
   useful camera dependence or an accuracy improvement.
-- Smoke weights are discarded. No full fusion training has started.
+- Smoke weights are discarded. The full MMEngine training/save/resume smoke
+  also passed: two fresh optimizer updates, exact restoration of model/AdamW
+  wrapper/schedulers at batch 8, then two further updates and separate two-frame
+  format-only validations. LiDAR weights and BN buffers stayed unchanged.
 
 ## Run the checks
 
@@ -93,11 +96,16 @@ tail -f ~/mmdetection3d/work_dirs/transfusion_l_mbt_swint_initialization_launch.
 The test runs **all 6,019 validation frames**, with both pretrained encoders and
 fresh, zero-output fusion. It saves predictions and
 `work_dirs/transfusion_l_mbt_swint_initialization/camera_initialization_verification.json`.
-The expected score is the **measured LiDAR-only baseline**, 64.43244 mAP /
-69.23599 NDS, within a predeclared 0.01-point tolerance.
+The completed test **passed**: 64.43243 mAP / 69.23597 NDS versus the measured
+LiDAR-only baseline of 64.43244 / 69.23599, within the predeclared 0.01-point
+tolerance.
 
 Matching that baseline establishes that loading/connecting the camera did not
 damage the detector. It does **not** measure camera-only detection, prove this
 backbone is superior to ResNet, or demonstrate a fusion gain. Those require
-training followed by matched validation and camera ablations. The full
-runner/optimizer-resume smoke also remains necessary before a long training run.
+training followed by matched validation and camera ablations.
+
+The training recipe now validates at batch 2,000 (500 optimizer updates), then
+every 10,000 batches. Non-finite gradients stop the optimizer before a step.
+`training_progress.json` records actual optimizer steps and sampled component
+gradient norms **after** clipping. See [full-run instructions](TRANSFUSION_L_TRAINING.md).

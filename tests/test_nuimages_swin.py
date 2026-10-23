@@ -22,8 +22,12 @@ def test_camera_change_preserves_detector_fusion_and_data_recipe():
         assert cfg.model[name] == first.model[name]
     for name in ('train_dataloader', 'val_dataloader', 'test_dataloader',
                  'train_pipeline', 'test_pipeline', 'point_cloud_range',
-                 'class_names', 'optim_wrapper', 'train_cfg', 'param_scheduler'):
+                 'class_names', 'param_scheduler'):
         assert cfg[name] == first[name]
+    optimizer = deepcopy(cfg.optim_wrapper)
+    assert optimizer.clip_grad.pop('error_if_nonfinite') is True
+    assert optimizer == first.optim_wrapper
+    assert cfg.train_cfg.max_iters == first.train_cfg.max_iters
     assert cfg.model.img_backbone.type == 'NuImagesSwinTransformer'
     assert cfg.model.img_backbone.convert_weights is False
     assert cfg.model.img_backbone.mlp_ratio == 4
@@ -34,6 +38,22 @@ def test_camera_change_preserves_detector_fusion_and_data_recipe():
     assert cfg.model.img_neck.out_channels == 256
     assert cfg.model.data_preprocessor.bgr_to_rgb is True
     assert cfg.camera_checkpoint_sha256 == NUIMAGES_SWIN_SHA256
+
+
+def test_early_validation_schedule_uses_installed_mmengine_interval_logic():
+    from mmengine.runner.loops import IterBasedTrainLoop
+    from mmengine.runner.utils import calc_dynamic_intervals
+    cfg = Config.fromfile(ROOT / 'configs/transfusion_l_mbt_swint_nuscenes.py')
+    loop = SimpleNamespace()
+    loop.dynamic_milestones, loop.dynamic_intervals = calc_dynamic_intervals(
+        cfg.train_cfg.val_interval, cfg.train_cfg.dynamic_intervals)
+    scheduled = []
+    for iteration in range(1, 20001):
+        loop._iter = iteration
+        IterBasedTrainLoop._decide_current_val_interval(loop)
+        if iteration >= cfg.train_cfg.val_begin and iteration % loop.val_interval == 0:
+            scheduled.append(iteration)
+    assert scheduled == [2000, 10000, 20000]
 
 
 def native_fixture():

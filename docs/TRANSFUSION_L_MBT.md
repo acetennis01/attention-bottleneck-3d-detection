@@ -150,8 +150,9 @@ LiDAR-only geometric augmentation to keep camera calibration valid.
   tail -f ~/mmdetection3d/work_dirs/transfusion_l_pretrained_baseline_launch.log
   ```
 
-The full runner/optimizer-resume training smoke remains a next milestone after
-baseline reproduction; the two direct smoke updates do not replace it.
+The full Swin-variant runner/optimizer-resume smoke subsequently passed; see
+[training verification](TRANSFUSION_L_TRAINING.md). The earlier two direct smoke
+updates alone did not replace that test.
 
 ## Optional nuImages-pretrained Swin camera
 
