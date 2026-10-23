@@ -139,8 +139,11 @@ LiDAR-only geometric augmentation to keep camera calibration valid.
 - All pretrained LiDAR/head tensors and BN buffers remained unchanged after the
   two discarded smoke updates. Torch peak allocated memory was 3.72 GiB; this
   does **not** include all workspace memory allocated directly by sparse CUDA ops.
-- The standalone full baseline evaluation was started in tmux session
-  `transfusion-l-baseline`. Its scores are **not yet a verified result**.
+- Full LiDAR-only baseline evaluation **passed** on all 6,019 frames:
+  **64.43244 mAP / 69.23599 NDS**, versus the published 64.9 / 69.6 reference.
+  Differences were -0.46756 / -0.36401 percentage points, within the predefined
+  0.5-point tolerance. Use the measured baseline for our comparisons, not the
+  published score.
 - On the PC, monitor with:
 
   ```bash
@@ -149,6 +152,14 @@ LiDAR-only geometric augmentation to keep camera calibration valid.
 
 The full runner/optimizer-resume training smoke remains a next milestone after
 baseline reproduction; the two direct smoke updates do not replace it.
+
+## Optional nuImages-pretrained Swin camera
+
+`configs/transfusion_l_mbt_swint_nuscenes.py` replaces only the camera backbone
+and corresponding FPN input channels. LiDAR, bottlenecks, calibration sampler,
+point inputs and training schedule remain unchanged. The ResNet variant is kept.
+See [camera verification](NUIMAGES_SWIN_CAMERA.md) for weight-loading checks,
+full cold-start validation, and the distinction from a camera-only 3D detector.
 
 ## Paused previous ablations
 

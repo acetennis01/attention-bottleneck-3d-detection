@@ -55,6 +55,7 @@ def max_tree_difference(first, second):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', default='work_dirs/transfusion_l_mbt_smoke/report.json')
+    parser.add_argument('--config', default='projects/myfusion/configs/transfusion_l_mbt_nuscenes.py')
     args = parser.parse_args()
     output = Path(args.output)
     if output.exists():
@@ -64,11 +65,16 @@ def main():
     set_random_seed(0)
     register_all_modules(init_default_scope=True)
     base = Config.fromfile('projects/myfusion/configs/transfusion_l_nuscenes_pretrained.py')
-    cfg = Config.fromfile('projects/myfusion/configs/transfusion_l_mbt_nuscenes.py')
+    cfg = Config.fromfile(args.config)
     baseline = MODELS.build(deepcopy(base.model)).cuda().eval()
     base_transfer = load_lidar_checkpoint(baseline, base.lidar_checkpoint)
     model = MODELS.build(deepcopy(cfg.model)).cuda().eval()
     transfer = load_lidar_checkpoint(model, cfg.lidar_checkpoint, fusion=True)
+    camera_verification = getattr(model.img_backbone, 'pretrained_verification', None)
+    if cfg.get('camera_checkpoint'):
+        assert camera_verification is not None
+        assert camera_verification['sha256'] == cfg.camera_checkpoint_sha256
+        assert camera_verification['all_loaded_tensors_bitwise_identical']
 
     # Real CUDA voxelizer coordinates, not a square-shape assumption.
     toy = torch.tensor([[-53.8875, -53.6625, -4.7, .5, 0]], device='cuda')
@@ -85,8 +91,17 @@ def main():
     assert torch.equal(baseline_example['inputs']['points'], fusion_example['inputs']['points'])
     baseline_batch = baseline.data_preprocessor(pseudo_collate([baseline_example]), False)
     batch = model.data_preprocessor(pseudo_collate([fusion_example]), False)
+    # Validate channel order and normalization against the actual loaded pixels.
+    raw_images = fusion_example['inputs']['img']
+    expected_pixel = (raw_images[:, [2, 1, 0], 100, 100].float().cuda()
+        - model.data_preprocessor.mean.reshape(1, 3)) / model.data_preprocessor.std.reshape(1, 3)
+    torch.testing.assert_close(batch['inputs']['imgs'][0, :, :, 100, 100], expected_pixel)
     metas = [sample.metainfo for sample in batch['data_samples']]
     with torch.no_grad():
+        selected_image_features = model.extract_img_feat(batch['inputs']['imgs'])
+        assert selected_image_features.shape[:3] == (1, 6, 256)
+        assert torch.isfinite(selected_image_features).all()
+        image_feature_shape = list(selected_image_features.shape)
         original = baseline.extract_feat(baseline_batch['inputs'],
             [sample.metainfo for sample in baseline_batch['data_samples']])
         fused = model.extract_feat(batch['inputs'], metas)
@@ -151,6 +166,9 @@ def main():
     torch.cuda.synchronize()
     report = dict(status='passed', strict_baseline_transfer=base_transfer,
         fusion_transfer=transfer, validation_frames=6019,
+        camera_pretrained_verification=camera_verification,
+        camera_input_rgb_normalization_verified=True,
+        selected_camera_feature_shape=image_feature_shape,
         identical_point_inputs=True, voxel_coordinates_order='x,y,z',
         fusion_transposes_xy_to_yx_and_back=True,
         zero_residual_bev_features_bitwise_identical=True,

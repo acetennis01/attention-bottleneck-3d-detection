@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-22",
+  "status": "passed",
+  "camera_checkpoint_sha256": "cc8189aa34e2d743e26b1e3d0c8d6c18768d87561d404f0f82b282c2d178810f",
+  "camera_checkpoint_tensors": 189,
+  "camera_tensors_loaded_and_bitwise_verified": 187,
+  "explicitly_unused_output_normalizers": ["norm0.bias", "norm0.weight"],
+  "reference_mmdet_swin_feature_outputs_bitwise_identical": true,
+  "applicable_regression_tests_passed": 145,
+  "new_camera_tests_passed": 8,
+  "rgb_pixel_normalization_verified": true,
+  "camera_feature_shape": [1, 6, 256, 60, 100],
+  "zero_residual_bev_features_bitwise_identical": true,
+  "finite_predictions": 200,
+  "discarded_smoke_optimizer_updates": 2,
+  "second_step_gradient_norms_before_clipping": {
+    "camera": 1.168785260194357,
+    "image_fpn": 2.5370167089627804,
+    "fusion": 410.83102537350044,
+    "bottleneck": 0.27604877948760986
+  },
+  "frozen_lidar_head_parameters_and_bn_buffers_unchanged": true,
+  "standalone_camera_3D_mAP": null,
+  "full_initialization_validation": "started_separately",
+  "full_fusion_training_started": false,
+  "caveat": "This is a checkpoint/gradient/initialization check, not evidence of improved camera detection or learned multimodal fusion."
+}
