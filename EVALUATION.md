@@ -1,5 +1,9 @@
 # Evaluation
 
+Historical original four-token KITTI experiment. For completed larger KITTI,
+nuScenes and matched camera-ablation results, see [results](results/README.md).
+The figure linked below belongs to this original model, not the newer B8 model.
+
 ## Protocol
 
 - KITTI 3D Object Detection validation split: 3,769 samples

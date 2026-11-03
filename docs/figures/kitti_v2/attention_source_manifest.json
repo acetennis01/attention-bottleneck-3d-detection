@@ -1,0 +1,267 @@
+{
+  "model": "ABFuse ResNet-50/FPN, eight bottleneck tokens, epoch 14",
+  "checkpoint": {
+    "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b8_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+    "checkpoint_sha256": "308921f9d01c2eec8ee6633983fbac8c688b64489a8840858379bb3f1a8263b0",
+    "source_config": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b8_seed0/kitti_camera_v2.py",
+    "strict_checkpoint_load": true,
+    "validation_samples": 3769
+  },
+  "selection": "Alternative scenes selected by input visibility and scene variety from candidate sheets. Illustrative, not representative or evidence of localized causal importance.",
+  "attention_method": "Unchanged head-averaged final-layer attention-path product, independent display normalization and calibrated height-weighted camera projection.",
+  "examples": [
+    {
+      "sample_idx": 5472,
+      "class_name": "Pedestrian",
+      "prediction_score": 0.8971921801567078,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.6158853769302368,
+      "query_token_index": 114,
+      "normalized_entropy": 0.8596523090571049,
+      "top_10_percent_mass": 0.5044248700141907,
+      "valid_cells": 169,
+      "filename": "pedestrian_005472.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 2892,
+      "class_name": "Pedestrian",
+      "prediction_score": 0.9345430731773376,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.6372045874595642,
+      "query_token_index": 114,
+      "normalized_entropy": 0.8602266628532074,
+      "top_10_percent_mass": 0.476117342710495,
+      "valid_cells": 169,
+      "filename": "pedestrian_002892.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 2477,
+      "class_name": "Pedestrian",
+      "prediction_score": 0.32067814469337463,
+      "selected_prediction_index": 8,
+      "matched_3d_iou": 0.6650330424308777,
+      "query_token_index": 130,
+      "normalized_entropy": 0.8983425989144107,
+      "top_10_percent_mass": 0.4181066155433655,
+      "valid_cells": 169,
+      "filename": "pedestrian_002477.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 6475,
+      "class_name": "Pedestrian",
+      "prediction_score": 0.866644024848938,
+      "selected_prediction_index": 1,
+      "matched_3d_iou": 0.5846368074417114,
+      "query_token_index": 130,
+      "normalized_entropy": 0.8733953433270104,
+      "top_10_percent_mass": 0.4503391683101654,
+      "valid_cells": 169,
+      "filename": "pedestrian_006475.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 1707,
+      "class_name": "Cyclist",
+      "prediction_score": 0.8774756789207458,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.5778448581695557,
+      "query_token_index": 100,
+      "normalized_entropy": 0.9146140354513145,
+      "top_10_percent_mass": 0.3923344910144806,
+      "valid_cells": 169,
+      "filename": "cyclist_001707.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 3678,
+      "class_name": "Cyclist",
+      "prediction_score": 0.8000698089599609,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.6447862386703491,
+      "query_token_index": 101,
+      "normalized_entropy": 0.8621881475279692,
+      "top_10_percent_mass": 0.4846864938735962,
+      "valid_cells": 169,
+      "filename": "cyclist_003678.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 3313,
+      "class_name": "Cyclist",
+      "prediction_score": 0.7901463508605957,
+      "selected_prediction_index": 3,
+      "matched_3d_iou": 0.6302669644355774,
+      "query_token_index": 115,
+      "normalized_entropy": 0.9136566242035632,
+      "top_10_percent_mass": 0.4049176573753357,
+      "valid_cells": 169,
+      "filename": "cyclist_003313.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 4092,
+      "class_name": "Cyclist",
+      "prediction_score": 0.7488861083984375,
+      "selected_prediction_index": 2,
+      "matched_3d_iou": 0.7079618573188782,
+      "query_token_index": 136,
+      "normalized_entropy": 0.9184572515143752,
+      "top_10_percent_mass": 0.37603846192359924,
+      "valid_cells": 169,
+      "filename": "cyclist_004092.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 859,
+      "class_name": "Cyclist",
+      "prediction_score": 0.7253360152244568,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.6537876725196838,
+      "query_token_index": 103,
+      "normalized_entropy": 0.8702178534150561,
+      "top_10_percent_mass": 0.4268660247325897,
+      "valid_cells": 169,
+      "filename": "cyclist_000859.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 1787,
+      "class_name": "Cyclist",
+      "prediction_score": 0.5754581093788147,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.6716828942298889,
+      "query_token_index": 97,
+      "normalized_entropy": 0.8642574571587885,
+      "top_10_percent_mass": 0.435596764087677,
+      "valid_cells": 169,
+      "filename": "cyclist_001787.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 7462,
+      "class_name": "Car",
+      "prediction_score": 0.999567449092865,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.9031217098236084,
+      "query_token_index": 114,
+      "normalized_entropy": 0.9318748589125936,
+      "top_10_percent_mass": 0.3339809477329254,
+      "valid_cells": 169,
+      "filename": "car_007462.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 4578,
+      "class_name": "Car",
+      "prediction_score": 0.999535083770752,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.7608065605163574,
+      "query_token_index": 131,
+      "normalized_entropy": 0.9084962705307321,
+      "top_10_percent_mass": 0.3933442234992981,
+      "valid_cells": 169,
+      "filename": "car_004578.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 4312,
+      "class_name": "Car",
+      "prediction_score": 0.99952232837677,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.8108184933662415,
+      "query_token_index": 113,
+      "normalized_entropy": 0.9705047296134878,
+      "top_10_percent_mass": 0.26970142126083374,
+      "valid_cells": 169,
+      "filename": "car_004312.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 5010,
+      "class_name": "Car",
+      "prediction_score": 0.9995102882385254,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.8124176859855652,
+      "query_token_index": 114,
+      "normalized_entropy": 0.9275184518302285,
+      "top_10_percent_mass": 0.30769848823547363,
+      "valid_cells": 169,
+      "filename": "car_005010.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 6868,
+      "class_name": "Car",
+      "prediction_score": 0.9994783997535706,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.8072973489761353,
+      "query_token_index": 113,
+      "normalized_entropy": 0.9450257854496664,
+      "top_10_percent_mass": 0.3264281749725342,
+      "valid_cells": 169,
+      "filename": "car_006868.png",
+      "attention_inference_matches_standard": true
+    },
+    {
+      "sample_idx": 5431,
+      "class_name": "Car",
+      "prediction_score": 0.9992020726203918,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.8209003806114197,
+      "query_token_index": 121,
+      "normalized_entropy": 0.9726575106327033,
+      "top_10_percent_mass": 0.22970595955848694,
+      "valid_cells": 169,
+      "filename": "car_005431.png",
+      "attention_inference_matches_standard": true
+    }
+  ],
+  "skipped": [
+    {
+      "sample_idx": 4657,
+      "reason": "No 3D-IoU-matched Pedestrian true positive in 4657"
+    },
+    {
+      "sample_idx": 6828,
+      "reason": "No 3D-IoU-matched Pedestrian true positive in 6828"
+    }
+  ],
+  "outputs": {
+    "attention_maps_camera_bev_option_1.png": {
+      "samples": [
+        5472,
+        1707,
+        7462
+      ],
+      "sha256": "ae1b147751353bae3a7e07ab6f09e662f823cc357e1bd39cfc606d3cbbaafddc"
+    },
+    "attention_maps_camera_bev_option_2.png": {
+      "samples": [
+        2892,
+        3678,
+        4578
+      ],
+      "sha256": "d742ae4c65acaf985e309851c5c9ab0e942873a255701ce9369c2568b49c3e78"
+    },
+    "attention_maps_camera_bev_option_3.png": {
+      "samples": [
+        2477,
+        3313,
+        4312
+      ],
+      "sha256": "91c5a1fd4681f9fb9b171c58f037fe4f6f211ebb8ba52740af5c0c6823e2e8aa"
+    },
+    "attention_maps_camera_bev_recommended.png": {
+      "samples": [
+        6475,
+        4092,
+        5010
+      ],
+      "sha256": "9dbdf4a0d93fb2210576e967f485a28fa783fb4dece7629490ba3d2445f48990",
+      "selection": "Post-hoc manual selection for clear street scenes, visible matched objects, and readable attention overlays; not representative sampling. Unmodified rows from the recorded candidate set."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "started_at": "2026-10-22T15:40:35.076835-07:00",
+  "checkpoint": {
+    "checkpoint": "/home/yab/mmdetection3d/checkpoints/transfusion_l/bevfusion_lidar_voxel0075_second_secfpn_8xb4-cyclic-20e_nus-3d-2628f933.pth",
+    "sha256": "2628f933277774e194932815ea1a5d66a0bd9f69ebc8d9040e8c92760bb6652e",
+    "lidar_tensors_verified": 306,
+    "sparse_kernel_permutations": [
+      "pts_middle_encoder.conv_input.0.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer1.0.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer1.0.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer1.1.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer1.1.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer1.2.0.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer2.0.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer2.0.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer2.1.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer2.1.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer2.2.0.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer3.0.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer3.0.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer3.1.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer3.1.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer3.2.0.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer4.0.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer4.0.conv2.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer4.1.conv1.weight",
+      "pts_middle_encoder.encoder_layers.encoder_layer4.1.conv2.weight",
+      "pts_middle_encoder.conv_out.0.weight"
+    ],
+    "new_tensors_missing": [],
+    "unexpected_keys": []
+  },
+  "validation_frames": 6019,
+  "annotation_sha256": "bd3a18bc8659ac8b0f6a400d342654352dce62d9083e0e26404c1d91cf5f0016",
+  "upstream_mmdetection3d_commit": "fe25f7a51d36e3702f961e198894580d83c4387b",
+  "published_reference": {
+    "mAP": 0.649,
+    "NDS": 0.696
+  },
+  "tolerance_raw": 0.005,
+  "note": "OpenMMLab model-zoo reference, not the separate MIT checkpoint. Deterministic nearest-nine-sweep validation is used for both baseline and MBT.",
+  "measured": {
+    "mAP": 0.6443243951596952,
+    "NDS": 0.6923598513262771
+  },
+  "reference_differences": {
+    "mAP": -0.004675604840304826,
+    "NDS": -0.003640148673722865
+  },
+  "completed_at": "2026-10-22T15:53:56.281605-07:00"
+}

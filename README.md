@@ -1,176 +1,127 @@
-# Attention-bottleneck camera–LiDAR 3D detection
+# ABFuse: attention-bottleneck camera–LiDAR 3D detection
 
-This MMDetection3D project contains the final KITTI experiment used in the
-paper and its full nuScenes trainval adaptation: a PointPillars detector with
-calibration-aware camera-to-BEV alignment and symmetric attention-bottleneck
-fusion.
+An MMDetection3D project for geometrically aligned camera–LiDAR fusion on
+**KITTI** and **nuScenes**. All completed model families are available on
+`main`; switching experimental branches is no longer necessary.
 
-## New camera-focused v2 experiment
+Camera features are aligned with LiDAR BEV locations using calibration. Separate
+transformer branches exchange information through shared attention-bottleneck
+tokens. LiDAR queries read the bottlenecks and update BEV features before
+3D detection. `MBT` in Python class/file names refers to this mechanism; the
+paper's model name is **ABFuse**. Class names are retained for checkpoint compatibility.
 
-The opt-in ResNet-50 + FPN / 256-D MBT experiment, independent camera
-supervision, coupled LiDAR masking, checks, and commands are documented in
-[`CAMERA_FOCUSED_V2.md`](CAMERA_FOCUSED_V2.md). It preserves the existing
-experiments and has no full-training accuracy results yet.
+## Results at a glance
 
-The final model uses:
+These are **validation-split** results, not KITTI test-server submissions.
+KITTI AP40 is averaged over Car, Pedestrian and Cyclist. nuScenes mAP/NDS are
+shown as percentages. Every pair below uses its matched LiDAR architecture.
 
-- PointPillars with SECOND and SECONDFPN for LiDAR BEV features.
-- An ImageNet-pretrained ResNet-18 camera backbone.
-- KITTI calibration to sample camera features at four heights for each BEV
-  location.
-- Four shared bottleneck tokens, four fusion layers, and eight attention heads.
-- A bottleneck-mediated LiDAR readout and a training-only, camera-only center
-  loss applied before multimodal fusion.
-- Stable valid-only camera aggregation and a bounded BEV residual update.
-- A fixed pretrained camera and LiDAR detector while the fusion path trains.
+| Dataset / experiment | LiDAR-only | ABFuse | Difference |
+|---|---:|---:|---:|
+| KITTI, original four-token, moderate 3D AP40 | 38.69 | 42.67 | +3.98 |
+| KITTI, larger eight-token, moderate 3D AP40 | 38.69 | **44.39** | **+5.71** |
+| KITTI, larger eight-token, moderate BEV AP40 | 52.89 | **55.05** | **+2.17** |
+| nuScenes, original PointPillars, mAP / NDS | 25.61 / 44.50 | 27.78 / 45.29 | +2.17 / +0.79 |
+| nuScenes, multi-scale PointPillars, mAP / NDS | 25.61 / 44.50 | 30.17 / 46.21 | +4.55 / +1.71 |
+| nuScenes, TransFusion-L / Swin-Tiny, mAP / NDS | 64.43 / 69.24 | **64.79 / 69.39** | **+0.36 / +0.15** |
 
-## Repository layout
+Differences are calculated **before rounding**. KITTI LiDAR/head parameters are
+fine-tuned after five frozen epochs; therefore the entire baseline gain cannot
+be attributed solely to camera information. The completed nuScenes models keep
+the transferred LiDAR/head fixed. Comparisons between different fusion variants
+are not controlled architectural ablations.
 
-```text
-configs/       Final training, baseline, smoke-test, and ablation configs
-fusion/        Attention-bottleneck fusion module and MMDetection3D detector
-hooks/         Staged training and fusion diagnostics
-transforms/    Black-image and shuffled-image evaluation transforms
-tools/         Evaluation, ablation, and attention-map utilities
-tests/         Focused tests for the retained implementation
-docs/          Paper figures generated from the final model
-```
+**Start with [verified results and provenance](results/README.md)** for exact
+scores, per-class reports, the completed 1/2/4/8/16-token study, all 30 camera
+ablations, checkpoint hashes and saved training configs. Corruption gaps support
+camera dependence, not statistical significance or causal attribution.
 
-The configuration inheritance chain is intentionally retained because these
-are the exact configurations used by the experiment:
+## Choose an experiment
 
-```text
-my_fusion_mbt_bev.py
-└── my_fusion_mbt_bev_eb48.py
-    └── my_fusion_mbt_bev_aligned_eb48.py
-        └── my_fusion_mbt_bev_camera_focused_eb48.py
-```
+Paths below are relative to this project. Run commands from the MMDetection3D
+root, with the project installed at `projects/myfusion`.
 
-## Setup
+| Experiment | Entry config | Details |
+|---|---|---|
+| KITTI LiDAR-only control | `configs/pointpillars_lidar_control_eb48.py` | [Historical reference](EVALUATION.md) |
+| KITTI controlled token sweep, ResNet-18 | `configs/kitti_bottleneck_b{1,2,4,8,16}.py` | [Protocol](docs/KITTI_BOTTLENECK_SMOKE.md), [completed results](docs/KITTI_BOTTLENECK_RESULTS.md) |
+| KITTI larger, ResNet-50/FPN, eight tokens | `configs/kitti_camera_v2.py` | [Architecture and training](CAMERA_FOCUSED_V2.md) |
+| KITTI larger, sixteen tokens | `configs/kitti_camera_v2_b16.py` | [Same controlled V2 recipe](CAMERA_FOCUSED_V2.md) |
+| nuScenes PointPillars LiDAR-only | `configs/pointpillars_lidar_control_nuscenes.py` | [Protocol](docs/NUSCENES_TRAINING.md) |
+| nuScenes original four-token / ResNet-18 | `configs/my_fusion_mbt_bev_nuscenes.py` | [Protocol](docs/NUSCENES_TRAINING.md) |
+| nuScenes multi-scale / ResNet-50, eight tokens | `configs/nuscenes_multiscale_fresh.py` | [Architecture and training](docs/NUSCENES_MULTISCALE_FRESH.md) |
+| nuScenes pretrained TransFusion-L baseline | `configs/transfusion_l_nuscenes_pretrained.py` | [Checkpoint verification](docs/TRANSFUSION_L_MBT.md) |
+| nuScenes TransFusion-L / nuImages Swin-Tiny | `configs/transfusion_l_mbt_swint_nuscenes.py` | [Training](docs/TRANSFUSION_L_TRAINING.md), [camera initializer](docs/NUIMAGES_SWIN_CAMERA.md) |
 
-Place this repository at `mmdetection3d/projects/myfusion`, then run commands
-from the MMDetection3D root:
+The original KITTI epoch-20 result uses a historical implementation. The current
+`my_fusion_mbt_bev_camera_focused_eb48.py` alias was subsequently changed for
+stable fusion and is **not** that historical trained architecture. Preserve the
+versioned `mbt_bev_kitti_v1.py`; use the saved training config/checkpoint metadata
+and [compatibility checks](docs/KITTI_BOTTLENECK_SMOKE.md) for old checkpoints.
+Do not replace the original paper result with the separate corrected B4 sweep.
+
+## Setup and run
+
+This is a project extension, **not a fork or replacement of MMDetection3D**.
+The verified training environment used Python 3.10, PyTorch 2.1.0+cu121,
+MMCV 2.1.0, MMDetection 3.2.0 and MMDetection3D 1.4.0. CUDA/compiled ops and
+dataset preparation are required; weights and datasets are not stored here.
 
 ```bash
+cd ~/mmdetection3d
 conda activate openmmlab
 export PYTHONPATH="$PWD"
+
+# Larger KITTI eight-token model; requires the matched LiDAR checkpoint
+# at the load_from path inherited from kitti_bottleneck_base.py.
+python tools/train.py projects/myfusion/configs/kitti_camera_v2.py
 ```
 
-If the VM cannot execute the upstream Numba KITTI rotated-IoU kernel, apply
-the included regression-tested MMCV backend:
+Setup helpers are in `tools/setup_kitti_haddr.sh`, `tools/setup_nuscenes_trainval.sh`,
+`tools/setup_transfusion_l.sh` and `tools/setup_nuimages_camera.sh`. Read each
+experiment's guide first: ranges, sweeps, channels and initializers differ.
+Public TransFusion-L/Swin component checkpoints are verified by pinned hashes;
+they are not a complete pretrained ABFuse detector or a reproduction of the
+complete BEVFusion architecture.
 
 ```bash
-python projects/myfusion/mmdet3d_patches/apply.py
-python -m pytest projects/myfusion/tests/test_kitti_overlap_backend.py -q
+# Regressions in the installed GPU environment.
+python -m pytest projects/myfusion/tests -q \
+  --ignore=projects/myfusion/tests/test_kitti_overlap_backend.py
 ```
 
-## Train the retained experiments
+The optional KITTI rotated-IoU backend has separate installation/regression
+instructions in [the KITTI audit](docs/KITTI_ARCHITECTURE_AUDIT.md). Smoke tests
+and AP on tiny subsets are execution checks, never benchmark results.
 
-The camera-focused model warm-starts from the best LiDAR-only checkpoint at
-the path specified by `load_from` and keeps that detector fixed, so train the
-baseline first:
+## Camera ablations and figures
 
-```bash
-python tools/train.py \
-  projects/myfusion/configs/pointpillars_lidar_control_eb48.py
+- [Completed 30-case camera-ablation suite](docs/CAMERA_ABLATION_SUITE.md):
+  correct, black-pixel and shuffled-camera controls at the same selected weights.
+- [Updated KITTI figures and reproduction commands](docs/KITTI_PAPER_VISUALIZATIONS.md).
+- [Detection comparison](docs/figures/kitti_v2/detection_comparison.png) and
+  [selected alternative attention maps](docs/figures/kitti_v2/attention_maps_camera_bev.png),
+  freshly rendered with the larger eight-token epoch-14 model and labelled ABFuse.
+
+Attention maps show independently normalized final-layer attention pathways,
+not full multi-layer rollouts or causal explanations. Historical four-token
+figures and the original KITTI evaluation remain clearly separated.
+
+## Repository map
+
+```text
+configs/          Training, baseline, ablation and smoke configs (inheritance retained)
+fusion/           Versioned symmetric bottleneck modules and detector integrations
+hooks/            Freezing, masking, checkpoint integrity and diagnostics
+transforms/       Camera corruption controls
+tools/            Setup, smoke, evaluation, publication and visualization scripts
+tests/            Model, configuration, corruption and published-result checks
+results/          Compact verified metrics, exact saved configs and provenance
+docs/             Experiment guides, audits and selected figures
 ```
 
-Run the bounded camera-focused smoke test:
-
-```bash
-python tools/train.py \
-  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_eb48_smoke.py
-```
-
-Train the final fusion model:
-
-```bash
-python tools/train.py \
-  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_eb48.py
-```
-
-Both full experiments use seed 0, a physical batch size of 6, and eight-step
-gradient accumulation. Checkpoints are selected using overall KITTI 3D
-AP40 at moderate difficulty.
-
-## Camera ablations
-
-Evaluate the best fusion checkpoint with correct images first, then with the
-retained black-image and shuffled-image configurations:
-
-```bash
-python tools/test.py \
-  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_eb48.py \
-  /path/to/best_epoch_20.pth
-
-python tools/test.py \
-  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_black_eval.py \
-  /path/to/best_epoch_20.pth
-
-python tools/test.py \
-  projects/myfusion/configs/my_fusion_mbt_bev_camera_focused_shuffled_eval.py \
-  /path/to/best_epoch_20.pth
-```
-
-`tools/compare_camera_ablations.py` compares the persisted prediction files.
-`tools/render_attention_maps.py` exports the camera and BEV attention maps used
-in the paper.
-
-## Recorded results from the original implementation
-
-On the 3,769-sample KITTI validation split, the best epoch-20 fusion checkpoint
-reached **42.6696 overall 3D AP40 moderate**, compared with **38.6868** for the
-LiDAR-only baseline. Correct images outperformed black images by 0.2845 points
-and shuffled images by 0.5742 points at the same metric. See
-[`EVALUATION.md`](EVALUATION.md) for the full results and limitations.
-
-These are validation-split results, not official KITTI test-server scores.
-They predate the numerically stable camera aggregation and bounded residual
-revision. The corrected implementation must be retrained before new results
-are attributed to it.
-
-## Controlled KITTI bottleneck-size study
-
-`configs/kitti_bottleneck_b1.py`, `b2`, `b4`, `b8`, and `b16` restore the
-historical KITTI architecture and 40-epoch recipe, including five-epoch LiDAR
-warm-up freezing and the bottleneck-conditioned auxiliary head. These configs
-use valid-only camera-height normalization without adopting the later
-nuScenes architecture changes. Their outputs are separate from the original
-experiments. A fresh four-token control is required alongside the other sizes.
-
-See [`docs/KITTI_BOTTLENECK_SMOKE.md`](docs/KITTI_BOTTLENECK_SMOKE.md) for GPU
-smoke tests and training commands, and
-[`docs/KITTI_ARCHITECTURE_AUDIT.md`](docs/KITTI_ARCHITECTURE_AUDIT.md) for the
-numerical correction and the intentional design choices that were preserved.
-The new numerical tests pass locally; the corrected GPU suite and full runs
-must wait until Haddr's PC is available.
-
-## nuScenes experiment
-
-The full nuScenes experiment uses a matched LiDAR-only PointPillars baseline
-followed by camera-focused MBT training. The MBT run automatically warm-starts
-from the baseline checkpoint with the highest validation NDS and keeps the
-transferred camera backbone, LiDAR encoder, and detection head fixed while the
-corrected alignment and fusion modules train. See
-[`docs/NUSCENES_TRAINING.md`](docs/NUSCENES_TRAINING.md) for the complete
-training protocol and commands.
-
-## Fresh multi-scale nuScenes experiment
-
-The next larger-model experiment is documented in
-[`docs/NUSCENES_MULTISCALE_FRESH.md`](docs/NUSCENES_MULTISCALE_FRESH.md).
-It uses ResNet-50, eight shared bottleneck tokens and bottleneck-mediated
-readout at all three detection scales. The trained LiDAR encoder/head and
-their normalization buffers stay fixed; camera/fusion optimization starts
-afresh from the LiDAR-only baseline and ImageNet camera initialization.
-Hard masking is disabled and independent camera supervision retains weight 0.25.
-
-The [controlled continuation study](docs/NUSCENES_CONTROLLED_RETRAINING.md)
-completed all five matched 1,000-update runs. Multi-scale readout scored
-**28.4913 mAP / 45.7456 NDS** on full nuScenes validation, versus
-27.6609 / 45.3258 for its matched frozen single-scale control. These are short
-continuation results, not results of the proposed fresh full-training recipe.
-
-The new configuration is `configs/nuscenes_multiscale_fresh.py`; a separate
-lower-LR variant and architecture-compatible black/shuffled-camera evaluation
-configs are also included. Adding these files does not start full training.
+[Experiment/config guide](docs/EXPERIMENT_INDEX.md) distinguishes completed paper
+models from historical pilots and smoke-only variants. [Repository maintenance](docs/REPOSITORY_MAINTENANCE.md)
+explains what is published and what stays local. Historical raw logs/videos and
+duplicate smoke artifacts are removed only from Git tracking, not from local
+storage or earlier commits. No history rewriting or branch deletion is required.

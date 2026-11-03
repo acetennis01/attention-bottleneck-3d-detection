@@ -1,7 +1,13 @@
 # Fresh TransFusion-L / nuImages Swin MBT training
 
 Config: `configs/transfusion_l_mbt_swint_nuscenes.py`.
-Branch: `codex/transfusion-l-mbt`. This is a new experiment, **not** a resume of
+Available on `main` (historical branch: `codex/transfusion-l-mbt`).
+**Completed:** 160,000 microbatches / 40,000 optimizer updates. The best-NDS
+checkpoint at microbatch 110,000 reaches 64.79498295 mAP / 69.38973585 NDS,
+versus the matched LiDAR-only 64.43243952 / 69.23598513. Correct/black/shuffled
+camera evaluations are complete; see [verified results](../results/README.md).
+
+This was a fresh experiment, **not** a resume of
 the previous PointPillars model or of any disposable smoke weights.
 
 ## Preflight checks passed

@@ -42,7 +42,10 @@ bash projects/myfusion/tools/run_kitti_bottleneck_smokes.sh \
 
 Use `legacy` as the second argument only to inspect the original numerical
 behavior. The aggregation mode is recorded in every report. The corrected
-suite has not yet been run on Haddr's GPU; previous saved reports are legacy.
+suite passed on Haddr's GPU on 2026-10-15, including all five token counts and
+reference inference. Reports are under
+`/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_smoke_valid_only_20261015_152142/`.
+The older saved reports under `kitti_smoke_results/20261014/` remain legacy.
 
 The launcher runs each token count in a separate process: 1, 2, 4, 8, and 16.
 Each run uses 96 training frames for 16 iterations (two accumulated optimizer

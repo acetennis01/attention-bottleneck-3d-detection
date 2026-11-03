@@ -1,7 +1,10 @@
 # Fresh multi-scale nuScenes MBT training
 
-This is the recommended **next full-training experiment**, not a completed
-accuracy result. KITTI and all historical nuScenes experiments are retained.
+**Completed:** the selected best-NDS checkpoint at microbatch 150,000 reaches
+30.16645388 mAP / 46.21459791 NDS (percentages). Full training and all three
+camera-input evaluations are complete; see [verified results](../results/README.md).
+The design discussion and proposed-recipe wording below are historical context.
+KITTI and all historical nuScenes experiments are retained.
 
 ## Why these changes
 

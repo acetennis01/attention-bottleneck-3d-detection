@@ -1,0 +1,5 @@
+# Published artifacts retain the exact bytes covered by provenance hashes.
+results/** -text
+docs/figures/kitti_v2/* -text
+# Python's CSV writer emits CRLF; retain it without false whitespace failures.
+*.csv whitespace=cr-at-eol

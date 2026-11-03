@@ -1,0 +1,402 @@
+{
+  "snapshot_manifest_sha256": "645d7022b825befc97824e9e9842f6483dc0588aa4a6948df66a3dab5d3afcaf",
+  "source_remote_root": "/home/yab/mmdetection3d",
+  "completed_camera_cases": 30,
+  "exclusion": "No model weights, datasets, raw predictions, logs or temporary files",
+  "files": [
+    {
+      "path": "baselines/kitti_pointpillars.json",
+      "source": "work_dirs/kitti_camera_ablations_20261018_v2b8_vs_legacyb8/lidar/correct/metrics.json",
+      "sha256": "adca3fab2c4f42de0b46513bc1bacfe880e170fc7268f72d92f2d4c1b98028bf",
+      "bytes": 11044
+    },
+    {
+      "path": "baselines/kitti_pointpillars_original.json",
+      "source": "work_dirs/pointpillars_lidar_control_eb48_stable_momentum_seed0/best_epoch28_eval/20260816_235958/20260816_235958.json",
+      "sha256": "d2e16d8ec7a5bdc18b88aac7c2f31038398ef51d6b3fd4ca76c61444ecc61c09",
+      "bytes": 9748
+    },
+    {
+      "path": "baselines/nuscenes_pointpillars.json",
+      "source": "work_dirs/nuscenes_analysis/baseline/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "e4da8a4d37c84efa47f3d872fe2de42795972276b8e4a50ee606da75b8d59dc2",
+      "bytes": 5185
+    },
+    {
+      "path": "baselines/nuscenes_transfusion_l.json",
+      "source": "work_dirs/transfusion_l_pretrained_baseline/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "87ccb8b863bfb9c156d23e703f159e6fa02e6a4466593de378d8c4e39e8990bb",
+      "bytes": 5208
+    },
+    {
+      "path": "baselines/transfusion_l_verification.json",
+      "source": "work_dirs/transfusion_l_pretrained_baseline/baseline_verification.json",
+      "sha256": "c61eaacc3ae1616100e5ce250d5280a28ea99d05eb069eb3c755af41a480c224",
+      "bytes": 2617
+    },
+    {
+      "path": "camera_ablations/SUMMARY.md",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/SUMMARY.md",
+      "sha256": "ae89d519043eb0b6a32faa588995a2cd75214031f3062af98fbc5d20918fb04f",
+      "bytes": 1930
+    },
+    {
+      "path": "camera_ablations/comparison.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/comparison.json",
+      "sha256": "3905f149758381e56892fd9cc4b8c8b1f8eba97077f0ba0db52331ebaf7d3601",
+      "bytes": 9168
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b1/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/black/attempt_01/metrics.json",
+      "sha256": "05faea975179f0ec5acfe8eb5ba51868c7793b90164073e345dbc10a95f63dfa",
+      "bytes": 11043
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b1/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/correct/attempt_01/metrics.json",
+      "sha256": "0495b1be378aecfceb43e95b7af73cf22ca27fe840106b571edbf47e76a67a11",
+      "bytes": 11056
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b1/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/shuffled/attempt_01/metrics.json",
+      "sha256": "165f36c5c33046e3d6efae1507894d732c4fc37cfd946ec45ea122390f5c8115",
+      "bytes": 11053
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b16/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/black/attempt_01/metrics.json",
+      "sha256": "3c1e81b042f988afa3a03d3ba81c2d533a621f253a6c2a6fe4d83763d00338f7",
+      "bytes": 11046
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b16/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/correct/attempt_01/metrics.json",
+      "sha256": "346b73a66cf54149abc5465fb65ef9992fc135bb34781dc8b261e3fea0fc3b61",
+      "bytes": 11053
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b16/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/shuffled/attempt_01/metrics.json",
+      "sha256": "aeb342a61dd30c484c8ff21506f338f135961bbdfedc1d5e4c3bd6b9f4423796",
+      "bytes": 11054
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b2/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/black/attempt_01/metrics.json",
+      "sha256": "f1cb2f6ec1b4fec397a34532ca2d830f4b9606b9ba897bd14fb324c9f0845fc0",
+      "bytes": 11049
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b2/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/correct/attempt_01/metrics.json",
+      "sha256": "1bbdc9ed86020304de70c70bf378e8d28f7160edda129b01c42a6e5109ea7846",
+      "bytes": 11047
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b2/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/shuffled/attempt_01/metrics.json",
+      "sha256": "ca7d20de8d414871355a3ac85e5e979b2c4c704102416afff8f67beaa920fdc4",
+      "bytes": 11054
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b4/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/black/attempt_01/metrics.json",
+      "sha256": "ae97f8564f0a90588fb28f19bdbf8797c8366a9194d77d40fcc5761a3f5a09d5",
+      "bytes": 11057
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b4/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/correct/attempt_01/metrics.json",
+      "sha256": "0b29d9e2b63aac320343197ba71cf5089ebdb345dbd0da6ccc561ca71ec79adb",
+      "bytes": 11054
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b4/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/shuffled/attempt_01/metrics.json",
+      "sha256": "f69f37331a81d2dc47666b55088a0f40a4d5ab6e78b6c0e5f49a07d38e20cfa8",
+      "bytes": 11053
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b8/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/black/attempt_01/metrics.json",
+      "sha256": "c53f4dcbdcf58ce50c4500bca84277d2d919b650cee2244d068243ff0d15eeb9",
+      "bytes": 11050
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b8/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/correct/attempt_01/metrics.json",
+      "sha256": "e82552fe11d6b1d429f84559c9d068168582a53f44025eedc7a7704ae1287744",
+      "bytes": 11054
+    },
+    {
+      "path": "camera_ablations/kitti_legacy_b8/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/shuffled/attempt_01/metrics.json",
+      "sha256": "12cb89aaae11951dc887990f560bb67c4d3072c1506a6ee63da59ff52eee0da9",
+      "bytes": 11057
+    },
+    {
+      "path": "camera_ablations/kitti_v2_b16/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/black/attempt_01/metrics.json",
+      "sha256": "d3e249a8d86631152c5c9c7dd60ae4d62ba6b148dcfa3d7379e31cca95ea0406",
+      "bytes": 11039
+    },
+    {
+      "path": "camera_ablations/kitti_v2_b16/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/correct/attempt_01/metrics.json",
+      "sha256": "f2d6c704b30459c4ebb852a8f47eb8802bcaef6432d3b0f021315e1634e36f54",
+      "bytes": 11044
+    },
+    {
+      "path": "camera_ablations/kitti_v2_b16/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/shuffled/attempt_01/metrics.json",
+      "sha256": "b1c6e46ae02b359c50c73405a2f07b9314569fc8e1bb7b080d62ecebee9d98d7",
+      "bytes": 11045
+    },
+    {
+      "path": "camera_ablations/kitti_v2_b8/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/black/attempt_01/metrics.json",
+      "sha256": "64f2a8edd72385c9e731099305c5774a5ae35f53944621f8d0a0dfad0ce6f0df",
+      "bytes": 11027
+    },
+    {
+      "path": "camera_ablations/kitti_v2_b8/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/correct/attempt_01/metrics.json",
+      "sha256": "922f83022cfb3bb98b60b83b4c2666008a032bffcf7f56ea88880dfa045d0acb",
+      "bytes": 11035
+    },
+    {
+      "path": "camera_ablations/kitti_v2_b8/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/shuffled/attempt_01/metrics.json",
+      "sha256": "182986d6114d6bcbd686f9e31a2826234f5194989f55ad74615177cd80890f34",
+      "bytes": 11039
+    },
+    {
+      "path": "camera_ablations/nuscenes_multiscale_b8/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/black/attempt_01/metrics.json",
+      "sha256": "04f19d5e689a8c9783251927b713f2bc202c6bc9430b44cfa4d75b55cac9f1ab",
+      "bytes": 1312
+    },
+    {
+      "path": "camera_ablations/nuscenes_multiscale_b8/black_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/black/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "3f9dd9a2d4e029973f039b47bb83e91a6e394c0e672215aec2ca9e4bf59b71b6",
+      "bytes": 4958
+    },
+    {
+      "path": "camera_ablations/nuscenes_multiscale_b8/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/correct/attempt_01/metrics.json",
+      "sha256": "819e7ff0ed2e31c5d3d4016162cc35d7356db837c1ab7db5b58a32417529b1c5",
+      "bytes": 1317
+    },
+    {
+      "path": "camera_ablations/nuscenes_multiscale_b8/correct_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/correct/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "5ec840e2b149d2a804ab280607ff2efe8a573237624ac0ede7ef82ffc575ea8e",
+      "bytes": 5209
+    },
+    {
+      "path": "camera_ablations/nuscenes_multiscale_b8/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/shuffled/attempt_01/metrics.json",
+      "sha256": "905285d1588b95e6f5cae9578bfa3b265fd602619fa15e50f3206aece6f5659b",
+      "bytes": 1320
+    },
+    {
+      "path": "camera_ablations/nuscenes_multiscale_b8/shuffled_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/shuffled/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "cd1200916a9393ec3e673e5a4131990c197a8c5c0265c74ef202dd7e187d7729",
+      "bytes": 5178
+    },
+    {
+      "path": "camera_ablations/nuscenes_original_b4/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/black/attempt_01/metrics.json",
+      "sha256": "23e7606bfd1ace178378e97cfe4608548283dea99fa9555ad3c733fc439a4b2e",
+      "bytes": 1262
+    },
+    {
+      "path": "camera_ablations/nuscenes_original_b4/black_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/black/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "3c66b2eaa98ce2e725f22107ee5695eee52525f82387978d0f42d36e3d516bda",
+      "bytes": 5184
+    },
+    {
+      "path": "camera_ablations/nuscenes_original_b4/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/correct/attempt_01/metrics.json",
+      "sha256": "258456a10285a5980d776cff1686840fec2bc7ccfeb3f8f74fd29cba76328314",
+      "bytes": 1268
+    },
+    {
+      "path": "camera_ablations/nuscenes_original_b4/correct_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/correct/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "45a1f3f4b32a552cadcd6568930633b89bb81e120672138f48b5459a0c0bff90",
+      "bytes": 5184
+    },
+    {
+      "path": "camera_ablations/nuscenes_original_b4/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/shuffled/attempt_01/metrics.json",
+      "sha256": "7d12b47b1a72b08036bb94305f82087685c5c8462ccc43d49f4c23cdaae57e06",
+      "bytes": 1271
+    },
+    {
+      "path": "camera_ablations/nuscenes_original_b4/shuffled_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/shuffled/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "1c37e0f175df30f92df36d189f2b2ac355953f9ce98fc7230f7d62391d868ff8",
+      "bytes": 5187
+    },
+    {
+      "path": "camera_ablations/nuscenes_transfusion_swint_b8/black.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/black/attempt_01/metrics.json",
+      "sha256": "759b2f22923028b408731c78c22f9361e5b3273c8f634717141750fe8f95b0b6",
+      "bytes": 1320
+    },
+    {
+      "path": "camera_ablations/nuscenes_transfusion_swint_b8/black_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/black/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "79fe6b1ad31d473cae430604e18027f4e3a79afcf800f5a94ab4d4016d278363",
+      "bytes": 5199
+    },
+    {
+      "path": "camera_ablations/nuscenes_transfusion_swint_b8/correct.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/correct/attempt_01/metrics.json",
+      "sha256": "8b2c46c24ae85b6a2be951167b1998b1a060d9ab0f5833c9309bc04fdba4fadf",
+      "bytes": 1326
+    },
+    {
+      "path": "camera_ablations/nuscenes_transfusion_swint_b8/correct_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/correct/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "a5760fc6e08bc2f511e84123acc1b9240d23238a614abf3dd72157bc89bd47fc",
+      "bytes": 5202
+    },
+    {
+      "path": "camera_ablations/nuscenes_transfusion_swint_b8/shuffled.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/shuffled/attempt_01/metrics.json",
+      "sha256": "52a1113ea01120346b076800152d2ca273a939f5285885fd04546c0b2fa8a171",
+      "bytes": 1329
+    },
+    {
+      "path": "camera_ablations/nuscenes_transfusion_swint_b8/shuffled_devkit.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/shuffled/attempt_01/results/pred_instances_3d/metrics_summary.json",
+      "sha256": "f0932acd3a8b024ff7944b6b3105b6439ceda5c888fd29ed4a3d8d4841dbc66e",
+      "bytes": 5194
+    },
+    {
+      "path": "camera_ablations/overall_metrics.csv",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/overall_metrics.csv",
+      "sha256": "ad595e905b222a31c84d6d910ffc6a5d67228f5eba0ea974726c99acf30bf5ca",
+      "bytes": 1792
+    },
+    {
+      "path": "camera_ablations/suite.json",
+      "source": "work_dirs/camera_ablations_kitti_nuscenes_20261025/suite.json",
+      "sha256": "ea68e54e1fd69011b660a29a01d18860df549ccf5ac44a36312d7e8919acd4d0",
+      "bytes": 26401
+    },
+    {
+      "path": "historical/nuscenes_distance_stratified_map.json",
+      "source": "work_dirs/nuscenes_analysis/report/distance_stratified_map.json",
+      "sha256": "e961fcdf66868077d3997f9ff35996b501ff3b612f677db3872733d7a4b0505a",
+      "bytes": 23010
+    },
+    {
+      "path": "historical/nuscenes_original_comparison.json",
+      "source": "work_dirs/nuscenes_analysis/report/metrics_comparison.json",
+      "sha256": "5b4c194f9abf6299cae8bf94bb4e335db50a350ff8e3f4b5078b4a9c2afe84d2",
+      "bytes": 3601
+    },
+    {
+      "path": "saved_configs/kitti_legacy_b1.py",
+      "source": "work_dirs/kitti_bottleneck_b1_valid_only_seed0/kitti_bottleneck_b1.py",
+      "sha256": "996d694fea4f8e8f32baa30154aaa859a61c286142df701f0fc4d1ab9e6860ba",
+      "bytes": 17086
+    },
+    {
+      "path": "saved_configs/kitti_legacy_b16.py",
+      "source": "work_dirs/kitti_bottleneck_b16_valid_only_seed0/kitti_bottleneck_b16.py",
+      "sha256": "cfbe845e34d1df9f6ea9b2dbf5bec67269d9962073d0caa6084d85a7a718d6ad",
+      "bytes": 17090
+    },
+    {
+      "path": "saved_configs/kitti_legacy_b2.py",
+      "source": "work_dirs/kitti_bottleneck_b2_valid_only_seed0/kitti_bottleneck_b2.py",
+      "sha256": "9e2c7ab652a4a81b4971a5dbf7b82596a141b1518dea3fdf68730a0ebf3b1648",
+      "bytes": 17086
+    },
+    {
+      "path": "saved_configs/kitti_legacy_b4.py",
+      "source": "work_dirs/kitti_bottleneck_b4_valid_only_seed0/kitti_bottleneck_b4.py",
+      "sha256": "3d40db886ced6035a8be603a78fa91ff0a6a88670d745e71c6e8cbe418b11077",
+      "bytes": 17086
+    },
+    {
+      "path": "saved_configs/kitti_legacy_b8.py",
+      "source": "work_dirs/kitti_bottleneck_b8_valid_only_seed0/kitti_bottleneck_b8.py",
+      "sha256": "884b8be8ae6be98861b5fa5402bda648f4720e6a2c5fae5f53c0cd9010727761",
+      "bytes": 17086
+    },
+    {
+      "path": "saved_configs/kitti_original_paper.py",
+      "source": "work_dirs/mbt_bev_camera_focused_eb48_seed0/20260818_190738/vis_data/config.py",
+      "sha256": "3a78dfe46cd464f55622c09ad634579c029dcd57f403708b8e57920c7730b83f",
+      "bytes": 16972
+    },
+    {
+      "path": "saved_configs/kitti_v2_b16.py",
+      "source": "work_dirs/kitti_camera_v2_r50_e256_b16_seed0/kitti_camera_v2_b16.py",
+      "sha256": "b865412321924687e88ccb6a240b8d04089fe513ba396be9cef8dad802768253",
+      "bytes": 17601
+    },
+    {
+      "path": "saved_configs/kitti_v2_b8.py",
+      "source": "work_dirs/kitti_camera_v2_r50_e256_b8_seed0/kitti_camera_v2.py",
+      "sha256": "3bc18dad3fc167b730b49f379af049b0439b7d2a19a2bbdf319155205a11a262",
+      "bytes": 17597
+    },
+    {
+      "path": "saved_configs/nuscenes_multiscale_b8.py",
+      "source": "work_dirs/nuscenes_multiscale_fresh_r50_e256_b8_seed0/nuscenes_multiscale_fresh.py",
+      "sha256": "a0c4e623d6fb87787e94297ab0297939cae74b3cb5db65e664febbf75b520d12",
+      "bytes": 26392
+    },
+    {
+      "path": "saved_configs/nuscenes_original_b4.py",
+      "source": "work_dirs/mbt_bev_nuscenes_fixed/my_fusion_mbt_bev_nuscenes.py",
+      "sha256": "f2bf45c9318670a56b83ab8f9cd138556925ab9e81d3328534170cb2282ca319",
+      "bytes": 25053
+    },
+    {
+      "path": "saved_configs/nuscenes_transfusion_swint_b8.py",
+      "source": "work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/transfusion_l_mbt_swint_nuscenes.py",
+      "sha256": "481151d36551249cadc862c4dd99ea9683a828f231806fc05563e2b835da8a2e",
+      "bytes": 29413
+    },
+    {
+      "path": "training/transfusion_l_integrity.json",
+      "source": "work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/transfusion_l_integrity.json",
+      "sha256": "0d906ca1e67356dd23baffd277025868bbbb022537aa9f8048e7e90248c45935",
+      "bytes": 295
+    },
+    {
+      "path": "training/transfusion_l_progress.json",
+      "source": "work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/training_progress.json",
+      "sha256": "e068ba7be35106887f9113f46506ad68811627ec663c1e673cfa9cce7d453002",
+      "bytes": 811
+    },
+    {
+      "path": "historical/kitti_original_paper_validation_history.json",
+      "source": "work_dirs/mbt_bev_camera_focused_eb48_seed0/20260818_190738/vis_data/scalars.json",
+      "source_sha256": "c563ef44845ade61c8fe046f68a9e86e4be77e0fac1ca7adec5c3f0ed0d2604e",
+      "sha256": "4951a6cd77fea7b90582cc4fb547c19f59257b3cd48203df8029fe3fd6ae3fd3",
+      "bytes": 211069,
+      "transformation": "Retain completed AP40 validation records only"
+    },
+    {
+      "path": "historical/kitti_pointpillars_original_validation_history.json",
+      "source": "work_dirs/pointpillars_lidar_control_eb48_stable_momentum_seed0/20260815_212802/vis_data/scalars.json",
+      "source_sha256": "41152540e8f3c670528096a212e43f8d8b8c0696cc0bfd647a7bbbf05eaaf771",
+      "sha256": "120be97e3f1457e00387060449d2d5f131b7b4ab5ec7ea05258248f8a029bc53",
+      "bytes": 421974,
+      "transformation": "Retain completed AP40 validation records only"
+    }
+  ]
+}

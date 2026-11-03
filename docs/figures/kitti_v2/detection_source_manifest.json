@@ -1,0 +1,133 @@
+{
+  "model": "ABFuse: ResNet-50/FPN, 256-D, eight bottleneck tokens, epoch 14",
+  "fusion": {
+    "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b8_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+    "checkpoint_sha256": "308921f9d01c2eec8ee6633983fbac8c688b64489a8840858379bb3f1a8263b0",
+    "source_config": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b8_seed0/kitti_camera_v2.py",
+    "strict_checkpoint_load": true,
+    "validation_samples": 3769
+  },
+  "lidar_baseline": {
+    "checkpoint": "/home/yab/mmdetection3d/work_dirs/pointpillars_lidar_control_eb48_stable_momentum_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_28.pth",
+    "checkpoint_sha256": "296b97413d3f6813f6c75cb481a575ad10e9d1bee7126c8b2c7da41abd6d0d5b",
+    "source_config": "/home/yab/mmdetection3d/projects/myfusion/configs/pointpillars_lidar_control_eb48.py",
+    "strict_checkpoint_load": true,
+    "validation_samples": 3769
+  },
+  "score_threshold": 0.3,
+  "qualitative_examples": [
+    {
+      "sample_idx": 8,
+      "predicted_counts": {
+        "LiDAR-only": 7,
+        "ABFuse": 7
+      },
+      "ground_truth_count": 6,
+      "raw_points": 122555,
+      "model_input_points": 16897
+    },
+    {
+      "sample_idx": 343,
+      "predicted_counts": {
+        "LiDAR-only": 5,
+        "ABFuse": 4
+      },
+      "ground_truth_count": 4,
+      "raw_points": 124629,
+      "model_input_points": 19668
+    },
+    {
+      "sample_idx": 767,
+      "predicted_counts": {
+        "LiDAR-only": 2,
+        "ABFuse": 1
+      },
+      "ground_truth_count": 1,
+      "raw_points": 113533,
+      "model_input_points": 18622
+    }
+  ],
+  "attention_examples": [
+    {
+      "sample_idx": 6804,
+      "class_name": "Pedestrian",
+      "prediction_score": 0.9770302772521973,
+      "selected_prediction_index": 0,
+      "matched_3d_iou": 0.6621614694595337,
+      "query_token_index": 130,
+      "normalized_entropy": 0.9620821624497078,
+      "top_10_percent_mass": 0.2588098645210266,
+      "valid_cells": 170
+    },
+    {
+      "sample_idx": 2206,
+      "class_name": "Cyclist",
+      "prediction_score": 0.9557185173034668,
+      "selected_prediction_index": 13,
+      "matched_3d_iou": 0.6661685705184937,
+      "query_token_index": 132,
+      "normalized_entropy": 0.9372096845186313,
+      "top_10_percent_mass": 0.37098950147628784,
+      "valid_cells": 169
+    },
+    {
+      "sample_idx": 767,
+      "class_name": "Car",
+      "prediction_score": 0.9970245957374573,
+      "selected_prediction_index": 1,
+      "matched_3d_iou": 0.7413870096206665,
+      "query_token_index": 185,
+      "normalized_entropy": 0.8604026220271873,
+      "top_10_percent_mass": 0.46979090571403503,
+      "valid_cells": 169
+    }
+  ],
+  "inference_checks": [
+    {
+      "sample_idx": 8,
+      "attention_inference_matches_standard": true,
+      "maximum_score_difference": 1.7881393432617188e-07
+    },
+    {
+      "sample_idx": 343,
+      "attention_inference_matches_standard": true,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "sample_idx": 767,
+      "attention_inference_matches_standard": true,
+      "maximum_score_difference": 0.0
+    },
+    {
+      "sample_idx": 2206,
+      "attention_inference_matches_standard": true,
+      "maximum_score_difference": 7.152557373046875e-07
+    },
+    {
+      "sample_idx": 6804,
+      "attention_inference_matches_standard": true,
+      "maximum_score_difference": 1.1920928955078125e-07
+    }
+  ],
+  "example_selection": "Road scenes selected before inference; prior attention sample IDs retained. No selection by fusion gain.",
+  "attention_method": "Head-averaged final-layer LiDAR-to-bottleneck attention multiplied by bottleneck-to-camera attention; valid cells renormalized. Camera heat uses learned height weights and calibration. Each heatmap independently normalized for display.",
+  "caveat": "Illustrative attention paths, not a full multi-layer rollout or causal attribution. Raw 360-degree scans are reference-only; inference uses camera-FOV reduced points with the configured range filter.",
+  "outputs": {
+    "qualitative_midpoint_examples.png": {
+      "shape": [
+        2913,
+        1440,
+        3
+      ],
+      "sha256": "94ac7d3ba4010e18d3cd85ba7abd4ca27c315fb9a66217a3dcbdfdf87e3dca28"
+    },
+    "attention_maps_camera_bev.png": {
+      "shape": [
+        1791,
+        1575,
+        3
+      ],
+      "sha256": "e41d992c817615b0201cf9dc2abc54e7f2026534a78a762c4234f25d28006ed3"
+    }
+  }
+}

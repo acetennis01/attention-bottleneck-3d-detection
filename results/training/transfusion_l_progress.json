@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "start_microbatch": 150000,
+  "resumed": true,
+  "accumulation": 4,
+  "optimizer_updates_this_session": 2500,
+  "total_optimizer_updates": 40000,
+  "camera_checkpoint_sha256": "cc8189aa34e2d743e26b1e3d0c8d6c18768d87561d404f0f82b282c2d178810f",
+  "exact_cold_camera_initialization": false,
+  "initial_optimizer_state_entries": 276,
+  "camera_initialization_validation": "passed",
+  "gradient_norm_definition": "Accumulated gradients after global clipping, before optimizer.step",
+  "completed_microbatches": 160000,
+  "gradient_norms_postclip": {
+    "camera": 0.43318668007850647,
+    "image_fpn": 0.06685113906860352,
+    "fusion": 1.8422256708145142,
+    "bottleneck": 0.06977418810129166
+  },
+  "current_learning_rates": [
+    2.0000000195699997e-07,
+    1.000000009785e-06
+  ]
+}

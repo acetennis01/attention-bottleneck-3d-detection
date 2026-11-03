@@ -18,3 +18,12 @@ nuscenes_analysis_results/*/results/pred_instances_3d/results_nusc.json
 .idea/
 .vscode/
 .DS_Store
+
+# Local drafts, review renders, and generated historical run trees.
+/paper_updates/
+/tmp/
+/kitti_smoke_results/
+/nuscenes_analysis_results/
+*.npz
+*.tar.gz
+*.zip

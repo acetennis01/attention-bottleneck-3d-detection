@@ -1,0 +1,19 @@
+{
+  "model": "ABFuse larger KITTI, ResNet-50/FPN, 256-D, 8 bottleneck tokens, epoch 14",
+  "checkpoint_sha256": "308921f9d01c2eec8ee6633983fbac8c688b64489a8840858379bb3f1a8263b0",
+  "files": [
+    {
+      "path": "detection_comparison.png",
+      "source": "work_dirs/kitti_paper_figures_20261102_b8/qualitative_midpoint_examples.png",
+      "sha256": "94ac7d3ba4010e18d3cd85ba7abd4ca27c315fb9a66217a3dcbdfdf87e3dca28",
+      "samples": [8, 343, 767]
+    },
+    {
+      "path": "attention_maps_camera_bev.png",
+      "source": "work_dirs/kitti_attention_alternatives_20261102_b8/attention_maps_camera_bev_option_1.png",
+      "sha256": "ae1b147751353bae3a7e07ab6f09e662f823cc357e1bd39cfc606d3cbbaafddc",
+      "samples": [5472, 1707, 7462],
+      "selection": "User-selected Alternative 1; illustrative scene selection, not representative sampling"
+    }
+  ]
+}

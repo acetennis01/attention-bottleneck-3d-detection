@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-02",
+  "host": "haddrsarchpc",
+  "scope": "Isolated consolidated project snapshot; existing source, datasets and runs untouched",
+  "source_archive_sha256": "5f7f061a04980918e5dd010f95425a929fee590c0dab2d994d7eea7904a82863",
+  "project_directory": "/home/yab/mmdetection3d/work_dirs/repo_consolidation_check_M03g3m/projects/myfusion",
+  "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest projects/myfusion/tests -q --junitxml=pytest-full-report.xml",
+  "passed": 162,
+  "failed": 0,
+  "skipped": 0,
+  "duration_seconds": 5.36,
+  "includes": [
+    "All model/configuration and camera corruption regressions",
+    "Downloaded nuImages Swin checkpoint strict initialization and reference forward equivalence",
+    "Installed KITTI MMCV/CPU overlap backend regressions",
+    "Published result/config/figure SHA-256 and completed 30-case suite checks"
+  ],
+  "local_checks": [
+    "Five standard-library published-result integrity tests passed",
+    "Python source compilation",
+    "Local documentation links resolved",
+    "No checkpoints, prediction dumps, data archives or videos in the proposed tracked tree"
+  ],
+  "limitation": "Regression verification, not a new full training run or new benchmark evaluation"
+}

@@ -6,8 +6,10 @@ replace the historical nuScenes runs or change the KITTI training recipe.
 
 This branch increases camera/fusion capacity and addresses LiDAR shortcuts.
 It does **not** replace the historical KITTI token study or the nuScenes model.
-There are no new full-training accuracy results yet. Graph tests and short
-execution smokes cannot establish improved AP or useful camera dependence.
+Both KITTI runs have now completed: eight tokens reach 44.3949 moderate 3D
+AP40 / 55.0548 BEV AP40, and sixteen tokens reach 43.2628 / 54.2189. Both select
+epoch 14. See [verified results](results/README.md) and the completed camera
+ablations; the smoke records below remain execution checks, not accuracy evidence.
 
 ## Architecture and training
 

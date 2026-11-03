@@ -1,0 +1,554 @@
+{
+  "status": "complete",
+  "started_at": "2026-10-25T18:33:07.293852-07:00",
+  "models": [
+    {
+      "name": "nuscenes_transfusion_swint_b8",
+      "dataset": "nuscenes",
+      "config": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/transfusion_l_mbt_swint_nuscenes.py",
+      "config_sha256": "481151d36551249cadc862c4dd99ea9683a828f231806fc05563e2b835da8a2e",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+      "checkpoint_sha256": "e87fb58195ed7ef692eb9b3f6193727a6c811de73c3125bd03c0ffe5bca8156e",
+      "validation_samples": 6019
+    },
+    {
+      "name": "kitti_v2_b8",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b8_seed0/kitti_camera_v2.py",
+      "config_sha256": "3bc18dad3fc167b730b49f379af049b0439b7d2a19a2bbdf319155205a11a262",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b8_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+      "checkpoint_sha256": "308921f9d01c2eec8ee6633983fbac8c688b64489a8840858379bb3f1a8263b0",
+      "validation_samples": 3769
+    },
+    {
+      "name": "kitti_v2_b16",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b16_seed0/kitti_camera_v2_b16.py",
+      "config_sha256": "b865412321924687e88ccb6a240b8d04089fe513ba396be9cef8dad802768253",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_camera_v2_r50_e256_b16_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+      "checkpoint_sha256": "559ad79b76ffcb1afbe66929ca61bec99839cebc0dae89a967cef6b47e33d1d5",
+      "validation_samples": 3769
+    },
+    {
+      "name": "nuscenes_multiscale_b8",
+      "dataset": "nuscenes",
+      "config": "/home/yab/mmdetection3d/work_dirs/nuscenes_multiscale_fresh_r50_e256_b8_seed0/nuscenes_multiscale_fresh.py",
+      "config_sha256": "a0c4e623d6fb87787e94297ab0297939cae74b3cb5db65e664febbf75b520d12",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/nuscenes_multiscale_fresh_r50_e256_b8_seed0/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_150000.pth",
+      "checkpoint_sha256": "32e67c07484439f805f12487b444d358d604facac3a2b901c2507fbc41045c24",
+      "validation_samples": 6019
+    },
+    {
+      "name": "nuscenes_original_b4",
+      "dataset": "nuscenes",
+      "config": "/home/yab/mmdetection3d/work_dirs/mbt_bev_nuscenes_fixed/my_fusion_mbt_bev_nuscenes.py",
+      "config_sha256": "f2bf45c9318670a56b83ab8f9cd138556925ab9e81d3328534170cb2282ca319",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/mbt_bev_nuscenes_fixed/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_epoch_9.pth",
+      "checkpoint_sha256": "f82bc37c7d5a75c132ba2b9405bc222b43388b5fd2c787b8c3f1ee24c427066f",
+      "validation_samples": 6019
+    },
+    {
+      "name": "kitti_legacy_b1",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b1_valid_only_seed0/kitti_bottleneck_b1.py",
+      "config_sha256": "996d694fea4f8e8f32baa30154aaa859a61c286142df701f0fc4d1ab9e6860ba",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b1_valid_only_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_28.pth",
+      "checkpoint_sha256": "079328b77d90380562d5d6d9f8c377ff05b3e4396552b6f574bb388f21694ce0",
+      "validation_samples": 3769
+    },
+    {
+      "name": "kitti_legacy_b2",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b2_valid_only_seed0/kitti_bottleneck_b2.py",
+      "config_sha256": "9e2c7ab652a4a81b4971a5dbf7b82596a141b1518dea3fdf68730a0ebf3b1648",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b2_valid_only_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_8.pth",
+      "checkpoint_sha256": "c66bc010da5f7461f63fb2e71a975340759ad616924d931daea11cb649fc9414",
+      "validation_samples": 3769
+    },
+    {
+      "name": "kitti_legacy_b4",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b4_valid_only_seed0/kitti_bottleneck_b4.py",
+      "config_sha256": "3d40db886ced6035a8be603a78fa91ff0a6a88670d745e71c6e8cbe418b11077",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b4_valid_only_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_28.pth",
+      "checkpoint_sha256": "3a0cb8660eb10e9d165ec0d6ee048d673d35b94dc8bf5de5bb4feea03700c80d",
+      "validation_samples": 3769
+    },
+    {
+      "name": "kitti_legacy_b8",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b8_valid_only_seed0/kitti_bottleneck_b8.py",
+      "config_sha256": "884b8be8ae6be98861b5fa5402bda648f4720e6a2c5fae5f53c0cd9010727761",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b8_valid_only_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_40.pth",
+      "checkpoint_sha256": "bb5f03ae88799680cc8ce761b3344f8caa07e37c6e1f782a4ec1013d313e8934",
+      "validation_samples": 3769
+    },
+    {
+      "name": "kitti_legacy_b16",
+      "dataset": "kitti",
+      "config": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b16_valid_only_seed0/kitti_bottleneck_b16.py",
+      "config_sha256": "cfbe845e34d1df9f6ea9b2dbf5bec67269d9962073d0caa6084d85a7a718d6ad",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_bottleneck_b16_valid_only_seed0/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+      "checkpoint_sha256": "5f3be2ff3107d0d4943cce5336427c2cda9fa3ee483b70ebc14d2ea41a6f9701",
+      "validation_samples": 3769
+    }
+  ],
+  "cases": {
+    "nuscenes_transfusion_swint_b8/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T18:33:55.632623-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/correct/attempt_01.log",
+      "evaluation_pid": 77099,
+      "process_group": 77099,
+      "completed_at": "2026-10-25T18:53:17.820158-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 64.79498294958124,
+        "NDS": 69.3897358537647
+      }
+    },
+    "nuscenes_transfusion_swint_b8/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T18:53:17.919955-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/black/attempt_01.log",
+      "evaluation_pid": 79624,
+      "process_group": 79624,
+      "completed_at": "2026-10-25T19:12:36.048951-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 61.84035000174353,
+        "NDS": 67.69330280397394
+      }
+    },
+    "nuscenes_transfusion_swint_b8/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:12:36.150471-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/shuffled/attempt_01.log",
+      "evaluation_pid": 82247,
+      "process_group": 82247,
+      "completed_at": "2026-10-25T19:31:56.623947-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 63.37317190448737,
+        "NDS": 68.66990360282317
+      }
+    },
+    "kitti_v2_b8/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:31:56.715970-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/correct/attempt_01.log",
+      "evaluation_pid": 84662,
+      "process_group": 84662,
+      "completed_at": "2026-10-25T19:33:22.890464-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 44.3949,
+        "BEV_AP40_moderate": 55.0548
+      }
+    },
+    "kitti_v2_b8/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:33:22.967493-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/black/attempt_01.log",
+      "evaluation_pid": 84903,
+      "process_group": 84903,
+      "completed_at": "2026-10-25T19:34:48.540860-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.7613,
+        "BEV_AP40_moderate": 53.3524
+      }
+    },
+    "kitti_v2_b8/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:34:48.615943-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b8/shuffled/attempt_01.log",
+      "evaluation_pid": 85148,
+      "process_group": 85148,
+      "completed_at": "2026-10-25T19:36:14.341762-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.5492,
+        "BEV_AP40_moderate": 52.3017
+      }
+    },
+    "kitti_v2_b16/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:36:14.440764-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/correct/attempt_01.log",
+      "evaluation_pid": 85398,
+      "process_group": 85398,
+      "completed_at": "2026-10-25T19:37:39.853100-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 43.2628,
+        "BEV_AP40_moderate": 54.2189
+      }
+    },
+    "kitti_v2_b16/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:37:39.928681-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/black/attempt_01.log",
+      "evaluation_pid": 85642,
+      "process_group": 85642,
+      "completed_at": "2026-10-25T19:39:04.767043-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.5871,
+        "BEV_AP40_moderate": 52.495
+      }
+    },
+    "kitti_v2_b16/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:39:04.842673-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_v2_b16/shuffled/attempt_01.log",
+      "evaluation_pid": 85885,
+      "process_group": 85885,
+      "completed_at": "2026-10-25T19:40:30.335615-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.057,
+        "BEV_AP40_moderate": 51.6586
+      }
+    },
+    "nuscenes_multiscale_b8/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:40:30.454898-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/correct/attempt_01.log",
+      "evaluation_pid": 86123,
+      "process_group": 86123,
+      "completed_at": "2026-10-25T19:57:23.692634-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 30.16645388254966,
+        "NDS": 46.21459790848797
+      }
+    },
+    "nuscenes_multiscale_b8/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T19:57:23.789030-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/black/attempt_01.log",
+      "evaluation_pid": 88268,
+      "process_group": 88268,
+      "completed_at": "2026-10-25T20:11:13.999044-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 20.053787275182216,
+        "NDS": 38.561943721262324
+      }
+    },
+    "nuscenes_multiscale_b8/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T20:11:14.095148-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_multiscale_b8/shuffled/attempt_01.log",
+      "evaluation_pid": 90241,
+      "process_group": 90241,
+      "completed_at": "2026-10-25T20:27:55.865826-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 22.54340096071334,
+        "NDS": 42.609542716463785
+      }
+    },
+    "nuscenes_original_b4/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T20:27:55.934164-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/correct/attempt_01.log",
+      "evaluation_pid": 92320,
+      "process_group": 92320,
+      "completed_at": "2026-10-25T20:42:10.251896-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 27.77973649390246,
+        "NDS": 45.29463811124986
+      }
+    },
+    "nuscenes_original_b4/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T20:42:10.315047-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/black/attempt_01.log",
+      "evaluation_pid": 94138,
+      "process_group": 94138,
+      "completed_at": "2026-10-25T20:55:17.079978-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 24.663652089348115,
+        "NDS": 44.053566772520156
+      }
+    },
+    "nuscenes_original_b4/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T20:55:17.156912-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_original_b4/shuffled/attempt_01.log",
+      "evaluation_pid": 95808,
+      "process_group": 95808,
+      "completed_at": "2026-10-25T21:09:43.150520-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "mAP": 25.589146440890737,
+        "NDS": 44.241995158942125
+      }
+    },
+    "kitti_legacy_b1/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:09:43.202056-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/correct/attempt_01.log",
+      "evaluation_pid": 97659,
+      "process_group": 97659,
+      "completed_at": "2026-10-25T21:11:01.524183-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.7868,
+        "BEV_AP40_moderate": 53.8465
+      }
+    },
+    "kitti_legacy_b1/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:11:01.565363-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/black/attempt_01.log",
+      "evaluation_pid": 98071,
+      "process_group": 98071,
+      "completed_at": "2026-10-25T21:12:19.050600-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.0223,
+        "BEV_AP40_moderate": 53.478
+      }
+    },
+    "kitti_legacy_b1/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:12:19.091831-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b1/shuffled/attempt_01.log",
+      "evaluation_pid": 98313,
+      "process_group": 98313,
+      "completed_at": "2026-10-25T21:13:36.132231-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.7732,
+        "BEV_AP40_moderate": 53.5323
+      }
+    },
+    "kitti_legacy_b2/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:13:36.179672-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/correct/attempt_01.log",
+      "evaluation_pid": 98527,
+      "process_group": 98527,
+      "completed_at": "2026-10-25T21:14:54.233631-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 43.0612,
+        "BEV_AP40_moderate": 54.8251
+      }
+    },
+    "kitti_legacy_b2/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:14:54.274675-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/black/attempt_01.log",
+      "evaluation_pid": 98735,
+      "process_group": 98735,
+      "completed_at": "2026-10-25T21:16:12.502506-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.808,
+        "BEV_AP40_moderate": 54.9611
+      }
+    },
+    "kitti_legacy_b2/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:16:12.541366-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b2/shuffled/attempt_01.log",
+      "evaluation_pid": 98984,
+      "process_group": 98984,
+      "completed_at": "2026-10-25T21:17:30.303444-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.7756,
+        "BEV_AP40_moderate": 54.7275
+      }
+    },
+    "kitti_legacy_b4/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:17:30.352296-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/correct/attempt_01.log",
+      "evaluation_pid": 99201,
+      "process_group": 99201,
+      "completed_at": "2026-10-25T21:18:48.153282-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.6099,
+        "BEV_AP40_moderate": 53.9047
+      }
+    },
+    "kitti_legacy_b4/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:18:48.194563-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/black/attempt_01.log",
+      "evaluation_pid": 99424,
+      "process_group": 99424,
+      "completed_at": "2026-10-25T21:20:05.830517-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.8772,
+        "BEV_AP40_moderate": 53.6188
+      }
+    },
+    "kitti_legacy_b4/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:20:05.871756-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b4/shuffled/attempt_01.log",
+      "evaluation_pid": 99651,
+      "process_group": 99651,
+      "completed_at": "2026-10-25T21:21:23.512850-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.9688,
+        "BEV_AP40_moderate": 53.3515
+      }
+    },
+    "kitti_legacy_b8/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:21:23.561973-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/correct/attempt_01.log",
+      "evaluation_pid": 99878,
+      "process_group": 99878,
+      "completed_at": "2026-10-25T21:22:41.107438-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 43.2288,
+        "BEV_AP40_moderate": 54.0672
+      }
+    },
+    "kitti_legacy_b8/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:22:41.151129-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/black/attempt_01.log",
+      "evaluation_pid": 100092,
+      "process_group": 100092,
+      "completed_at": "2026-10-25T21:23:58.700554-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.2687,
+        "BEV_AP40_moderate": 53.3367
+      }
+    },
+    "kitti_legacy_b8/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:23:58.745540-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b8/shuffled/attempt_01.log",
+      "evaluation_pid": 100322,
+      "process_group": 100322,
+      "completed_at": "2026-10-25T21:25:16.013302-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 41.7044,
+        "BEV_AP40_moderate": 53.6384
+      }
+    },
+    "kitti_legacy_b16/correct": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:25:16.061975-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/correct/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/correct/attempt_01.log",
+      "evaluation_pid": 100551,
+      "process_group": 100551,
+      "completed_at": "2026-10-25T21:26:33.930899-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 43.0773,
+        "BEV_AP40_moderate": 55.5481
+      }
+    },
+    "kitti_legacy_b16/black": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:26:33.972294-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/black/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/black/attempt_01.log",
+      "evaluation_pid": 100771,
+      "process_group": 100771,
+      "completed_at": "2026-10-25T21:27:51.855256-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 43.1063,
+        "BEV_AP40_moderate": 55.4231
+      }
+    },
+    "kitti_legacy_b16/shuffled": {
+      "status": "passed",
+      "attempt": 1,
+      "started_at": "2026-10-25T21:27:51.895287-07:00",
+      "report": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/shuffled/attempt_01/metrics.json",
+      "log": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/kitti_legacy_b16/shuffled/attempt_01.log",
+      "evaluation_pid": 100995,
+      "process_group": 100995,
+      "completed_at": "2026-10-25T21:29:09.636328-07:00",
+      "returncode": 0,
+      "metrics_percentage_points": {
+        "3D_AP40_moderate": 42.5736,
+        "BEV_AP40_moderate": 55.0755
+      }
+    }
+  },
+  "total_cases": 30,
+  "active_case": null,
+  "queue_pid": 77094,
+  "inference_only": true,
+  "shuffle_seed": 0,
+  "completed_at": "2026-10-25T21:29:09.638693-07:00"
+}

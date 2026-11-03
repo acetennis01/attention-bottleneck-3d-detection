@@ -53,7 +53,7 @@ standard MMDetection3D PointPillars checkpoint prefixes:
 | `pts_neck` | `neck` |
 | `pts_bbox_head` | `bbox_head` |
 
-This mapping transfers the PillarFeatureNet, BEV scatter, SECOND backbone,
+This mapping transfers the HardVFE pillar encoder, BEV scatter, SECOND backbone,
 SECONDFPN neck, and detection-head weights. The ResNet-18 camera backbone is
 initialized from ImageNet, while the camera-to-BEV alignment and
 attention-bottleneck fusion parameters are newly initialized.

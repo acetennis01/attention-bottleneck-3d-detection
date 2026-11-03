@@ -5,7 +5,12 @@ replacements for the historical KITTI or nuScenes implementations. The existing
 full nuScenes dataset and LiDAR baseline checkpoint are reused; no conversion
 or download is required on Haddr's PC.
 
-**Current next experiment (2026-10-21):** use the separate
+**Current status:** the fresh multi-scale and TransFusion-L/Swin runs are
+complete. See [final verified results](../results/README.md). This document
+retains the older single-scale pilots and their diagnosis; it is not a claim
+that they are the selected final models.
+
+**Historical next experiment (2026-10-21):** use the separate
 [fresh multi-scale recipe](NUSCENES_MULTISCALE_FRESH.md). The completed
 [controlled continuation study](NUSCENES_CONTROLLED_RETRAINING.md) found
 multi-scale readout best at 28.4913 mAP / 45.7456 NDS after 1,000 updates.

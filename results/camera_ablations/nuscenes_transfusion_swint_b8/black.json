@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "mode": "black",
+  "source_config": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/transfusion_l_mbt_swint_nuscenes.py",
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+  "checkpoint_sha256": "e87fb58195ed7ef692eb9b3f6193727a6c811de73c3125bd03c0ffe5bca8156e",
+  "optimizer_updates": 0,
+  "annotation_sha256": "bd3a18bc8659ac8b0f6a400d342654352dce62d9083e0e26404c1d91cf5f0016",
+  "strict_checkpoint_load_passed": true,
+  "validation_samples": 6019,
+  "input_preflight": {
+    "actual_black_pixels_zero": true,
+    "six_shuffled_paths_changed": true,
+    "same_lidar_and_calibration": true,
+    "shuffle_seed": 0
+  },
+  "metrics": {
+    "mAP": 0.6184035000174353,
+    "NDS": 0.6769330280397393
+  },
+  "metrics_summary": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/black/attempt_01/results/pred_instances_3d/metrics_summary.json",
+  "predictions": "/home/yab/mmdetection3d/work_dirs/camera_ablations_kitti_nuscenes_20261025/nuscenes_transfusion_swint_b8/black/attempt_01/results/pred_instances_3d/results_nusc.json",
+  "fusion_eval_batches_checked": 6019,
+  "elapsed_seconds": 1151.8537517959994
+}

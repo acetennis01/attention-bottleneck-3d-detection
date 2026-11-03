@@ -1,6 +1,10 @@
 # Pretrained TransFusion-L + attention bottlenecks
 
-Branch: `codex/transfusion-l-mbt`. This is a separate experiment; no historical
+Available on `main` (historical branch: `codex/transfusion-l-mbt`). The Swin
+variant completed full training and camera ablations; see
+[final scores](../results/README.md). Setup/gating notes below are historical.
+
+This is a separate experiment; no historical
 KITTI, PointPillars, or multi-scale MBT implementation is replaced.
 
 ## Starting point
