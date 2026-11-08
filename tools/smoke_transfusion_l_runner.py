@@ -71,6 +71,8 @@ def smoke_config(base, work_dir, maximum):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--work-dir', required=True)
+    parser.add_argument('--config', default=(
+        'projects/myfusion/configs/transfusion_l_mbt_swint_nuscenes.py'))
     args = parser.parse_args()
     root = Path(args.work_dir).resolve()
     if root.exists() and any(root.iterdir()):
@@ -83,7 +85,7 @@ def main():
     try:
         torch.set_num_threads(4)
         register_all_modules(init_default_scope=True)
-        base = Config.fromfile('projects/myfusion/configs/transfusion_l_mbt_swint_nuscenes.py')
+        base = Config.fromfile(args.config)
         first_cfg = smoke_config(base, root / 'cold', 8)
         first = Runner.from_cfg(first_cfg)
         first.train()

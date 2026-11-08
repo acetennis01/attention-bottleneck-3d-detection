@@ -152,8 +152,8 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
 
         bottlenecks = self.bottleneck_tokens.expand(batch_size, -1, -1)
         image_attention_layers, lidar_attention_layers = [], []
-        for image_block, lidar_block in zip(
-                self.image_blocks, self.lidar_blocks):
+        for layer_index, (image_block, lidar_block) in enumerate(zip(
+                self.image_blocks, self.lidar_blocks)):
             image_length, lidar_length = (
                 image_tokens.shape[1], lidar_tokens.shape[1])
             # Both branches must read the SAME pre-layer shared state.
@@ -172,9 +172,9 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
                     lidar_attention[:, :, lidar_length:, :lidar_length].detach())
             image_tokens = image_updated[:, :image_length]
             lidar_tokens = lidar_updated[:, :lidar_length]
-            bottlenecks = 0.5 * (
-                image_updated[:, image_length:] +
-                lidar_updated[:, lidar_length:])
+            bottlenecks = self._combine_bottlenecks(
+                image_updated[:, image_length:],
+                lidar_updated[:, lidar_length:], layer_index)
 
         image_tokens = self.image_norm(image_tokens)
         lidar_tokens = self.lidar_norm(lidar_tokens)
@@ -222,3 +222,9 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
                 lidar_readout=readout_attention.detach(),
                 **{sampling_attention_key: sampling_weights.detach()})
         return output
+
+    def _combine_bottlenecks(
+        self, image: Tensor, lidar: Tensor, layer_index: int,
+    ) -> Tensor:
+        """Historical arithmetic; new exchange rules opt in by subclassing."""
+        return 0.5 * (image + lidar)

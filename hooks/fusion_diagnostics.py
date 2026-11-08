@@ -97,9 +97,11 @@ class FusionDiagnosticsHook(Hook):
             'fusion/bev_delta_ratio': delta_rms / max(lidar_rms, 1e-12),
             'fusion/image_token_rms': rms(output['image_tokens']),
             'fusion/lidar_token_rms': rms(output['lidar_tokens']),
-            'fusion/bottleneck_token_rms': rms(
-                output['bottleneck_tokens']),
         }
+        for key, label in (('bottleneck_tokens', 'bottleneck_token_rms'),
+                           ('fusion_context_tokens', 'full_context_token_rms')):
+            if key in output:
+                self._feature_stats['fusion/' + label] = rms(output[key])
         if 'image_valid_ratio' in output:
             self._feature_stats['fusion/image_valid_ratio'] = float(
                 output['image_valid_ratio'].detach())

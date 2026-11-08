@@ -38,9 +38,14 @@ def component(name):
 class Checks(Hook):
     priority = 'LOW'
 
-    def __init__(self, report, baseline, expect_masking=True):
+    def __init__(self, report, baseline, expect_masking=True,
+                 required_gradient_groups=None):
         self.report, self.baseline = report, baseline
         self.expect_masking = bool(expect_masking)
+        self.required_gradient_groups = (
+            ('image_backbone', 'image_neck', 'bottleneck', 'camera_aux',
+             'bev_residual') if required_gradient_groups is None
+            else tuple(required_gradient_groups))
         self.handles, self.losses, self.keep_ratios = [], [], []
         self.grad_max, self.valid_ratios = {}, []
 
@@ -94,8 +99,7 @@ class Checks(Hook):
                     self.start[name], parameter.detach().cpu()):
                 group = component(name)
                 changed[group] = changed.get(group, 0) + 1
-        for group in ('image_backbone', 'image_neck', 'bottleneck',
-                      'camera_aux', 'bev_residual'):
+        for group in self.required_gradient_groups:
             assert self.grad_max.get(group, 0) > 0, f'No {group} gradient'
             assert changed.get(group, 0) > 0, f'No {group} update'
         assert min(self.valid_ratios) > 0
