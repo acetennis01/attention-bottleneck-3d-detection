@@ -56,6 +56,15 @@ def test_common_parameters_start_identically_to_b8(fusion_class):
     assert removed and all(name.startswith('bottleneck') for name in removed)
 
 
+def test_reset_after_construction_does_not_reference_deleted_bottlenecks(fusion_class):
+    model = build(fusion_class).eval()
+    nn.init.normal_(model.bev_residual.weight, std=.02)
+    model.reset_parameters()
+    assert not any('bottleneck' in name for name in model.state_dict())
+    image, lidar, meta = inputs()
+    assert torch.equal(model(image, lidar, **meta)['bev_features'], lidar)
+
+
 def test_full_spatial_attention_shapes_and_capture_equivalence(fusion_class):
     model = build(fusion_class).eval()
     nn.init.normal_(model.bev_residual.weight, std=.02)

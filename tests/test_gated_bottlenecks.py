@@ -188,3 +188,44 @@ def test_six_view_all_drop_training_and_clean_eval(multiview_class, drop):
     assert not out['image_valid_mask'].any()
     model.eval()
     assert model(image, lidar, **meta)['camera_view_available'].all()
+
+
+def test_gate_weights_camera_for_positive_logit(fusion_class):
+    model = build(fusion_class).eval()
+    camera, lidar = torch.randn(2, 4, 16), torch.randn(2, 4, 16)
+    with torch.no_grad():
+        model.bottleneck_gates[0].bias.fill_(50)
+    torch.testing.assert_close(model._combine_bottlenecks(camera, lidar, 0),
+                               camera)
+    with torch.no_grad():
+        model.bottleneck_gates[0].bias.fill_(-50)
+    torch.testing.assert_close(model._combine_bottlenecks(camera, lidar, 0),
+                               lidar)
+
+
+def test_dropped_view_values_cannot_affect_kept_output(multiview_class):
+    torch.manual_seed(41)
+    model = build(multiview_class).eval()
+    nn.init.normal_(model.bev_residual.weight, std=.02)
+    image, lidar, meta = multi_inputs()
+    views = torch.ones(2, 6, dtype=torch.bool)
+    views[:, 0] = False
+    first = model(image, lidar, camera_available=views, **meta)
+    changed = image.clone()
+    changed[:, 0] = float('nan')
+    second = model(changed, lidar, camera_available=views, **meta)
+    torch.testing.assert_close(first['bev_features'], second['bev_features'],
+                               rtol=0, atol=0)
+    assert torch.isfinite(second['bev_features']).all()
+
+
+def test_whole_camera_drop_provides_no_detection_gradient(multiview_class):
+    model = build(multiview_class, camera_drop_prob=1).train()
+    nn.init.normal_(model.bev_residual.weight, std=.02)
+    image, lidar, meta = multi_inputs()
+    out = model(image, lidar, **meta)
+    out['bev_features'].square().mean().backward()
+    # Explicit fallback skips the learned correction; this is intended, not
+    # evidence that missing examples teach the gate to recognize corruption.
+    for parameter in model.parameters():
+        assert parameter.grad is None or not parameter.grad.any()

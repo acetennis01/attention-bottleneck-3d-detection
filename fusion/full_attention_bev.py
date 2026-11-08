@@ -64,6 +64,24 @@ class FullAttentionBEVFusion(GatedCameraMBTBEVFusion):
         del self.num_bottleneck_tokens
         del self.use_bottleneck_gate
 
+    def reset_parameters(self):
+        """Reset the common embeddings/head/adapter without deleted latents.
+
+        The base constructor calls this before the full-attention conversion;
+        retain its exact initialization and RNG consumption at that stage.
+        Later explicit resets must not access removed bottleneck parameters.
+        Like the parent method, this does not reset every transformer weight.
+        """
+        if hasattr(self, 'bottleneck_tokens'):
+            return super().reset_parameters()
+        for name in ('image_position', 'lidar_position', 'image_modality',
+                     'lidar_modality', 'aligned_bev_position'):
+            nn.init.trunc_normal_(getattr(self, name), std=.02)
+        nn.init.normal_(self.camera_aux_head.weight, std=.01)
+        nn.init.constant_(self.camera_aux_head.bias, -4.595)
+        nn.init.zeros_(self.bev_residual.weight)
+        nn.init.zeros_(self.bev_residual.bias)
+
     def _fuse_aligned_features(
             self, lidar_features, aligned, image_valid_mask, sampling_weights,
             return_attention=False, sampling_attention_key='image_height_weights'):
