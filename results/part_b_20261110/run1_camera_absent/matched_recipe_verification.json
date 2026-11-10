@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+  "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+  "changed_fields": [
+    "camera always absent",
+    "residual kept trainable instead of bypassed",
+    "output paths"
+  ],
+  "max_epochs": 40,
+  "seed": 0,
+  "physical_batch": 6,
+  "accumulation": 8,
+  "same_initializer": true,
+  "same_architecture": true,
+  "same_optimizer": true,
+  "same_scheduler": true,
+  "same_data": true,
+  "same_freeze": true,
+  "same_selection_rule": true,
+  "limitations": "Absence removes camera auxiliary targets; retained residual receives detection gradients on all examples rather than bypassing dropped examples. This is an extra-capacity control, not perfect causal isolation."
+}

@@ -1,0 +1,64 @@
+{
+  "bundle_date": "2026-11-10",
+  "audited_at": "2026-11-10T12:54:36.756183-08:00",
+  "source_root": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_absent_full_20261109",
+  "original_results_and_november_9_bundle_unchanged": true,
+  "weights_included": false,
+  "datasets_included": false,
+  "raw_predictions_included": false,
+  "notes": "Run 1 completed its full budget and all 20 scheduled validations. Selected checkpoint independently checked against all 126 protected baseline tensors. Includes original local pre-resume config and effective remote resumed config; remote MMEngine re-dumped the latter under the original filename. Launch/recovery/audit scripts are dated host-specific provenance, not portable commands.",
+  "files": {
+    "README.md": {
+      "sha256": "45ff8f5521e6356d42635db754f88f7a368f1d7b85bb6068561892b76e977132",
+      "bytes": 4355
+    },
+    "kitti_comparison.json": {
+      "sha256": "ac0be352ae0683f9f1924b45747935c11e63376e64db327a8bf03455f29498ef",
+      "bytes": 1823
+    },
+    "run1_camera_absent/audit_completed_run.py": {
+      "sha256": "d3dc3d9e49c456e9defc2fede790d8fe869ed4c5690a7a4fe990351cbff8f520",
+      "bytes": 5225
+    },
+    "run1_camera_absent/initial_config.py": {
+      "sha256": "552caff03b7285137ef7fa0a48f5d2609bda7fde48c189ebe6f7ecfc3fb104f0",
+      "bytes": 17588
+    },
+    "run1_camera_absent/launch_run1.py": {
+      "sha256": "06f739d3b6622b2514edf2109fbf4cb482456a8ae063c6ad754ca0f6e03c259e",
+      "bytes": 7777
+    },
+    "run1_camera_absent/matched_recipe_verification.json": {
+      "sha256": "7e7a3ab02309e97a132dcb33f39becd77e5215dbb9922316a0ad633fb030e591",
+      "bytes": 855
+    },
+    "run1_camera_absent/resume_report.json": {
+      "sha256": "76e950f54248c8678d2288349735239fa47d41d4fdc1ffb5de21d1b2b1ea1abe",
+      "bytes": 932
+    },
+    "run1_camera_absent/resume_run1.py": {
+      "sha256": "e4881bcc036529da2863b4b0cfd4b6a9f0825d3e995a1b07367ebaa4694c6435",
+      "bytes": 6611
+    },
+    "run1_camera_absent/resumed_config.py": {
+      "sha256": "5010a59083a98ecb7b2fa9370015fa7828a0cbc16dd5fdd3583d744be0625efc",
+      "bytes": 17524
+    },
+    "run1_camera_absent/selected_validation_record.txt": {
+      "sha256": "a05048ecfbaa9b214ea7000d7f4a34ab810e7b3234bde66a0371ef00f471acae",
+      "bytes": 9541
+    },
+    "run1_camera_absent/summary.json": {
+      "sha256": "93ea89b7f7d3bbb050802103ef1a4f601bdfbd9ad49a7330dc47551184f8b348",
+      "bytes": 3173
+    },
+    "run1_camera_absent/training_progress.json": {
+      "sha256": "2cd4746c080ba899c6ed6312aeddfc3960b0937848f95d2ab32a3e39399697f7",
+      "bytes": 1288
+    },
+    "run1_camera_absent/validation_history.json": {
+      "sha256": "f95bd8a3ef0f5d6051a63fa5e7fbfa1d308609ec5541b515c53d7bc545598d19",
+      "bytes": 1837
+    }
+  }
+}

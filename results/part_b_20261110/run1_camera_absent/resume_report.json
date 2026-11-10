@@ -1,0 +1,21 @@
+{
+  "status": "complete",
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_absent_full_20261109/epoch_12.pth",
+  "resumed_at": "2026-11-10T09:04:44.754541-08:00",
+  "restored_completed_epochs": 12,
+  "restored_microbatches": 14856,
+  "restored_optimizer_updates": 1857,
+  "next_validation_epoch": 14,
+  "epoch_12_validation_already_complete": true,
+  "random_state_note": "Original seed and epoch sampler restored; bitwise dropout/point-shuffle RNG continuity is not claimed.",
+  "checkpoint_sha256": "576f5091ed95949890bc0e1ea111f7ed80523518961b8e207c90d7f3a5d6e66e",
+  "exact_model_optimizer_scheduler_restore": true,
+  "protected_lidar_tensors_unchanged": 126,
+  "accumulation_boundary_verified": true,
+  "optimizer_state_entries": 184,
+  "completed_microbatches": 49520,
+  "optimizer_updates": 6190,
+  "active_epoch": 40,
+  "checked_absence_batches": 83641,
+  "completed_at": "2026-11-10T10:54:40.659800-08:00"
+}

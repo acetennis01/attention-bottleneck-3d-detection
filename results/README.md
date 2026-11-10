@@ -5,6 +5,16 @@ KITTI overall AP40 averages Car, Pedestrian and Cyclist. nuScenes mAP/NDS in
 the tables below are percentages; official devkit JSON files retain unit scale.
 Use one selected checkpoint for all metrics of a model, not separate metric maxima.
 
+## November 10 follow-up
+
+[Completed Run 1 and combined comparison](part_b_20261110/README.md) add the
+full-budget camera-absent KITTI capacity control: 40.3501 / 52.0620 moderate
+3D/BEV AP40. The full-camera gated model improves by +1.6989 / +2.6322 AP points.
+The [four-run claim review](../docs/PART_B_CLAIM_REVIEW_20261110.md) distinguishes
+the measured accuracy gains and explicit missing-camera fallback from the
+unsupported claim of never underperforming LiDAR under arbitrary corruption.
+The new bundle preserves the earlier bundles and includes its own hashes.
+
 ## November 9 follow-up
 
 [Part B results](part_b_20261109/README.md) add a completed matched 40-epoch

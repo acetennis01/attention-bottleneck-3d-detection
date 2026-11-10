@@ -1,0 +1,54 @@
+{
+  "dataset": "KITTI validation, all 3769 frames",
+  "metric": "Overall moderate AP40, mean across Car/Pedestrian/Cyclist",
+  "selection": "best moderate 3D AP40; BEV at the same selected checkpoint",
+  "models": [
+    {
+      "name": "lidar_initializer",
+      "selected_metrics": {
+        "epoch": 28,
+        "moderate_3d_ap40": 38.6872,
+        "moderate_bev_ap40": 52.8851
+      },
+      "evidence": "../README.md"
+    },
+    {
+      "name": "camera_absent_control",
+      "selected_metrics": {
+        "epoch": 14,
+        "moderate_3d_ap40": 40.3501,
+        "moderate_bev_ap40": 52.062
+      },
+      "evidence": "run1_camera_absent/summary.json"
+    },
+    {
+      "name": "full_attention",
+      "selected_metrics": {
+        "epoch": 16,
+        "moderate_3d_ap40": 40.3272,
+        "moderate_bev_ap40": 53.5769
+      },
+      "checkpoint_sha256": "ed20e87154879cd5ac10683437becf5f03f589897c9a3c80ff4cd46704c87dcd",
+      "evidence": "../part_b_20261109/kitti/comparison.json"
+    },
+    {
+      "name": "gated_b8",
+      "selected_metrics": {
+        "epoch": 18,
+        "moderate_3d_ap40": 42.049,
+        "moderate_bev_ap40": 54.6942
+      },
+      "checkpoint_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+      "evidence": "../part_b_20261109/kitti/comparison.json"
+    }
+  ],
+  "gated_minus_camera_absent_pp": {
+    "moderate_3d_ap40": 1.6989000000000019,
+    "moderate_bev_ap40": 2.6322000000000045
+  },
+  "gated_minus_full_attention_pp": {
+    "moderate_3d_ap40": 1.7218000000000018,
+    "moderate_bev_ap40": 1.1173000000000002
+  },
+  "caveat": "Single seed, interrupted training; no bitwise RNG-continuity claim. Missing camera supervision and retained residual gradient routing differ from the full-camera arm. Extra-capacity control, not perfect causal isolation."
+}

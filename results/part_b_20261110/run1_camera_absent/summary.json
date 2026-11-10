@@ -1,0 +1,53 @@
+{
+  "status": "complete",
+  "dataset": "KITTI validation, all 3769 frames",
+  "metric": "Overall moderate AP40, mean across Car/Pedestrian/Cyclist",
+  "selection": "best moderate 3D AP40; BEV at the same selected checkpoint",
+  "selected_checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_absent_full_20261109/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+  "checkpoint_sha256": "28a898dc3268ad86f7ab0833d1be10f627f7d64501d3b1db6d3909df163ffe91",
+  "resumed_config_sha256": "5010a59083a98ecb7b2fa9370015fa7828a0cbc16dd5fdd3583d744be0625efc",
+  "baseline_sha256": "296b97413d3f6813f6c75cb481a575ad10e9d1bee7126c8b2c7da41abd6d0d5b",
+  "selected_metrics": {
+    "epoch": 14,
+    "moderate_3d_ap40": 40.3501,
+    "moderate_bev_ap40": 52.062
+  },
+  "protected_lidar_tensors_exactly_verified": 126,
+  "resolved_recipe_comparison_rechecked": true,
+  "config_record_note": "MMEngine rewrote absent_resolved_config.py with resume=True and epoch_12 load_from during recovery. This effective config is exported as resumed_config.py; the original local pre-resume copy is exported separately as initial_config.py.",
+  "validation_log_sha256": {
+    "/home/yab/mmdetection3d/work_dirs/part_b_kitti_absent_full_20261109.log": "23288363b14f673379e58b5591d166a8a082c884d10452fd402d0c4ecd1384d2",
+    "/home/yab/mmdetection3d/work_dirs/part_b_run1_resume_20261110/training.log": "de3d9a2127e18c2dece27d0bf2942db55f67231f649715fee32dabab397981cd"
+  },
+  "completion": {
+    "status": "complete",
+    "started_at": "2026-11-09T23:55:52.386463-08:00",
+    "model": "GatedCameraMBTBEVFusion",
+    "max_epochs": 40,
+    "completed_epochs": 40,
+    "planned_microbatches": 49520,
+    "accumulation": 8,
+    "optimizer_updates": 6190,
+    "microbatches_per_epoch": 1238,
+    "protected_lidar_tensors": 126,
+    "lidar_initializer_loaded_exactly": true,
+    "lidar_and_head_unchanged": true,
+    "baseline_sha256": "296b97413d3f6813f6c75cb481a575ad10e9d1bee7126c8b2c7da41abd6d0d5b",
+    "preflight_report": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_kitti_preflight/report.json",
+    "fresh_optimizer": true,
+    "smoke_weights_used": false,
+    "control": "camera-always-absent, trainable residual, no valid camera auxiliary targets",
+    "active_epoch": 40,
+    "completed_microbatches": 49520,
+    "latest_loss": 0.06370100378990173,
+    "checked_absence_batches": 83641,
+    "resumed_from": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_absent_full_20261109/epoch_12.pth",
+    "resume_report": "/home/yab/mmdetection3d/work_dirs/part_b_run1_resume_20261110/resume_report.json",
+    "checked_absence_batches_before_interruption": 37714,
+    "absence_counter_scope": "current recovery process",
+    "exact_model_optimizer_scheduler_restore": true,
+    "completed_at": "2026-11-10T10:54:40.659549-08:00"
+  },
+  "caveat": "Single seed, interrupted training; no bitwise RNG-continuity claim. Missing camera supervision and retained residual gradient routing differ from the full-camera arm. Extra-capacity control, not perfect causal isolation.",
+  "initial_config_sha256": "552caff03b7285137ef7fa0a48f5d2609bda7fde48c189ebe6f7ecfc3fb104f0"
+}
