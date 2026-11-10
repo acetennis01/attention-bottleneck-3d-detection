@@ -2,6 +2,7 @@
 import importlib.util
 from pathlib import Path
 import pytest
+import torch
 
 spec = importlib.util.spec_from_file_location('_nusc_camera_case',
     Path(__file__).resolve().parents[1] / 'tools/evaluate_nuscenes_camera_case.py')
@@ -17,7 +18,7 @@ def pipeline():
             dict(type='Pack3DDetInputs', keys=['img', 'points'])]
 
 
-@pytest.mark.parametrize('mode', ['correct', 'black', 'shuffled'])
+@pytest.mark.parametrize('mode', ['correct', 'black', 'shuffled', 'missing'])
 def test_preserves_every_non_camera_step(mode):
     source = pipeline()
     actual = module.camera_pipeline(source, mode, 'infos.pkl', seed=7)
@@ -40,7 +41,7 @@ def test_rejects_double_corruption():
         module.camera_pipeline(source, 'correct', 'infos.pkl')
 
 
-@pytest.mark.parametrize('mode', ['correct', 'black', 'shuffled'])
+@pytest.mark.parametrize('mode', ['correct', 'black', 'shuffled', 'missing'])
 def test_requires_camera_loader(mode):
     with pytest.raises(ValueError):
         module.camera_pipeline([dict(type='LoadPointsFromFile')], mode, 'infos.pkl')
@@ -48,4 +49,33 @@ def test_requires_camera_loader(mode):
 
 def test_rejects_unknown_mode():
     with pytest.raises(ValueError):
-        module.camera_pipeline(pipeline(), 'missing', 'infos.pkl')
+        module.camera_pipeline(pipeline(), 'unknown', 'infos.pkl')
+
+
+def test_missing_requires_explicit_fallback_without_pixel_corruption():
+    fusion = dict(camera_mode='present', bypass_missing=True)
+    module.configure_availability(fusion, 'missing')
+    assert fusion['camera_mode'] == 'missing'
+    assert module.camera_pipeline(pipeline(), 'missing', 'infos.pkl') == pipeline()
+    for invalid in ({}, dict(camera_mode='present', bypass_missing=False),
+                    dict(camera_mode='missing', bypass_missing=True)):
+        with pytest.raises(ValueError):
+            module.configure_availability(invalid, 'missing')
+
+
+@pytest.mark.parametrize('mode', ['correct', 'black', 'shuffled'])
+def test_corruption_does_not_enable_fallback(mode):
+    fusion = dict(camera_mode='present', bypass_missing=True)
+    module.configure_availability(fusion, mode)
+    assert fusion['camera_mode'] == 'present'
+    with pytest.raises(RuntimeError):
+        module.check_availability(mode, (), dict(camera_available=torch.tensor([False])))
+
+
+def test_missing_checks_every_batch_for_exact_feature_identity():
+    lidar = torch.randn(1, 8, 3, 4)
+    result = dict(camera_available=torch.tensor([False]), bev_features=lidar.clone())
+    module.check_availability('missing', (None, lidar), result)
+    result['bev_features'] = lidar + .01
+    with pytest.raises(RuntimeError):
+        module.check_availability('missing', (None, lidar), result)

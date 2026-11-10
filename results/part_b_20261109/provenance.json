@@ -1,0 +1,267 @@
+{
+  "bundle_date": "2026-11-09",
+  "exported_at": "2026-11-09T23:46:13.422404-08:00",
+  "original_results_provenance_unchanged": true,
+  "weights_included": false,
+  "datasets_included": false,
+  "raw_predictions_included": false,
+  "source_roots": {
+    "nuscenes_training": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full",
+    "nuscenes_camera_evaluation": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109",
+    "kitti_full_attention": "/home/yab/mmdetection3d/work_dirs/part_b_run4_full_attention_20261109",
+    "kitti_gated": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109",
+    "kitti_comparison": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_matched_comparison_20261109"
+  },
+  "record_notes": "Selected validation text files preserve exact metric log lines. KITTI comparison/history is derived from those MMEngine validation logs; checkpoint hashes and frozen-state checks were verified on host. Camera export_manifest.json preserves its original inner-file hashes. Original files in the earlier results export were not modified.",
+  "validation": "All four full nuScenes cases passed; 15 protocol tests passed; both KITTI runs completed full budgets and selected checkpoints retained 126 baseline tensors.",
+  "files": {
+    "README.md": {
+      "sha256": "e443ed7277e253f7b3b366225e4b844948a297e233057646df40bcf5547c0718",
+      "bytes": 5058
+    },
+    "kitti/comparison.json": {
+      "sha256": "128809c4889b22cc4f2da92e1b7a50f2faded6f2389228c5925aa901d45a01a4",
+      "bytes": 9488
+    },
+    "kitti/full_attention_config.py": {
+      "sha256": "1289178789679fd642c09c1cede602d0a7c1ed7a0dc8022f6f9b7b5c3e4d18de",
+      "bytes": 18353
+    },
+    "kitti/full_attention_preflight.json": {
+      "sha256": "db4e3b086579d225009770812f69471586b43a6fa1dd3cd1d2eb3e6cea836cc6",
+      "bytes": 1719
+    },
+    "kitti/full_attention_selected_validation_record.txt": {
+      "sha256": "1f9d4bc6bc00e49662eea0c265975d2e337914a1e15fea31ca5bb08047c22502",
+      "bytes": 9541
+    },
+    "kitti/full_attention_training_progress.json": {
+      "sha256": "58e278f84821fcb542e38f5c4b5dad1005181b7f0fcc62970b1f44ca5eb1bc7b",
+      "bytes": 790
+    },
+    "kitti/gated_b8_config.py": {
+      "sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "bytes": 17584
+    },
+    "kitti/gated_b8_selected_validation_record.txt": {
+      "sha256": "f3f275d829a8df7466d2f862b42303c1071f52f8b91ff99d6a7197efd3147fe3",
+      "bytes": 9541
+    },
+    "kitti/gated_preflight.json": {
+      "sha256": "10465acfa6c41011e8f2c9584310ff49a2bc4d9c926157cc8663ca8d9ff929b9",
+      "bytes": 1695
+    },
+    "kitti/gated_training_progress.json": {
+      "sha256": "256b7e9b3bebece415f7fe0140f1c9580a05c2c75b2fca5af9c0530707755458",
+      "bytes": 793
+    },
+    "kitti/matched_recipe_verification.json": {
+      "sha256": "707dbaf39997d2c518f45a747909f89bfe5398681c2309bbf6214aaa0ae45a5b",
+      "bytes": 597
+    },
+    "nuscenes/camera_ablations/black/metrics.json": {
+      "sha256": "b7ba54c698eaff009d46f1feceb95c3d3e73d53ff18d44207ff7d6630282c604",
+      "bytes": 1238
+    },
+    "nuscenes/camera_ablations/black/results/pred_instances_3d/metrics_summary.json": {
+      "sha256": "647ffb596e333505f1bb810b8d7b4ac6d9564c67758b4c9346fb9679836a3d4b",
+      "bytes": 5201
+    },
+    "nuscenes/camera_ablations/comparison.json": {
+      "sha256": "62a1a9e6e144672d4df751ac34d306823087398fbbf7fafd4c248d9f638f5d3e",
+      "bytes": 3382
+    },
+    "nuscenes/camera_ablations/correct/metrics.json": {
+      "sha256": "c636a849eb494d4759efcda342a306c333d1418a489c995098308ac8dff4cf12",
+      "bytes": 1247
+    },
+    "nuscenes/camera_ablations/correct/results/pred_instances_3d/metrics_summary.json": {
+      "sha256": "eac6506321b9c4b509f7a42f7aa991745f59410f24a2556d64c87a6065f7ae9d",
+      "bytes": 5204
+    },
+    "nuscenes/camera_ablations/export_manifest.json": {
+      "sha256": "d546f2e008dda479b59de9764fbd246d2c14ff4dd06559ad5a6f5b1685e72955",
+      "bytes": 3129
+    },
+    "nuscenes/camera_ablations/missing/metrics.json": {
+      "sha256": "e0211fdf4c0780887146943cc993ac82c9935da2e2208baeef8ec43289118018",
+      "bytes": 1295
+    },
+    "nuscenes/camera_ablations/missing/results/pred_instances_3d/metrics_summary.json": {
+      "sha256": "7a76fd6cbbc3f3eff59090e34cb9ebd3702d42220220ace449edfdbb66624a4e",
+      "bytes": 5198
+    },
+    "nuscenes/camera_ablations/protocol_tests.xml": {
+      "sha256": "3d272193fba2237606f7a278910bc71c9b59a7cb752570d053c7a45986749847",
+      "bytes": 3069
+    },
+    "nuscenes/camera_ablations/reference.json": {
+      "sha256": "d66d0a66e3769959aed72ca75774c68fc650e169ebb5e296fe015c32bb649e3f",
+      "bytes": 1380
+    },
+    "nuscenes/camera_ablations/run3_camera_eval_queue_20261109.py": {
+      "sha256": "4bbd39070b3db6988ac94cd007a0c7fe3a53fa198f5978c196dc96abf8abbd79",
+      "bytes": 5769
+    },
+    "nuscenes/camera_ablations/shuffled/metrics.json": {
+      "sha256": "ad519495d488dee5435b3000a4dd0a1dc5004e439e6f0a563fb0650dcabc57a5",
+      "bytes": 1251
+    },
+    "nuscenes/camera_ablations/shuffled/results/pred_instances_3d/metrics_summary.json": {
+      "sha256": "d91efabefb8a99bc18e5e38a3094777a1908b7571ddcd6e7ef02940018c72e0d",
+      "bytes": 5197
+    },
+    "nuscenes/camera_ablations/status.json": {
+      "sha256": "f638e872a08b53a0ec2b7d6c55830ec1f5890e596512b3f8fad4ec0abb474d7e",
+      "bytes": 2125
+    },
+    "nuscenes/final_resume_report.json": {
+      "sha256": "dfead1065e70af077fa1271865112e379097c18c210439e2fb44228c7e1db2cb",
+      "bytes": 677
+    },
+    "nuscenes/frozen_integrity.json": {
+      "sha256": "0d906ca1e67356dd23baffd277025868bbbb022537aa9f8048e7e90248c45935",
+      "bytes": 295
+    },
+    "nuscenes/selected_config.py": {
+      "sha256": "47000ad8bb2728a17b2f89a7fd8b66e94b99f5bb87aed8d678854807bd71d489",
+      "bytes": 29601
+    },
+    "nuscenes/training_progress.json": {
+      "sha256": "6475110d20d0ebf22c84dcda3293bb3bbfcd743aede19433b11eae6974c1d202",
+      "bytes": 812
+    },
+    "nuscenes/validation_history.json": {
+      "sha256": "d4e67bf9c6a7b5740a396a21227206079f125f22db8cf7d70288546220dc6d6e",
+      "bytes": 2235
+    },
+    "nuscenes/validations/002000_devkit.json": {
+      "sha256": "b50587c6745307d9682a5a5f2fffc8381a008066671a27b2aee3df5f3a0d2855",
+      "bytes": 5200
+    },
+    "nuscenes/validations/002000_runner.json": {
+      "sha256": "e8be7e3e81346811861a87437c61fe609bd2e46adcd7d9f3139a2ce578de7707",
+      "bytes": 7527
+    },
+    "nuscenes/validations/010000_devkit.json": {
+      "sha256": "50afdd3d1947998a25c85094cfe726de133b5bb4cf3c4f691275312c3116e72c",
+      "bytes": 5205
+    },
+    "nuscenes/validations/010000_runner.json": {
+      "sha256": "6e61ecf82dbec9890a14ffb3a5492b048e5fc977320462d0d95e31d9bbc6f5bb",
+      "bytes": 7526
+    },
+    "nuscenes/validations/020000_devkit.json": {
+      "sha256": "a0f619a1251eab89e44f3545bd96173e040d510d7bde7c571cc2ae7802a9a94c",
+      "bytes": 5204
+    },
+    "nuscenes/validations/020000_runner.json": {
+      "sha256": "f1311f82e0635e5a809571248aeec2fedccf06d75ee47449c2490bc3d9f3e367",
+      "bytes": 7517
+    },
+    "nuscenes/validations/030000_devkit.json": {
+      "sha256": "07d39f2537ab6c556d3bc79582dffb4bfe036578ca3800e143d143685d7b187d",
+      "bytes": 5206
+    },
+    "nuscenes/validations/030000_runner.json": {
+      "sha256": "db1185eaf935baea2e013a60db6cf0ce0067c4c91e13e57df37b2c6e2f28a0a1",
+      "bytes": 7518
+    },
+    "nuscenes/validations/040000_devkit.json": {
+      "sha256": "6f1f8f184b48d1129fad909ad1f989c43c97c46eb44153d789667ce40b258e99",
+      "bytes": 5190
+    },
+    "nuscenes/validations/040000_runner.json": {
+      "sha256": "41c7e8926a26d7142a7c3af265385aac61ff415cf6dc99a21d06f5d28cb5ffbb",
+      "bytes": 7527
+    },
+    "nuscenes/validations/050000_devkit.json": {
+      "sha256": "f01ea4f626f35dd18d1f41c2dabd19f81566b1637f0ee854c5ac8754f5ed7042",
+      "bytes": 5204
+    },
+    "nuscenes/validations/050000_runner.json": {
+      "sha256": "574ec63cd23404385dd6ffa25b8c099d3082e6feb3bbb2d395e5628a099b89c3",
+      "bytes": 7527
+    },
+    "nuscenes/validations/060000_devkit.json": {
+      "sha256": "b1e25609fd80322423664a968527d9d43598d0489ebc16a74f4592cd0abceb08",
+      "bytes": 5194
+    },
+    "nuscenes/validations/060000_runner.json": {
+      "sha256": "8a2bf0e9980452608cebab73e8798adb80746f8c7f801aede3e265f984871f81",
+      "bytes": 7522
+    },
+    "nuscenes/validations/070000_devkit.json": {
+      "sha256": "6914213cc1a0c38e70c8b3f713f0d449f614b4e98d4f3d71c5b8cd3ea419ff4d",
+      "bytes": 5194
+    },
+    "nuscenes/validations/070000_runner.json": {
+      "sha256": "823ccddefb69d7c3871c049968925968bbbeaf26f62d7486075b59bc192a2077",
+      "bytes": 7526
+    },
+    "nuscenes/validations/080000_devkit.json": {
+      "sha256": "eaca8dc4842e1e88088b20e476a0cefc0b3d33f9c7c9c3bc7df85eac6b72ca2f",
+      "bytes": 5203
+    },
+    "nuscenes/validations/080000_runner.json": {
+      "sha256": "6d7c029baa72f528c753891f406c86a2ab772d573d8c618db73917627271c01f",
+      "bytes": 7535
+    },
+    "nuscenes/validations/090000_devkit.json": {
+      "sha256": "ef7a39a46714175007115f96b0b6df966301c7e5c2fdd3943689bae999b0b3d6",
+      "bytes": 5204
+    },
+    "nuscenes/validations/090000_runner.json": {
+      "sha256": "15e538ca5d6ef313e188a4f4d09dad8973412db0edcd6f3667ccfe6c3553fbae",
+      "bytes": 7526
+    },
+    "nuscenes/validations/110000_devkit.json": {
+      "sha256": "1121b89bcfff0f7d4847ea5342f4b8cf1914b314e5ccce08755ab244145297e6",
+      "bytes": 5205
+    },
+    "nuscenes/validations/110000_runner.json": {
+      "sha256": "0714315ad4e846243988219641f89449b6f8e9d767251d8e45433b0ef073cb91",
+      "bytes": 7524
+    },
+    "nuscenes/validations/120000_devkit.json": {
+      "sha256": "5eb5ea18b61f01f34c72f1eb66a9d444cdf2bec7107c43e8fba50361f36a1d9a",
+      "bytes": 5207
+    },
+    "nuscenes/validations/120000_runner.json": {
+      "sha256": "31fb607b240c579d30836f1340bf05351089f12f4eab9b0a095ad0df4f2fa096",
+      "bytes": 7526
+    },
+    "nuscenes/validations/130000_devkit.json": {
+      "sha256": "672cd22c7a5f3c45b888a9ba489a1fb164b36e564044654445cc4f41a2067e14",
+      "bytes": 5197
+    },
+    "nuscenes/validations/130000_runner.json": {
+      "sha256": "1ed56861edb8973dc92dcde09965aaf1b8c4e484f4f1b116aac73963fdc6932d",
+      "bytes": 7529
+    },
+    "nuscenes/validations/140000_devkit.json": {
+      "sha256": "ac2dc869126b60e302db025a846ec6b24ef9bbcff06c6b2b79c41990428f8167",
+      "bytes": 5203
+    },
+    "nuscenes/validations/140000_runner.json": {
+      "sha256": "c90b29eed581274be59b1956db4242b5b01247a123b176fe633f632f60e32dfe",
+      "bytes": 7526
+    },
+    "nuscenes/validations/150000_devkit.json": {
+      "sha256": "a48a9d270372b04bc142669c3374d11ef620e4b1ca4a51245582114544f9bb5b",
+      "bytes": 5201
+    },
+    "nuscenes/validations/150000_runner.json": {
+      "sha256": "99826de99618daacb07669b1d7f1b25b521074ddd53101bbdef9390a34358b50",
+      "bytes": 7528
+    },
+    "nuscenes/validations/160000_devkit.json": {
+      "sha256": "08ab5e24152fb568b2de57db49d570d4bd70d4eb4cc4324a8d1decd121fa8620",
+      "bytes": 5201
+    },
+    "nuscenes/validations/160000_runner.json": {
+      "sha256": "e8d20c9c5f71711c2b83cb8cbb11b9412c684ab90357a410ec0d2596df73a3aa",
+      "bytes": 7528
+    }
+  }
+}

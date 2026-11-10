@@ -98,3 +98,38 @@ explicitly prepare the same two-epoch truncated schedule as the existing pilots.
 Do not load MBT weights non-strictly into this architecture. After training,
 evaluate correct/black/shuffled/explicit-missing conditions at the same selected
 checkpoint, then measure compute under matched conditions.
+
+## GPU preflight and training launch — 2026-11-09
+
+The real-KITTI preflight passed at physical batch six: 32 microbatches / four
+optimizer updates, exact LiDAR transfer and frozen-state integrity, finite
+gradients through camera/both attention branches/readout, strict reload, and
+explicit-missing feature identity/prediction checks. All LiDAR keep masks were
+one; no hard masking was enabled. Preflight weights were not used for training.
+Preflight report:
+`/home/yab/mmdetection3d/work_dirs/part_b_run4_preflight_20261109/report.json`.
+
+Fresh full training started at 16:03 Pacific on 2026-11-09 under managed user
+service `abfuse-run4-training-20261109.service`, with logout persistence already
+enabled. Source root is the reviewed/fixed snapshot
+`/home/yab/mmdetection3d/work_dirs/abfuse_review_20261107_run3_run4`.
+Production output:
+`/home/yab/mmdetection3d/work_dirs/part_b_run4_full_attention_20261109`.
+The resolved config, separate from the smoke config, is
+`run4_resolved_config.py`; progress/integrity is `run4_training_progress.json`.
+
+Budget: 40 epochs, 1238 microbatches per epoch, physical batch six/accumulation
+eight, 49520 microbatches / 6190 optimizer updates, seed zero. Same camera
+dropout, auxiliary objective and permanently frozen LiDAR/head as the Part B
+KITTI recipe. The launcher counts optimizer steps and checks all 126 protected
+KITTI LiDAR/head tensors and frozen normalization modes at epoch boundaries.
+It selects on clean overall moderate 3D AP40, not Car-only AP or corruption.
+
+Launch inspection reached epoch one, batch 400/1238, with 50 actual optimizer
+updates, finite losses, nonzero camera/attention gradients, and intact LiDAR
+masks. This is an execution-health snapshot, not a validation result.
+
+At launch, the gated KITTI comparator had only completed its two-epoch pilot.
+The full-budget comparator subsequently completed the same 40 epochs. See the
+[verified matched results](PART_B_KITTI_MATCHED_RESULTS_20261109.md) and
+[published records](../results/part_b_20261109/README.md).

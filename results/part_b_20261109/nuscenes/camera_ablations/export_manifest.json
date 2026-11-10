@@ -1,0 +1,37 @@
+{
+  "files": {
+    "status.json": "f638e872a08b53a0ec2b7d6c55830ec1f5890e596512b3f8fad4ec0abb474d7e",
+    "comparison.json": "62a1a9e6e144672d4df751ac34d306823087398fbbf7fafd4c248d9f638f5d3e",
+    "reference.json": "d66d0a66e3769959aed72ca75774c68fc650e169ebb5e296fe015c32bb649e3f",
+    "protocol_tests.xml": "3d272193fba2237606f7a278910bc71c9b59a7cb752570d053c7a45986749847",
+    "run3_camera_eval_queue_20261109.py": "4bbd39070b3db6988ac94cd007a0c7fe3a53fa198f5978c196dc96abf8abbd79",
+    "correct/metrics.json": "c636a849eb494d4759efcda342a306c333d1418a489c995098308ac8dff4cf12",
+    "correct/results/pred_instances_3d/metrics_summary.json": "eac6506321b9c4b509f7a42f7aa991745f59410f24a2556d64c87a6065f7ae9d",
+    "black/metrics.json": "b7ba54c698eaff009d46f1feceb95c3d3e73d53ff18d44207ff7d6630282c604",
+    "black/results/pred_instances_3d/metrics_summary.json": "647ffb596e333505f1bb810b8d7b4ac6d9564c67758b4c9346fb9679836a3d4b",
+    "shuffled/metrics.json": "ad519495d488dee5435b3000a4dd0a1dc5004e439e6f0a563fb0650dcabc57a5",
+    "shuffled/results/pred_instances_3d/metrics_summary.json": "d91efabefb8a99bc18e5e38a3094777a1908b7571ddcd6e7ef02940018c72e0d",
+    "missing/metrics.json": "e0211fdf4c0780887146943cc993ac82c9935da2e2208baeef8ec43289118018",
+    "missing/results/pred_instances_3d/metrics_summary.json": "7a76fd6cbbc3f3eff59090e34cb9ebd3702d42220220ace449edfdbb66624a4e"
+  },
+  "source_hashes": {
+    "fusion/mbt_bev_nuscenes_camera_v2.py": "cfc26b630a81c43349d925f745eaa1f77cc1233c7d706d7846e2afec0369dbe5",
+    "fusion/mbt_detector_nuscenes_camera_v2.py": "bc15923a484d872bcf6a82d013307ea3f651ec99ed2afc5ac91c0d67579c6ca5",
+    "fusion/mbt_bev_nuscenes.py": "cf98bfa8c9e0e1432cd563cc73e2e542035fb6021a3fe83391ca9b43adb1480e",
+    "fusion/__init__.py": "772ae902f06b784d76744305e41779473ee8713381f115db0aee649e98fc4f9e",
+    "fusion/mbt_bev_kitti_v1.py": "e733ac802e6174ef4b59def513f04f617ac8960c370ac090c4044c0dbe1b488e",
+    "fusion/mbt_bev_gated.py": "97376455a32e7da32373ee034d89d5b78ca51a3a16c0e365cc2479557b94bc3b",
+    "fusion/mbt_detector.py": "32eb9d5174199463557b81de0c95f1f1c6d4f7306fabd7154b98462848062f9d",
+    "fusion/mbt_bev_gated_nuscenes.py": "ec3318d95830a912c6f815d70efaaa3b59dab9e47a76821587323e38498d1300",
+    "fusion/mbt_nuscenes_multiscale.py": "109dffb93c5de499768aff4f0a13e2b8b535250b6979f1d9585c6bb8c5d9a9c3",
+    "fusion/mbt_detector_camera_v2.py": "63e06d79d5ed6116ee2c2563d002c007a6e351978447220c0a7a319d638ec08d",
+    "fusion/nuimages_swin.py": "463b2db01762fc80a311af9b160ccee775b8880b09a54d8ba6d555d77e36ec0b",
+    "fusion/transfusion_l_mbt.py": "6ca873e98063ad42ac1b63f53a8bf993a71501493037e1e4ba611df80e2506c8",
+    "fusion/mbt_detector_nuscenes.py": "d3dc4b4200f2d8aded697a6183953aa4ab272f09821c42f115f48672a2630808",
+    "fusion/mbt_bev_camera_v2.py": "db64c547d403027b86c71b9590e616624aefb2c5fb27f7282dc9393be32ad330",
+    "fusion/mbt_bev.py": "2e5b4374a53b1f41d8f60b176dc12f89b55108d46a88f051e95350b5306b2869"
+  },
+  "evaluator_sha256": "a161a6a9db92b43040566ed6d0a1045b7aa0f27152a140b25f8cf97e4e6354a7",
+  "raw_predictions_included": false,
+  "weights_included": false
+}

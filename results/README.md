@@ -5,6 +5,17 @@ KITTI overall AP40 averages Car, Pedestrian and Cyclist. nuScenes mAP/NDS in
 the tables below are percentages; official devkit JSON files retain unit scale.
 Use one selected checkpoint for all metrics of a model, not separate metric maxima.
 
+## November 9 follow-up
+
+[Part B results](part_b_20261109/README.md) add a completed matched 40-epoch
+KITTI gated-bottleneck/full-attention comparison and four fixed-checkpoint
+nuScenes camera conditions. Gated KITTI scored 42.05 / 54.69 moderate 3D/BEV
+AP40 versus full attention's 40.33 / 53.58. The new nuScenes model preserved
+clean performance and improved black/shuffled results over previous ABFuse;
+undetected corruptions still score below LiDAR-only. These are single-seed
+observations. The dated bundle has its own provenance manifest; the original
+reports and original manifest below are preserved.
+
 ## Main comparisons
 
 | Experiment | Selected checkpoint | 3D AP40 moderate | BEV AP40 moderate |
@@ -51,7 +62,7 @@ is not the historical original paper checkpoint (42.6696).
 
 ## Camera dependence
 
-All **30** correct/black/shuffled evaluations across **ten** models completed
+The original **30** correct/black/shuffled evaluations across **ten** models completed
 with strict state loading, unchanged weights and the full validation splits.
 
 - [All scores](camera_ablations/SUMMARY.md)

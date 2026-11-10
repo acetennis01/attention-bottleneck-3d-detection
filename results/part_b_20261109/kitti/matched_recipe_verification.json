@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_run4_full_attention_20261109/run4_resolved_config.py",
+  "reference_config_sha256": "1289178789679fd642c09c1cede602d0a7c1ed7a0dc8022f6f9b7b5c3e4d18de",
+  "changed_fields": [
+    "fusion architecture and latent/gate options",
+    "registration import",
+    "output paths"
+  ],
+  "max_epochs": 40,
+  "seed": 0,
+  "physical_batch": 6,
+  "accumulation": 8,
+  "same_initializer": true,
+  "same_optimizer": true,
+  "same_scheduler": true,
+  "same_data": true,
+  "same_freeze": true,
+  "same_selection_rule": true
+}

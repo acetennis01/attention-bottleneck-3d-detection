@@ -1,0 +1,94 @@
+{
+  "status": "complete",
+  "completed_microbatches": 160000,
+  "optimizer_updates": 40000,
+  "selected_microbatch": 110000,
+  "selection": "best NDS among completed clean validation evaluations",
+  "metrics_units": "unit scale",
+  "completed_validations": [
+    {
+      "microbatch": 2000,
+      "mAP": 0.6376236151759873,
+      "NDS": 0.6864100784214087
+    },
+    {
+      "microbatch": 10000,
+      "mAP": 0.6437462499700732,
+      "NDS": 0.6912981791207565
+    },
+    {
+      "microbatch": 20000,
+      "mAP": 0.643095511816083,
+      "NDS": 0.6914479647026918
+    },
+    {
+      "microbatch": 30000,
+      "mAP": 0.6445646967342721,
+      "NDS": 0.6919426824997195
+    },
+    {
+      "microbatch": 40000,
+      "mAP": 0.6445691341453081,
+      "NDS": 0.6917346234548208
+    },
+    {
+      "microbatch": 50000,
+      "mAP": 0.6452598603201924,
+      "NDS": 0.6918841864064927
+    },
+    {
+      "microbatch": 60000,
+      "mAP": 0.646850831107373,
+      "NDS": 0.6935390592841506
+    },
+    {
+      "microbatch": 70000,
+      "mAP": 0.6449689363697554,
+      "NDS": 0.692532226866225
+    },
+    {
+      "microbatch": 80000,
+      "mAP": 0.6474519132685808,
+      "NDS": 0.6935392399943228
+    },
+    {
+      "microbatch": 90000,
+      "mAP": 0.6469245506440671,
+      "NDS": 0.6931956216040092
+    },
+    {
+      "microbatch": 110000,
+      "mAP": 0.6478970603175472,
+      "NDS": 0.6940300180619856
+    },
+    {
+      "microbatch": 120000,
+      "mAP": 0.6473868494095141,
+      "NDS": 0.6931781006236851
+    },
+    {
+      "microbatch": 130000,
+      "mAP": 0.6477852499971822,
+      "NDS": 0.6936625516021782
+    },
+    {
+      "microbatch": 140000,
+      "mAP": 0.6479543000636724,
+      "NDS": 0.6935993228046853
+    },
+    {
+      "microbatch": 150000,
+      "mAP": 0.6480610166248938,
+      "NDS": 0.693722649760435
+    },
+    {
+      "microbatch": 160000,
+      "mAP": 0.647992354940191,
+      "NDS": 0.6936072267853598
+    }
+  ],
+  "missing_scheduled_validation_microbatches": [
+    100000
+  ],
+  "caveat": "The 100000-step validation was interrupted and the manual CLI resume continued training without repeating it. Resumes restored weights/optimizer/schedulers; bitwise augmentation RNG reproduction is not claimed."
+}

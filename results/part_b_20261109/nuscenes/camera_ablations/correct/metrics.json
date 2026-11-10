@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "mode": "correct",
+  "source_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_training_queue/transfusion_gated_full.py",
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+  "checkpoint_sha256": "691beda2e84cf33c64ebf26fc513b1a20717dfd4d48443c728aed3628e195639",
+  "optimizer_updates": 0,
+  "explicit_camera_absence": false,
+  "annotation_sha256": "bd3a18bc8659ac8b0f6a400d342654352dce62d9083e0e26404c1d91cf5f0016",
+  "strict_checkpoint_load_passed": true,
+  "validation_samples": 6019,
+  "input_preflight": {
+    "actual_black_pixels_zero": true,
+    "six_shuffled_paths_changed": true,
+    "same_lidar_and_calibration": true,
+    "shuffle_seed": 0
+  },
+  "metrics": {
+    "mAP": 0.6478970603175472,
+    "NDS": 0.6940300180619856
+  },
+  "metrics_summary": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/correct/results/pred_instances_3d/metrics_summary.json",
+  "predictions": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/correct/results/pred_instances_3d/results_nusc.json",
+  "fusion_eval_batches_checked": 6019,
+  "elapsed_seconds": 1126.026630991997
+}

@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "selected_microbatch": 110000,
+  "inference_only": true,
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+  "config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_training_queue/transfusion_gated_full.py",
+  "cases": {
+    "correct": {
+      "status": "passed",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/correct",
+      "metrics": {
+        "mAP": 0.6478970603175472,
+        "NDS": 0.6940300180619856
+      },
+      "report": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/correct/metrics.json"
+    },
+    "black": {
+      "status": "passed",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/black",
+      "metrics": {
+        "mAP": 0.6244056564348341,
+        "NDS": 0.6793153296971168
+      },
+      "report": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/black/metrics.json"
+    },
+    "shuffled": {
+      "status": "passed",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/shuffled",
+      "metrics": {
+        "mAP": 0.6374625094396364,
+        "NDS": 0.6883243404961321
+      },
+      "report": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/shuffled/metrics.json"
+    },
+    "missing": {
+      "status": "passed",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/missing",
+      "metrics": {
+        "mAP": 0.6443242933908458,
+        "NDS": 0.6923597389681575
+      },
+      "report": "/home/yab/mmdetection3d/work_dirs/part_b_run3_camera_eval_20261109/missing/metrics.json"
+    }
+  },
+  "checkpoint_sha256": "691beda2e84cf33c64ebf26fc513b1a20717dfd4d48443c728aed3628e195639",
+  "config_sha256": "47000ad8bb2728a17b2f89a7fd8b66e94b99f5bb87aed8d678854807bd71d489",
+  "checkpoint_metadata_iteration": 110000,
+  "protected_lidar_tensors_exactly_verified": 306,
+  "annotation_sha256": "bd3a18bc8659ac8b0f6a400d342654352dce62d9083e0e26404c1d91cf5f0016"
+}

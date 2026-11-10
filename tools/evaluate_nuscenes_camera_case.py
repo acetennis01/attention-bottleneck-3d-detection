@@ -3,7 +3,8 @@
 No training hooks, optimizer, weight conversion, or architecture changes are
 allowed. Black means zero RGB/BGR pixels BEFORE normalization, not zero features.
 Shuffling replaces the complete six-camera bundle while retaining target-scene
-LiDAR, annotations, and calibration. This is an OOD dependence test.
+LiDAR, annotations, and calibration. This is an OOD dependence test. Missing
+uses the gated model's explicit absence signal, not an automatic black detector.
 """
 import argparse
 from copy import deepcopy
@@ -37,7 +38,7 @@ def camera_pipeline(pipeline, mode, info_file, seed=0):
     result = deepcopy(pipeline)
     if any(step['type'] in CORRUPTIONS for step in result):
         raise ValueError('Use a clean source config, not an ablation config')
-    if mode not in ('correct', 'black', 'shuffled'):
+    if mode not in ('correct', 'black', 'shuffled', 'missing'):
         raise ValueError(mode)
     load = next((i for i, step in enumerate(result)
                  if step['type'].split('.')[-1] == 'LoadMultiViewImageFromFiles'), None)
@@ -52,6 +53,26 @@ def camera_pipeline(pipeline, mode, info_file, seed=0):
             index += 1
         result.insert(index, dict(type='BlackImage'))
     return result
+
+
+def configure_availability(fusion, mode):
+    """Keep corruption and known-absence interventions distinct."""
+    if fusion.get('camera_mode', 'present') != 'present':
+        raise ValueError('Use a source config with camera_mode=present')
+    if mode == 'missing':
+        if 'camera_mode' not in fusion or fusion.get('bypass_missing') is not True:
+            raise ValueError('Missing mode requires explicit gated-model fallback')
+        fusion['camera_mode'] = 'missing'
+
+
+def check_availability(mode, inputs, result):
+    if mode == 'missing':
+        if result['camera_available'].any():
+            raise RuntimeError('Explicit missing mode retained an available camera')
+        if not torch.equal(inputs[1], result['bev_features']):
+            raise RuntimeError('Missing mode did not preserve the exact LiDAR BEV')
+    elif 'camera_available' in result and not result['camera_available'].all():
+        raise RuntimeError('Corruption evaluation unexpectedly triggered fallback')
 
 
 def check_camera_inputs(dataset, clean_pipeline, info_file):
@@ -82,7 +103,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', required=True)
     parser.add_argument('--checkpoint', required=True)
-    parser.add_argument('--mode', choices=('correct', 'black', 'shuffled'), required=True)
+    parser.add_argument('--mode', choices=('correct', 'black', 'shuffled', 'missing'), required=True)
     parser.add_argument('--work-dir', required=True)
     args = parser.parse_args()
     output = Path(args.work_dir).resolve()
@@ -106,6 +127,8 @@ def main():
             imports.append(name)
         cfg.custom_imports = dict(imports=imports, allow_failed_imports=False)
         import_modules_from_strings(**cfg.custom_imports)
+        configure_availability(cfg.model.fusion_module, args.mode)
+        report['explicit_camera_absence'] = args.mode == 'missing'
         clean = deepcopy(cfg.test_dataloader.dataset.pipeline)
         if cfg.test_dataloader.dataset.get('indices') is not None:
             raise ValueError('Full validation is required, not a subset')
@@ -147,6 +170,7 @@ def main():
         def check_eval(module, inputs, result):
             if module.training:
                 raise RuntimeError('Fusion is not in eval mode')
+            check_availability(args.mode, inputs, result)
             if checked[0] % 250 == 0:
                 if not result['lidar_token_keep_mask'].all():
                     raise RuntimeError('LiDAR masking active at evaluation')
@@ -172,6 +196,8 @@ def main():
         report.update(status='passed', metrics=values,
                       metrics_summary=str(summary_path), predictions=str(predictions),
                       fusion_eval_batches_checked=checked[0])
+        if args.mode == 'missing':
+            report['exact_lidar_feature_identity_batches'] = checked[0]
     except BaseException as error:
         report.update(status='failed', error=repr(error))
         raise

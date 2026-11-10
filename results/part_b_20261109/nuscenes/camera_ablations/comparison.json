@@ -1,0 +1,108 @@
+{
+  "status": "complete",
+  "checkpoint_sha256": "691beda2e84cf33c64ebf26fc513b1a20717dfd4d48443c728aed3628e195639",
+  "selected_microbatch": 110000,
+  "units": "percentages and percentage-point differences",
+  "results": [
+    {
+      "mode": "correct",
+      "mAP": 64.78970603175472,
+      "NDS": 69.40300180619856,
+      "clean_minus_condition_pp": {
+        "mAP": 0.0,
+        "NDS": 0.0
+      },
+      "new_minus_previous_pp": {
+        "mAP": -0.005276917826520844,
+        "NDS": 0.013265952433854977
+      },
+      "previous_clean_minus_condition_pp": {
+        "mAP": 0.0,
+        "NDS": 0.0
+      }
+    },
+    {
+      "mode": "black",
+      "mAP": 62.44056564348342,
+      "NDS": 67.93153296971168,
+      "clean_minus_condition_pp": {
+        "mAP": 2.349140388271309,
+        "NDS": 1.4714688364868778
+      },
+      "new_minus_previous_pp": {
+        "mAP": 0.6002156417398865,
+        "NDS": 0.2382301657377468
+      },
+      "previous_clean_minus_condition_pp": {
+        "mAP": 2.954632947837709,
+        "NDS": 1.6964330497907696
+      }
+    },
+    {
+      "mode": "shuffled",
+      "mAP": 63.746250943963645,
+      "NDS": 68.83243404961321,
+      "clean_minus_condition_pp": {
+        "mAP": 1.0434550877910787,
+        "NDS": 0.5705677565853495
+      },
+      "new_minus_previous_pp": {
+        "mAP": 0.3730790394762735,
+        "NDS": 0.16253044679004347
+      },
+      "previous_clean_minus_condition_pp": {
+        "mAP": 1.4218110450938681,
+        "NDS": 0.7198322509415362
+      }
+    },
+    {
+      "mode": "missing",
+      "mAP": 64.43242933908458,
+      "NDS": 69.23597389681575,
+      "clean_minus_condition_pp": {
+        "mAP": 0.35727669267013873,
+        "NDS": 0.16702790938281087
+      }
+    }
+  ],
+  "previous_reference": {
+    "previous_model": {
+      "name": "nuscenes_transfusion_swint_b8",
+      "dataset": "nuscenes",
+      "config": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/transfusion_l_mbt_swint_nuscenes.py",
+      "config_sha256": "481151d36551249cadc862c4dd99ea9683a828f231806fc05563e2b835da8a2e",
+      "checkpoint": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+      "checkpoint_sha256": "e87fb58195ed7ef692eb9b3f6193727a6c811de73c3125bd03c0ffe5bca8156e",
+      "validation_samples": 6019
+    },
+    "previous_results_percentage": [
+      {
+        "model": "nuscenes_transfusion_swint_b8",
+        "dataset": "nuscenes",
+        "mode": "correct",
+        "mAP": 64.79498294958124,
+        "NDS": 69.3897358537647
+      },
+      {
+        "model": "nuscenes_transfusion_swint_b8",
+        "dataset": "nuscenes",
+        "mode": "black",
+        "mAP": 61.84035000174353,
+        "NDS": 67.69330280397394
+      },
+      {
+        "model": "nuscenes_transfusion_swint_b8",
+        "dataset": "nuscenes",
+        "mode": "shuffled",
+        "mAP": 63.37317190448737,
+        "NDS": 68.66990360282317
+      }
+    ],
+    "lidar_baseline_unit_scale": {
+      "mean_ap": 0.6443243951596952,
+      "nd_score": 0.6923598513262771
+    },
+    "units": "previous results use percentages; baseline devkit and new case reports use unit scale"
+  },
+  "caveat": "Single seed. Black/shuffle are OOD camera-dependence tests; explicit missing uses an oracle availability signal, not automatic corruption detection."
+}

@@ -1,0 +1,8 @@
+{
+  "status": "verified",
+  "iter": 160000,
+  "checkpoint_sha256": "2628f933277774e194932815ea1a5d66a0bd9f69ebc8d9040e8c92760bb6652e",
+  "protected_tensors": 306,
+  "lidar_and_head_unchanged": true,
+  "baseline_report": "work_dirs/transfusion_l_pretrained_baseline/baseline_verification.json"
+}

@@ -118,6 +118,42 @@ not live status. Local preflight evidence and source manifests are in
 `work_dirs/part_b_20261107/`; current remote queue status is
 `/home/yab/mmdetection3d/work_dirs/part_b_20261107_training_queue/status.json`.
 
+## Full-budget matched KITTI comparator — launched 2026-11-09
+
+After Run 4 completed, the user authorized the gated KITTI model's full
+40-epoch run. This is fresh optimization from the same LiDAR-only initializer,
+not continuation of the two-epoch pilot and not a warm start from smoke weights.
+The earlier passed gated real-data preflight was reused because the architecture
+and training recipe have not changed.
+
+The launcher compares its resolved config against Run 4's actual saved
+`run4_resolved_config.py`. Equality is required after removing only fusion
+architecture/latent/gate fields, the extra full-attention registration import,
+and output paths. Initializer, data, optimizer, schedule, physical batch six,
+accumulation eight, 40-epoch freeze of parameters/BN buffers, seed zero, camera
+dropout .20, auxiliary supervision and clean moderate 3D AP40 selection match.
+Run 4 config hash:
+`1289178789679fd642c09c1cede602d0a7c1ed7a0dc8022f6f9b7b5c3e4d18de`.
+
+Managed user service: `abfuse-kitti-gated-full-20261109.service`.
+Output root:
+`/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109`.
+Records: `matched_recipe_verification.json`, `gated_resolved_config.py`, and
+`gated_training_progress.json`. The budget is 49520 microbatches / 6190 actual
+optimizer updates. All 126 KITTI LiDAR/head tensors are verified against the
+initializer and checked at epoch boundaries, with frozen parameters and modes.
+
+Launch inspection: epoch one, at least 150/1238 batches, finite losses, nonzero
+camera/bottleneck gradients, and 12 audited optimizer updates at batch 100.
+No new validation score or bottleneck-superiority conclusion is established
+by this launch record. Both models remain single-seed experiments.
+
+The full run subsequently completed all 40 epochs / 6190 optimizer updates.
+Selected epoch 18 scored 42.0490 / 54.6942 moderate 3D/BEV AP40, compared with
+full attention's epoch-16 scores 40.3272 / 53.5769. See the
+[matched comparison](PART_B_KITTI_MATCHED_RESULTS_20261109.md) and
+[published compact evidence](../results/part_b_20261109/README.md).
+
 Do not adopt the review's arbitrary one-point threshold as a significance test.
 Do not claim “never worse” from a finite corruption suite, or rename the paper
 “Fail-Safe” on the basis of an explicit bypass alone. Update the title and

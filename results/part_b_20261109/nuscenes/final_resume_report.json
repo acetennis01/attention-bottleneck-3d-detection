@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/iter_158000.pth",
+  "expected_microbatch": 158000,
+  "optimizer_updates_at_resume": 39500,
+  "checkpoint_sha256": "26b2dcd4d902a56c0620d4839ea90e81a51d2f34784393f5dc6d691930c736e3",
+  "exact_model_optimizer_scheduler_restore": true,
+  "restored_optimizer_state_entries": 284,
+  "next_validation_microbatch": 160000,
+  "skipped_complete_epochs": 5,
+  "replay_batches_remaining": 17350,
+  "data_order_note": "Same DefaultSampler scene order; bitwise augmentation RNG is not claimed.",
+  "latest_completed_microbatch": 160000,
+  "completed_microbatches": 160000
+}

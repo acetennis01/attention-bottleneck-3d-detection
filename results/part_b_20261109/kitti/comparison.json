@@ -1,0 +1,307 @@
+{
+  "status": "complete",
+  "dataset": "KITTI validation, all 3769 frames",
+  "metric": "Overall moderate AP40, mean across Car/Pedestrian/Cyclist",
+  "selection": "best clean moderate 3D AP40, same selected weights for BEV",
+  "models": [
+    {
+      "name": "full_attention",
+      "selected_checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_run4_full_attention_20261109/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_16.pth",
+      "checkpoint_sha256": "ed20e87154879cd5ac10683437becf5f03f589897c9a3c80ff4cd46704c87dcd",
+      "config_sha256": "1289178789679fd642c09c1cede602d0a7c1ed7a0dc8022f6f9b7b5c3e4d18de",
+      "validation_log_sha256": "6670324f4787748fc523d561701ec226f98e666cb08215035ef0efff802edfb7",
+      "selected_metrics": {
+        "epoch": 16,
+        "moderate_3d_ap40": 40.3272,
+        "moderate_bev_ap40": 53.5769
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 38.9957,
+          "moderate_bev_ap40": 51.8422
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 37.9354,
+          "moderate_bev_ap40": 51.174
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 35.9912,
+          "moderate_bev_ap40": 50.5871
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 38.2964,
+          "moderate_bev_ap40": 52.5139
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 39.884,
+          "moderate_bev_ap40": 52.5847
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 39.2594,
+          "moderate_bev_ap40": 52.5801
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 39.9457,
+          "moderate_bev_ap40": 52.8727
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 40.3272,
+          "moderate_bev_ap40": 53.5769
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 39.9878,
+          "moderate_bev_ap40": 53.2507
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 39.6707,
+          "moderate_bev_ap40": 52.5878
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 40.0437,
+          "moderate_bev_ap40": 52.4645
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 39.8364,
+          "moderate_bev_ap40": 52.5167
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 39.3143,
+          "moderate_bev_ap40": 52.0805
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 38.2148,
+          "moderate_bev_ap40": 51.7915
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 38.8198,
+          "moderate_bev_ap40": 51.4134
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 38.8724,
+          "moderate_bev_ap40": 52.0084
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 38.6037,
+          "moderate_bev_ap40": 51.5365
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 38.5954,
+          "moderate_bev_ap40": 51.2622
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 38.289,
+          "moderate_bev_ap40": 51.26
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 38.2638,
+          "moderate_bev_ap40": 50.8144
+        }
+      ],
+      "completion": {
+        "status": "complete",
+        "started_at": "2026-11-09T16:03:01.172099-08:00",
+        "model": "FullAttentionBEVFusion",
+        "max_epochs": 40,
+        "completed_epochs": 40,
+        "planned_microbatches": 49520,
+        "accumulation": 8,
+        "optimizer_updates": 6190,
+        "microbatches_per_epoch": 1238,
+        "protected_lidar_tensors": 126,
+        "lidar_initializer_loaded_exactly": true,
+        "lidar_and_head_unchanged": true,
+        "baseline_sha256": "296b97413d3f6813f6c75cb481a575ad10e9d1bee7126c8b2c7da41abd6d0d5b",
+        "preflight_report": "/home/yab/mmdetection3d/work_dirs/part_b_run4_preflight_20261109/report.json",
+        "fresh_optimizer": true,
+        "smoke_weights_used": false,
+        "active_epoch": 40,
+        "completed_microbatches": 49520,
+        "latest_loss": 0.0445653535425663,
+        "completed_at": "2026-11-09T18:47:06.324323-08:00"
+      },
+      "protected_lidar_tensors_exactly_verified": 126
+    },
+    {
+      "name": "gated_b8",
+      "selected_checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_18.pth",
+      "checkpoint_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+      "config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "validation_log_sha256": "58c906969bc6f889ad1aaa553abaaf9876fa1080b45d4a84db3a63f10e44e569",
+      "selected_metrics": {
+        "epoch": 18,
+        "moderate_3d_ap40": 42.049,
+        "moderate_bev_ap40": 54.6942
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 39.0899,
+          "moderate_bev_ap40": 51.8509
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 38.0456,
+          "moderate_bev_ap40": 51.495
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 37.4344,
+          "moderate_bev_ap40": 50.9748
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 40.6376,
+          "moderate_bev_ap40": 53.6522
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 39.2067,
+          "moderate_bev_ap40": 52.302
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 38.9953,
+          "moderate_bev_ap40": 52.8297
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 39.9186,
+          "moderate_bev_ap40": 52.4051
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 41.7198,
+          "moderate_bev_ap40": 54.0694
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 42.049,
+          "moderate_bev_ap40": 54.6942
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 39.7641,
+          "moderate_bev_ap40": 53.0739
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 39.3908,
+          "moderate_bev_ap40": 53.6344
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 39.9859,
+          "moderate_bev_ap40": 53.4256
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 40.9935,
+          "moderate_bev_ap40": 53.8883
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 39.8341,
+          "moderate_bev_ap40": 52.2156
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 40.1944,
+          "moderate_bev_ap40": 53.204
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 39.6253,
+          "moderate_bev_ap40": 52.5104
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 39.7964,
+          "moderate_bev_ap40": 52.6246
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 39.4104,
+          "moderate_bev_ap40": 52.4439
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 39.5324,
+          "moderate_bev_ap40": 52.3811
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 38.9789,
+          "moderate_bev_ap40": 51.9823
+        }
+      ],
+      "completion": {
+        "status": "complete",
+        "started_at": "2026-11-09T20:16:54.818559-08:00",
+        "model": "GatedCameraMBTBEVFusion",
+        "max_epochs": 40,
+        "completed_epochs": 40,
+        "planned_microbatches": 49520,
+        "accumulation": 8,
+        "optimizer_updates": 6190,
+        "microbatches_per_epoch": 1238,
+        "protected_lidar_tensors": 126,
+        "lidar_initializer_loaded_exactly": true,
+        "lidar_and_head_unchanged": true,
+        "baseline_sha256": "296b97413d3f6813f6c75cb481a575ad10e9d1bee7126c8b2c7da41abd6d0d5b",
+        "preflight_report": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_kitti_preflight/report.json",
+        "fresh_optimizer": true,
+        "smoke_weights_used": false,
+        "active_epoch": 40,
+        "completed_microbatches": 49520,
+        "latest_loss": 0.06108754128217697,
+        "completed_at": "2026-11-09T23:05:48.353135-08:00"
+      },
+      "protected_lidar_tensors_exactly_verified": 126
+    }
+  ],
+  "gated_minus_full_attention_pp": {
+    "moderate_3d_ap40": 1.7218000000000018,
+    "moderate_bev_ap40": 1.1173000000000002
+  },
+  "matched_recipe_verification": {
+    "status": "passed",
+    "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_run4_full_attention_20261109/run4_resolved_config.py",
+    "reference_config_sha256": "1289178789679fd642c09c1cede602d0a7c1ed7a0dc8022f6f9b7b5c3e4d18de",
+    "changed_fields": [
+      "fusion architecture and latent/gate options",
+      "registration import",
+      "output paths"
+    ],
+    "max_epochs": 40,
+    "seed": 0,
+    "physical_batch": 6,
+    "accumulation": 8,
+    "same_initializer": true,
+    "same_optimizer": true,
+    "same_scheduler": true,
+    "same_data": true,
+    "same_freeze": true,
+    "same_selection_rule": true
+  },
+  "caveat": "Single seed; compares gated bottlenecks against this unrestricted modality-specific full-attention graph. Gate/dropout attribution, significance, robustness, and compute efficiency are not established by this clean comparison."
+}

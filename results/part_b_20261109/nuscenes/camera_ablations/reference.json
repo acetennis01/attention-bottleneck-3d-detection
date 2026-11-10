@@ -1,0 +1,39 @@
+{
+  "previous_model": {
+    "name": "nuscenes_transfusion_swint_b8",
+    "dataset": "nuscenes",
+    "config": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/transfusion_l_mbt_swint_nuscenes.py",
+    "config_sha256": "481151d36551249cadc862c4dd99ea9683a828f231806fc05563e2b835da8a2e",
+    "checkpoint": "/home/yab/mmdetection3d/work_dirs/transfusion_l_mbt_swint_e256_b8_seed0/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+    "checkpoint_sha256": "e87fb58195ed7ef692eb9b3f6193727a6c811de73c3125bd03c0ffe5bca8156e",
+    "validation_samples": 6019
+  },
+  "previous_results_percentage": [
+    {
+      "model": "nuscenes_transfusion_swint_b8",
+      "dataset": "nuscenes",
+      "mode": "correct",
+      "mAP": 64.79498294958124,
+      "NDS": 69.3897358537647
+    },
+    {
+      "model": "nuscenes_transfusion_swint_b8",
+      "dataset": "nuscenes",
+      "mode": "black",
+      "mAP": 61.84035000174353,
+      "NDS": 67.69330280397394
+    },
+    {
+      "model": "nuscenes_transfusion_swint_b8",
+      "dataset": "nuscenes",
+      "mode": "shuffled",
+      "mAP": 63.37317190448737,
+      "NDS": 68.66990360282317
+    }
+  ],
+  "lidar_baseline_unit_scale": {
+    "mean_ap": 0.6443243951596952,
+    "nd_score": 0.6923598513262771
+  },
+  "units": "previous results use percentages; baseline devkit and new case reports use unit scale"
+}
