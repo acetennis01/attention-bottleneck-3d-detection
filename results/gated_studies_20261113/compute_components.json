@@ -1,0 +1,1018 @@
+{
+  "status": "complete",
+  "FLOP_convention": "One fused multiply-add = one FLOP; native MHA includes QKV/output projections and both attention matrix products",
+  "scope": "Camera backbone/FPN and fusion module, including computed auxiliary logits. Excludes voxelization, LiDAR encoder, detector head and postprocessing.",
+  "note": "Architecture counts; new arms are not trained accuracy results. Unsupported arithmetic is reported without silently treating it as a complete total.",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "pytorch": "2.1.0+cu121",
+  "datasets": {
+    "kitti": {
+      "reference_checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_18.pth",
+      "checkpoint_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+      "strict_loading": true,
+      "sample_metainfo": {
+        "sample_idx": "0",
+        "lidar_path": "data/kitti/training/velodyne_reduced/000001.bin",
+        "img_path": "data/kitti/training/image_2/000001.png"
+      },
+      "image_shape": [
+        1,
+        3,
+        384,
+        1280
+      ],
+      "camera_feature_shape": [
+        1,
+        256,
+        48,
+        160
+      ],
+      "lidar_feature_shape": [
+        1,
+        384,
+        248,
+        216
+      ],
+      "camera_encoder": {
+        "counted_GFLOPs": 46.54891008,
+        "by_operator": {
+          "conv": 46328709120,
+          "batch_norm": 217743360,
+          "upsample_nearest2d": 2457600
+        },
+        "unsupported_operators": {
+          "aten::max_pool2d": 1,
+          "aten::add_": 16,
+          "aten::add": 2
+        }
+      },
+      "arms": [
+        {
+          "name": "gated_b8_reference",
+          "changes": {},
+          "fusion_parameters": 7050120,
+          "counted_GFLOPs": 13.094959424,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141915648,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.0608836199098732,
+          "peak_allocated_mib": 576.48291015625
+        },
+        {
+          "name": "average_no_dropout",
+          "changes": {
+            "use_bottleneck_gate": false,
+            "camera_drop_prob": 0.0
+          },
+          "fusion_parameters": 7050120,
+          "counted_GFLOPs": 13.09494304,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141899264,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 20,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.8919754199159797,
+          "peak_allocated_mib": 576.48291015625
+        },
+        {
+          "name": "average_dropout",
+          "changes": {
+            "use_bottleneck_gate": false
+          },
+          "fusion_parameters": 7050120,
+          "counted_GFLOPs": 13.09494304,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141899264,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 20,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.8879949200199917,
+          "peak_allocated_mib": 576.48291015625
+        },
+        {
+          "name": "gate_no_dropout",
+          "changes": {
+            "camera_drop_prob": 0.0
+          },
+          "fusion_parameters": 7050120,
+          "counted_GFLOPs": 13.094959424,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141915648,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.032547059992794,
+          "peak_allocated_mib": 576.48291015625
+        },
+        {
+          "name": "b1",
+          "changes": {
+            "num_bottleneck_tokens": 1
+          },
+          "fusion_parameters": 7048328,
+          "counted_GFLOPs": 13.033979456,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6247680,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 809504768,
+            "linear": 1111623680,
+            "scaled_dot_product_attention": 131072,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.077880780037958,
+          "peak_allocated_mib": 576.45556640625
+        },
+        {
+          "name": "b2",
+          "changes": {
+            "num_bottleneck_tokens": 2
+          },
+          "fusion_parameters": 7048584,
+          "counted_GFLOPs": 13.042666304,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6269440,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 813711360,
+            "linear": 1115951104,
+            "scaled_dot_product_attention": 262144,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.0485541200323496,
+          "peak_allocated_mib": 576.45947265625
+        },
+        {
+          "name": "b4",
+          "changes": {
+            "num_bottleneck_tokens": 4
+          },
+          "fusion_parameters": 7049096,
+          "counted_GFLOPs": 13.060064576,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6312960,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 822149120,
+            "linear": 1124605952,
+            "scaled_dot_product_attention": 524288,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.040663779975148,
+          "peak_allocated_mib": 576.46728515625
+        },
+        {
+          "name": "b16",
+          "changes": {
+            "num_bottleneck_tokens": 16
+          },
+          "fusion_parameters": 7052168,
+          "counted_GFLOPs": 13.165142336,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 6574080,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "_native_multi_head_attention": 873463808,
+            "linear": 1176535040,
+            "scaled_dot_product_attention": 2097152,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.0466669400630053,
+          "peak_allocated_mib": 576.51416015625
+        },
+        {
+          "name": "width128",
+          "changes": {
+            "embed_dim": 128
+          },
+          "fusion_parameters": 1886856,
+          "counted_GFLOPs": 6.12362784,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 5517737984,
+            "grid_sampler": 524288,
+            "group_norm": 655360,
+            "layer_norm": 3200000,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 6856704,
+            "_native_multi_head_attention": 281149440,
+            "linear": 285483008,
+            "scaled_dot_product_attention": 524288,
+            "upsample_bilinear2d": 27426816
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.966071740083862,
+          "peak_allocated_mib": 529.49365234375
+        },
+        {
+          "name": "width512",
+          "changes": {
+            "embed_dim": 512
+          },
+          "fusion_parameters": 27207048,
+          "counted_GFLOPs": 29.58094368,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 22070951936,
+            "grid_sampler": 2097152,
+            "group_norm": 2621440,
+            "layer_norm": 12800000,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 27426816,
+            "_native_multi_head_attention": 2785542144,
+            "linear": 4567629824,
+            "scaled_dot_product_attention": 2097152,
+            "upsample_bilinear2d": 109707264
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 24,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.984822559868917,
+          "peak_allocated_mib": 710.68896484375
+        },
+        {
+          "name": "full_attention",
+          "changes": {},
+          "fusion_parameters": 7045508,
+          "counted_GFLOPs": 13.70196,
+          "by_operator": {
+            "bmm": 16384,
+            "conv": 11035475968,
+            "grid_sampler": 1048576,
+            "group_norm": 1310720,
+            "layer_norm": 11796480,
+            "upsample_nearest2d": 53568,
+            "adaptive_avg_pool2d": 13713408,
+            "linear": 1979711488,
+            "scaled_dot_product_attention": 603979776,
+            "upsample_bilinear2d": 54853632
+          },
+          "unsupported_operators": {
+            "aten::where": 6,
+            "aten::linspace": 2,
+            "aten::add": 26,
+            "aten::mul": 64,
+            "aten::meshgrid": 1,
+            "aten::numel": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 2,
+            "aten::div": 15,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 2,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::unflatten": 9,
+            "aten::gelu": 8
+          },
+          "fusion_latency_ms": 3.230813760019373,
+          "peak_allocated_mib": 576.94189453125
+        }
+      ]
+    },
+    "nuscenes": {
+      "reference_checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/best_NuScenes metric_pred_instances_3d_NuScenes_NDS_iter_110000.pth",
+      "checkpoint_sha256": "691beda2e84cf33c64ebf26fc513b1a20717dfd4d48443c728aed3628e195639",
+      "strict_loading": true,
+      "sample_metainfo": {
+        "sample_idx": "0",
+        "lidar_path": "None",
+        "img_path": "['data/nuscenes_full/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201470412460.jpg', 'data/nuscenes_full/samples/CAM_FRONT_RIGHT/n015-2018-08-02-17-16-37+0800__CAM_FRONT_RIGHT__1533201470420339.jpg', 'data/nuscenes_full/samples/CAM_FRONT_LEFT/n015-2018-08-02-17-16-37+0800__CAM_FRONT_LEFT__1533201470404874.jpg', 'data/nuscenes_full/samples/CAM_BACK/n015-2018-08-02-17-16-37+0800__CAM_BACK__1533201470437525.jpg', 'data/nuscenes_full/samples/CAM_BACK_LEFT/n015-2018-08-02-17-16-37+0800__CAM_BACK_LEFT__1533201470447423.jpg', 'data/nuscenes_full/samples/CAM_BACK_RIGHT/n015-2018-08-02-17-16-37+0800__CAM_BACK_RIGHT__1533201470427893.jpg']"
+      },
+      "image_shape": [
+        1,
+        6,
+        3,
+        480,
+        800
+      ],
+      "camera_feature_shape": [
+        1,
+        6,
+        256,
+        60,
+        100
+      ],
+      "lidar_feature_shape": [
+        1,
+        512,
+        180,
+        180
+      ],
+      "camera_encoder": {
+        "counted_GFLOPs": 250.129884672,
+        "by_operator": {
+          "conv": 24993792000,
+          "layer_norm": 907200000,
+          "linear": 216649728000,
+          "matmul": 7567644672,
+          "upsample_nearest2d": 11520000
+        },
+        "unsupported_operators": {
+          "aten::mul": 25,
+          "aten::rsub": 24,
+          "aten::pad": 12,
+          "aten::add": 56,
+          "aten::softmax": 12,
+          "aten::gelu": 12,
+          "aten::fill_": 54,
+          "aten::sub": 18,
+          "aten::ne": 6,
+          "aten::im2col": 3
+        }
+      },
+      "arms": [
+        {
+          "name": "gated_b8_reference",
+          "changes": {},
+          "fusion_parameters": 7117583,
+          "counted_GFLOPs": 12.898580112,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141915648,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.970877420011675,
+          "peak_allocated_mib": 664.46923828125
+        },
+        {
+          "name": "average_no_dropout",
+          "changes": {
+            "use_bottleneck_gate": false,
+            "camera_drop_prob": 0.0,
+            "camera_view_drop_prob": 0.0
+          },
+          "fusion_parameters": 7117583,
+          "counted_GFLOPs": 12.898563728,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141899264,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 22,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.7850039399345405,
+          "peak_allocated_mib": 666.75048828125
+        },
+        {
+          "name": "average_dropout",
+          "changes": {
+            "use_bottleneck_gate": false
+          },
+          "fusion_parameters": 7117583,
+          "counted_GFLOPs": 12.898563728,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141899264,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 22,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.788277939980617,
+          "peak_allocated_mib": 666.75048828125
+        },
+        {
+          "name": "gate_no_dropout",
+          "changes": {
+            "camera_drop_prob": 0.0,
+            "camera_view_drop_prob": 0.0
+          },
+          "fusion_parameters": 7117583,
+          "counted_GFLOPs": 12.898580112,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6400000,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 839122944,
+            "linear": 1141915648,
+            "scaled_dot_product_attention": 1048576,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.9664312399108894,
+          "peak_allocated_mib": 666.75048828125
+        },
+        {
+          "name": "b1",
+          "changes": {
+            "num_bottleneck_tokens": 1
+          },
+          "fusion_parameters": 7115791,
+          "counted_GFLOPs": 12.837600144,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6247680,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 809504768,
+            "linear": 1111623680,
+            "scaled_dot_product_attention": 131072,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.9913453399785794,
+          "peak_allocated_mib": 666.72314453125
+        },
+        {
+          "name": "b2",
+          "changes": {
+            "num_bottleneck_tokens": 2
+          },
+          "fusion_parameters": 7116047,
+          "counted_GFLOPs": 12.846286992,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6269440,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 813711360,
+            "linear": 1115951104,
+            "scaled_dot_product_attention": 262144,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.966382140002679,
+          "peak_allocated_mib": 666.72705078125
+        },
+        {
+          "name": "b4",
+          "changes": {
+            "num_bottleneck_tokens": 4
+          },
+          "fusion_parameters": 7116559,
+          "counted_GFLOPs": 12.863685264,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6312960,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 822149120,
+            "linear": 1124605952,
+            "scaled_dot_product_attention": 524288,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.955420200014487,
+          "peak_allocated_mib": 666.73486328125
+        },
+        {
+          "name": "b16",
+          "changes": {
+            "num_bottleneck_tokens": 16
+          },
+          "fusion_parameters": 7119631,
+          "counted_GFLOPs": 12.968763024,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 10854334464,
+            "grid_sampler": 6291456,
+            "group_norm": 7864320,
+            "layer_norm": 6574080,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 8294400,
+            "_native_multi_head_attention": 873463808,
+            "linear": 1176535040,
+            "scaled_dot_product_attention": 2097152,
+            "upsample_bilinear2d": 33177600
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.9504920799809042,
+          "peak_allocated_mib": 666.78173828125
+        },
+        {
+          "name": "width128",
+          "changes": {
+            "embed_dim": 128
+          },
+          "fusion_parameters": 1920655,
+          "counted_GFLOPs": 6.02546856,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 5427167232,
+            "grid_sampler": 3145728,
+            "group_norm": 3932160,
+            "layer_norm": 3200000,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 4147200,
+            "_native_multi_head_attention": 281149440,
+            "linear": 285483008,
+            "scaled_dot_product_attention": 524288,
+            "upsample_bilinear2d": 16588800
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 2.908635339990724,
+          "peak_allocated_mib": 628.53125
+        },
+        {
+          "name": "width512",
+          "changes": {
+            "embed_dim": 512
+          },
+          "fusion_parameters": 27341839,
+          "counted_GFLOPs": 29.188124304,
+          "by_operator": {
+            "matmul": 98304,
+            "conv": 21708668928,
+            "grid_sampler": 12582912,
+            "group_norm": 15728640,
+            "layer_norm": 12800000,
+            "upsample_nearest2d": 32400,
+            "adaptive_avg_pool2d": 16588800,
+            "_native_multi_head_attention": 2785542144,
+            "linear": 4567629824,
+            "scaled_dot_product_attention": 2097152,
+            "upsample_bilinear2d": 66355200
+          },
+          "unsupported_operators": {
+            "aten::where": 7,
+            "aten::numel": 1,
+            "aten::linspace": 2,
+            "aten::add": 30,
+            "aten::mul": 26,
+            "aten::meshgrid": 1,
+            "aten::ones_like": 2,
+            "aten::clamp_min": 3,
+            "aten::div": 7,
+            "aten::lt": 2,
+            "aten::sub": 2,
+            "aten::tanh": 1,
+            "aten::any": 3,
+            "aten::softmax": 1,
+            "aten::sum": 2,
+            "aten::gelu": 8,
+            "aten::sigmoid": 4,
+            "aten::rsub": 4,
+            "aten::unflatten": 1
+          },
+          "fusion_latency_ms": 3.796808240003884,
+          "peak_allocated_mib": 714.9853515625
+        }
+      ]
+    }
+  }
+}

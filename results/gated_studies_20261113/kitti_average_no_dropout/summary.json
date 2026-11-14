@@ -1,0 +1,139 @@
+{
+  "status": "complete",
+  "dataset": "KITTI validation, all 3769 frames",
+  "metric": "Overall moderate AP40, mean across Car/Pedestrian/Cyclist",
+  "selection": "best clean moderate 3D AP40; BEV uses same selected checkpoint",
+  "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_average_no_dropout.py",
+  "config_sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68",
+  "selected_checkpoint": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_no_dropout/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_14.pth",
+  "checkpoint_sha256": "b906b0cb87e6c14a6de1c9d2e4ddf3a6e6b90166e6d474e253ffc4ca38c63a24",
+  "scalar_history_source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_no_dropout/20261113_212420/vis_data/scalars.json",
+  "scalar_history_sha256": "20e30502d39e4eb9954c5db00d8afa31551743b2b623992ae14f80f98f75ecce",
+  "validation_log_source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_no_dropout/20261113_212420/20261113_212420.log",
+  "validation_log_sha256": "65aecfce4266938a12bc4f109ceb2ccaec390feb6ed81bf1343ba3d681efa4a0",
+  "selected_metrics": {
+    "epoch": 14,
+    "moderate_3d_ap40": 41.7982,
+    "moderate_bev_ap40": 53.9732
+  },
+  "validation_history": [
+    {
+      "epoch": 2,
+      "moderate_3d_ap40": 38.3782,
+      "moderate_bev_ap40": 52.229
+    },
+    {
+      "epoch": 4,
+      "moderate_3d_ap40": 38.2766,
+      "moderate_bev_ap40": 51.706
+    },
+    {
+      "epoch": 6,
+      "moderate_3d_ap40": 39.2636,
+      "moderate_bev_ap40": 51.6425
+    },
+    {
+      "epoch": 8,
+      "moderate_3d_ap40": 39.7251,
+      "moderate_bev_ap40": 52.7143
+    },
+    {
+      "epoch": 10,
+      "moderate_3d_ap40": 40.9079,
+      "moderate_bev_ap40": 53.3017
+    },
+    {
+      "epoch": 12,
+      "moderate_3d_ap40": 40.3781,
+      "moderate_bev_ap40": 53.6483
+    },
+    {
+      "epoch": 14,
+      "moderate_3d_ap40": 41.7982,
+      "moderate_bev_ap40": 53.9732
+    },
+    {
+      "epoch": 16,
+      "moderate_3d_ap40": 41.0331,
+      "moderate_bev_ap40": 54.2187
+    },
+    {
+      "epoch": 18,
+      "moderate_3d_ap40": 41.0422,
+      "moderate_bev_ap40": 53.8632
+    },
+    {
+      "epoch": 20,
+      "moderate_3d_ap40": 40.3087,
+      "moderate_bev_ap40": 53.465
+    },
+    {
+      "epoch": 22,
+      "moderate_3d_ap40": 40.3845,
+      "moderate_bev_ap40": 54.0568
+    },
+    {
+      "epoch": 24,
+      "moderate_3d_ap40": 41.7009,
+      "moderate_bev_ap40": 53.8153
+    },
+    {
+      "epoch": 26,
+      "moderate_3d_ap40": 41.1993,
+      "moderate_bev_ap40": 54.0456
+    },
+    {
+      "epoch": 28,
+      "moderate_3d_ap40": 41.096,
+      "moderate_bev_ap40": 53.5185
+    },
+    {
+      "epoch": 30,
+      "moderate_3d_ap40": 41.1463,
+      "moderate_bev_ap40": 53.5509
+    },
+    {
+      "epoch": 32,
+      "moderate_3d_ap40": 40.3415,
+      "moderate_bev_ap40": 52.9213
+    },
+    {
+      "epoch": 34,
+      "moderate_3d_ap40": 40.3697,
+      "moderate_bev_ap40": 52.9172
+    },
+    {
+      "epoch": 36,
+      "moderate_3d_ap40": 40.4676,
+      "moderate_bev_ap40": 53.158
+    },
+    {
+      "epoch": 38,
+      "moderate_3d_ap40": 40.1958,
+      "moderate_bev_ap40": 52.8018
+    },
+    {
+      "epoch": 40,
+      "moderate_3d_ap40": 40.2571,
+      "moderate_bev_ap40": 52.822
+    }
+  ],
+  "completion": {
+    "status": "complete",
+    "smoke_only": false,
+    "production_config_sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68",
+    "start_microbatch": 0,
+    "protected_tensors": 126,
+    "started_at": "2026-11-14T05:24:25.559672+00:00",
+    "resumed": false,
+    "expected_total_updates": 6190,
+    "completed_microbatches": 49520,
+    "optimizer_updates": 6190,
+    "latest_loss": 0.05190864950418472,
+    "updated_at": "2026-11-14T08:12:01.531424+00:00",
+    "completed_epochs": 40,
+    "frozen_lidar_and_head_unchanged": true,
+    "completed_at": "2026-11-14T08:13:28.511427+00:00"
+  },
+  "caveat": "Single seed. This arm disables both gating and dropout; comparison with the gated/dropout reference cannot isolate gating."
+}

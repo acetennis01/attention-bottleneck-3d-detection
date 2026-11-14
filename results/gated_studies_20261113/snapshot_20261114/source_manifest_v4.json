@@ -1,0 +1,586 @@
+[
+  {
+    "path": "configs/kitti_bottleneck_b1.py",
+    "sha256": "b30bc3e1b909b9ae1de0c2c76965ac7d7d747029014043923ce006e2f21e6a6b"
+  },
+  {
+    "path": "configs/kitti_bottleneck_b16.py",
+    "sha256": "c5f31576f6549ac907f00f1417ab2846b395f9d6178715e2952bc1aa073d47ce"
+  },
+  {
+    "path": "configs/kitti_bottleneck_b2.py",
+    "sha256": "6a27b8cb23d490058991541cb97cedc7dca790e22d0a35ae40e29e80d3d8a1a4"
+  },
+  {
+    "path": "configs/kitti_bottleneck_b4.py",
+    "sha256": "edaa3a05781d4b5fc0d6027a635c65a873df7cc4090bb8fde74557c05084e69e"
+  },
+  {
+    "path": "configs/kitti_bottleneck_b8.py",
+    "sha256": "7fe9c7dd4f9940c337653ca66799d9998f6ea5e40f0dd3434fcdbb53c3567faf"
+  },
+  {
+    "path": "configs/kitti_bottleneck_base.py",
+    "sha256": "ddd634a7560902c584322286f4a5d6c13655f065fedeb0185bda04180c34d8a8"
+  },
+  {
+    "path": "configs/kitti_camera_v2.py",
+    "sha256": "551b7d7bde0e95ea0f8f82ff5911814fbeb66ee7ca11c7721e503e485cf930b2"
+  },
+  {
+    "path": "configs/kitti_camera_v2_b16.py",
+    "sha256": "c73991f9c5ba513c8bbd1a599d3847350ce9321804508a1b0f965175775bd2bb"
+  },
+  {
+    "path": "configs/kitti_camera_v2_black_eval.py",
+    "sha256": "46f60d60996a79bee352dda83fca72a8e5baddb5f420aeb2e88825035d88e432"
+  },
+  {
+    "path": "configs/kitti_camera_v2_no_mask.py",
+    "sha256": "3373b3e84d8c667da3532756e7292ff45b94baa89a1d175aad057b5d9835cd21"
+  },
+  {
+    "path": "configs/kitti_camera_v2_shuffled_eval.py",
+    "sha256": "c90d1df02bb1b18428aba70eac01f2940d3b708b58aca1f6acb6a375519f5ed3"
+  },
+  {
+    "path": "configs/kitti_camera_v2_smoke.py",
+    "sha256": "9306bbccf9e9b76b6ed0713429d042d69b27605e5518b13542aac8c48fa4ce22"
+  },
+  {
+    "path": "configs/kitti_full_attention.py",
+    "sha256": "e25ba0f238d9223adf09a53a4ca961017baa284f5c996d3ed4678375c1159fb7"
+  },
+  {
+    "path": "configs/kitti_gated_absent_control.py",
+    "sha256": "d5853469b1ffcdbce5169fb5959473450492fe3f5727c20d31cb563c40e88e98"
+  },
+  {
+    "path": "configs/kitti_gated_average.py",
+    "sha256": "bd65c08d8e32eed396673bc23ddd83ada9e12c26e019557e562599fcb522974b"
+  },
+  {
+    "path": "configs/kitti_gated_b8.py",
+    "sha256": "a1a4bdb280c09d6cc99f4b87c387b65229767b42c037378447e7fc8cee073337"
+  },
+  {
+    "path": "configs/kitti_gated_dropout_only.py",
+    "sha256": "e03fc973dbeed980c0140bd56a012bdd84a359371979c38ca7393196ff9c7d74"
+  },
+  {
+    "path": "configs/kitti_gated_gate_only.py",
+    "sha256": "06df8adb8fd9277ae6b6c35fadd4d56e07152f16fafdecd5fa60eef7d9ecef1c"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev.py",
+    "sha256": "36732ae0092b00125f2d6e0462ab5b2bfc287f2b90794e27173ddcce28eee83c"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_aligned_eb48.py",
+    "sha256": "8dbda5be99f3eef60f0a2c809b883cbe82afc5f207d6f2a370f73033a13a206d"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_camera_focused_black_eval.py",
+    "sha256": "b4175e27a7d3683113740933b0e9a7e3d692b8d2e59a84c72831964aaa31636d"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_camera_focused_eb48.py",
+    "sha256": "618eac1f5b375f552f19ccaf8bbe396777315f5753a92cd5e8117a44d8f33935"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_camera_focused_eb48_smoke.py",
+    "sha256": "013122c3f118a500cd90b19a1192b79e7b0c0dbceac561702030a42588d1c716"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_camera_focused_shuffled_eval.py",
+    "sha256": "11feac78f7a9faf48e42a865c198178e5dc6cf5aa38216781866e901aebd91b5"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_eb48.py",
+    "sha256": "fca3ecb96ee59b41a3540578b07188d4baaa797a3646e45dc16acffe339ddc58"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_nuscenes.py",
+    "sha256": "3aaf280edf2aedc150c71e640ad13b87cf36a52ad9dc34b55a7deff4dff74720"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_nuscenes_black_eval.py",
+    "sha256": "607c336ef6d31806a9bac619a110f6dba743328c50461c741d347a51e9619544"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_nuscenes_mini.py",
+    "sha256": "0e39e518d8fe3f54cf7c8a624a02e9e9c1799de55b7b8b6b4b5e3b0a44dca365"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_nuscenes_mini_smoke.py",
+    "sha256": "60899dc5c59a357844941682e2e480ac817299fee9e6b623ce06717dc43c216d"
+  },
+  {
+    "path": "configs/my_fusion_mbt_bev_nuscenes_shuffled_eval.py",
+    "sha256": "77165cbb33695b4449b80511a2594da230c007e295bb0dcd26ac1bd2ecba698f"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2.py",
+    "sha256": "bdd689a0d215e42384357bbccc1f659314293e7ecb21d8cc60c56cb491ceb7cc"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_b16.py",
+    "sha256": "42ac09f3f799f0c5372c4ebde88a8b9d73d61554f21f7192216cdec31e85796a"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_frozen_lidar_pilot.py",
+    "sha256": "376421525fa4a5c0911363cfdf6b8089d41ade49330aefe4809c6a6aac6cf38b"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_no_mask.py",
+    "sha256": "e3a4b59fd31612d1669c3dbfe7ee958892c7428229ae03431bc10e66e8001c9a"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_no_mask_black_eval.py",
+    "sha256": "20afbdbf32716d4eea8aa20ce79b07630b1be5c842c3f6cb319985190b15ca11"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_no_mask_shuffled_eval.py",
+    "sha256": "a97dcec4b82a74f23d9eadedea22e63dcf558e440efe5ebe4b4487968607cd49"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_no_mask_smoke.py",
+    "sha256": "1b0b32608066cba230753fec6f6c2ad5c985526d0fc9dc7a02847139708b2ab6"
+  },
+  {
+    "path": "configs/nuscenes_camera_v2_smoke.py",
+    "sha256": "71daf294bc14b99bf21da981b98d98b11727a46d2da8a86f3509109b7f162683"
+  },
+  {
+    "path": "configs/nuscenes_controlled_base.py",
+    "sha256": "fe6effa63f106a8f861ad7a357c966b6f8ed8a91562ddbee235ede3eaff0effe"
+  },
+  {
+    "path": "configs/nuscenes_controlled_frozen.py",
+    "sha256": "d15aed8cd76ed5cf6c8a9faaa902ee9ab94c47ddb263d86ef795ebe84b8001ae"
+  },
+  {
+    "path": "configs/nuscenes_controlled_joint.py",
+    "sha256": "1b707335f51b427167461b3891912de8d08258a2302323093d8d2a4bcb2a630e"
+  },
+  {
+    "path": "configs/nuscenes_controlled_lower_aux.py",
+    "sha256": "7ccbab128dae4e281a61a8d3c47a61ff6a3302722318395f958607bce3707f24"
+  },
+  {
+    "path": "configs/nuscenes_controlled_lower_lr.py",
+    "sha256": "46eaf8a50949d1194093d401ec2b2c6895258374db83826a22bf6d4d262dd316"
+  },
+  {
+    "path": "configs/nuscenes_controlled_multiscale.py",
+    "sha256": "5c0cffbbce11acf76680f82670bea27193e706fec463466cc75d1e6dd9cd4bcd"
+  },
+  {
+    "path": "configs/nuscenes_multiscale_fresh.py",
+    "sha256": "8e3f177cdaa69a1f96103f02d972df098678c3df4b166fbf49054fcbc6328930"
+  },
+  {
+    "path": "configs/nuscenes_multiscale_fresh_black_eval.py",
+    "sha256": "eb290b75c5877dae9f635fb5ca13e955d24fd970dd66db6b85d63ef69c95ac28"
+  },
+  {
+    "path": "configs/nuscenes_multiscale_fresh_lower_lr.py",
+    "sha256": "e56b27081dfc76d0702895db5cc7ea514fd9e4327071b4deced52d7394864431"
+  },
+  {
+    "path": "configs/nuscenes_multiscale_fresh_shuffled_eval.py",
+    "sha256": "22829db4f6563389edd69dad888a3bb6075f007233ad971a218553609e092ee4"
+  },
+  {
+    "path": "configs/pointpillars_lidar_control.py",
+    "sha256": "dd7481c9263d109f930ff7ebd1fc93c49a8f36c2a9d675c54514386c33597e2b"
+  },
+  {
+    "path": "configs/pointpillars_lidar_control_eb48.py",
+    "sha256": "b9941ecaa3469e78f8548dc17062f7f40275f199561f2bb6dcabdc7eaedc9e5d"
+  },
+  {
+    "path": "configs/pointpillars_lidar_control_nuscenes.py",
+    "sha256": "71627e31fed286869feb19874c7bbad0178b16e90b9470d737ef0fc27c78478f"
+  },
+  {
+    "path": "configs/pointpillars_lidar_control_nuscenes_mini.py",
+    "sha256": "094cdaf08fc9ee0758c7c807e0483a9c758e735e1ff4c10c94da27dc72e3f588"
+  },
+  {
+    "path": "configs/pointpillars_lidar_control_nuscenes_mini_smoke.py",
+    "sha256": "1e5c5985a5a47d8951367abd2d37986cda9120b24a30e5ce662a02d0fc052982"
+  },
+  {
+    "path": "configs/transfusion_l_gated_swint_nuscenes.py",
+    "sha256": "fb57f2cd5becbec9c8e1175e61209003eb2c35c10f753a3167680e9279cc46c4"
+  },
+  {
+    "path": "configs/transfusion_l_mbt_nuscenes.py",
+    "sha256": "bc2acf17426fb661d6b3aa75cce2dc1f36cd4727e9e078a2a6e38c9cec1fd1e5"
+  },
+  {
+    "path": "configs/transfusion_l_mbt_swint_nuscenes.py",
+    "sha256": "6280d2dfc9199a50205053a49250dd3b16abf37abe385053c15aa552be9df6fc"
+  },
+  {
+    "path": "configs/transfusion_l_nuscenes_pretrained.py",
+    "sha256": "f7af0b47265741d5f7d4d2949722ad803bd43772bedbdabb938ac6bcde484c1e"
+  },
+  {
+    "path": "fusion/__init__.py",
+    "sha256": "772ae902f06b784d76744305e41779473ee8713381f115db0aee649e98fc4f9e"
+  },
+  {
+    "path": "fusion/full_attention_bev.py",
+    "sha256": "000c144c538b8f5604249b60212d06f4463192b0e3a364eb5b68ecd59ac318b1"
+  },
+  {
+    "path": "fusion/mbt_bev.py",
+    "sha256": "2e5b4374a53b1f41d8f60b176dc12f89b55108d46a88f051e95350b5306b2869"
+  },
+  {
+    "path": "fusion/mbt_bev_camera_v2.py",
+    "sha256": "db64c547d403027b86c71b9590e616624aefb2c5fb27f7282dc9393be32ad330"
+  },
+  {
+    "path": "fusion/mbt_bev_gated.py",
+    "sha256": "97376455a32e7da32373ee034d89d5b78ca51a3a16c0e365cc2479557b94bc3b"
+  },
+  {
+    "path": "fusion/mbt_bev_gated_nuscenes.py",
+    "sha256": "ec3318d95830a912c6f815d70efaaa3b59dab9e47a76821587323e38498d1300"
+  },
+  {
+    "path": "fusion/mbt_bev_kitti_v1.py",
+    "sha256": "e733ac802e6174ef4b59def513f04f617ac8960c370ac090c4044c0dbe1b488e"
+  },
+  {
+    "path": "fusion/mbt_bev_nuscenes.py",
+    "sha256": "cf98bfa8c9e0e1432cd563cc73e2e542035fb6021a3fe83391ca9b43adb1480e"
+  },
+  {
+    "path": "fusion/mbt_bev_nuscenes_camera_v2.py",
+    "sha256": "cfc26b630a81c43349d925f745eaa1f77cc1233c7d706d7846e2afec0369dbe5"
+  },
+  {
+    "path": "fusion/mbt_detector.py",
+    "sha256": "32eb9d5174199463557b81de0c95f1f1c6d4f7306fabd7154b98462848062f9d"
+  },
+  {
+    "path": "fusion/mbt_detector_camera_v2.py",
+    "sha256": "63e06d79d5ed6116ee2c2563d002c007a6e351978447220c0a7a319d638ec08d"
+  },
+  {
+    "path": "fusion/mbt_detector_nuscenes.py",
+    "sha256": "d3dc4b4200f2d8aded697a6183953aa4ab272f09821c42f115f48672a2630808"
+  },
+  {
+    "path": "fusion/mbt_detector_nuscenes_camera_v2.py",
+    "sha256": "bc15923a484d872bcf6a82d013307ea3f651ec99ed2afc5ac91c0d67579c6ca5"
+  },
+  {
+    "path": "fusion/mbt_nuscenes_multiscale.py",
+    "sha256": "109dffb93c5de499768aff4f0a13e2b8b535250b6979f1d9585c6bb8c5d9a9c3"
+  },
+  {
+    "path": "fusion/nuimages_swin.py",
+    "sha256": "463b2db01762fc80a311af9b160ccee775b8880b09a54d8ba6d555d77e36ec0b"
+  },
+  {
+    "path": "fusion/transfusion_l_mbt.py",
+    "sha256": "6ca873e98063ad42ac1b63f53a8bf993a71501493037e1e4ba611df80e2506c8"
+  },
+  {
+    "path": "hooks/__init__.py",
+    "sha256": "6365b99528dbe995572688ed2a318ff46a3123432bf29cac9468501a8228dc05"
+  },
+  {
+    "path": "hooks/camera_v2_masking.py",
+    "sha256": "a518abe3f7fd7984421d5f9c8db4f6687dd1109dc4e8d1318c9b4124e9875702"
+  },
+  {
+    "path": "hooks/controlled_retraining.py",
+    "sha256": "080eb53d8ce0b99896f408bfdc5ffcf53e4021e2c0c0fe2aa87f937070f5888f"
+  },
+  {
+    "path": "hooks/fresh_fusion_training.py",
+    "sha256": "a202f79e80859813981ba07613c2d3ee1199f76254ee250762bc38678a9163a3"
+  },
+  {
+    "path": "hooks/frozen_lidar_integrity.py",
+    "sha256": "6cfb04166b19a4ff368bb0673bccaab296e1deb7f5c6b32b8b779b7eb03361c5"
+  },
+  {
+    "path": "hooks/fusion_diagnostics.py",
+    "sha256": "c514ab0ec08ddae307fd551f4a54da26e83e2d5a9efd0672b4fedfcd2f51a9fc"
+  },
+  {
+    "path": "hooks/staged_fusion_training.py",
+    "sha256": "95ad88dec883f6b98c69668d4ecf68301fe0ce199c2770fd479dc86144dbc878"
+  },
+  {
+    "path": "hooks/transfusion_l_initialization.py",
+    "sha256": "460fdc73325d8aa0d15f9ec50696af88fbcb3341ba84419bfb2d75bd5f1256be"
+  },
+  {
+    "path": "hooks/transfusion_l_training_audit.py",
+    "sha256": "6c0e5edfc6e00d5e4d55a1f45cf29ef6aef0beb66b9cb7ca4b4a6d113b10fdb8"
+  },
+  {
+    "path": "transforms/__init__.py",
+    "sha256": "2e6de123f3ad0915d312c6c9b832cad7d75e674d927a771ffa2bfc29269858ad"
+  },
+  {
+    "path": "transforms/image_ablation.py",
+    "sha256": "eb56db761a36a229b269734e0f059c43343b16584beeb2fbbc570e689e8f781e"
+  },
+  {
+    "path": "tools/analyze_nuscenes_ablations.py",
+    "sha256": "910904aed89ac5657be3f4ec5676fd0b6d44dd03fcf5fb9c83829d66ab13d51f"
+  },
+  {
+    "path": "tools/analyze_nuscenes_distance.py",
+    "sha256": "b0c9b3cbd7a70d209a17bbe0886b95a6141987836754c2c7fa8fedeffa9aafb9"
+  },
+  {
+    "path": "tools/audit_kitti_predictions.py",
+    "sha256": "906b71cefa6bf0525fd12e2897ccf36f9716fa6a59d2fbb14bec75d3f3ee962b"
+  },
+  {
+    "path": "tools/audit_mbt_training.py",
+    "sha256": "abe9a0b0410380dfa59e8cdda962adff3ef462725d78f9121f9fa221243e26a7"
+  },
+  {
+    "path": "tools/build_attention_candidate_sheets.py",
+    "sha256": "3a8ee79d3bee1fd652b1d63e3ce7a463a66a6c9829004cfa0b10ba3ed3438481"
+  },
+  {
+    "path": "tools/compare_camera_ablations.py",
+    "sha256": "de6908e12a9ae2f400e5d7bf3be36ba4b8f93e579ef173e370250df29286a84a"
+  },
+  {
+    "path": "tools/curate_research_results.py",
+    "sha256": "76e5c3a85798cbc516c371878cc9a3b4322bb8095441bd3d747eecec533a9ac3"
+  },
+  {
+    "path": "tools/evaluate_kitti_camera_case.py",
+    "sha256": "308ac8d84a9087178faa5ff86b3bdcc0aaac1d39369ff960a69be6a5122fbbfa"
+  },
+  {
+    "path": "tools/evaluate_nuscenes_camera_case.py",
+    "sha256": "a161a6a9db92b43040566ed6d0a1045b7aa0f27152a140b25f8cf97e4e6354a7"
+  },
+  {
+    "path": "tools/evaluate_persisted_kitti.py",
+    "sha256": "1971cf6e49380b6819f73cf92c235968e24464d8ce033e11df5a0b1187f22286"
+  },
+  {
+    "path": "tools/evaluate_pretrained_camera_initialization.py",
+    "sha256": "408f1f3154e8cb5be3de84f68b0c034477e1559dd5397823f3e9ac595549ee83"
+  },
+  {
+    "path": "tools/evaluate_transfusion_l.py",
+    "sha256": "3ebbec2798a62e440a9700521f7da1288d3a1fb3128d516ddda993d5eac7de7b"
+  },
+  {
+    "path": "tools/export_research_metrics.py",
+    "sha256": "158b65eab4d56782144fbd6477ca19c6691345bf7c41fd7ea79e02170a44bce2"
+  },
+  {
+    "path": "tools/gated_study_plan.py",
+    "sha256": "4e5b73f194ef1cbede0df52eac7a0dabb47479efd98e6d846c38138644154506"
+  },
+  {
+    "path": "tools/launch_transfusion_l_swint.py",
+    "sha256": "bf569a0585a97c52a214d5d81060eeb9ec3b74adef05a6430ce32ab8f914c93c"
+  },
+  {
+    "path": "tools/measure_gated_study_compute.py",
+    "sha256": "c26e548e51997c58727be771c3bf315a640d7d0d0b73393408ef17c3740a74de"
+  },
+  {
+    "path": "tools/preflight_gated_kitti.py",
+    "sha256": "ed6facd23321e4832e29d1fab63538e76f261968d9908bdc4d37ae4be16e67de"
+  },
+  {
+    "path": "tools/prepare_nuscenes_trainval.py",
+    "sha256": "13066d773f638f8079540744c0ada5b284c148af11a16dd00fb435af1ab781b3"
+  },
+  {
+    "path": "tools/render_attention_maps.py",
+    "sha256": "0ae476c3f577389c45d255df9634dabc18665bb0facbaf38095c0fead3a58119"
+  },
+  {
+    "path": "tools/render_kitti_attention_alternatives.py",
+    "sha256": "3254bc903ef27324471359d99405c9b7294bd1a8f3018be532812692b7a9cf63"
+  },
+  {
+    "path": "tools/render_kitti_failure_cases.py",
+    "sha256": "a204b0b19eea27f7cacd9bb630191f91820365de061f8399a420bc7ccacd9f14"
+  },
+  {
+    "path": "tools/render_kitti_paper_figures.py",
+    "sha256": "7b167c243beedf66e2e351cf02093723b1f8d68d8954970205045361749c703b"
+  },
+  {
+    "path": "tools/render_model_architecture.py",
+    "sha256": "ec0c1e853019a0c18ae3b55a55ef0fa23aa9952ba576910d0c8ef779b6477e4d"
+  },
+  {
+    "path": "tools/render_nuscenes_fusion.py",
+    "sha256": "016b28d6178c93c3c2dadb2585a62bf1905e20c27e06b9340c6bd263885092a0"
+  },
+  {
+    "path": "tools/run_camera_ablation_suite.py",
+    "sha256": "a1c643db011c2c5a8d21a4002ad27576a3b3628f1386bb47e3a41dbb5e3c06a3"
+  },
+  {
+    "path": "tools/run_gated_studies.py",
+    "sha256": "b091e8ca9ee87399dc04ad2aeae31787a040c86759af1cdfb8d6ae4259495c95"
+  },
+  {
+    "path": "tools/run_nuscenes_controlled.py",
+    "sha256": "908492e3ef71225c86b0a60a86e0931040ab904ff25e3bb36e03dec4bec5ae81"
+  },
+  {
+    "path": "tools/run_part_b_training.py",
+    "sha256": "8a180b112091da5e4be656051acd673610cd773021b49c2f6b46017f7674847d"
+  },
+  {
+    "path": "tools/smoke_camera_v2.py",
+    "sha256": "1b90ed4b24695d9d7b62c4de233f43bd2d2304b43d8dc82a32e9a01e4062e1b4"
+  },
+  {
+    "path": "tools/smoke_kitti_bottlenecks.py",
+    "sha256": "87d946d96bcc295b5f0fea62315923f58634bf1d3d261ef31bf17ba9db177f78"
+  },
+  {
+    "path": "tools/smoke_nuscenes_camera_v2.py",
+    "sha256": "0d7ce71f2730110b223da9c6d4cee51ad60d333e0661a29483a900fe1cecef90"
+  },
+  {
+    "path": "tools/smoke_nuscenes_frozen_continuation.py",
+    "sha256": "2746d2b4aa21a4e631557caa9ebf940940d01e8e2ca0f5b57cd8384263824c26"
+  },
+  {
+    "path": "tools/smoke_nuscenes_multiscale_fresh.py",
+    "sha256": "e4bf64f38146ee9387d54a0d0f653c7f40b4d7edaa2b0b09d217eec906c74399"
+  },
+  {
+    "path": "tools/smoke_transfusion_l_mbt.py",
+    "sha256": "f8d496c98b904844e7ebb87e513292f0172c6eda38a262cf0437a977808db736"
+  },
+  {
+    "path": "tools/smoke_transfusion_l_runner.py",
+    "sha256": "6526a0efaecb08f8aadf53305533a181a59ede82d74b053dabdb4b3a9b3f05f5"
+  },
+  {
+    "path": "tools/summarize_kitti_camera_ablations.py",
+    "sha256": "a322ccc90fe7212063050ce5044a8aa5833d496de85355c150013b45c883ed24"
+  },
+  {
+    "path": "tools/transfusion_l_checkpoint.py",
+    "sha256": "9e45bf9f8e7c3c790f6c7566d10318c92f5648f9df526f848a59214c72c935e4"
+  },
+  {
+    "path": "tests/test_camera_v2.py",
+    "sha256": "7951168e51bc8ec59c908d99054f886029e4d113fd461c368ea40964d9bcdd37"
+  },
+  {
+    "path": "tests/test_camera_v2_configs.py",
+    "sha256": "9e4e1f1938ff7a77be7956f44bef27dd8dcd90f3a1ea6188a5be084a8c17b5f6"
+  },
+  {
+    "path": "tests/test_experiment_configs.py",
+    "sha256": "c72799d537bef4499ad2b4f2421f5e0f68fb299833b9e8d3b4b3978d63a45664"
+  },
+  {
+    "path": "tests/test_full_attention.py",
+    "sha256": "03d807b4bc9895ca325281bc93c0f3120ee92ad7cdb3f3df840f9511d80e86db"
+  },
+  {
+    "path": "tests/test_full_attention_config.py",
+    "sha256": "626e31ad83f4b77c33aaca388f68293d5b72afff9f40dc2fd720f6c446311bf9"
+  },
+  {
+    "path": "tests/test_gated_bottlenecks.py",
+    "sha256": "bccbac768f7a3cd362847127beb5228f9192ab36f9fe7afa7f4c92763e2fb357"
+  },
+  {
+    "path": "tests/test_gated_compute_counts.py",
+    "sha256": "79e3bafec718ad33368749d5a456fe1d56f3bc071937af897ab64e1018235f19"
+  },
+  {
+    "path": "tests/test_gated_configs.py",
+    "sha256": "4c73918b2d8692302579d64a363dbbc8fbaf635be5329bece2f6193c28ab59c1"
+  },
+  {
+    "path": "tests/test_gated_study_plan.py",
+    "sha256": "a3535f20326a476d9732d3be6908a83c972001e746741c5cb1845dd9f5652434"
+  },
+  {
+    "path": "tests/test_image_ablation.py",
+    "sha256": "bbc9807a96dd9b156b3011354b16032360f6a9535ef2d0e2c4810e7854d9d206"
+  },
+  {
+    "path": "tests/test_kitti_camera_case.py",
+    "sha256": "9a548675ee3961cc6b96cb81508fcc06fe0d08183af94528c668eb5a386223fa"
+  },
+  {
+    "path": "tests/test_kitti_camera_summary.py",
+    "sha256": "9defac3e97984695e37781fc36d101d8bde1f5eb0061a379a1ae939f7776bf3b"
+  },
+  {
+    "path": "tests/test_kitti_overlap_backend.py",
+    "sha256": "ecd28d4f8c71403ba1731655c8620c1830cea423d33d0c80a599f80657f08d32"
+  },
+  {
+    "path": "tests/test_kitti_v1_aggregation.py",
+    "sha256": "63f7433750fec66ca57b4bb57f4f191b0806f4857ef81f06981b109a670bf864"
+  },
+  {
+    "path": "tests/test_mbt_bev.py",
+    "sha256": "70a02d2c47443aacdc99de57261d995cd2259450cc49d0666b0fd3dad0c30300"
+  },
+  {
+    "path": "tests/test_nuimages_swin.py",
+    "sha256": "f9fb9cf92bd47e40263d2f3f1d76f251eb5b3c4e221c99935ffde9a0401f1468"
+  },
+  {
+    "path": "tests/test_nuscenes_camera_case.py",
+    "sha256": "142276fe337533804b4be0516d910147155e148b16406cdc18cb18077a35cfdc"
+  },
+  {
+    "path": "tests/test_nuscenes_camera_v2.py",
+    "sha256": "1772c102381bc348b1e2cfcbcf733d1925d8ee3084b505f101129a014958b267"
+  },
+  {
+    "path": "tests/test_nuscenes_camera_v2_configs.py",
+    "sha256": "2d67ad91916c4eb72eec5dcefb4efe574fcc947ba6373b55d71dc6be8808f0ed"
+  },
+  {
+    "path": "tests/test_nuscenes_controlled.py",
+    "sha256": "1bdc30c26cab90bbf9f12a6935872895478d86b6d50dd9b27e2688a3a8a77ac4"
+  },
+  {
+    "path": "tests/test_nuscenes_frozen_continuation.py",
+    "sha256": "7b4480bf75c33f65956b87650b6dcd6bb22e740ad7f81b45feecc8ffdb1ea455"
+  },
+  {
+    "path": "tests/test_nuscenes_fusion.py",
+    "sha256": "be9fd2e35e9f5e700e2653d4ee0dcea66e661ad48f2ca0717b58e808350f2cc3"
+  },
+  {
+    "path": "tests/test_nuscenes_multiscale_fresh.py",
+    "sha256": "f4ea6a20aea3c07dd08eea2bc515fae54b5f98dd4cd99e6d2ec7d3c52cec2789"
+  },
+  {
+    "path": "tests/test_published_results.py",
+    "sha256": "da82cb7f5b1ef3ee4d2bb70cf3fd6546b96fbd6bdf0e0dcdeb2300d8240a10a9"
+  },
+  {
+    "path": "tests/test_transfusion_l_mbt.py",
+    "sha256": "dfbe19cc9be058db9d5863f0a47c8c0f393cfc0d61cb40f5ad9d3bd75b23fcc9"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "status": "training",
+  "smoke_only": false,
+  "production_config_sha256": "42d99cff5c046ff4e92560c7cbdb05773b82880dfbf85b76d123c25c6f7ad86d",
+  "start_microbatch": 0,
+  "protected_tensors": 126,
+  "started_at": "2026-11-14T17:23:44.260805+00:00",
+  "resumed": false,
+  "expected_total_updates": 6190,
+  "completed_microbatches": 8200,
+  "optimizer_updates": 1025,
+  "latest_loss": 0.14554104208946228,
+  "updated_at": "2026-11-14T17:49:19.477465+00:00",
+  "completed_epochs": 6,
+  "aligned_recovery_checkpoint": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_dropout/aligned_epoch_4.pth"
+}

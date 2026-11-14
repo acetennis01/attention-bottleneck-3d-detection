@@ -1,0 +1,52 @@
+..........................                                               [100%]
+=============================== warnings summary ===============================
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:66
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:66: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._family)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:70
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:70: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._size)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:74
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:74: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._name)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:78
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:78: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._value)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:85
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:85: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._families)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:92
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:92: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._point_sizes)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:102
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:102: DeprecationWarning: 'setParseAction' deprecated - use 'set_parse_action'
+    ).setParseAction(self._property)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:127
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:127
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:127
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:127
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:127
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:127: DeprecationWarning: 'parseString' deprecated - use 'parse_string'
+    self._parser.parseString(pattern)
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:134
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:134
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:134
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:134
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:134
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/fontconfig_pattern.py:134: DeprecationWarning: 'resetCache' deprecated - use 'reset_cache'
+    self._parser.resetCache()
+
+../../../miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/_mathtext.py:30
+  /home/yab/miniconda3/envs/openmmlab/lib/python3.10/site-packages/matplotlib/_mathtext.py:30: DeprecationWarning: 'enablePackrat' deprecated - use 'enable_packrat'
+    ParserElement.enablePackrat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+26 passed, 18 warnings in 2.37s

@@ -1,0 +1,21 @@
+{
+  "arm": "kitti_average_dropout",
+  "reason": "Shutdown before first full optimizer/scheduler recovery checkpoint",
+  "archived_attempt": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/interrupted_attempts/kitti_average_dropout_before_first_checkpoint_20261114",
+  "previous_progress": {
+    "status": "training",
+    "smoke_only": false,
+    "production_config_sha256": "42d99cff5c046ff4e92560c7cbdb05773b82880dfbf85b76d123c25c6f7ad86d",
+    "start_microbatch": 0,
+    "protected_tensors": 126,
+    "started_at": "2026-11-14T08:13:56.675200+00:00",
+    "resumed": false,
+    "expected_total_updates": 6190,
+    "completed_microbatches": 2500,
+    "optimizer_updates": 312,
+    "latest_loss": 0.47966527938842773,
+    "updated_at": "2026-11-14T08:23:07.251141+00:00",
+    "completed_epochs": 2
+  },
+  "action": "Fresh restart of this arm from identical seed-zero LiDAR/camera initialization; completed arms retained"
+}

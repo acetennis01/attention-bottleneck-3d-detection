@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "smoke_only": false,
+  "production_config_sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68",
+  "start_microbatch": 0,
+  "protected_tensors": 126,
+  "started_at": "2026-11-14T05:24:25.559672+00:00",
+  "resumed": false,
+  "expected_total_updates": 6190,
+  "completed_microbatches": 49520,
+  "optimizer_updates": 6190,
+  "latest_loss": 0.05190864950418472,
+  "updated_at": "2026-11-14T08:12:01.531424+00:00",
+  "completed_epochs": 40,
+  "frozen_lidar_and_head_unchanged": true,
+  "completed_at": "2026-11-14T08:13:28.511427+00:00"
+}

@@ -1,0 +1,386 @@
+{
+  "status": "running",
+  "stages": [
+    {
+      "name": "kitti_average_no_dropout",
+      "dataset": "kitti",
+      "arm": "average_no_dropout",
+      "changes": {
+        "use_bottleneck_gate": false,
+        "camera_drop_prob": 0.0
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_average_no_dropout.py",
+      "config_sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_no_dropout",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.camera_drop_prob",
+        "model.fusion_module.use_bottleneck_gate",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "training",
+      "preflight": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/preflights/kitti_average_no_dropout/preflight.json"
+    },
+    {
+      "name": "kitti_average_dropout",
+      "dataset": "kitti",
+      "arm": "average_dropout",
+      "changes": {
+        "use_bottleneck_gate": false
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_average_dropout.py",
+      "config_sha256": "42d99cff5c046ff4e92560c7cbdb05773b82880dfbf85b76d123c25c6f7ad86d",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_dropout",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.use_bottleneck_gate",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_gate_no_dropout",
+      "dataset": "kitti",
+      "arm": "gate_no_dropout",
+      "changes": {
+        "camera_drop_prob": 0.0
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_gate_no_dropout.py",
+      "config_sha256": "0b7ef5d8f00ff546ae44d5bce10ca5ef164324926d548f795578cd127e9c3fac",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_gate_no_dropout",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.camera_drop_prob",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_b1",
+      "dataset": "kitti",
+      "arm": "b1",
+      "changes": {
+        "num_bottleneck_tokens": 1
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b1.py",
+      "config_sha256": "7684e62ceed2162b7c49adea3c40181544ce037df355b54f481e4bbaf2fabfbc",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_b1",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_b2",
+      "dataset": "kitti",
+      "arm": "b2",
+      "changes": {
+        "num_bottleneck_tokens": 2
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b2.py",
+      "config_sha256": "2cb90d731a47ece05855959b15c4601f2dfd8d5c1d36fa899caae95911d022c1",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_b2",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_b4",
+      "dataset": "kitti",
+      "arm": "b4",
+      "changes": {
+        "num_bottleneck_tokens": 4
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b4.py",
+      "config_sha256": "3e70aa83d94ca980108bbbc3052c6a204ff5265a1b95f9df90ff3f49a3f67f23",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_b4",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_b16",
+      "dataset": "kitti",
+      "arm": "b16",
+      "changes": {
+        "num_bottleneck_tokens": 16
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b16.py",
+      "config_sha256": "a77b47ca4b584e842378cb65d93a41b1f2c4978a2d31d98ce471114f38ccae0e",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_b16",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_width128",
+      "dataset": "kitti",
+      "arm": "width128",
+      "changes": {
+        "embed_dim": 128
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_width128.py",
+      "config_sha256": "0f45a4d32e919b016e9b37e48d8bb2d91c728e4f3cf4b8a8e73840f7b0b98183",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_width128",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.embed_dim",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "kitti_width512",
+      "dataset": "kitti",
+      "arm": "width512",
+      "changes": {
+        "embed_dim": 512
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_width512.py",
+      "config_sha256": "7823e60f6ddb84ab030a97de7c1ff1a37463d44183b618fbf8549019c9e90d24",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_width512",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/gated_resolved_config.py",
+      "reference_config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "recipe_differences": [
+        "default_hooks.checkpoint.interval",
+        "model.fusion_module.embed_dim",
+        "test_evaluator.pklfile_prefix",
+        "val_evaluator.pklfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_average_no_dropout",
+      "dataset": "nuscenes",
+      "arm": "average_no_dropout",
+      "changes": {
+        "use_bottleneck_gate": false,
+        "camera_drop_prob": 0.0,
+        "camera_view_drop_prob": 0.0
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_average_no_dropout.py",
+      "config_sha256": "f1132ab98f4f44fc348cf72b639f412f7519964285ef30909b6cc4dab5d55de6",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_average_no_dropout",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.camera_drop_prob",
+        "model.fusion_module.camera_view_drop_prob",
+        "model.fusion_module.use_bottleneck_gate",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_average_dropout",
+      "dataset": "nuscenes",
+      "arm": "average_dropout",
+      "changes": {
+        "use_bottleneck_gate": false
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_average_dropout.py",
+      "config_sha256": "2b8fc47a3d1e6f2f3da29fd3d5b3adfb6a0f74472b7520a170a03ebf402fa347",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_average_dropout",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.use_bottleneck_gate",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_gate_no_dropout",
+      "dataset": "nuscenes",
+      "arm": "gate_no_dropout",
+      "changes": {
+        "camera_drop_prob": 0.0,
+        "camera_view_drop_prob": 0.0
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_gate_no_dropout.py",
+      "config_sha256": "8ea3c81a5cc469ad7eac0548e15c5fa6919902babb14eda25c602df9734b6e95",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_gate_no_dropout",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.camera_drop_prob",
+        "model.fusion_module.camera_view_drop_prob",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_b1",
+      "dataset": "nuscenes",
+      "arm": "b1",
+      "changes": {
+        "num_bottleneck_tokens": 1
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b1.py",
+      "config_sha256": "367214b1684c8946333bb1a0016cbbda144dceecb3af175fa3340703a568e514",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_b1",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_b2",
+      "dataset": "nuscenes",
+      "arm": "b2",
+      "changes": {
+        "num_bottleneck_tokens": 2
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b2.py",
+      "config_sha256": "064537d09a4e11844ae77f7788fe696b42631151ae7956f5146316501deacf88",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_b2",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_b4",
+      "dataset": "nuscenes",
+      "arm": "b4",
+      "changes": {
+        "num_bottleneck_tokens": 4
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b4.py",
+      "config_sha256": "7bc06272c7785c765a8d5dd8488609f29877b8497aec90c10df09fea4770dff2",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_b4",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_b16",
+      "dataset": "nuscenes",
+      "arm": "b16",
+      "changes": {
+        "num_bottleneck_tokens": 16
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b16.py",
+      "config_sha256": "51030ac9e0400bf2f6417888d798eb0bed08343490b80ffe97f0423553e99528",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_b16",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.num_bottleneck_tokens",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_width128",
+      "dataset": "nuscenes",
+      "arm": "width128",
+      "changes": {
+        "embed_dim": 128
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_width128.py",
+      "config_sha256": "dda360fd09f4c66adace0d4623b2350048ab11ec0e85118a292285393ca7165b",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_width128",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.embed_dim",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    },
+    {
+      "name": "nuscenes_width512",
+      "dataset": "nuscenes",
+      "arm": "width512",
+      "changes": {
+        "embed_dim": 512
+      },
+      "config": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_width512.py",
+      "config_sha256": "46ccf444bc45633730a753ef02e023841f17a2d2957a37874d43aab1a6dc79bf",
+      "work_dir": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/nuscenes_width512",
+      "reference_config": "/home/yab/mmdetection3d/work_dirs/part_b_20261107_transfusion_gated_full/transfusion_gated_full.py",
+      "reference_config_sha256": "18b0142409580ab1b97c0ce627bfda61bbc7ade22848252fee20dc78e7bebf07",
+      "recipe_differences": [
+        "model.fusion_module.embed_dim",
+        "test_evaluator.jsonfile_prefix",
+        "val_evaluator.jsonfile_prefix",
+        "work_dir"
+      ],
+      "status": "pending"
+    }
+  ],
+  "scope": "Full KITTI and nuScenes sweeps",
+  "reused_reference": "Completed gated B8/E256 on each dataset; no retraining of those arms",
+  "current_stage": "kitti_average_no_dropout"
+}

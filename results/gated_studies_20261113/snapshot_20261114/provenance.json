@@ -1,0 +1,129 @@
+{
+  "snapshot_at_utc": "2026-11-14T17:49:35.043480+00:00",
+  "queue_root": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3",
+  "source_root": "/home/yab/mmdetection3d/work_dirs/abfuse_gated_studies_20261113_source",
+  "export_scope": "Resolved configs, full completed validation history, selected metrics/checkpoint identities, audits, restart and queue records; no weights or predictions.",
+  "raw_file_sources": {
+    "snapshot_20261114/queue_status.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/status.json",
+      "sha256": "8689a134888edb07a1461b4fffe3ab6dbb9f2aea96c9bdce2e0f44f4821640ae"
+    },
+    "snapshot_20261114/restart_record.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/restart_record_20261114.json",
+      "sha256": "44b74169e40b9535979d0cf4719f6b42bbfa6728945f557084dede6ca2ba22aa"
+    },
+    "configs/kitti_average_no_dropout.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_average_no_dropout.py",
+      "sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68"
+    },
+    "snapshot_20261114/kitti_average_no_dropout/study_progress.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_no_dropout/study_progress.json",
+      "sha256": "df51d4fe8d3276cdf8a38c332d5d6fdfb318b8b6fdc650f0fe2ff473e71b40b1"
+    },
+    "snapshot_20261114/kitti_average_no_dropout/preflight.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/preflights/kitti_average_no_dropout/preflight.json",
+      "sha256": "2445b09c36e3e0365913a385acc7f7f85a2aeff0c7461948989412bde09bb52c"
+    },
+    "configs/kitti_average_dropout.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_average_dropout.py",
+      "sha256": "42d99cff5c046ff4e92560c7cbdb05773b82880dfbf85b76d123c25c6f7ad86d"
+    },
+    "snapshot_20261114/kitti_average_dropout/study_progress.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/runs/kitti_average_dropout/study_progress.json",
+      "sha256": "62ce7d3f3c0d672ae0086c51f17be35458c3d98b2216d60a07c761cc7456201c"
+    },
+    "snapshot_20261114/kitti_average_dropout/preflight.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/preflights/kitti_average_dropout/preflight.json",
+      "sha256": "d41453726f479cf5207bd55640abfaa8443dda2ce18b32fa4b9709fde2382b8f"
+    },
+    "configs/kitti_gate_no_dropout.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_gate_no_dropout.py",
+      "sha256": "0b7ef5d8f00ff546ae44d5bce10ca5ef164324926d548f795578cd127e9c3fac"
+    },
+    "configs/kitti_b1.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b1.py",
+      "sha256": "7684e62ceed2162b7c49adea3c40181544ce037df355b54f481e4bbaf2fabfbc"
+    },
+    "configs/kitti_b2.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b2.py",
+      "sha256": "2cb90d731a47ece05855959b15c4601f2dfd8d5c1d36fa899caae95911d022c1"
+    },
+    "configs/kitti_b4.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b4.py",
+      "sha256": "3e70aa83d94ca980108bbbc3052c6a204ff5265a1b95f9df90ff3f49a3f67f23"
+    },
+    "configs/kitti_b16.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_b16.py",
+      "sha256": "a77b47ca4b584e842378cb65d93a41b1f2c4978a2d31d98ce471114f38ccae0e"
+    },
+    "configs/kitti_width128.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_width128.py",
+      "sha256": "0f45a4d32e919b016e9b37e48d8bb2d91c728e4f3cf4b8a8e73840f7b0b98183"
+    },
+    "configs/kitti_width512.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/kitti_width512.py",
+      "sha256": "7823e60f6ddb84ab030a97de7c1ff1a37463d44183b618fbf8549019c9e90d24"
+    },
+    "configs/nuscenes_average_no_dropout.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_average_no_dropout.py",
+      "sha256": "f1132ab98f4f44fc348cf72b639f412f7519964285ef30909b6cc4dab5d55de6"
+    },
+    "configs/nuscenes_average_dropout.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_average_dropout.py",
+      "sha256": "2b8fc47a3d1e6f2f3da29fd3d5b3adfb6a0f74472b7520a170a03ebf402fa347"
+    },
+    "configs/nuscenes_gate_no_dropout.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_gate_no_dropout.py",
+      "sha256": "8ea3c81a5cc469ad7eac0548e15c5fa6919902babb14eda25c602df9734b6e95"
+    },
+    "configs/nuscenes_b1.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b1.py",
+      "sha256": "367214b1684c8946333bb1a0016cbbda144dceecb3af175fa3340703a568e514"
+    },
+    "configs/nuscenes_b2.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b2.py",
+      "sha256": "064537d09a4e11844ae77f7788fe696b42631151ae7956f5146316501deacf88"
+    },
+    "configs/nuscenes_b4.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b4.py",
+      "sha256": "7bc06272c7785c765a8d5dd8488609f29877b8497aec90c10df09fea4770dff2"
+    },
+    "configs/nuscenes_b16.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_b16.py",
+      "sha256": "51030ac9e0400bf2f6417888d798eb0bed08343490b80ffe97f0423553e99528"
+    },
+    "configs/nuscenes_width128.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_width128.py",
+      "sha256": "dda360fd09f4c66adace0d4623b2350048ab11ec0e85118a292285393ca7165b"
+    },
+    "configs/nuscenes_width512.py": {
+      "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113_v3/configs/nuscenes_width512.py",
+      "sha256": "46ccf444bc45633730a753ef02e023841f17a2d2957a37874d43aab1a6dc79bf"
+    },
+    "snapshot_20261114/source_manifest_v4.json": {
+      "source": "/home/yab/mmdetection3d/work_dirs/abfuse_gated_studies_20261113_source/final_source_manifest_v4.json",
+      "sha256": "81349cd53e6eb661dc1b6b2d2b75a4f7b027b4f66bd7d2b54d4266a7b4eb966a"
+    },
+    "snapshot_20261114/recovery_tests.log": {
+      "source": "/home/yab/mmdetection3d/work_dirs/abfuse_gated_studies_20261113_source/recovery_tests_20261114.log",
+      "sha256": "e528cf177f7dd48dc680100c4d062c37ca99bd9094f740fc985310e4229c6cce"
+    },
+    "snapshot_20261114/abfuse-gated-studies-20261113.service": {
+      "source": "/home/yab/.config/systemd/user/abfuse-gated-studies-20261113.service",
+      "sha256": "b51d84d0c01ff9f95fe94888ab83c01c69fdf853d1c296d491c54a68c44f7791"
+    }
+  },
+  "study_code_sha256": {
+    "tools/gated_study_plan.py": "4e5b73f194ef1cbede0df52eac7a0dabb47479efd98e6d846c38138644154506",
+    "tools/run_gated_studies.py": "b091e8ca9ee87399dc04ad2aeae31787a040c86759af1cdfb8d6ae4259495c95",
+    "tools/measure_gated_study_compute.py": "c26e548e51997c58727be771c3bf315a640d7d0d0b73393408ef17c3740a74de",
+    "tests/test_gated_study_plan.py": "a3535f20326a476d9732d3be6908a83c972001e746741c5cb1845dd9f5652434",
+    "tests/test_gated_compute_counts.py": "79e3bafec718ad33368749d5a456fe1d56f3bc071937af897ab64e1018235f19"
+  },
+  "compute_report": {
+    "source": "/home/yab/mmdetection3d/work_dirs/gated_studies_20261113/compute_v2.json",
+    "sha256": "91968b271c1b9ed6191d3def475cf1346093155cfd021d6dc77298312ee63481"
+  },
+  "service_state": "ActiveState=active\nSubState=running\n",
+  "gpu_snapshot": "NVIDIA GeForce RTX 4090, 89 %, 7762 MiB\n"
+}
