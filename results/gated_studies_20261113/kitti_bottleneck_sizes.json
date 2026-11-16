@@ -1,0 +1,85 @@
+{
+  "dataset": "KITTI validation",
+  "frames": 3769,
+  "seed": 0,
+  "training_epochs": 40,
+  "model": "Gated ABFuse, ResNet-50/FPN + PointPillars, E256, camera dropout 0.20",
+  "selection": "Best clean moderate overall 3D AP40; BEV is from the same checkpoint",
+  "results": [
+    {
+      "bottleneck_tokens": 1,
+      "selected_metrics": {
+        "epoch": 24,
+        "moderate_3d_ap40": 40.9047,
+        "moderate_bev_ap40": 53.4498
+      },
+      "checkpoint_sha256": "eb86665337151c707007114e0f32ae7f4a58badd6de215617d1592b7738f2628",
+      "config_sha256": "7684e62ceed2162b7c49adea3c40181544ce037df355b54f481e4bbaf2fabfbc",
+      "validation_log_sha256": "46af8c156be88ff10785f0bfeffec98df953b676b53ba20f6b0612fc782103c1",
+      "evaluations": 20,
+      "optimizer_updates": 6190,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed_from_epoch": null
+    },
+    {
+      "bottleneck_tokens": 2,
+      "selected_metrics": {
+        "epoch": 16,
+        "moderate_3d_ap40": 41.6289,
+        "moderate_bev_ap40": 54.3788
+      },
+      "checkpoint_sha256": "785586b348cdabf269c324e26a892fcce66257cf63bd60886bc4b9d7b1246a18",
+      "config_sha256": "2cb90d731a47ece05855959b15c4601f2dfd8d5c1d36fa899caae95911d022c1",
+      "validation_log_sha256": "c9e02f0c77fa0836ee468837ae1b640e2d56abf7167f3e14ca539563736f719a",
+      "evaluations": 20,
+      "optimizer_updates": 6190,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed_from_epoch": null
+    },
+    {
+      "bottleneck_tokens": 4,
+      "selected_metrics": {
+        "epoch": 14,
+        "moderate_3d_ap40": 40.7389,
+        "moderate_bev_ap40": 52.6713
+      },
+      "checkpoint_sha256": "9be67ae265740f0c7470a9fc8d698646c64866d8e6dfc8c63b2243561308d3d9",
+      "config_sha256": "3e70aa83d94ca980108bbbc3052c6a204ff5265a1b95f9df90ff3f49a3f67f23",
+      "validation_log_sha256": "ee1621dbce8fd20e90e3c113b2c91147ada7b35d89625747f7bc037641baf166",
+      "evaluations": 20,
+      "optimizer_updates": 6190,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed_from_epoch": null
+    },
+    {
+      "bottleneck_tokens": 8,
+      "selected_metrics": {
+        "epoch": 18,
+        "moderate_3d_ap40": 42.049,
+        "moderate_bev_ap40": 54.6942
+      },
+      "checkpoint_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+      "config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+      "validation_log_sha256": "58c906969bc6f889ad1aaa553abaaf9876fa1080b45d4a84db3a63f10e44e569",
+      "evaluations": 20,
+      "optimizer_updates": 6190,
+      "frozen_lidar_and_head_unchanged": true,
+      "reused_reference": true
+    },
+    {
+      "bottleneck_tokens": 16,
+      "selected_metrics": {
+        "epoch": 16,
+        "moderate_3d_ap40": 40.9294,
+        "moderate_bev_ap40": 54.1006
+      },
+      "checkpoint_sha256": "b4ae7cd8d54c9e51af02a3bf38d95f794efbd17895c3e17317fc1bb4d8cceb8a",
+      "config_sha256": "a77b47ca4b584e842378cb65d93a41b1f2c4978a2d31d98ce471114f38ccae0e",
+      "validation_log_sha256": "54e4d90086eaa9031616b118978d7b5b030e9c132f6f9344c6f7e6c362f444fc",
+      "evaluations": 20,
+      "optimizer_updates": 6190,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed_from_epoch": 4
+    }
+  ]
+}
