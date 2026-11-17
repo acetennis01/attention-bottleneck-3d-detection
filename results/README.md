@@ -5,6 +5,12 @@ KITTI overall AP40 averages Car, Pedestrian and Cyclist. nuScenes mAP/NDS in
 the tables below are percentages; official devkit JSON files retain unit scale.
 Use one selected checkpoint for all metrics of a model, not separate metric maxima.
 
+## Gated KITTI ablations
+
+[Completed gated KITTI studies](gated_studies_20261113/README.md) report
+the bottleneck-count, gate and camera-dropout, and fusion-width comparisons,
+with validation histories, checkpoint hashes, and component GFLOPs.
+
 ## November 10 follow-up
 
 [Completed Run 1 and combined comparison](part_b_20261110/README.md) add the

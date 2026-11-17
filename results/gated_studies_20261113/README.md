@@ -14,22 +14,32 @@ Fusion width is 256 and training camera dropout is 20% for all models.
 Scores use all 3,769 clean KITTI validation frames. The 8-token row is the existing reference.
 [Run records](kitti_bottleneck_sizes.json)
 
-## November 14 snapshot
+## KITTI gate and camera dropout
 
-Snapshot: November 14, 2026, 09:49 PST.
+Eight tokens and width 256. Camera dropout, when enabled, is 20%.
 
-| KITTI model | Status | Best epoch | 3D AP40 | BEV AP40 |
+| Update | Camera dropout | Best epoch | Moderate 3D AP40 | Moderate BEV AP40 |
 |---|---|---:|---:|---:|
-| Average bottleneck, no dropout | Completed 40 epochs | 14 | 41.7982 | 53.9732 |
-| Gated B8/E256 + dropout | Completed reference | 18 | 42.0490 | 54.6942 |
-| Average bottleneck + dropout | Training: 6/40 epochs completed | — | — | — |
+| Average | Off | 14 | 41.7982 | 53.9732 |
+| Average | On | 30 | 41.9867 | 54.2849 |
+| Gated | Off | 30 | 41.4109 | 53.3112 |
+| Gated | On | 18 | 42.0490 | 54.6942 |
 
-AP40: moderate difficulty, mean across Car/Pedestrian/Cyclist, all 3,769
-validation frames. BEV uses the checkpoint selected by 3D AP40.
+## KITTI fusion width
 
-New sweep: **1 completed, 1 training, 16 pending** across KITTI and nuScenes.
+Eight tokens, gated fusion and 20% camera dropout. Both sensor backbones are fixed across these runs.
 
-[Code tests](publication_tests_20261114.log): **27 passed**.
+| Width | Best epoch | Moderate 3D AP40 | Moderate BEV AP40 | Fusion GFLOPs |
+|---:|---:|---:|---:|---:|
+| 128 | 14 | 42.4193 | 54.1193 | 6.12 |
+| 256 | 18 | 42.0490 | 54.6942 | 13.09 |
+| 512 | 14 | 40.8755 | 53.1350 | 29.58 |
 
-[Full validation history](kitti_average_no_dropout/summary.json) ·
-[Component compute results](compute_components.json)
+All KITTI arms completed 40 epochs with seed 0. Selection uses clean
+moderate 3D AP40 on all 3,769 validation frames. BEV is from the same
+checkpoint. GFLOPs count supported fusion operations at batch size one
+with one FLOP per fused multiply-add.
+
+[Validation histories and hashes](kitti_component_and_width.json) ·
+[Component compute](compute_components.json) ·
+[November 14 queue snapshot](snapshot_20261114/queue_status.json)

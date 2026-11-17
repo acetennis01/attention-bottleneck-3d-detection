@@ -1,0 +1,631 @@
+{
+  "dataset": "KITTI validation",
+  "frames": 3769,
+  "seed": 0,
+  "model": "ResNet-50/FPN and frozen PointPillars; eight bottleneck tokens",
+  "selection": "Best clean moderate overall 3D AP40; BEV AP40 is from the same checkpoint",
+  "source_queue": "gated_studies_20261113_v3",
+  "gated_reference": {
+    "source": "kitti_bottleneck_sizes.json",
+    "bottleneck_tokens": 8,
+    "selected_metrics": {
+      "epoch": 18,
+      "moderate_3d_ap40": 42.049,
+      "moderate_bev_ap40": 54.6942
+    },
+    "checkpoint_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+    "config_sha256": "a3211a35b551b35fc3054269aff675bdca34fa810987aaa6e7b80422f5668ebe",
+    "validation_log_sha256": "58c906969bc6f889ad1aaa553abaaf9876fa1080b45d4a84db3a63f10e44e569",
+    "evaluations": 20,
+    "optimizer_updates": 6190,
+    "frozen_lidar_and_head_unchanged": true,
+    "reused_reference": true
+  },
+  "runs": {
+    "kitti_average_no_dropout": {
+      "selected_metrics": {
+        "epoch": 14,
+        "moderate_3d_ap40": 41.7982,
+        "moderate_bev_ap40": 53.9732
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 38.3782,
+          "moderate_bev_ap40": 52.229
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 38.2766,
+          "moderate_bev_ap40": 51.706
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 39.2636,
+          "moderate_bev_ap40": 51.6425
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 39.7251,
+          "moderate_bev_ap40": 52.7143
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 40.9079,
+          "moderate_bev_ap40": 53.3017
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 40.3781,
+          "moderate_bev_ap40": 53.6483
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 41.7982,
+          "moderate_bev_ap40": 53.9732
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 41.0331,
+          "moderate_bev_ap40": 54.2187
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 41.0422,
+          "moderate_bev_ap40": 53.8632
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 40.3087,
+          "moderate_bev_ap40": 53.465
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 40.3845,
+          "moderate_bev_ap40": 54.0568
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 41.7009,
+          "moderate_bev_ap40": 53.8153
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 41.1993,
+          "moderate_bev_ap40": 54.0456
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 41.096,
+          "moderate_bev_ap40": 53.5185
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 41.1463,
+          "moderate_bev_ap40": 53.5509
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 40.3415,
+          "moderate_bev_ap40": 52.9213
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 40.3697,
+          "moderate_bev_ap40": 52.9172
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 40.4676,
+          "moderate_bev_ap40": 53.158
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 40.1958,
+          "moderate_bev_ap40": 52.8018
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 40.2571,
+          "moderate_bev_ap40": 52.822
+        }
+      ],
+      "checkpoint_sha256": "b906b0cb87e6c14a6de1c9d2e4ddf3a6e6b90166e6d474e253ffc4ca38c63a24",
+      "production_config_sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68",
+      "run_config_sha256": "3cc98ee45e57c57a2c384eb74c47e82bf3f79cd924f0ddac06ff58166041bf68",
+      "validation_log_hashes": {
+        "20261113_212420/vis_data/scalars.json": "20e30502d39e4eb9954c5db00d8afa31551743b2b623992ae14f80f98f75ecce"
+      },
+      "completed_epochs": 40,
+      "completed_microbatches": 49520,
+      "optimizer_updates": 6190,
+      "protected_tensors": 126,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed": false
+    },
+    "kitti_average_dropout": {
+      "selected_metrics": {
+        "epoch": 30,
+        "moderate_3d_ap40": 41.9867,
+        "moderate_bev_ap40": 54.2849
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 39.7403,
+          "moderate_bev_ap40": 52.2904
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 38.0063,
+          "moderate_bev_ap40": 51.8406
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 38.2853,
+          "moderate_bev_ap40": 51.1151
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 41.1484,
+          "moderate_bev_ap40": 53.1411
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 40.3092,
+          "moderate_bev_ap40": 53.4473
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 39.4383,
+          "moderate_bev_ap40": 52.8027
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 41.5736,
+          "moderate_bev_ap40": 53.0449
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 40.3736,
+          "moderate_bev_ap40": 53.3037
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 41.0505,
+          "moderate_bev_ap40": 53.8617
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 41.9202,
+          "moderate_bev_ap40": 53.7159
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 40.0899,
+          "moderate_bev_ap40": 53.7896
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 41.1359,
+          "moderate_bev_ap40": 53.4901
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 41.8292,
+          "moderate_bev_ap40": 53.597
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 41.154,
+          "moderate_bev_ap40": 53.5636
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 41.9867,
+          "moderate_bev_ap40": 54.2849
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 41.064,
+          "moderate_bev_ap40": 53.5336
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 41.6657,
+          "moderate_bev_ap40": 53.6061
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 41.3028,
+          "moderate_bev_ap40": 53.5677
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 41.7298,
+          "moderate_bev_ap40": 53.5602
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 41.4896,
+          "moderate_bev_ap40": 53.1652
+        }
+      ],
+      "checkpoint_sha256": "b9996ff3481d409be38acd88ce074311cbaadbf2f674fa19a8bea3e3b086a640",
+      "production_config_sha256": "42d99cff5c046ff4e92560c7cbdb05773b82880dfbf85b76d123c25c6f7ad86d",
+      "run_config_sha256": "42d99cff5c046ff4e92560c7cbdb05773b82880dfbf85b76d123c25c6f7ad86d",
+      "validation_log_hashes": {
+        "20261114_092337/vis_data/scalars.json": "c7616c0932296a8a56987c209f73f0e798ac38d791e24d112df7920172271796"
+      },
+      "completed_epochs": 40,
+      "completed_microbatches": 49520,
+      "optimizer_updates": 6190,
+      "protected_tensors": 126,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed": false
+    },
+    "kitti_gate_no_dropout": {
+      "selected_metrics": {
+        "epoch": 30,
+        "moderate_3d_ap40": 41.4109,
+        "moderate_bev_ap40": 53.3112
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 37.7575,
+          "moderate_bev_ap40": 51.9
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 37.7891,
+          "moderate_bev_ap40": 50.9751
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 39.3419,
+          "moderate_bev_ap40": 51.7352
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 40.3585,
+          "moderate_bev_ap40": 52.552
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 38.0603,
+          "moderate_bev_ap40": 51.0721
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 40.0579,
+          "moderate_bev_ap40": 52.9095
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 40.4643,
+          "moderate_bev_ap40": 53.1566
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 41.1968,
+          "moderate_bev_ap40": 53.2264
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 40.4674,
+          "moderate_bev_ap40": 52.8944
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 41.2463,
+          "moderate_bev_ap40": 53.3667
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 40.4891,
+          "moderate_bev_ap40": 53.877
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 40.6474,
+          "moderate_bev_ap40": 53.5274
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 40.7971,
+          "moderate_bev_ap40": 53.3652
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 40.2609,
+          "moderate_bev_ap40": 53.3087
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 41.4109,
+          "moderate_bev_ap40": 53.3112
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 41.3964,
+          "moderate_bev_ap40": 53.3113
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 40.9122,
+          "moderate_bev_ap40": 53.0673
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 40.5012,
+          "moderate_bev_ap40": 52.8945
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 40.2406,
+          "moderate_bev_ap40": 52.6102
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 40.1247,
+          "moderate_bev_ap40": 52.4841
+        }
+      ],
+      "checkpoint_sha256": "720f15d4d87aff4acfcd1e7eedc4af7d0386ccdbed6471d07ee112b9f1f59d03",
+      "production_config_sha256": "0b7ef5d8f00ff546ae44d5bce10ca5ef164324926d548f795578cd127e9c3fac",
+      "run_config_sha256": "0b7ef5d8f00ff546ae44d5bce10ca5ef164324926d548f795578cd127e9c3fac",
+      "validation_log_hashes": {
+        "20261114_120356/vis_data/scalars.json": "2868553eab359d04fb2ae8eee6b5e4701544f12d354fd56d0f7ae4d848fd59e0"
+      },
+      "completed_epochs": 40,
+      "completed_microbatches": 49520,
+      "optimizer_updates": 6190,
+      "protected_tensors": 126,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed": false
+    },
+    "kitti_width128": {
+      "selected_metrics": {
+        "epoch": 14,
+        "moderate_3d_ap40": 42.4193,
+        "moderate_bev_ap40": 54.1193
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 40.0813,
+          "moderate_bev_ap40": 52.3683
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 38.8692,
+          "moderate_bev_ap40": 52.3417
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 39.3486,
+          "moderate_bev_ap40": 52.3259
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 40.2874,
+          "moderate_bev_ap40": 53.2264
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 39.1248,
+          "moderate_bev_ap40": 51.59
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 39.6728,
+          "moderate_bev_ap40": 52.7631
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 42.4193,
+          "moderate_bev_ap40": 54.1193
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 40.779,
+          "moderate_bev_ap40": 53.8524
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 41.7112,
+          "moderate_bev_ap40": 54.4015
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 41.4905,
+          "moderate_bev_ap40": 53.2874
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 39.3559,
+          "moderate_bev_ap40": 52.4515
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 40.5824,
+          "moderate_bev_ap40": 53.205
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 40.545,
+          "moderate_bev_ap40": 53.152
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 40.2953,
+          "moderate_bev_ap40": 52.7282
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 39.0404,
+          "moderate_bev_ap40": 51.984
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 39.628,
+          "moderate_bev_ap40": 52.1305
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 39.875,
+          "moderate_bev_ap40": 52.3563
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 39.8409,
+          "moderate_bev_ap40": 52.1111
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 39.1388,
+          "moderate_bev_ap40": 51.641
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 38.9982,
+          "moderate_bev_ap40": 51.641
+        }
+      ],
+      "checkpoint_sha256": "85f3fa01a069d9c60604e39eb3c3d1fbabd6d2922dc6b2b6b97848bb191bc833",
+      "production_config_sha256": "0f45a4d32e919b016e9b37e48d8bb2d91c728e4f3cf4b8a8e73840f7b0b98183",
+      "run_config_sha256": "0f45a4d32e919b016e9b37e48d8bb2d91c728e4f3cf4b8a8e73840f7b0b98183",
+      "validation_log_hashes": {
+        "20261115_131259/vis_data/scalars.json": "83865c7014014a579186d8ef14c6a6427c03acea8833b9d01d6a9ecfba9c780d"
+      },
+      "completed_epochs": 40,
+      "completed_microbatches": 49520,
+      "optimizer_updates": 6190,
+      "protected_tensors": 126,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed": false
+    },
+    "kitti_width512": {
+      "selected_metrics": {
+        "epoch": 14,
+        "moderate_3d_ap40": 40.8755,
+        "moderate_bev_ap40": 53.135
+      },
+      "validation_history": [
+        {
+          "epoch": 2,
+          "moderate_3d_ap40": 37.8118,
+          "moderate_bev_ap40": 52.2623
+        },
+        {
+          "epoch": 4,
+          "moderate_3d_ap40": 35.8729,
+          "moderate_bev_ap40": 52.1697
+        },
+        {
+          "epoch": 6,
+          "moderate_3d_ap40": 37.929,
+          "moderate_bev_ap40": 52.0249
+        },
+        {
+          "epoch": 8,
+          "moderate_3d_ap40": 37.7548,
+          "moderate_bev_ap40": 52.1622
+        },
+        {
+          "epoch": 10,
+          "moderate_3d_ap40": 39.6385,
+          "moderate_bev_ap40": 52.114
+        },
+        {
+          "epoch": 12,
+          "moderate_3d_ap40": 39.9265,
+          "moderate_bev_ap40": 53.3867
+        },
+        {
+          "epoch": 14,
+          "moderate_3d_ap40": 40.8755,
+          "moderate_bev_ap40": 53.135
+        },
+        {
+          "epoch": 16,
+          "moderate_3d_ap40": 40.4698,
+          "moderate_bev_ap40": 53.3344
+        },
+        {
+          "epoch": 18,
+          "moderate_3d_ap40": 39.2433,
+          "moderate_bev_ap40": 52.6767
+        },
+        {
+          "epoch": 20,
+          "moderate_3d_ap40": 40.3715,
+          "moderate_bev_ap40": 53.2058
+        },
+        {
+          "epoch": 22,
+          "moderate_3d_ap40": 40.5185,
+          "moderate_bev_ap40": 53.0725
+        },
+        {
+          "epoch": 24,
+          "moderate_3d_ap40": 40.6817,
+          "moderate_bev_ap40": 52.8286
+        },
+        {
+          "epoch": 26,
+          "moderate_3d_ap40": 40.732,
+          "moderate_bev_ap40": 53.162
+        },
+        {
+          "epoch": 28,
+          "moderate_3d_ap40": 39.7229,
+          "moderate_bev_ap40": 53.0216
+        },
+        {
+          "epoch": 30,
+          "moderate_3d_ap40": 40.8554,
+          "moderate_bev_ap40": 53.0361
+        },
+        {
+          "epoch": 32,
+          "moderate_3d_ap40": 40.8063,
+          "moderate_bev_ap40": 53.5257
+        },
+        {
+          "epoch": 34,
+          "moderate_3d_ap40": 39.5913,
+          "moderate_bev_ap40": 52.8534
+        },
+        {
+          "epoch": 36,
+          "moderate_3d_ap40": 40.1392,
+          "moderate_bev_ap40": 53.0796
+        },
+        {
+          "epoch": 38,
+          "moderate_3d_ap40": 40.2952,
+          "moderate_bev_ap40": 52.9131
+        },
+        {
+          "epoch": 40,
+          "moderate_3d_ap40": 40.3656,
+          "moderate_bev_ap40": 52.9172
+        }
+      ],
+      "checkpoint_sha256": "970dd8f67ba0228e469e4df3e857552683f0c8303343d259b965a88616d87abc",
+      "production_config_sha256": "7823e60f6ddb84ab030a97de7c1ff1a37463d44183b618fbf8549019c9e90d24",
+      "run_config_sha256": "7823e60f6ddb84ab030a97de7c1ff1a37463d44183b618fbf8549019c9e90d24",
+      "validation_log_hashes": {
+        "20261115_170307/vis_data/scalars.json": "2a6b0b38ca6ad0b2613444907b3f2e509c50f592e8e2d6057ebd6117ff94a313"
+      },
+      "completed_epochs": 40,
+      "completed_microbatches": 49520,
+      "optimizer_updates": 6190,
+      "protected_tensors": 126,
+      "frozen_lidar_and_head_unchanged": true,
+      "resumed": false
+    }
+  }
+}
