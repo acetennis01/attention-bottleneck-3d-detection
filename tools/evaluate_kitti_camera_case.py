@@ -21,25 +21,29 @@ from mmengine.utils import import_modules_from_strings
 
 def camera_pipeline(pipeline, mode, split_file, seed=0):
     pipeline = copy.deepcopy(pipeline)
-    if mode == 'correct':
+    if mode in ('correct', 'missing'):
         return pipeline
     image_load = next((index for index, step in enumerate(pipeline)
                        if step['type'].endswith('LoadImageFromFile')), None)
     if image_load is None:
         raise ValueError('Camera corruption requires an image-loading pipeline')
-    if any(step['type'] in ('BlackImage', 'ShuffleKittiImagePath')
+    if any(step['type'] in ('BlackImage', 'ShuffleKittiImagePath',
+                            'KittiQualityCorruption', 'KittiRandomQualityCorruption')
            for step in pipeline):
         raise ValueError('Use a clean source config, not an ablation config')
     if mode == 'shuffled':
         pipeline.insert(image_load, dict(
             type='ShuffleKittiImagePath', split_file=split_file, seed=seed))
-    elif mode == 'black':
+    elif mode in ('black', 'dim', 'blurred', 'occluded'):
         # After resizing but before packing/normalization, matching the
         # repository's existing black-image protocol.
         index = image_load + 1
         while index < len(pipeline) and pipeline[index]['type'] == 'Resize':
             index += 1
-        pipeline.insert(index, dict(type='BlackImage'))
+        if mode == 'black':
+            pipeline.insert(index, dict(type='BlackImage'))
+        else:
+            pipeline.insert(index, dict(type='KittiQualityCorruption', condition=mode))
     else:
         raise ValueError(f'Unknown camera mode: {mode}')
     return pipeline
@@ -49,8 +53,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', required=True)
     parser.add_argument('--checkpoint', required=True)
-    parser.add_argument('--mode', choices=('correct', 'black', 'shuffled'),
+    parser.add_argument('--mode', choices=('correct', 'black', 'shuffled',
+                        'dim', 'blurred', 'occluded', 'missing'),
                         required=True)
+    quality = parser.add_mutually_exclusive_group()
+    quality.add_argument('--ignore-camera-quality', action='store_true')
+    quality.add_argument('--fixed-camera-quality', type=float)
     parser.add_argument('--work-dir', required=True)
     parser.add_argument('--memory-fraction', type=float, default=0.20)
     parser.add_argument('--split-file', default='data/kitti/ImageSets/val.txt')
@@ -74,8 +82,21 @@ def main():
         ablation_import = 'projects.myfusion.transforms.image_ablation'
         if ablation_import not in imports:
             imports.append(ablation_import)
+        if args.mode in ('dim', 'blurred', 'occluded'):
+            imports.append('projects.myfusion.transforms.kitti_quality_eval')
         cfg.custom_imports = dict(imports=imports, allow_failed_imports=False)
         import_modules_from_strings(**cfg.custom_imports)
+        if args.ignore_camera_quality or args.fixed_camera_quality is not None:
+            if cfg.model.type != 'KittiQualityWeightedDetector':
+                raise ValueError('Overriding camera quality requires the quality pilot model')
+            cfg.model.use_camera_quality = not args.ignore_camera_quality
+            cfg.model.fixed_camera_quality = args.fixed_camera_quality
+        report['ignored_camera_quality'] = args.ignore_camera_quality
+        report['fixed_camera_quality'] = args.fixed_camera_quality
+        if args.mode == 'missing':
+            if not cfg.model.get('fusion_module', {}).get('bypass_missing'):
+                raise ValueError('Explicit camera absence requires a LiDAR bypass')
+            cfg.model.fusion_module.camera_mode = 'missing'
         pipeline = camera_pipeline(
             cfg.test_dataloader.dataset.pipeline, args.mode, args.split_file)
         if cfg.test_dataloader.dataset.get('indices') is not None:
@@ -119,8 +140,9 @@ def main():
         report['gpu'] = torch.cuda.get_device_name()
         report['memory_fraction'] = args.memory_fraction
         sampled_checks = [0]
+        quality_weights = []
 
-        def check_eval(module, _inputs, result):
+        def check_eval(module, inputs, result):
             if module.training:
                 raise RuntimeError('Fusion module is not in eval mode')
             if sampled_checks[0] % 250 == 0:
@@ -128,6 +150,11 @@ def main():
                     raise RuntimeError('LiDAR masking was active during evaluation')
                 if not torch.isfinite(result['bev_features']).all():
                     raise RuntimeError('Non-finite evaluation features')
+            if args.mode == 'missing' and not torch.equal(
+                    inputs[1], result['bev_features']):
+                raise RuntimeError('Missing cameras did not return identical LiDAR features')
+            if 'camera_residual_weight' in result:
+                quality_weights.append(result['camera_residual_weight'].detach().cpu())
             sampled_checks[0] += 1
 
         handle = None
@@ -147,6 +174,16 @@ def main():
             raise RuntimeError('Persisted prediction count differs from validation')
         report['predictions'] = str(predictions)
         report['fusion_eval_batches_checked'] = sampled_checks[0]
+        if args.mode == 'missing':
+            if sampled_checks[0] != samples:
+                raise RuntimeError('Missing-camera identity was not checked on the entire split')
+            report['missing_lidar_feature_identity'] = True
+        if quality_weights:
+            weights = torch.cat(quality_weights).float()
+            quantiles = weights.quantile(torch.tensor([0.1, 0.5, 0.9]))
+            report['camera_residual_weight'] = dict(
+                mean=weights.mean().item(), p10=quantiles[0].item(),
+                median=quantiles[1].item(), p90=quantiles[2].item())
         report['peak_gpu_allocated_mib'] = torch.cuda.max_memory_allocated() / 2**20
         report['elapsed_seconds'] = time.monotonic() - start
         report['status'] = 'passed'

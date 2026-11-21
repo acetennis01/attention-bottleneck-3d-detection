@@ -131,6 +131,8 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
         image_valid_mask: Tensor, sampling_weights: Tensor,
         return_attention: bool = False,
         sampling_attention_key: str = 'image_height_weights',
+        residual_weight: Optional[Tensor] = None,
+        modality_quality: Optional[Tensor] = None,
     ) -> Dict[str, Tensor]:
         """Shared V2 graph after single- or multi-view geometric sampling.
 
@@ -174,7 +176,7 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
             lidar_tokens = lidar_updated[:, :lidar_length]
             bottlenecks = self._combine_bottlenecks(
                 image_updated[:, image_length:],
-                lidar_updated[:, lidar_length:], layer_index)
+                lidar_updated[:, lidar_length:], layer_index, modality_quality)
 
         image_tokens = self.image_norm(image_tokens)
         lidar_tokens = self.lidar_norm(lidar_tokens)
@@ -191,7 +193,10 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
             align_corners=False)
         # Keep the historical unrestricted residual's capacity. In particular,
         # do not cap the camera's possible correction at 0.1 per BEV feature.
-        fused = lidar_bypass + self.bev_residual(token_map)
+        delta = self.bev_residual(token_map)
+        if residual_weight is not None:
+            delta = delta * residual_weight.to(delta)[:, None, None, None]
+        fused = lidar_bypass + delta
         sums = sampling_weights.detach().float().reshape(
             batch_size, -1, *self.token_grid_size).sum(1).flatten(1)
         visible_sums = sums[image_valid_mask[..., 0]]
@@ -225,6 +230,7 @@ class CameraFocusedMBTBEVFusionV2(SymmetricMBTBEVFusion):
 
     def _combine_bottlenecks(
         self, image: Tensor, lidar: Tensor, layer_index: int,
+        modality_quality: Optional[Tensor] = None,
     ) -> Tensor:
         """Historical arithmetic; new exchange rules opt in by subclassing."""
         return 0.5 * (image + lidar)

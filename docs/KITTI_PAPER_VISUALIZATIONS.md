@@ -3,6 +3,12 @@
 Generated on 2026-11-02 with the larger ResNet-50/FPN, 256-D, eight-token
 ABFuse model's selected epoch-14 checkpoint. These replace the historical
 four-token model's illustrations, not its reported experimental results.
+This is the averaged model, not the later gated epoch-18 reference.
+
+Historical failure-case rendering is available in
+`tools/render_kitti_failure_cases.py`. It consumes a passed full-validation
+report and persisted predictions from that same epoch-14 checkpoint; it does
+not run training or relabel those examples as gated-model predictions.
 
 Local outputs: `work_dirs/kitti_paper_figures_20261102_b8/`.
 The same directory exists under `/home/yab/mmdetection3d/` on Haddr's PC.

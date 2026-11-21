@@ -63,4 +63,6 @@ Disposable head-only refits: 1,200 steps, 64 training frames and 64 separate val
 
 ## Evidence
 
+[Implementation and reproduction](../../docs/SENSOR_RELIABILITY.md) · [Executed configs](configs/)
+
 Completed preflights checked strict loading, finite gate/quality gradients, frozen tensors and exact explicit-camera-absence feature identity. The archived regression log records 34 passing tests. `recipe.json` retains its original pre-launch `planned` status; the completion records and evaluation results above establish completion. `source_manifest.json` identifies the run source snapshot by hashes; it is not a claim that the working-tree prototype code has been committed. No weights, datasets, predictions or manuscript files are included. [Bundle checksums](provenance.json).

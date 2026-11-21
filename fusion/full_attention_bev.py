@@ -84,7 +84,8 @@ class FullAttentionBEVFusion(GatedCameraMBTBEVFusion):
 
     def _fuse_aligned_features(
             self, lidar_features, aligned, image_valid_mask, sampling_weights,
-            return_attention=False, sampling_attention_key='image_height_weights'):
+            return_attention=False, sampling_attention_key='image_height_weights',
+            residual_weight=None):
         batch = lidar_features.shape[0]
         image = aligned + self.aligned_bev_position + self.image_modality
         aux_tokens = self.camera_aux_norm(image)
@@ -117,8 +118,11 @@ class FullAttentionBEVFusion(GatedCameraMBTBEVFusion):
         sums = sampling_weights.detach().float().reshape(
             batch, -1, *self.token_grid_size).sum(1).flatten(1)
         visible = sums[image_valid_mask[..., 0]]
+        delta = self.bev_residual(token_map)
+        if residual_weight is not None:
+            delta = delta * residual_weight.to(delta)[:, None, None, None]
         output = dict(
-            bev_features=bypass + self.bev_residual(token_map),
+            bev_features=bypass + delta,
             image_tokens=image, lidar_tokens=lidar,
             lidar_tokens_pre_readout=pre_readout, fusion_context_tokens=context,
             camera_aux_tokens=aux_tokens, camera_aux_logits=aux_logits,

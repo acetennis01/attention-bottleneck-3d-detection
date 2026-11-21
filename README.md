@@ -12,29 +12,30 @@ paper's model name is **ABFuse**. Class names are retained for checkpoint compat
 
 ## Results at a glance
 
-These are **validation-split** results, not KITTI test-server submissions.
-KITTI AP40 is averaged over Car, Pedestrian and Cyclist. nuScenes mAP/NDS are
-shown as percentages. Every pair below uses its matched LiDAR architecture.
+The current reference is **gated ABFuse**. KITTI uses ResNet-50/FPN,
+PointPillars, width 256 and eight bottleneck tokens; nuScenes uses
+nuImages Swin-Tiny and TransFusion-L. Both keep the LiDAR detector frozen.
+These are validation results; KITTI overall AP40 averages Car, Pedestrian
+and Cyclist, and nuScenes mAP/NDS are percentages.
 
-| Dataset / experiment | LiDAR-only | ABFuse | Difference |
+| Gated reference, clean inputs | LiDAR-only | Gated ABFuse | Gain (points) |
 |---|---:|---:|---:|
-| KITTI, original four-token, moderate 3D AP40 | 38.69 | 42.67 | +3.98 |
-| KITTI, larger eight-token, moderate 3D AP40 | 38.69 | **44.39** | **+5.71** |
-| KITTI, larger eight-token, moderate BEV AP40 | 52.89 | **55.05** | **+2.17** |
-| nuScenes, original PointPillars, mAP / NDS | 25.61 / 44.50 | 27.78 / 45.29 | +2.17 / +0.79 |
-| nuScenes, multi-scale PointPillars, mAP / NDS | 25.61 / 44.50 | 30.17 / 46.21 | +4.55 / +1.71 |
-| nuScenes, TransFusion-L / Swin-Tiny, mAP / NDS | 64.43 / 69.24 | **64.79 / 69.39** | **+0.36 / +0.15** |
+| KITTI moderate 3D AP40 | 38.6872 | 42.0490 | +3.3618 |
+| KITTI moderate BEV AP40 | 52.8851 | 54.6942 | +1.8091 |
+| nuScenes mAP / NDS | 64.43 / 69.24 | 64.79 / 69.40 | +0.36 / +0.17 |
 
-Differences are calculated **before rounding**. KITTI LiDAR/head parameters are
-fine-tuned after five frozen epochs; therefore the entire baseline gain cannot
-be attributed solely to camera information. The completed nuScenes models keep
-the transferred LiDAR/head fixed. Comparisons between different fusion variants
-are not controlled architectural ablations.
+- [Gated bottleneck-count, gate/dropout and width results](results/gated_studies_20261113/README.md).
+- [Matched KITTI architecture controls](results/part_b_20261110/README.md).
+- [nuScenes camera ablations](results/part_b_20261109/README.md).
+- [Sensor-corruption evaluations, reliability pilots and latency](results/sensor_reliability_20261120/README.md).
+- [Exact results, historical averaged models and provenance](results/README.md).
 
-**Start with [verified results and provenance](results/README.md)** for exact
-scores, per-class reports, the completed 1/2/4/8/16-token study, all 30 camera
-ablations, checkpoint hashes and saved training configs. Corruption gaps support
-camera dependence, not statistical significance or causal attribution.
+Explicit camera absence bypasses fusion using a supplied availability flag;
+black or shuffled images do not automatically trigger that path. Corruptions
+can underperform LiDAR-only. Learned reliability is a separate exploratory
+pilot with mixed gains, not a replacement for the reference checkpoint.
+The KITTI width study changes fusion width, not the camera backbone;
+completed gated multi-scale nuScenes results are not claimed.
 
 ## Choose an experiment
 
@@ -43,6 +44,9 @@ root, with the project installed at `projects/myfusion`.
 
 | Experiment | Entry config | Details |
 |---|---|---|
+| KITTI gated reference, ResNet-50/FPN, B8 | `configs/kitti_gated_b8.py` | [Matched studies](docs/GATED_STUDIES_20261113.md), [completed results](results/gated_studies_20261113/README.md) |
+| nuScenes gated TransFusion-L / Swin-Tiny | `configs/transfusion_l_gated_swint_nuscenes.py` | [Completed comparison](results/part_b_20261109/README.md) |
+| KITTI learned-reliability pilots and latency | Generated matched configs | [Reproduction guide](docs/SENSOR_RELIABILITY.md), [results](results/sensor_reliability_20261120/README.md) |
 | KITTI LiDAR-only control | `configs/pointpillars_lidar_control_eb48.py` | [Historical reference](EVALUATION.md) |
 | KITTI controlled token sweep, ResNet-18 | `configs/kitti_bottleneck_b{1,2,4,8,16}.py` | [Protocol](docs/KITTI_BOTTLENECK_SMOKE.md), [completed results](docs/KITTI_BOTTLENECK_RESULTS.md) |
 | KITTI larger, ResNet-50/FPN, eight tokens | `configs/kitti_camera_v2.py` | [Architecture and training](CAMERA_FOCUSED_V2.md) |
@@ -72,9 +76,8 @@ cd ~/mmdetection3d
 conda activate openmmlab
 export PYTHONPATH="$PWD"
 
-# Larger KITTI eight-token model; requires the matched LiDAR checkpoint
-# at the load_from path inherited from kitti_bottleneck_base.py.
-python tools/train.py projects/myfusion/configs/kitti_camera_v2.py
+# Gated KITTI reference; requires the matched LiDAR initializer.
+python tools/train.py projects/myfusion/configs/kitti_gated_b8.py
 ```
 
 Setup helpers are in `tools/setup_kitti_haddr.sh`, `tools/setup_nuscenes_trainval.sh`,
@@ -95,6 +98,9 @@ instructions in [the KITTI audit](docs/KITTI_ARCHITECTURE_AUDIT.md). Smoke tests
 and AP on tiny subsets are execution checks, never benchmark results.
 
 ## Camera ablations and figures
+
+The published detection/attention figures use the historical averaged R50/B8
+epoch-14 model, rather than the gated epoch-18 reference.
 
 - [Completed 30-case camera-ablation suite](docs/CAMERA_ABLATION_SUITE.md):
   correct, black-pixel and shuffled-camera controls at the same selected weights.

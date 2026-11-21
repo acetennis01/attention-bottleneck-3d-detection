@@ -54,6 +54,28 @@ class PublishedResultsTests(unittest.TestCase):
             self.assertNotEqual(path.name, 'results_nusc.json')
             self.assertLess(path.stat().st_size, 1024*1024)
 
+    def test_reliability_results_and_executed_configs_match_evidence(self):
+        directory = ROOT/'results/sensor_reliability_20261120'
+        manifest = json.loads((directory/'provenance.json').read_text())
+        for name, record in manifest['files'].items():
+            self.assertEqual(hashlib.sha256((directory/name).read_bytes()).hexdigest(),
+                             record['sha256'], name)
+        recipe = json.loads((directory/'recipe.json').read_text())
+        comparison = json.loads((directory/'comparison.json').read_text())
+        self.assertEqual(comparison['status'], 'complete')
+        self.assertEqual(comparison['validation_samples'], 3769)
+        self.assertEqual(len(comparison['results']), 46)
+        for arm in ('guided', 'unguided'):
+            self.assertEqual(hashlib.sha256((directory/'configs'/(arm+'.py')).read_bytes()).hexdigest(),
+                             recipe['configs'][arm])
+            completed = json.loads((directory/(arm+'_completed.json')).read_text())
+            self.assertEqual(completed['status'], 'complete')
+            self.assertEqual(completed['optimizer_updates'], 1392)
+            self.assertTrue(completed['frozen_sensors_and_head_unchanged'])
+            hashes = {row['checkpoint_sha256'] for row in comparison['results']
+                      if row['arm'] == arm}
+            self.assertEqual(hashes, {completed['checkpoint_sha256']})
+
 
 if __name__ == '__main__':
     unittest.main()

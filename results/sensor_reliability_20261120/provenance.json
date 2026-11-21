@@ -7,8 +7,8 @@
   "manuscript_included": false,
   "files": {
     "README.md": {
-      "sha256": "d99fe18e69c5cea62e7329b7e6fb48b155dc13b0e5f7fe8bd0d8f2a79303ce09",
-      "bytes": 5957
+      "sha256": "8eb54a4a858d88db403fb1e2836644d05dab8c0c504ec77639f2274c4bb59024",
+      "bytes": 6058
     },
     "comparison.json": {
       "sha256": "ce2d312e9191ad68e321a08ab9ab900797eb57f8cd3d99b767300a470b838297",
@@ -53,6 +53,14 @@
     "unguided_completed.json": {
       "sha256": "960ec10ad1c3413a48d7ce5cdda767908d22ea72a538a946331c9753dd7733ef",
       "bytes": 650
+    },
+    "configs/guided.py": {
+      "sha256": "d1b66a0148aeb4ee841e93d9332d5e9f63f81066dba279436633562082a487e3",
+      "bytes": 18680
+    },
+    "configs/unguided.py": {
+      "sha256": "e403a309398e42941ffe0fbb948bc2da827e07f0bf514bdc1e55cb1fbf57bad8",
+      "bytes": 18686
     }
   }
 }

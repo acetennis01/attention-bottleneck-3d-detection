@@ -1,5 +1,18 @@
 # Repository consolidation (2026-11-02)
 
+## November 20 code publication
+
+The root README now leads with the gated reference. Reliability pilots,
+corruption transforms, concat/add timing controls, diagnostics, historical
+failure rendering and executed pilot configs are published with their tests.
+Historical implementations and experiment records remain available.
+
+The isolated PC snapshot passed **222 tests, zero skips**. All nine command-line
+entrypoints imported successfully, and three optimization controls exactly
+reproduced the archived validation MAE. See the
+[verification record](repository_publication_tests_20261120.json) and
+[reproduction guide](SENSOR_RELIABILITY.md). No detector was retrained.
+
 ## What is retained on main
 
 - All original/versioned, larger KITTI, multi-scale nuScenes and
@@ -16,7 +29,7 @@
 ## What remains local instead of tracked
 
 `work_dirs/`, `data/`, `checkpoints/`, `paper_updates/`, `tmp/`,
-`kitti_smoke_results/` and `nuscenes_analysis_results/` are generated or private
+`output/`, `skills/`, `kitti_smoke_results/` and `nuscenes_analysis_results/` are generated or private
 working trees, not the canonical public source layout. Existing copies are
 left on disk. Compact useful scores/configs are preserved under `results/`;
 old tracked logs/videos remain recoverable from earlier Git commits.
@@ -26,6 +39,11 @@ No datasets, weights (`*.pth`), prediction pickles (`*.pkl`), raw nuScenes
 be committed. This cleanup does not erase Git history or physically delete
 the historical local run directories. Therefore it improves the current file
 tree, not the size of every historical clone object.
+
+The local `skills/` copy is a dated assistant handoff, not project runtime code.
+Current public reproduction instructions belong in `docs/`; verified metrics
+and executed configs belong in `results/`. Generated supplementary manuscripts
+and compiled PDFs under `output/` remain local.
 
 ## Branches
 

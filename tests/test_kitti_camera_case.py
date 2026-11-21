@@ -21,14 +21,15 @@ def pipeline():
             dict(type='Pack3DDetInputs', keys=['img', 'points'])]
 
 
-@pytest.mark.parametrize('mode', ['correct', 'black', 'shuffled'])
+@pytest.mark.parametrize('mode', ['correct', 'missing', 'black', 'shuffled',
+                                 'dim', 'blurred', 'occluded'])
 def test_only_camera_condition_is_changed(mode):
     original = pipeline()
     changed = module.camera_pipeline(original, mode, 'val.txt', seed=0)
     assert original == pipeline()
     assert changed is not original
     assert [step for step in changed if step['type'] not in
-            ('BlackImage', 'ShuffleKittiImagePath')] == original
+            ('BlackImage', 'ShuffleKittiImagePath', 'KittiQualityCorruption')] == original
     types = [step['type'] for step in changed]
     if mode == 'black':
         assert types.index('Resize') < types.index('BlackImage')
@@ -37,6 +38,10 @@ def test_only_camera_condition_is_changed(mode):
         assert types.index('ShuffleKittiImagePath') < types.index('mmcv.LoadImageFromFile')
         assert changed[0]['split_file'] == 'val.txt'
         assert changed[0]['seed'] == 0
+    elif mode in ('dim', 'blurred', 'occluded'):
+        index = types.index('KittiQualityCorruption')
+        assert types.index('Resize') < index < types.index('Pack3DDetInputs')
+        assert changed[index]['condition'] == mode
 
 
 def test_lidar_correct_mode_is_unchanged():
@@ -46,8 +51,10 @@ def test_lidar_correct_mode_is_unchanged():
         module.camera_pipeline(original, 'black', 'val.txt')
 
 
-def test_rejects_double_corruption():
+@pytest.mark.parametrize('corruption', ['BlackImage', 'ShuffleKittiImagePath',
+                                      'KittiQualityCorruption', 'KittiRandomQualityCorruption'])
+def test_rejects_double_corruption(corruption):
     original = pipeline()
-    original.insert(2, dict(type='BlackImage'))
+    original.insert(2, dict(type=corruption))
     with pytest.raises(ValueError):
         module.camera_pipeline(original, 'shuffled', 'val.txt')

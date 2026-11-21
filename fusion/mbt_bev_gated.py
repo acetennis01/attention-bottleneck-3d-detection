@@ -45,7 +45,7 @@ class GatedCameraMBTBEVFusion(CameraFocusedMBTBEVFusionV2):
             nn.init.zeros_(gate.weight)
             nn.init.zeros_(gate.bias)
 
-    def _combine_bottlenecks(self, image, lidar, layer_index):
+    def _combine_bottlenecks(self, image, lidar, layer_index, modality_quality=None):
         if not self.use_bottleneck_gate:
             return super()._combine_bottlenecks(image, lidar, layer_index)
         gate = self.bottleneck_gates[layer_index](
@@ -54,7 +54,8 @@ class GatedCameraMBTBEVFusion(CameraFocusedMBTBEVFusionV2):
 
     def forward(self, image_features, lidar_features, lidar2img=None,
                 image_shapes=None, scale_factors=None, padded_image_shape=None,
-                return_attention=False, camera_available=None):
+                return_attention=False, camera_available=None,
+                residual_weight=None):
         if image_features.ndim != 4 or lidar_features.ndim != 4:
             raise ValueError('Single-camera KITTI BCHW features required')
         batch = lidar_features.shape[0]
@@ -90,10 +91,13 @@ class GatedCameraMBTBEVFusion(CameraFocusedMBTBEVFusionV2):
         valid = valid & available[:, None, None]
         output = self._fuse_aligned_features(
             lidar_features, aligned, valid, weights,
-            return_attention=return_attention)
+            return_attention=return_attention, residual_weight=residual_weight)
         if self.bypass_missing:
             output['bev_features'] = torch.where(
                 available[:, None, None, None], output['bev_features'],
                 lidar_features)
         output['camera_available'] = available
+        if residual_weight is not None:
+            output['camera_residual_weight'] = torch.where(
+                available, residual_weight, 0) if self.bypass_missing else residual_weight
         return output

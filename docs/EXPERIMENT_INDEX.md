@@ -3,6 +3,15 @@
 Use this with the [root README](../README.md) and [verified results](../results/README.md).
 All families coexist on `main`; no experimental branch checkout is required.
 
+## Current gated reference and follow-up
+
+| Work | Source | Results / protocol |
+|---|---|---|
+| Gated KITTI and token/width controls | `fusion/mbt_bev_gated.py`, `configs/kitti_gated_b8.py`, `tools/run_gated_studies.py` | [Completed studies](../results/gated_studies_20261113/README.md) |
+| Gated nuScenes | `fusion/mbt_bev_gated_nuscenes.py`, `configs/transfusion_l_gated_swint_nuscenes.py` | [Completed camera ablations](../results/part_b_20261109/README.md) |
+| Exploratory two-sensor reliability | `fusion/mbt_bev_reliability.py`, `tools/run_sensor_reliability.py` | [Results](../results/sensor_reliability_20261120/README.md), [reproduction](SENSOR_RELIABILITY.md) |
+| Matched inference timing | `fusion/simple_bev_fusion.py`, `tools/benchmark_fusion_latency.py` | [Measurements and scope](../results/sensor_reliability_20261120/latency.json) |
+
 ## Completed models used in comparisons
 
 | Family | Camera / fusion | LiDAR / output | Entry configs |

@@ -5,7 +5,9 @@ scope is full bottleneck-count and component sweeps on KITTI and nuScenes,
 plus fusion-width and component-compute comparisons. Results and the dated
 queue snapshot are in [the evidence directory](../results/gated_studies_20261113/README.md).
 
-## Overnight result and current state
+Current completed KITTI results are in [the results table](../results/gated_studies_20261113/README.md). The queue status below is historical; it is not live progress.
+
+## Historical November 14 queue snapshot
 
 Snapshot: **2026-11-14 09:49 PST (17:49 UTC)**. One of 18 new arms is complete,
 one is training, and 16 are pending. The completed KITTI average/no-dropout

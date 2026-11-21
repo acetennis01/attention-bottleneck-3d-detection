@@ -119,6 +119,22 @@ def test_black_image_does_not_trigger_oracle_fallback(fusion_class):
         'camera_available'].all()
 
 
+def test_quality_scales_each_residual_and_preserves_exact_fallback(fusion_class):
+    model = build(fusion_class).eval()
+    nn.init.normal_(model.bev_residual.weight, std=.2)
+    image, lidar, meta = inputs(batch=3)
+    available = torch.tensor([True, True, False])
+    unweighted = model(image, lidar, camera_available=available, **meta)
+    out = model(image, lidar, camera_available=available,
+                residual_weight=torch.tensor([1., .25, 1.]), **meta)
+    assert torch.equal(out['bev_features'][0], unweighted['bev_features'][0])
+    torch.testing.assert_close(
+        out['bev_features'][1],
+        lidar[1] + .25 * (unweighted['bev_features'][1] - lidar[1]))
+    assert torch.equal(out['bev_features'][2], lidar[2])
+    assert out['camera_residual_weight'].tolist() == [1., .25, 0.]
+
+
 def test_attention_capture_preserves_predictions(fusion_class):
     model = build(fusion_class).eval()
     nn.init.normal_(model.bev_residual.weight, std=.02)

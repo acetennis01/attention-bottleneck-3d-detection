@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-20",
+  "scope": "Isolated source snapshot on installed MMDetection3D environment; production checkout, detector checkpoints and datasets unchanged",
+  "source_archive_sha256": "9bf18225a552049aed7ec69ac6f78b5429ac02f95ceac5591f03c6cd137aff2d",
+  "tested_changed_python_sha256": {
+    "fusion/camera_quality.py": "34398e9fd0ee29a119c95b7a8e37e9443ede2fdfe46d4117611a9f2fc490bb68",
+    "fusion/full_attention_bev.py": "60087549f3821a4ad8a37a055e2c1c78ef1714b7f0c8a7cad3fd375b2d035876",
+    "fusion/mbt_bev_camera_v2.py": "45e773091c3d71bf710dec4239ef6844d36c4cfeb56f8f2d91aaeffa89203d40",
+    "fusion/mbt_bev_gated.py": "5286d2869e1d68d26ade72841a37fb523782fc662a222cb423debc7a8e8e65b7",
+    "fusion/mbt_bev_reliability.py": "a19c67c5cd74e022f8f6e04cb8ed4b6d055450c4f3dfd3ff0472d92020a41de8",
+    "fusion/mbt_detector_kitti_quality.py": "ad88c2556952973f30901bb65aab5c4c622e90c3bc7f3373903d6a965b6ac1dc",
+    "fusion/mbt_detector_reliability.py": "07ef61ad5a0669634a365916593ff3ec8d886ae0e4414b14d5c7b0de09d75d90",
+    "fusion/simple_bev_fusion.py": "945ae5bf7616b496c488184f174bd86bc891d5914876f3a6ac61af83631c534d",
+    "results/sensor_reliability_20261120/configs/guided.py": "d1b66a0148aeb4ee841e93d9332d5e9f63f81066dba279436633562082a487e3",
+    "results/sensor_reliability_20261120/configs/unguided.py": "e403a309398e42941ffe0fbb948bc2da827e07f0bf514bdc1e55cb1fbf57bad8",
+    "tests/test_gated_bottlenecks.py": "3c8571d34529d885abd3d5c390c6ef56b863ed746b1f9bf3f119e240bfb0bae2",
+    "tests/test_kitti_camera_case.py": "c1bd39058020561602c332541132b45c2da37c118029905e1f1a64066243de7a",
+    "tests/test_published_results.py": "88713c510489ce6e12119ca7356e61af2a1f5dae02713d532a27e642bed767dc",
+    "tests/test_sensor_reliability.py": "10525323b04f55e7e3819ac0413f284ee694c2362ea1c1f68840aee22af869f0",
+    "tools/benchmark_fusion_latency.py": "c32638f817f25aad2c3baeb502d1b0939a29099bc334e73aa563a4317e448cf5",
+    "tools/diagnose_sensor_reliability.py": "0fb5cb051b7c3ab96468b8a3c2d2f5c13f95df25b3b1e425b646ccf911333b0c",
+    "tools/evaluate_kitti_camera_case.py": "e636f09e1313ac9c3f6b131c1e83fd390f3debe705ff45aa67aa65690c54169a",
+    "tools/finetune_kitti_camera_quality.py": "9b13c9f4872c73840caa9610d87ba56a0e75864fbcdd23a9167d35cefd7c0289",
+    "tools/prepare_kitti_camera_quality.py": "26f08082bd70c1f39fe60552df177315bf60fb021dcc62f0086dc86dc7746cdd",
+    "tools/refit_reliability_controls.py": "0284d585fd2b0ee8f6ebc6ed1d96f182dc5dc0aab9ded38aa2e42545257ace4f",
+    "tools/render_kitti_failure_cases.py": "a204b0b19eea27f7cacd9bb630191f91820365de061f8399a420bc7ccacd9f14",
+    "tools/run_sensor_reliability.py": "69b22701458c8599abfbf1ab99c884d8a1f4679c79ea69df5af852a3e7e73032",
+    "tools/train_kitti_camera_quality.py": "505ae9176ef7623732ed9704815d4773ec38efff2a2f58ec490df6b9c61b0e8b",
+    "transforms/kitti_quality_eval.py": "dd106fc0fbdeb7f5a6428fd82223311256860993900ce58750041e266a634848",
+    "transforms/quality_corruptions.py": "eebd82860cdd727f06b902ad1d3098b83521425a8398661ee8e28d156d58a732",
+    "transforms/sensor_reliability.py": "d3f69711ea42141c10edd2bf4b02d6ee6e0603800c99f1df943e627a6a632c6e"
+  },
+  "command": "OMP_NUM_THREADS=2 python -m pytest projects/myfusion/tests -q --junitxml=regression.xml",
+  "passed": 222,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_seconds": 5.796,
+  "environment": {
+    "python": "3.10",
+    "pytorch": "2.1.0+cu121",
+    "mmengine": "0.10.7",
+    "mmdet3d": "1.4.0",
+    "gpu": "NVIDIA RTX 4090"
+  },
+  "isolation_setup": [
+    "Copied MMDetection3D package into the isolated directory and applied this repository KITTI overlap patch there",
+    "Used existing BEVFusion, checkpoint and data dependencies; no production source modifications"
+  ],
+  "diagnostic_replay": {
+    "controls": 3,
+    "validation_weighted_mae_matches_archived_results_exactly": true,
+    "detector_updated": false,
+    "new_detector_ap_measured": false,
+    "feature_cache": "Existing completed diagnosis cache"
+  },
+  "local_checks": [
+    "Six published-result integrity tests",
+    "Python syntax compilation",
+    "Documentation links",
+    "Credential patterns and excluded-artifact scope"
+  ],
+  "limitation": "Regression and diagnostic reproduction checks, not new detector training or new benchmark results."
+}
