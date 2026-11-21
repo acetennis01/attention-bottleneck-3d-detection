@@ -1,0 +1,58 @@
+{
+  "bundle_date": "2026-11-20",
+  "scope": "Completed KITTI synthetic sensor-corruption evaluations, reliability pilots, latency and head-only diagnosis",
+  "weights_included": false,
+  "datasets_included": false,
+  "raw_predictions_included": false,
+  "manuscript_included": false,
+  "files": {
+    "README.md": {
+      "sha256": "d99fe18e69c5cea62e7329b7e6fb48b155dc13b0e5f7fe8bd0d8f2a79303ce09",
+      "bytes": 5957
+    },
+    "comparison.json": {
+      "sha256": "ce2d312e9191ad68e321a08ab9ab900797eb57f8cd3d99b767300a470b838297",
+      "bytes": 24490
+    },
+    "diagnosis/diagnosis.json": {
+      "sha256": "093d3e5bc91f8516948f87f5ab452b9506f324d9a940ff00b238836fbc2ebbbe",
+      "bytes": 80410
+    },
+    "diagnosis/optimization_controls.json": {
+      "sha256": "9bea5e35b15d8a5de7f33fbebcd9051041d6e1f4706edd35f3760ac20d3d6f2d",
+      "bytes": 16861
+    },
+    "guided_completed.json": {
+      "sha256": "315bc685c6d7cde38f4f95ab035917a0fa44db989845e7dffd97b17eba167772",
+      "bytes": 645
+    },
+    "latency.json": {
+      "sha256": "29636b5339d2acb689e0bfbc28d00ed0b28bb0fc799287ef2a652883906512e5",
+      "bytes": 8298
+    },
+    "preflight_guided.json": {
+      "sha256": "b5dce3f622ed293adf211193369a08fc2fa3591e038414a1adac2e4678e17b5e",
+      "bytes": 759
+    },
+    "preflight_unguided.json": {
+      "sha256": "57278714696d6850a8be60485ad7a605cf28cd5d1b90b106572af47df2ade7ab",
+      "bytes": 763
+    },
+    "recipe.json": {
+      "sha256": "d4586d9491d17b1d9a21b291caa003b821c738565c01bdc0ee59f92e0ae00965",
+      "bytes": 1201
+    },
+    "regression.log": {
+      "sha256": "ba494f4cf8e4d5e60da173f0f081504563cb231fb25f489e0d9dad83a380c2b9",
+      "bytes": 4065
+    },
+    "source_manifest.json": {
+      "sha256": "3ca1f542cdaacb2fc84aae71ba7d669b9ebbfd76142a68d1f9977f91396b0d9e",
+      "bytes": 18709
+    },
+    "unguided_completed.json": {
+      "sha256": "960ec10ad1c3413a48d7ce5cdda767908d22ea72a538a946331c9753dd7733ef",
+      "bytes": 650
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "status": "complete",
+  "arm": "unguided",
+  "smoke": true,
+  "config_sha256": "e403a309398e42941ffe0fbb948bc2da827e07f0bf514bdc1e55cb1fbf57bad8",
+  "resumed": false,
+  "start_microbatch": 0,
+  "planned_microbatches": 16,
+  "protected_tensors": 456,
+  "completed_microbatches": 16,
+  "optimizer_updates": 2,
+  "loss": 0.10537894070148468,
+  "updated_at": "2026-11-21T00:29:07.929603+00:00",
+  "frozen_sensors_and_head_unchanged": true,
+  "strict_reload": true,
+  "finite_quality_and_gate_gradients": true,
+  "exact_explicit_missing_identity": true,
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_sensor_reliability_20261120/preflight_unguided/iter_16.pth",
+  "checkpoint_sha256": "129720bdc67ce0452a5f04d7aa2b74db0afa3346f2bcba403fb888092bb6cb06"
+}

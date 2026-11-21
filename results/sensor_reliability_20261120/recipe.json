@@ -1,0 +1,33 @@
+{
+  "status": "planned",
+  "reference_checkpoint": "/home/yab/mmdetection3d/work_dirs/part_b_kitti_gated_full_20261109/best_Kitti metric_pred_instances_3d_KITTI_Overall_3D_AP40_moderate_epoch_18.pth",
+  "reference_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+  "initializer_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+  "configs": {
+    "guided": "d1b66a0148aeb4ee841e93d9332d5e9f63f81066dba279436633562082a487e3",
+    "unguided": "e403a309398e42941ffe0fbb948bc2da827e07f0bf514bdc1e55cb1fbf57bad8"
+  },
+  "epochs": 6,
+  "microbatches_per_epoch": 1856,
+  "physical_batch": 4,
+  "accumulation": 8,
+  "seed": 0,
+  "frozen_modules": [
+    "img_backbone",
+    "img_neck",
+    "voxel_encoder",
+    "middle_encoder",
+    "backbone",
+    "neck",
+    "bbox_head"
+  ],
+  "selection": "Fixed final epoch 6 for both pilot arms",
+  "quality_targets": "[1-severity,1] for camera; [1,1-severity] for LiDAR",
+  "corruption_training": "25% clean; otherwise uniform type and Beta(2,2) severity",
+  "evaluation_severities": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "note": "Scores estimate synthetic severity. Complete LiDAR absence is outside this pilot."
+}

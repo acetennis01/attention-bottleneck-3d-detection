@@ -5,6 +5,10 @@ KITTI overall AP40 averages Car, Pedestrian and Cyclist. nuScenes mAP/NDS in
 the tables below are percentages; official devkit JSON files retain unit scale.
 Use one selected checkpoint for all metrics of a model, not separate metric maxima.
 
+## Sensor reliability and latency
+
+[November 20 results](sensor_reliability_20261120/README.md): 46 KITTI corruption evaluations, matched six-epoch reliability pilots, fusion/detector timings, and quality-head diagnosis. Pilot gains are mixed; diagnostic head refits are not new detector AP results.
+
 ## Gated KITTI ablations
 
 [Completed gated KITTI studies](gated_studies_20261113/README.md) report

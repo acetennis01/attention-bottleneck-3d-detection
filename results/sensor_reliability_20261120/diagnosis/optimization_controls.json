@@ -1,0 +1,604 @@
+{
+  "status": "complete",
+  "note": "Disposable LiDAR head refits on the identical frozen feature cache; no detector update.",
+  "trained_l1_lr1e4": {
+    "objective": "l1",
+    "features": "lidar",
+    "steps": 1200,
+    "learning_rate": 0.0001,
+    "train": {
+      "natural_weighted_mae": 0.18744301795959473,
+      "mean_sigmoid_derivative": 0.0012487364001572132,
+      "cases": [
+        {
+          "condition": "clean",
+          "severity": 0.0,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.25,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.5,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.75,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.25,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.5,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.75,
+          "mean_prediction": 0.9990993142127991,
+          "target": 1.0,
+          "mae": 0.0009006336331367493
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.25,
+          "mean_prediction": 0.9989286065101624,
+          "target": 0.75,
+          "mae": 0.24892853200435638
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.5,
+          "mean_prediction": 0.9985528588294983,
+          "target": 0.5,
+          "mae": 0.4985528588294983
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.75,
+          "mean_prediction": 0.9974184036254883,
+          "target": 0.25,
+          "mae": 0.7474184036254883
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.25,
+          "mean_prediction": 0.9988917708396912,
+          "target": 0.75,
+          "mae": 0.24889172613620758
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.5,
+          "mean_prediction": 0.9983733892440796,
+          "target": 0.5,
+          "mae": 0.4983733892440796
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.75,
+          "mean_prediction": 0.9978798627853394,
+          "target": 0.25,
+          "mae": 0.7478798627853394
+        }
+      ]
+    },
+    "validation": {
+      "natural_weighted_mae": 0.18745413422584534,
+      "mean_sigmoid_derivative": 0.0012608133256435394,
+      "cases": [
+        {
+          "condition": "clean",
+          "severity": 0.0,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.25,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.5,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.75,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.25,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.5,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.75,
+          "mean_prediction": 0.9990798234939575,
+          "target": 1.0,
+          "mae": 0.0009202612563967705
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.25,
+          "mean_prediction": 0.9989004731178284,
+          "target": 0.75,
+          "mae": 0.24890051782131195
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.5,
+          "mean_prediction": 0.9985225200653076,
+          "target": 0.5,
+          "mae": 0.49852254986763
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.75,
+          "mean_prediction": 0.9973995089530945,
+          "target": 0.25,
+          "mae": 0.7473995089530945
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.25,
+          "mean_prediction": 0.9988933801651001,
+          "target": 0.75,
+          "mae": 0.24889340996742249
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.5,
+          "mean_prediction": 0.9984087944030762,
+          "target": 0.5,
+          "mae": 0.49840885400772095
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.75,
+          "mean_prediction": 0.9978998899459839,
+          "target": 0.25,
+          "mae": 0.7478998899459839
+        }
+      ]
+    }
+  },
+  "trained_bce_lr1e4": {
+    "objective": "bce",
+    "features": "lidar",
+    "steps": 1200,
+    "learning_rate": 0.0001,
+    "train": {
+      "natural_weighted_mae": 0.23020748794078827,
+      "mean_sigmoid_derivative": 0.1432904303073883,
+      "cases": [
+        {
+          "condition": "clean",
+          "severity": 0.0,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.25,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.5,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.75,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.25,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.5,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.75,
+          "mean_prediction": 0.8272369503974915,
+          "target": 1.0,
+          "mae": 0.17276298999786377
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.25,
+          "mean_prediction": 0.8268419504165649,
+          "target": 0.75,
+          "mae": 0.07684190571308136
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.5,
+          "mean_prediction": 0.8262854814529419,
+          "target": 0.5,
+          "mae": 0.3262854218482971
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.75,
+          "mean_prediction": 0.8251204490661621,
+          "target": 0.25,
+          "mae": 0.5751204490661621
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.25,
+          "mean_prediction": 0.8267345428466797,
+          "target": 0.75,
+          "mae": 0.07673456519842148
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.5,
+          "mean_prediction": 0.8256373405456543,
+          "target": 0.5,
+          "mae": 0.3256374001502991
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.75,
+          "mean_prediction": 0.8250661492347717,
+          "target": 0.25,
+          "mae": 0.5750661492347717
+        }
+      ]
+    },
+    "validation": {
+      "natural_weighted_mae": 0.23040638864040375,
+      "mean_sigmoid_derivative": 0.1436414122581482,
+      "cases": [
+        {
+          "condition": "clean",
+          "severity": 0.0,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.25,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.5,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.75,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.25,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.5,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.75,
+          "mean_prediction": 0.8266444802284241,
+          "target": 1.0,
+          "mae": 0.17335551977157593
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.25,
+          "mean_prediction": 0.8263092637062073,
+          "target": 0.75,
+          "mae": 0.0763092115521431
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.5,
+          "mean_prediction": 0.8258306980133057,
+          "target": 0.5,
+          "mae": 0.3258307874202728
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.75,
+          "mean_prediction": 0.8248357176780701,
+          "target": 0.25,
+          "mae": 0.5748356580734253
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.25,
+          "mean_prediction": 0.8261940479278564,
+          "target": 0.75,
+          "mae": 0.07619401812553406
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.5,
+          "mean_prediction": 0.825173556804657,
+          "target": 0.5,
+          "mae": 0.32517361640930176
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.75,
+          "mean_prediction": 0.8245999217033386,
+          "target": 0.25,
+          "mae": 0.5745999217033386
+        }
+      ]
+    }
+  },
+  "reset_half_l1_lr1e4": {
+    "objective": "l1",
+    "features": "lidar",
+    "steps": 1200,
+    "learning_rate": 0.0001,
+    "train": {
+      "natural_weighted_mae": 0.1890965700149536,
+      "mean_sigmoid_derivative": 0.024754084646701813,
+      "cases": [
+        {
+          "condition": "clean",
+          "severity": 0.0,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.25,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.5,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.75,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.25,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.5,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.75,
+          "mean_prediction": 0.9790358543395996,
+          "target": 1.0,
+          "mae": 0.020964179188013077
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.25,
+          "mean_prediction": 0.9765241742134094,
+          "target": 0.75,
+          "mae": 0.22652415931224823
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.5,
+          "mean_prediction": 0.9714730978012085,
+          "target": 0.5,
+          "mae": 0.4714730978012085
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.75,
+          "mean_prediction": 0.9586106538772583,
+          "target": 0.25,
+          "mae": 0.7086106538772583
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.25,
+          "mean_prediction": 0.9760569334030151,
+          "target": 0.75,
+          "mae": 0.22605693340301514
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.5,
+          "mean_prediction": 0.9693525433540344,
+          "target": 0.5,
+          "mae": 0.4693525731563568
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.75,
+          "mean_prediction": 0.9635343551635742,
+          "target": 0.25,
+          "mae": 0.7135342955589294
+        }
+      ]
+    },
+    "validation": {
+      "natural_weighted_mae": 0.1892303079366684,
+      "mean_sigmoid_derivative": 0.024813784286379814,
+      "cases": [
+        {
+          "condition": "clean",
+          "severity": 0.0,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.25,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.5,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "camera_dim",
+          "severity": 0.75,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.25,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.5,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "camera_blur",
+          "severity": 0.75,
+          "mean_prediction": 0.9788634777069092,
+          "target": 1.0,
+          "mae": 0.021136563271284103
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.25,
+          "mean_prediction": 0.9762596487998962,
+          "target": 0.75,
+          "mae": 0.22625967860221863
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.5,
+          "mean_prediction": 0.9712157249450684,
+          "target": 0.5,
+          "mae": 0.47121575474739075
+        },
+        {
+          "condition": "lidar_dropout",
+          "severity": 0.75,
+          "mean_prediction": 0.958500325679779,
+          "target": 0.25,
+          "mae": 0.708500325679779
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.25,
+          "mean_prediction": 0.9762396216392517,
+          "target": 0.75,
+          "mae": 0.22623960673809052
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.5,
+          "mean_prediction": 0.9698774814605713,
+          "target": 0.5,
+          "mae": 0.4698774814605713
+        },
+        {
+          "condition": "lidar_noise",
+          "severity": 0.75,
+          "mean_prediction": 0.963854193687439,
+          "target": 0.25,
+          "mae": 0.713854193687439
+        }
+      ]
+    }
+  }
+}

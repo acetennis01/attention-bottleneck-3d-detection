@@ -1,0 +1,279 @@
+{
+  "status": "complete",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "pytorch": "2.1.0+cu121",
+  "batch_size": 1,
+  "frame_indices": [
+    0,
+    418,
+    837,
+    1256,
+    1674,
+    2093,
+    2512,
+    2930,
+    3349,
+    3768
+  ],
+  "warmup_calls": 10,
+  "detector_scope": "Model preprocessing/voxelization, encoders, fusion, detection head and postprocessing; excludes disk loading and dataset transforms.",
+  "fusion_scope": "Cached real camera/LiDAR features plus geometric sampling and fusion.",
+  "note": "Concat/add controls have fresh fusion weights. Timings compare inference graphs; detection accuracy is not compared. All models share sensor encoders and the frozen detection head.",
+  "checkpoint_sha256": "c88b971c894716238659d5682ef9dc0801288d590d391a2d68d00fd2388a5ca0",
+  "full_attention_checkpoint_sha256": "ed20e87154879cd5ac10683437becf5f03f589897c9a3c80ff4cd46704c87dcd",
+  "arms": {
+    "gated_b8": {
+      "fusion_parameters": 7050120,
+      "counted_GFLOPs": 13.094959424,
+      "by_operator": {
+        "bmm": 16384,
+        "conv": 11035475968,
+        "grid_sampler": 1048576,
+        "group_norm": 1310720,
+        "layer_norm": 6400000,
+        "upsample_nearest2d": 53568,
+        "adaptive_avg_pool2d": 13713408,
+        "_native_multi_head_attention": 839122944,
+        "linear": 1141915648,
+        "scaled_dot_product_attention": 1048576,
+        "upsample_bilinear2d": 54853632
+      },
+      "unsupported_operators": {
+        "aten::where": 6,
+        "aten::linspace": 2,
+        "aten::add": 30,
+        "aten::mul": 24,
+        "aten::meshgrid": 1,
+        "aten::numel": 1,
+        "aten::ones_like": 2,
+        "aten::clamp_min": 2,
+        "aten::div": 7,
+        "aten::lt": 2,
+        "aten::sub": 2,
+        "aten::tanh": 1,
+        "aten::any": 2,
+        "aten::softmax": 1,
+        "aten::sum": 2,
+        "aten::gelu": 8,
+        "aten::sigmoid": 4,
+        "aten::rsub": 4,
+        "aten::unflatten": 1
+      },
+      "fusion_latency": {
+        "mean_ms": 3.087747440149542,
+        "median_ms": 3.0844879984215368,
+        "p10_ms": 3.0678068011184223,
+        "p90_ms": 3.098743402006221,
+        "calls": 100
+      },
+      "detector_latency": {
+        "mean_ms": 15.492259840248153,
+        "median_ms": 15.518953499849886,
+        "p10_ms": 14.968710302127874,
+        "p90_ms": 15.896758001690614,
+        "calls": 50
+      },
+      "fusion_speedup_over_gated": 1.0,
+      "detector_speedup_over_gated": 1.0
+    },
+    "average_b8": {
+      "fusion_parameters": 7050120,
+      "counted_GFLOPs": 13.09494304,
+      "by_operator": {
+        "bmm": 16384,
+        "conv": 11035475968,
+        "grid_sampler": 1048576,
+        "group_norm": 1310720,
+        "layer_norm": 6400000,
+        "upsample_nearest2d": 53568,
+        "adaptive_avg_pool2d": 13713408,
+        "_native_multi_head_attention": 839122944,
+        "linear": 1141899264,
+        "scaled_dot_product_attention": 1048576,
+        "upsample_bilinear2d": 54853632
+      },
+      "unsupported_operators": {
+        "aten::where": 6,
+        "aten::linspace": 2,
+        "aten::add": 30,
+        "aten::mul": 20,
+        "aten::meshgrid": 1,
+        "aten::numel": 1,
+        "aten::ones_like": 2,
+        "aten::clamp_min": 2,
+        "aten::div": 7,
+        "aten::lt": 2,
+        "aten::sub": 2,
+        "aten::tanh": 1,
+        "aten::any": 2,
+        "aten::softmax": 1,
+        "aten::sum": 2,
+        "aten::gelu": 8,
+        "aten::unflatten": 1
+      },
+      "fusion_latency": {
+        "mean_ms": 2.9315431598661235,
+        "median_ms": 2.9289389985933667,
+        "p10_ms": 2.9155027983506443,
+        "p90_ms": 2.9452090009726817,
+        "calls": 100
+      },
+      "detector_latency": {
+        "mean_ms": 15.230976639941218,
+        "median_ms": 15.296241997930338,
+        "p10_ms": 14.777344600952347,
+        "p90_ms": 15.589029100738117,
+        "calls": 50
+      },
+      "fusion_speedup_over_gated": 1.0531076269949196,
+      "detector_speedup_over_gated": 1.0145598835288878
+    },
+    "full_attention": {
+      "fusion_parameters": 7045508,
+      "counted_GFLOPs": 13.70196,
+      "by_operator": {
+        "bmm": 16384,
+        "conv": 11035475968,
+        "grid_sampler": 1048576,
+        "group_norm": 1310720,
+        "layer_norm": 11796480,
+        "upsample_nearest2d": 53568,
+        "adaptive_avg_pool2d": 13713408,
+        "linear": 1979711488,
+        "scaled_dot_product_attention": 603979776,
+        "upsample_bilinear2d": 54853632
+      },
+      "unsupported_operators": {
+        "aten::where": 6,
+        "aten::linspace": 2,
+        "aten::add": 26,
+        "aten::mul": 64,
+        "aten::meshgrid": 1,
+        "aten::numel": 1,
+        "aten::ones_like": 2,
+        "aten::clamp_min": 2,
+        "aten::div": 15,
+        "aten::lt": 2,
+        "aten::sub": 2,
+        "aten::tanh": 1,
+        "aten::any": 2,
+        "aten::softmax": 1,
+        "aten::sum": 2,
+        "aten::unflatten": 9,
+        "aten::gelu": 8
+      },
+      "fusion_latency": {
+        "mean_ms": 3.268216289980046,
+        "median_ms": 3.2659764983691275,
+        "p10_ms": 3.257906001090305,
+        "p90_ms": 3.2771191003121203,
+        "calls": 100
+      },
+      "detector_latency": {
+        "mean_ms": 15.712031660077628,
+        "median_ms": 15.88160499886726,
+        "p10_ms": 15.116899401618866,
+        "p90_ms": 16.284689501480898,
+        "calls": 50
+      },
+      "fusion_speedup_over_gated": 0.9444305554439177,
+      "detector_speedup_over_gated": 0.9771653117526068
+    },
+    "concat": {
+      "fusion_parameters": 594052,
+      "counted_GFLOPs": 11.140354368,
+      "by_operator": {
+        "bmm": 16384,
+        "conv": 11069030400,
+        "grid_sampler": 1048576,
+        "group_norm": 1310720,
+        "layer_norm": 327680,
+        "upsample_nearest2d": 53568,
+        "adaptive_avg_pool2d": 13713408,
+        "upsample_bilinear2d": 54853632
+      },
+      "unsupported_operators": {
+        "aten::where": 6,
+        "aten::linspace": 2,
+        "aten::add": 9,
+        "aten::mul": 10,
+        "aten::meshgrid": 1,
+        "aten::numel": 1,
+        "aten::ones_like": 2,
+        "aten::clamp_min": 2,
+        "aten::div": 6,
+        "aten::lt": 2,
+        "aten::sub": 2,
+        "aten::tanh": 1,
+        "aten::any": 2,
+        "aten::softmax": 1,
+        "aten::sum": 2,
+        "aten::reshape_as": 1
+      },
+      "fusion_latency": {
+        "mean_ms": 2.0900192098270054,
+        "median_ms": 2.085984999212087,
+        "p10_ms": 2.07816699767136,
+        "p90_ms": 2.0960549987648847,
+        "calls": 100
+      },
+      "detector_latency": {
+        "mean_ms": 14.60385835969646,
+        "median_ms": 14.631264999479754,
+        "p10_ms": 14.094775500052492,
+        "p90_ms": 15.087595500517637,
+        "calls": 50
+      },
+      "fusion_speedup_over_gated": 1.4786721858434273,
+      "detector_speedup_over_gated": 1.0606706597414302
+    },
+    "add": {
+      "fusion_parameters": 528516,
+      "counted_GFLOPs": 11.123577152,
+      "by_operator": {
+        "bmm": 16384,
+        "conv": 11052253184,
+        "grid_sampler": 1048576,
+        "group_norm": 1310720,
+        "layer_norm": 327680,
+        "upsample_nearest2d": 53568,
+        "adaptive_avg_pool2d": 13713408,
+        "upsample_bilinear2d": 54853632
+      },
+      "unsupported_operators": {
+        "aten::where": 6,
+        "aten::linspace": 2,
+        "aten::add": 10,
+        "aten::mul": 10,
+        "aten::meshgrid": 1,
+        "aten::numel": 1,
+        "aten::ones_like": 2,
+        "aten::clamp_min": 2,
+        "aten::div": 6,
+        "aten::lt": 2,
+        "aten::sub": 2,
+        "aten::tanh": 1,
+        "aten::any": 2,
+        "aten::softmax": 1,
+        "aten::sum": 2,
+        "aten::reshape_as": 1
+      },
+      "fusion_latency": {
+        "mean_ms": 2.3654003301635385,
+        "median_ms": 2.36583449805039,
+        "p10_ms": 2.354509900396806,
+        "p90_ms": 2.3755780999636045,
+        "calls": 100
+      },
+      "detector_latency": {
+        "mean_ms": 14.889694100129418,
+        "median_ms": 14.952606999941054,
+        "p10_ms": 14.392039500671672,
+        "p90_ms": 15.291506102948915,
+        "calls": 50
+      },
+      "fusion_speedup_over_gated": 1.3037632179949048,
+      "detector_speedup_over_gated": 1.0378761041409745
+    }
+  }
+}

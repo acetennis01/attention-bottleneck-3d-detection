@@ -1,0 +1,796 @@
+{
+  "status": "complete",
+  "validation_samples": 3769,
+  "evaluation_cases": 46,
+  "seed": 0,
+  "training_epochs_per_arm": 6,
+  "selection": "Fixed final epoch 6",
+  "quality_order": [
+    "camera",
+    "lidar"
+  ],
+  "results": [
+    {
+      "arm": "guided",
+      "condition": "camera_blur",
+      "severity": 0.25,
+      "moderate_3d_ap40": 40.1277,
+      "moderate_bev_ap40": 52.7543,
+      "mean_quality": [
+        0.8343765139579773,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.12369519472122192,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "046c15bb1421f3e6cac89a155d743f3985758954945be7dec46b8b8cb9760ed5"
+    },
+    {
+      "arm": "guided",
+      "condition": "camera_blur",
+      "severity": 0.5,
+      "moderate_3d_ap40": 40.0318,
+      "moderate_bev_ap40": 52.4538,
+      "mean_quality": [
+        0.5074755549430847,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.11117863655090332,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "e3f7a2cd843209b45daecf000426167e47ae7a96d8633acc3baf1b0479aa7c48"
+    },
+    {
+      "arm": "guided",
+      "condition": "camera_blur",
+      "severity": 0.75,
+      "moderate_3d_ap40": 39.8674,
+      "moderate_bev_ap40": 52.4171,
+      "mean_quality": [
+        0.19892264902591705,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.07152708619832993,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "18bbdc4041151ca88a4607bdeb6c7fc6b2d7eccae2853a7d909e761ad08dd2e9"
+    },
+    {
+      "arm": "guided",
+      "condition": "camera_dim",
+      "severity": 0.25,
+      "moderate_3d_ap40": 41.3647,
+      "moderate_bev_ap40": 54.4777,
+      "mean_quality": [
+        0.9527182579040527,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.2039334625005722,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "6426da29f5d4c2b7599c0b324c04f9ecad328fb633e9acc8a1189eac94728252"
+    },
+    {
+      "arm": "guided",
+      "condition": "camera_dim",
+      "severity": 0.5,
+      "moderate_3d_ap40": 41.3408,
+      "moderate_bev_ap40": 54.436,
+      "mean_quality": [
+        0.9267457127571106,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.4268370270729065,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "b9d1e285227ac1767b9d92b1daa38834bc6e38fb4b2c116e29e76cc44567da06"
+    },
+    {
+      "arm": "guided",
+      "condition": "camera_dim",
+      "severity": 0.75,
+      "moderate_3d_ap40": 40.7649,
+      "moderate_bev_ap40": 53.8244,
+      "mean_quality": [
+        0.8491778373718262,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.5991778373718262,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "a6363e3917c2d7b388bb510773c1252445476cb62b6482a30873656a9e4d892d"
+    },
+    {
+      "arm": "guided",
+      "condition": "clean",
+      "severity": 0.0,
+      "moderate_3d_ap40": 41.4034,
+      "moderate_bev_ap40": 54.203,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9879604578018188
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.012039496563374996
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "0b043d64c064333b3b8eae883596a77c2fa11bf73bbfdb7e8d0ba4b7de0f53b8"
+    },
+    {
+      "arm": "guided",
+      "condition": "lidar_dropout",
+      "severity": 0.25,
+      "moderate_3d_ap40": 40.5275,
+      "moderate_bev_ap40": 53.2203,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9872044920921326
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.237204447388649
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "cd7b2acac5eabf48e2ab2e170b20e3abc233c0c2e2538b5f23b5e888c7491472"
+    },
+    {
+      "arm": "guided",
+      "condition": "lidar_dropout",
+      "severity": 0.5,
+      "moderate_3d_ap40": 36.6504,
+      "moderate_bev_ap40": 49.417,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9857920408248901
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.48579201102256775
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "8e82d49aa7407ef19bb5de9f2ef79ef31c4c1b0a798e0adb65ee676e20963a41"
+    },
+    {
+      "arm": "guided",
+      "condition": "lidar_dropout",
+      "severity": 0.75,
+      "moderate_3d_ap40": 28.7725,
+      "moderate_bev_ap40": 41.7847,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9826840162277222
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.7326840162277222
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "6169704b0308b1cf0876ae93c70b144a9988bfe25797b15e153bea1591eee6ac"
+    },
+    {
+      "arm": "guided",
+      "condition": "lidar_noise",
+      "severity": 0.25,
+      "moderate_3d_ap40": 37.4675,
+      "moderate_bev_ap40": 49.7324,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9873224496841431
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.23732243478298187
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "976d8408a290a8c7d739709dd3477829ac19d15d952c98aa118107ea00931f9d"
+    },
+    {
+      "arm": "guided",
+      "condition": "lidar_noise",
+      "severity": 0.5,
+      "moderate_3d_ap40": 25.7317,
+      "moderate_bev_ap40": 38.2817,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9856287837028503
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.4856288433074951
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "e8e7af6c8c8283ca9a9068d34c2734d5a36f2b094753c19a8596d001f79fe54f"
+    },
+    {
+      "arm": "guided",
+      "condition": "lidar_noise",
+      "severity": 0.75,
+      "moderate_3d_ap40": 15.168,
+      "moderate_bev_ap40": 26.3907,
+      "mean_quality": [
+        0.9702170491218567,
+        0.9841957092285156
+      ],
+      "quality_mae": [
+        0.029782919213175774,
+        0.7341957092285156
+      ],
+      "checkpoint_sha256": "f54ffcd551d6e695a58eb6419f61f240f2947300a608390c73afa4e72e41d61b",
+      "report_sha256": "3e595f07a5d8cc348ef08f76d7ab8ebf8e0867d99b3f3735a37d6ae2b0aedca3"
+    },
+    {
+      "arm": "lidar",
+      "condition": "clean",
+      "severity": 0.0,
+      "moderate_3d_ap40": 38.6872,
+      "moderate_bev_ap40": 52.8851,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "840fd2a986a9f6c80595c42edcb495522c4da84c4c889e44c260f65150c0c492"
+    },
+    {
+      "arm": "lidar",
+      "condition": "lidar_dropout",
+      "severity": 0.25,
+      "moderate_3d_ap40": 37.3338,
+      "moderate_bev_ap40": 51.7076,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.1499999761581421
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "165e79ec35c05365b85741fdac0eedd4263ce59d2bee16b5edc271d5793803b0"
+    },
+    {
+      "arm": "lidar",
+      "condition": "lidar_dropout",
+      "severity": 0.5,
+      "moderate_3d_ap40": 32.2769,
+      "moderate_bev_ap40": 47.5808,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.40000006556510925
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "08be0231ea07f2c56d380509fc70acf336345046594dc9cc2b8b89259d43bff8"
+    },
+    {
+      "arm": "lidar",
+      "condition": "lidar_dropout",
+      "severity": 0.75,
+      "moderate_3d_ap40": 23.9342,
+      "moderate_bev_ap40": 38.9036,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.6500000357627869
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "5782274d28d2ce9a65a9c52d77d2a50baa62165c59de80a9ab83de7cb87df53b"
+    },
+    {
+      "arm": "lidar",
+      "condition": "lidar_noise",
+      "severity": 0.25,
+      "moderate_3d_ap40": 33.133,
+      "moderate_bev_ap40": 48.031,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.1499999761581421
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "c710e86db16db3b6da71414b4845638d870439fe6a36f37095d66240d9407e0a"
+    },
+    {
+      "arm": "lidar",
+      "condition": "lidar_noise",
+      "severity": 0.5,
+      "moderate_3d_ap40": 21.7487,
+      "moderate_bev_ap40": 36.3255,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.40000006556510925
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "9decc131b6892615baa06d7939d542257d23347aacdc9377dde3a0940782d578"
+    },
+    {
+      "arm": "lidar",
+      "condition": "lidar_noise",
+      "severity": 0.75,
+      "moderate_3d_ap40": 12.3005,
+      "moderate_bev_ap40": 25.8187,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.6500000357627869
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "e3ffebaf45ed789d158dfc2a9cb74993a73119f339626226b45594fb91a2eace"
+    },
+    {
+      "arm": "reference",
+      "condition": "camera_blur",
+      "severity": 0.25,
+      "moderate_3d_ap40": 40.2056,
+      "moderate_bev_ap40": 52.3618,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.1499999761581421,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "ecebe2115675627cfaa34d1747557ef64224316097fe39896d6e6cbfc05d212a"
+    },
+    {
+      "arm": "reference",
+      "condition": "camera_blur",
+      "severity": 0.5,
+      "moderate_3d_ap40": 39.098,
+      "moderate_bev_ap40": 52.0647,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.40000006556510925,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "1652f322de2c0fdac0c780a5d91a57a31048db9134af0325877f07e1323cc5f1"
+    },
+    {
+      "arm": "reference",
+      "condition": "camera_blur",
+      "severity": 0.75,
+      "moderate_3d_ap40": 39.1666,
+      "moderate_bev_ap40": 51.5799,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.6500000357627869,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "cfe7eff27ac34125f1cea06e7008f998819a1223390ad40fe8d1501bb110206a"
+    },
+    {
+      "arm": "reference",
+      "condition": "camera_dim",
+      "severity": 0.25,
+      "moderate_3d_ap40": 42.0185,
+      "moderate_bev_ap40": 54.6309,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.1499999761581421,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "5c6ca0df54f6412ce463ea350bf756f4be0617982b9b925c3790461fb596342e"
+    },
+    {
+      "arm": "reference",
+      "condition": "camera_dim",
+      "severity": 0.5,
+      "moderate_3d_ap40": 41.9729,
+      "moderate_bev_ap40": 54.3518,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.40000006556510925,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "ab697e95b809937ae00e19721735a973b8a39323995e96be897bec80ee6caf0c"
+    },
+    {
+      "arm": "reference",
+      "condition": "camera_dim",
+      "severity": 0.75,
+      "moderate_3d_ap40": 41.1701,
+      "moderate_bev_ap40": 53.3474,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.6500000357627869,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "f5ea954859644bbcea90687d2965c60126f4b2175a4c6cc0499ffbc834e1ba44"
+    },
+    {
+      "arm": "reference",
+      "condition": "clean",
+      "severity": 0.0,
+      "moderate_3d_ap40": 42.049,
+      "moderate_bev_ap40": 54.6942,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.10000001639127731
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "93a89a7a06cea9d5c1f19b3248759ed53253259ffb85b623abd3e8f31289e1df"
+    },
+    {
+      "arm": "reference",
+      "condition": "lidar_dropout",
+      "severity": 0.25,
+      "moderate_3d_ap40": 40.5094,
+      "moderate_bev_ap40": 53.003,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.1499999761581421
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "3fac944dbe0d7693ea3c261a7cbf242e2660e35fb8434f2bd87e6f3dde7464ec"
+    },
+    {
+      "arm": "reference",
+      "condition": "lidar_dropout",
+      "severity": 0.5,
+      "moderate_3d_ap40": 36.4656,
+      "moderate_bev_ap40": 49.359,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.40000006556510925
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "2cbd58346d882af250f122b30b74a0ec5c66e27dfc1d3b9f281514b230b8c990"
+    },
+    {
+      "arm": "reference",
+      "condition": "lidar_dropout",
+      "severity": 0.75,
+      "moderate_3d_ap40": 27.97,
+      "moderate_bev_ap40": 41.0616,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.6500000357627869
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "10755a63ca2aa4b2166f86baefe42fc6400121c1933ef6e69e5ae05c4d1f0739"
+    },
+    {
+      "arm": "reference",
+      "condition": "lidar_noise",
+      "severity": 0.25,
+      "moderate_3d_ap40": 37.2483,
+      "moderate_bev_ap40": 50.0393,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.1499999761581421
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "014168e408d0fb259f7610c21bfe1ce315e5df318b02d58e77def7d081e799c0"
+    },
+    {
+      "arm": "reference",
+      "condition": "lidar_noise",
+      "severity": 0.5,
+      "moderate_3d_ap40": 24.9948,
+      "moderate_bev_ap40": 37.9275,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.40000006556510925
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "24fd71a1366f5f95dcb508ba409e470dc917f3cf5a15bfe2c36b0af981dc5e20"
+    },
+    {
+      "arm": "reference",
+      "condition": "lidar_noise",
+      "severity": 0.75,
+      "moderate_3d_ap40": 14.6586,
+      "moderate_bev_ap40": 26.3274,
+      "mean_quality": [
+        0.8999996185302734,
+        0.8999996185302734
+      ],
+      "quality_mae": [
+        0.10000001639127731,
+        0.6500000357627869
+      ],
+      "checkpoint_sha256": "74dd41b13cfe713b2b2b1c8bebc166beb17246ea2bbc1e06137e16db295c3ec0",
+      "report_sha256": "410f6817fff8cdfb209c59ecc9f316173752b0134750ab52ceb2590598f83d19"
+    },
+    {
+      "arm": "unguided",
+      "condition": "camera_blur",
+      "severity": 0.25,
+      "moderate_3d_ap40": 40.1428,
+      "moderate_bev_ap40": 52.7711,
+      "mean_quality": [
+        0.8310407400131226,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.12353943288326263,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "4bf5e4c227fd5c227cc959ed90629434b4a60a156458e403a7d683246d95c3a3"
+    },
+    {
+      "arm": "unguided",
+      "condition": "camera_blur",
+      "severity": 0.5,
+      "moderate_3d_ap40": 40.174,
+      "moderate_bev_ap40": 52.5487,
+      "mean_quality": [
+        0.4991183280944824,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.1122075766324997,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "e69832f9016a60bd5a0f2b3fa345f53754ec23dc6a654582c7a286fe897e966b"
+    },
+    {
+      "arm": "unguided",
+      "condition": "camera_blur",
+      "severity": 0.75,
+      "moderate_3d_ap40": 39.8012,
+      "moderate_bev_ap40": 52.3326,
+      "mean_quality": [
+        0.18956421315670013,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.07760888338088989,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "0ca61e8a68e37eef5f37327f162cc2229ffd43562af6b86bde64d84cb6caa6cb"
+    },
+    {
+      "arm": "unguided",
+      "condition": "camera_dim",
+      "severity": 0.25,
+      "moderate_3d_ap40": 41.3571,
+      "moderate_bev_ap40": 54.5368,
+      "mean_quality": [
+        0.9525031447410583,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.2037520855665207,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "ee6e0897db173f51acf8f34eb08eead53c547efd2814dae8c1ecf6586bf612c2"
+    },
+    {
+      "arm": "unguided",
+      "condition": "camera_dim",
+      "severity": 0.5,
+      "moderate_3d_ap40": 41.3424,
+      "moderate_bev_ap40": 54.3952,
+      "mean_quality": [
+        0.9257631301879883,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.42586103081703186,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "330b7a58c480b74c2917b4937df18b8aceecde22b74283dc8abf1d2fdb2b2ca3"
+    },
+    {
+      "arm": "unguided",
+      "condition": "camera_dim",
+      "severity": 0.75,
+      "moderate_3d_ap40": 40.8858,
+      "moderate_bev_ap40": 54.009,
+      "mean_quality": [
+        0.8460384011268616,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.5960384011268616,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "f9ff319fab553734ddbae3531183f7a0803245e9ac1c61363ed32bb7fd796f0a"
+    },
+    {
+      "arm": "unguided",
+      "condition": "clean",
+      "severity": 0.0,
+      "moderate_3d_ap40": 41.4355,
+      "moderate_bev_ap40": 54.173,
+      "mean_quality": [
+        0.9703768491744995,
+        0.9885909557342529
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.01140905637294054
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "1f37ff97d4ecd7914dae208eb25798e504772bcf3c8656fae4f514dbf2070039"
+    },
+    {
+      "arm": "unguided",
+      "condition": "lidar_dropout",
+      "severity": 0.25,
+      "moderate_3d_ap40": 40.3766,
+      "moderate_bev_ap40": 53.2276,
+      "mean_quality": [
+        0.9703768491744995,
+        0.987865686416626
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.23786568641662598
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "fc5f076bf1ed3cc7bf6abf87da4da37f4e20c5a8c6d34346399309999d3f6157"
+    },
+    {
+      "arm": "unguided",
+      "condition": "lidar_dropout",
+      "severity": 0.5,
+      "moderate_3d_ap40": 36.6092,
+      "moderate_bev_ap40": 49.3236,
+      "mean_quality": [
+        0.9703768491744995,
+        0.9865085482597351
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.4865085482597351
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "c6b59b811c8a0e27c2afb1c6c669f1d06e91ff369a1b822c7d1e7708f1fb4e04"
+    },
+    {
+      "arm": "unguided",
+      "condition": "lidar_dropout",
+      "severity": 0.75,
+      "moderate_3d_ap40": 28.6695,
+      "moderate_bev_ap40": 41.7906,
+      "mean_quality": [
+        0.9703768491744995,
+        0.9835147857666016
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.7335147857666016
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "76c890857b144d69fabe4ff37226c4d80aa4f7f7fcadc4d0c7efb5639f10763a"
+    },
+    {
+      "arm": "unguided",
+      "condition": "lidar_noise",
+      "severity": 0.25,
+      "moderate_3d_ap40": 37.5646,
+      "moderate_bev_ap40": 49.7762,
+      "mean_quality": [
+        0.9703768491744995,
+        0.9879776835441589
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.2379777431488037
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "8887145381c72f880e0e60a55ae3dee5ee3730e320f31206648dc4dc7e865477"
+    },
+    {
+      "arm": "unguided",
+      "condition": "lidar_noise",
+      "severity": 0.5,
+      "moderate_3d_ap40": 25.7187,
+      "moderate_bev_ap40": 38.3376,
+      "mean_quality": [
+        0.9703768491744995,
+        0.9863491058349609
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.48634910583496094
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "0a8486b4c818a8f465c319a88091029a707612276aa6cad56252381dbbcd8b0d"
+    },
+    {
+      "arm": "unguided",
+      "condition": "lidar_noise",
+      "severity": 0.75,
+      "moderate_3d_ap40": 15.2747,
+      "moderate_bev_ap40": 26.4872,
+      "mean_quality": [
+        0.9703768491744995,
+        0.9849682450294495
+      ],
+      "quality_mae": [
+        0.029623184353113174,
+        0.7349680662155151
+      ],
+      "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec",
+      "report_sha256": "d5544eddb089298a1f9cdd88abc70022e8bb0c706100c4007f9c719783690bb0"
+    }
+  ]
+}

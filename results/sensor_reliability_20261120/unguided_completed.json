@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "arm": "unguided",
+  "smoke": false,
+  "config_sha256": "e403a309398e42941ffe0fbb948bc2da827e07f0bf514bdc1e55cb1fbf57bad8",
+  "resumed": false,
+  "start_microbatch": 0,
+  "planned_microbatches": 11136,
+  "protected_tensors": 456,
+  "completed_microbatches": 11136,
+  "optimizer_updates": 1392,
+  "loss": 0.41288259625434875,
+  "updated_at": "2026-11-21T01:14:11.221166+00:00",
+  "frozen_sensors_and_head_unchanged": true,
+  "checkpoint": "/home/yab/mmdetection3d/work_dirs/kitti_sensor_reliability_20261120/unguided/epoch_6.pth",
+  "checkpoint_sha256": "8fd31207eb381f6fe02071b3cd9a49017f3acbbce2b8574c7cc61ef64e0cc1ec"
+}
